@@ -79,7 +79,7 @@ function onAction(a, d = {}){
   switch(a){
     case 'setDateMode': if(d.date) setDateMode(d.date); break;
     case 'setTimeline': setTimelineMode(d.time); break;
-    case 'openOrder': openOrderModal(Number(d.queueIdx || 0)); break;
+    case 'openOrder': openOrderModal(d.orderId || d.queueIdx || 0); break;
     case 'openIncident': openIncidentModal(d.incId); break;
     case 'setOrderTrend': setOrderTrendPeriod(d.trendPeriod); break;
     case 'setVehPage': setVehCarouselPage(Number(d.page || 0)); break;
