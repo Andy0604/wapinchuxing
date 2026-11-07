@@ -6,9 +6,9 @@
    Panel Container & Header
    -------------------------------------------------------------------------- */
 .panel {
-  background: rgba(9, 22, 42, 0.94) !important;
-  border: 1px solid rgba(35, 88, 150, 0.65) !important;
-  border-radius: 6px !important;
+  background: #0a192ab8 !important;
+  border: 1px solid rgba(125, 181, 230, 0.18) !important;
+  border-radius: 12px !important;
   box-shadow: 0 8px 24px rgba(1, 6, 16, 0.6), inset 0 1px 0 rgba(70, 150, 245, 0.16) !important;
   padding: 14px 15px !important;
   position: relative;
@@ -37,7 +37,7 @@
   font-weight: 600;
   letter-spacing: .06em;
   margin: 0;
-  color: #f0f6fc;
+  color: #f7fbff;
   position: relative;
   padding-left: 12px;
 }
@@ -50,9 +50,9 @@
   transform: translateY(-50%);
   width: 4px;
   height: 15px;
-  background: #00b4ff;
+  background: #7de7ff;
   border-radius: 2px;
-  box-shadow: 0 0 8px rgba(0, 180, 255, 0.7);
+  box-shadow: 0 0 8px rgba(125, 231, 255, 0.7);
 }
 
 /* 右上角药丸胶囊标签 */
@@ -62,8 +62,8 @@
   gap: 5px;
   font-size: 11px;
   color: #9ac2d6;
-  background: rgba(13, 34, 62, 0.75);
-  border: 1px solid rgba(35, 85, 145, 0.65);
+  background: rgba(4, 20, 39, 0.6);
+  border: 1px solid rgba(120, 180, 225, 0.2);
   padding: 2px 10px;
   border-radius: 12px;
   letter-spacing: .04em;
@@ -104,9 +104,9 @@
   gap: 8px;
 }
 .metric-card {
-  background: rgba(11, 27, 52, 0.85);
-  border: 1px solid rgba(28, 68, 118, 0.65);
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(125, 181, 230, 0.14);
+  border-radius: 8px;
   padding: 10px 12px;
   display: flex;
   flex-direction: column;
@@ -114,7 +114,7 @@
 }
 .m-lbl {
   font-size: 11px;
-  color: #8eaecf;
+  color: #84a6c7;
   letter-spacing: .02em;
 }
 .m-val {
@@ -125,16 +125,16 @@
 }
 .m-val strong {
   font: 700 24px/1.1 var(--num);
-  color: #f0f6fc;
+  color: #f7fbff;
   letter-spacing: .02em;
 }
 .m-val small {
   font-size: 11px;
-  color: #8eaecf;
+  color: #84a6c7;
 }
 .m-delta {
   font-size: 11px;
-  color: #8eaecf;
+  color: #84a6c7;
 }
 .m-delta.up {
   color: #38efbd;
@@ -154,9 +154,9 @@
   gap: 6px;
 }
 .badge-pill {
-  background: rgba(16, 45, 84, 0.9);
-  border: 1px solid rgba(40, 105, 185, 0.7);
-  color: #52aaff;
+  background: rgba(5, 25, 45, 0.8);
+  border: 1px solid rgba(125, 181, 230, 0.25);
+  color: #73d8ff;
   font: 600 11px/1.2 var(--num);
   padding: 2px 6px;
   border-radius: 3px;
@@ -171,9 +171,9 @@
   margin-top: 8px;
 }
 .env-box {
-  background: rgba(11, 27, 52, 0.85);
-  border: 1px solid rgba(28, 68, 118, 0.65);
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(125, 181, 230, 0.14);
+  border-radius: 8px;
   padding: 8px 4px;
   display: flex;
   flex-direction: column;
@@ -195,11 +195,11 @@
 .env-ico.c-anchor { color: #38efbd; }
 .env-val {
   font: 700 14px/1.15 var(--num);
-  color: #f0f6fc;
+  color: #f7fbff;
 }
 .env-lbl {
   font-size: 10px;
-  color: #8eaecf;
+  color: #84a6c7;
   margin-top: 3px;
 }
 
@@ -228,7 +228,7 @@
 .arpu-card {
   background: rgba(44, 32, 12, 0.45);
   border: 1px solid rgba(225, 165, 52, 0.55);
-  border-radius: 5px;
+  border-radius: 8px;
   padding: 8px 14px;
   min-width: 72px;
   display: flex;
@@ -254,20 +254,20 @@
   margin-top: 5px;
 }
 .order-box {
-  background: rgba(11, 27, 52, 0.85);
-  border: 1px solid rgba(28, 68, 118, 0.65);
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(125, 181, 230, 0.14);
+  border-radius: 8px;
   padding: 7px 4px;
   text-align: center;
 }
 .order-box strong {
   font: 700 17px/1 var(--num);
   display: block;
-  color: #f0f6fc;
+  color: #f7fbff;
 }
 .order-box small {
   font-size: 10px;
-  color: #8eaecf;
+  color: #84a6c7;
   margin-top: 4px;
   display: block;
 }
@@ -287,24 +287,24 @@
   gap: 6px;
 }
 .svc-box {
-  background: rgba(11, 27, 52, 0.85);
-  border: 1px solid rgba(28, 68, 118, 0.65);
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(125, 181, 230, 0.14);
+  border-radius: 8px;
   padding: 8px 4px;
   text-align: center;
 }
 .svc-num strong {
   font: 700 18px/1 var(--num);
-  color: #f0f6fc;
+  color: #f7fbff;
 }
 .svc-num small {
   font-size: 10px;
-  color: #8eaecf;
+  color: #84a6c7;
   margin-left: 2px;
 }
 .svc-lbl {
   font-size: 10px;
-  color: #8eaecf;
+  color: #84a6c7;
   margin-top: 4px;
 }
 
@@ -312,7 +312,7 @@
   display: flex;
   justify-content: space-between;
   font-size: 11px;
-  color: #8eaecf;
+  color: #84a6c7;
   margin: 10px 4px 5px;
 }
 .queue-list {
@@ -324,9 +324,9 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background: rgba(9, 23, 44, 0.75);
-  border: 1px solid rgba(26, 62, 108, 0.55);
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(125, 181, 230, 0.12);
+  border-radius: 8px;
   padding: 6px 10px;
 }
 .queue-route {
@@ -355,7 +355,7 @@
   box-shadow: 0 0 5px rgba(56, 239, 189, 0.6);
 }
 .q-stop.to:before {
-  border: 1.5px solid #52aaff;
+  border: 1.5px solid #73d8ff;
   background: transparent;
 }
 .queue-meta {
@@ -368,7 +368,7 @@
 }
 .q-time {
   font: 600 13px var(--mono);
-  color: #8eaecf;
+  color: #84a6c7;
   display: block;
   margin-top: 1px;
 }
@@ -389,34 +389,34 @@
   gap: 6px;
 }
 .cap-box {
-  background: rgba(11, 27, 52, 0.85);
-  border: 1px solid rgba(28, 68, 118, 0.65);
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.045);
+  border: 1px solid rgba(125, 181, 230, 0.14);
+  border-radius: 8px;
   padding: 9px 4px;
   text-align: center;
 }
 .cap-box strong {
   font: 700 20px/1.1 var(--num);
   display: block;
-  color: #f0f6fc;
+  color: #f7fbff;
 }
 .cap-box small {
   font-size: 10px;
-  color: #8eaecf;
+  color: #84a6c7;
   margin-top: 4px;
   display: block;
 }
 .cap-bar-info {
   margin-top: 8px;
   padding: 7px 10px;
-  background: rgba(9, 23, 44, 0.75);
-  border: 1px solid rgba(26, 62, 108, 0.55);
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(125, 181, 230, 0.12);
+  border-radius: 8px;
   display: flex;
   justify-content: space-around;
   align-items: center;
   font-size: 11px;
-  color: #8eaecf;
+  color: #84a6c7;
 }
 .cap-bar-info b {
   color: #38efbd;
@@ -438,9 +438,9 @@
 .driver-alert-box {
   display: flex;
   align-items: center;
-  background: rgba(9, 23, 44, 0.75);
-  border: 1px solid rgba(28, 68, 118, 0.65);
-  border-radius: 4px;
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(125, 181, 230, 0.14);
+  border-radius: 8px;
   padding: 8px 14px;
   margin-bottom: 9px;
 }
@@ -456,13 +456,13 @@
 }
 .alert-lbl {
   font-size: 12px;
-  color: #f0f6fc;
+  color: #f7fbff;
   font-weight: 500;
 }
 .alert-val {
   margin-left: auto;
   font: 700 17px var(--num);
-  color: #f0f6fc;
+  color: #f7fbff;
 }
 
 .adas-section {
@@ -476,13 +476,13 @@
   gap: 6px;
   font-size: 12px;
   font-weight: 600;
-  color: #f0f6fc;
+  color: #f7fbff;
   margin: 3px 0 2px;
 }
 .adas-header .icon {
   width: 15px;
   height: 15px;
-  color: #52aaff;
+  color: #73d8ff;
 }
 .adas-grid {
   display: grid;
@@ -497,8 +497,8 @@
 .adas-item {
   display: flex;
   align-items: center;
-  background: rgba(9, 23, 44, 0.75);
-  border: 1px solid rgba(26, 62, 108, 0.55);
+  background: rgba(255, 255, 255, 0.035);
+  border: 1px solid rgba(125, 181, 230, 0.12);
   border-radius: 3px;
   padding: 6px 9px;
 }
@@ -520,7 +520,7 @@
 }
 .adas-val {
   font: 600 13px var(--num);
-  color: #f0f6fc;
+  color: #f7fbff;
   margin-left: 6px;
 }
 .adas-val.hot {
@@ -541,7 +541,7 @@
   gap: 6px;
 }
 .inc-stat-box {
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 7px 4px;
   text-align: center;
 }
@@ -583,12 +583,12 @@
   margin-top: 9px;
 }
 .inc-v2-card {
-  border-radius: 4px;
+  border-radius: 8px;
   padding: 9px 11px;
   display: flex;
   flex-direction: column;
   gap: 6px;
-  background: rgba(11, 27, 52, 0.85);
+  background: rgba(255, 255, 255, 0.045);
 }
 .inc-v2-card.warn {
   border: 1px solid rgba(220, 160, 50, 0.45);
@@ -605,7 +605,7 @@
 }
 .inc-v2-time {
   font: 11px var(--mono);
-  color: #8eaecf;
+  color: #84a6c7;
   white-space: nowrap;
 }
 .inc-v2-badge {
@@ -628,7 +628,7 @@
 .inc-v2-title {
   font-size: 12px;
   font-weight: 600;
-  color: #f0f6fc;
+  color: #f7fbff;
   flex: 1;
   white-space: nowrap;
   overflow: hidden;
@@ -660,6 +660,6 @@
   white-space: nowrap;
 }
 .inc-v2-act-val {
-  color: #52aaff;
+  color: #73d8ff;
   font-weight: 500;
 }
