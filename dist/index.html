@@ -2500,7 +2500,7 @@ function openIncidentModal(id) {
   const modal = document.getElementById('event-modal');
   if (!modal) return;
   const isHandled = item.status === '已处理';
-  modal.classList.remove('align-right');
+  modal.classList.add('align-right');
   modal.innerHTML = `
     <div class="modal-head">
       <h3 class="modal-title">事件详情</h3>
