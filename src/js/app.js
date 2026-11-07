@@ -77,6 +77,7 @@ async function toggleFullscreen(){
 }
 function onAction(a, d = {}){
   switch(a){
+    case 'setDateMode': if(d.date) setDateMode(d.date); break;
     case 'setTimeline': setTimelineMode(d.time); break;
     case 'openOrder': openOrderModal(Number(d.queueIdx || 0)); break;
     case 'openIncident': openIncidentModal(d.incId); break;
@@ -107,8 +108,30 @@ function onAction(a, d = {}){
     case 'busRoute':if(state.bus){const v=runs.find(v=>v.id===state.bus);if(v)setLine(v.line)}break;
   }
 }
+let selectedDateMode = 'auto'; // 'auto' | 'today' | 'tomorrow'
+
+function getActiveDatasetDate() {
+  if (selectedDateMode === 'today') return '2026-11-07';
+  if (selectedDateMode === 'tomorrow') return '2026-11-08';
+  const now = new Date(), z = 'Asia/Shanghai';
+  const curDateStr = now.toLocaleDateString('sv-SE', { timeZone: z });
+  return curDateStr >= '2026-11-08' ? '2026-11-08' : '2026-11-07';
+}
+
+function setDateMode(d) {
+  selectedDateMode = d;
+  document.querySelectorAll('.tb-date-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.date === d);
+  });
+  if (typeof updatePanels === 'function') updatePanels();
+  setClock();
+  const label = d === 'tomorrow' ? '明日模拟数据 (2026-11-08)' : '今日运营数据 (2026-11-07)';
+  toast(`已切换至: ${label}`);
+}
+
 let currentTimelineMode = 'live';
 let lastIncidentCount = -1;
+let lastCheckedMinute = -1;
 
 function setTimelineMode(t) {
   currentTimelineMode = t;
@@ -134,14 +157,26 @@ function getEffectiveTimeStr() {
 
 function setClock(){
   const now=new Date(),z='Asia/Shanghai';
-  if (currentTimelineMode === 'live' || currentTimelineMode === 'all') {
-    byId('clock').textContent=now.toLocaleTimeString('en-GB',{timeZone:z,hour12:false});
-  } else {
-    byId('clock').textContent=currentTimelineMode;
-  }
-  byId('date').textContent=now.toLocaleDateString('sv-SE',{timeZone:z}).replaceAll('-','.')+'  '+now.toLocaleDateString('zh-CN',{timeZone:z,weekday:'short'});
+  const curTimeStr = now.toLocaleTimeString('en-GB', { timeZone: z, hour12: false });
+  const curDateStr = now.toLocaleDateString('sv-SE', { timeZone: z });
+  const curMinute = now.getMinutes();
 
-  // 实时模式下若到达特定时间点新增了预警事件，自动动态刷新并弹出播报提醒
+  if (currentTimelineMode === 'live' || currentTimelineMode === 'all') {
+    byId('clock').textContent = curTimeStr;
+  } else {
+    byId('clock').textContent = currentTimelineMode;
+  }
+
+  // 顶部日期显示
+  const activeDate = getActiveDatasetDate();
+  if (activeDate === '2026-11-08') {
+    byId('date').textContent = '2026.11.08  周日';
+  } else {
+    byId('date').textContent = curDateStr.replaceAll('-', '.') + '  ' + now.toLocaleDateString('zh-CN', { timeZone: z, weekday: 'short' });
+  }
+
+  // 1. 实时模式下若到达特定预警时间点（如 10:20:00, 10:58:00, 11:20:00, 12:30:00, 13:20:00, 15:00:00），
+  //    秒级捕获并自动局部刷新事件面板，无需手动刷新页面，并弹出调度通知
   if (currentTimelineMode === 'live' && typeof getActiveIncidentCount === 'function') {
     const count = getActiveIncidentCount();
     if (lastIncidentCount >= 0 && count > lastIncidentCount) {
@@ -151,6 +186,12 @@ function setClock(){
       }
     }
     lastIncidentCount = count;
+  }
+
+  // 2. 实时模式下每分钟自动更新订单与分时指标（无需刷新页面）
+  if (currentTimelineMode === 'live' && curMinute !== lastCheckedMinute) {
+    lastCheckedMinute = curMinute;
+    if (typeof updatePanels === 'function') updatePanels();
   }
 }
 function updateScreenScale(){
@@ -165,7 +206,15 @@ function launch(){
   updateScreenScale();
   document.querySelectorAll('[data-icon]').forEach(el=>el.innerHTML=ico(el.dataset.icon));
   makeMap();try{hasCity=initializeCity()}catch(e){console.warn('建筑图层使用矢量模式',e)}
-  updatePanels();updateChrome();renderMapLayers();setClock();setInterval(setClock,1000);
+  updatePanels();updateChrome();renderMapLayers();
+  const activeDate = getActiveDatasetDate();
+  const btnToday = byId('btn-date-today');
+  const btnTomorrow = byId('btn-date-tomorrow');
+  if (btnToday && btnTomorrow) {
+    btnToday.classList.toggle('active', activeDate === '2026-11-07');
+    btnTomorrow.classList.toggle('active', activeDate === '2026-11-08');
+  }
+  setClock();setInterval(setClock,1000);
   cameraPointers();requestAnimationFrame(tick);
   document.addEventListener('click',e=>{
     if(!byId('layer-pop').contains(e.target)&&!e.target.closest('[data-action="layers"]'))closeLayers();
