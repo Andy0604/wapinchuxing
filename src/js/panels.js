@@ -778,7 +778,7 @@ function startVehCarousel() {
   }, 4500);
 }
 
-function vehicleRosterCarouselPanelfunction vehicleRosterCarouselPanel() {
+function vehicleRosterCarouselPanel() {
   const badge = `<span class="tag-badge">在线 32/32 · 核载7人</span>`;
   return `<section class="panel panel-veh-carousel">
     ${panelHeader('车辆监控', badge)}
