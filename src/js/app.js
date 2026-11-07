@@ -109,8 +109,6 @@ function launch(){
   updatePanels();updateChrome();renderMapLayers();setClock();setInterval(setClock,1000);
   cameraPointers();requestAnimationFrame(tick);
   document.addEventListener('click',e=>{
-    const modal = byId('event-modal');
-    if(modal && !modal.hidden && e.target === modal){closeModal();return}
     if(!byId('layer-pop').contains(e.target)&&!e.target.closest('[data-action="layers"]'))closeLayers();
     const el=e.target.closest('[data-action],[data-mode],[data-place],[data-event],[data-line],[data-bus],[data-fleet-line]');
     if(!el)return;const d=el.dataset;

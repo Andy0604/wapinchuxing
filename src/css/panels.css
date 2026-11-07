@@ -780,53 +780,51 @@
 }
 
 /* --------------------------------------------------------------------------
-   全局弹窗体系 (车辆订单详情 / 事件详情)
+   地图区域浮动弹窗 (非全屏遮罩模式，参照 yacht-monitor-v2 浮窗形式)
    -------------------------------------------------------------------------- */
-.modal-backdrop {
-  position: fixed;
-  inset: 0;
-  z-index: 1000;
-  background: rgba(4, 14, 30, 0.72);
-  -webkit-backdrop-filter: blur(8px);
-  backdrop-filter: blur(8px);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 16px;
-  animation: modalFadeIn 0.2s ease-out;
-}
-.modal-backdrop[hidden] {
-  display: none !important;
-}
-@keyframes modalFadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
-}
-
-.modal-dialog {
-  width: min(500px, 92vw);
-  max-height: 88vh;
+.map-float-panel {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+  width: min(440px, calc(100% - 28px));
+  max-height: calc(100% - 28px);
   overflow-y: auto;
-  background: linear-gradient(150deg, #102a54, #081a34);
+  z-index: 10;
+  background: linear-gradient(155deg, rgba(16, 42, 82, 0.94), rgba(9, 25, 52, 0.96));
   border: 1px solid rgba(100, 185, 255, 0.45);
   border-radius: 12px;
-  box-shadow: 0 20px 60px rgba(0, 0, 0, 0.75), 0 0 25px rgba(35, 125, 235, 0.25);
-  padding: 18px 20px;
-  position: relative;
+  box-shadow: 0 16px 45px rgba(0, 0, 0, 0.65), 0 0 20px rgba(35, 125, 235, 0.25);
+  -webkit-backdrop-filter: blur(12px);
+  backdrop-filter: blur(12px);
+  padding: 16px 18px;
   display: flex;
   flex-direction: column;
-  gap: 11px;
-  animation: modalSlideIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+  gap: 10px;
+  animation: floatSlideIn 0.22s cubic-bezier(0.16, 1, 0.3, 1);
 }
-@keyframes modalSlideIn {
-  from { opacity: 0; transform: translateY(10px) scale(0.97); }
-  to { opacity: 1; transform: translateY(0) scale(1); }
+.map-float-panel[hidden] {
+  display: none !important;
+}
+.map-float-panel.align-right {
+  left: auto;
+  right: 14px;
+  animation: floatSlideInRight 0.22s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes floatSlideIn {
+  from { opacity: 0; transform: translateX(-16px) scale(0.98); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
+}
+@keyframes floatSlideInRight {
+  from { opacity: 0; transform: translateX(16px) scale(0.98); }
+  to { opacity: 1; transform: translateX(0) scale(1); }
 }
 
 .modal-head {
   display: flex;
   align-items: center;
   justify-content: space-between;
+  margin-bottom: 2px;
 }
 .modal-title {
   display: flex;
@@ -852,23 +850,26 @@
   border-radius: 2px;
   box-shadow: 0 0 10px rgba(56, 189, 248, 0.8);
 }
-.modal-close-circle {
-  width: 28px;
-  height: 28px;
-  border-radius: 50%;
-  border: 1px solid rgba(125, 181, 230, 0.35);
-  background: rgba(10, 32, 60, 0.6);
+.modal-head-actions {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.modal-collapse-btn {
+  background: rgba(14, 45, 85, 0.65);
+  border: 1px solid rgba(100, 180, 255, 0.35);
   color: #bad8f5;
-  display: grid;
-  place-items: center;
+  border-radius: 5px;
+  padding: 3px 12px;
+  font-size: 12px;
+  letter-spacing: 0.05em;
   cursor: pointer;
-  font-size: 14px;
   transition: all 0.15s;
 }
-.modal-close-circle:hover {
+.modal-collapse-btn:hover {
+  background: rgba(30, 85, 155, 0.85);
   border-color: #38bdf8;
   color: #ffffff;
-  background: rgba(30, 80, 145, 0.75);
 }
 
 .modal-dashed-card {

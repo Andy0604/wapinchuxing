@@ -386,55 +386,56 @@ function openOrderModal(idx) {
   const data = queueOrderDetails[idx] || queueOrderDetails[0];
   const modal = document.getElementById('event-modal');
   if (!modal) return;
+  modal.classList.remove('align-right');
   modal.innerHTML = `
-    <div class="modal-dialog" role="dialog" aria-modal="true">
-      <div class="modal-head">
-        <h3 class="modal-title">车辆订单详情</h3>
-        <button class="modal-close-circle" data-action="closeModal" aria-label="关闭">✕</button>
+    <div class="modal-head">
+      <h3 class="modal-title">车辆订单详情</h3>
+      <div class="modal-head-actions">
+        <button class="modal-collapse-btn" data-action="closeModal">收起</button>
       </div>
-      <div class="modal-dashed-card">
-        <span class="modal-code font-num">${data.id}</span>
-        <span class="modal-pill serving">${data.status}</span>
+    </div>
+    <div class="modal-dashed-card">
+      <span class="modal-code font-num">${data.id}</span>
+      <span class="modal-pill serving">${data.status}</span>
+    </div>
+    <div class="modal-grid-2">
+      <div class="modal-sub-card">
+        <span class="sc-label">乘客电话</span>
+        <span class="sc-val font-num">${data.passengerPhone}</span>
       </div>
-      <div class="modal-grid-2">
-        <div class="modal-sub-card">
-          <span class="sc-label">乘客电话</span>
-          <span class="sc-val font-num">${data.passengerPhone}</span>
-        </div>
-        <div class="modal-sub-card">
-          <span class="sc-label">用车时间</span>
-          <span class="sc-val font-num">${data.useTime}</span>
-        </div>
-        <div class="modal-sub-card">
-          <span class="sc-label">司机 · 车牌</span>
-          <span class="sc-val">${data.driver}</span>
-        </div>
-        <div class="modal-sub-card">
-          <span class="sc-label">司机电话</span>
-          <span class="sc-val font-num">${data.driverPhone}</span>
-        </div>
-        <div class="modal-sub-card full">
-          <span class="sc-label">行程路线</span>
-          <span class="sc-val">${data.route}</span>
-        </div>
-        <div class="modal-sub-card">
-          <span class="sc-label">乘车人数</span>
-          <span class="sc-val font-num">${data.pax}</span>
-        </div>
-        <div class="modal-sub-card">
-          <span class="sc-label">订单金额</span>
-          <span class="sc-val amber font-num">${data.price}</span>
-        </div>
+      <div class="modal-sub-card">
+        <span class="sc-label">用车时间</span>
+        <span class="sc-val font-num">${data.useTime}</span>
       </div>
-      <div class="modal-section-title">订单流转明细</div>
-      <div class="modal-timeline">
-        ${data.timeline.map(t => `
-          <div class="timeline-item">
-            <span class="timeline-name">${t.name}</span>
-            <span class="timeline-time">${t.time}</span>
-          </div>
-        `).join('')}
+      <div class="modal-sub-card">
+        <span class="sc-label">司机 · 车牌</span>
+        <span class="sc-val">${data.driver}</span>
       </div>
+      <div class="modal-sub-card">
+        <span class="sc-label">司机电话</span>
+        <span class="sc-val font-num">${data.driverPhone}</span>
+      </div>
+      <div class="modal-sub-card full">
+        <span class="sc-label">行程路线</span>
+        <span class="sc-val">${data.route}</span>
+      </div>
+      <div class="modal-sub-card">
+        <span class="sc-label">乘车人数</span>
+        <span class="sc-val font-num">${data.pax}</span>
+      </div>
+      <div class="modal-sub-card">
+        <span class="sc-label">订单金额</span>
+        <span class="sc-val amber font-num">${data.price}</span>
+      </div>
+    </div>
+    <div class="modal-section-title">订单流转明细</div>
+    <div class="modal-timeline">
+      ${data.timeline.map(t => `
+        <div class="timeline-item">
+          <span class="timeline-name">${t.name}</span>
+          <span class="timeline-time">${t.time}</span>
+        </div>
+      `).join('')}
     </div>
   `;
   modal.hidden = false;
@@ -445,48 +446,49 @@ function openIncidentModal(id) {
   const modal = document.getElementById('event-modal');
   if (!modal) return;
   const isHandled = item.status === '已处理';
+  modal.classList.remove('align-right');
   modal.innerHTML = `
-    <div class="modal-dialog" role="dialog" aria-modal="true">
-      <div class="modal-head">
-        <h3 class="modal-title">事件详情</h3>
-        <button class="modal-close-circle" data-action="closeModal" aria-label="关闭">✕</button>
+    <div class="modal-head">
+      <h3 class="modal-title">事件详情</h3>
+      <div class="modal-head-actions">
+        <button class="modal-collapse-btn" data-action="closeModal">收起</button>
       </div>
-      <div class="modal-dashed-card">
-        <span class="modal-code font-num">${item.id}</span>
-        <span class="modal-pill ${isHandled ? 'handled' : 'unhandled'}">${item.status}</span>
+    </div>
+    <div class="modal-dashed-card">
+      <span class="modal-code font-num">${item.id}</span>
+      <span class="modal-pill ${isHandled ? 'handled' : 'unhandled'}">${item.status}</span>
+    </div>
+    <div class="modal-grid-2">
+      <div class="modal-sub-card">
+        <span class="sc-label">事件时间</span>
+        <span class="sc-val font-num">今日 ${item.time}</span>
       </div>
-      <div class="modal-grid-2">
-        <div class="modal-sub-card">
-          <span class="sc-label">事件时间</span>
-          <span class="sc-val font-num">今日 ${item.time}</span>
-        </div>
-        <div class="modal-sub-card">
-          <span class="sc-label">事件等级</span>
-          <span class="sc-val ${item.type === 'err' ? 'c-red' : 'warn'}">${item.tag}</span>
-        </div>
-        <div class="modal-sub-card full">
-          <span class="sc-label">${item.tag}内容</span>
-          <span class="sc-val" style="font-size:13px; line-height:1.5;">${item.content}</span>
-        </div>
-        <div class="modal-sub-card">
-          <span class="sc-label">发生位置</span>
-          <span class="sc-val">${item.location}</span>
-        </div>
-        <div class="modal-sub-card">
-          <span class="sc-label">关联车辆</span>
-          <span class="sc-val">${item.car}</span>
-        </div>
-        <div class="modal-sub-card full">
-          <span class="sc-label">建议处理方式</span>
-          <span class="sc-val blue">${item.action}</span>
-        </div>
+      <div class="modal-sub-card">
+        <span class="sc-label">事件等级</span>
+        <span class="sc-val ${item.type === 'err' ? 'c-red' : 'warn'}">${item.tag}</span>
       </div>
-      <div class="modal-actions">
-        <button class="modal-btn cancel" data-action="closeModal">关闭</button>
-        <button class="modal-btn primary" data-action="resolveIncident" data-inc-id="${item.id}" ${isHandled ? 'disabled' : ''}>
-          ${isHandled ? '✓ 已处理' : '✓ 标记已处理'}
-        </button>
+      <div class="modal-sub-card full">
+        <span class="sc-label">${item.tag}内容</span>
+        <span class="sc-val" style="font-size:13px; line-height:1.5;">${item.content}</span>
       </div>
+      <div class="modal-sub-card">
+        <span class="sc-label">发生位置</span>
+        <span class="sc-val">${item.location}</span>
+      </div>
+      <div class="modal-sub-card">
+        <span class="sc-label">关联车辆</span>
+        <span class="sc-val">${item.car}</span>
+      </div>
+      <div class="modal-sub-card full">
+        <span class="sc-label">建议处理方式</span>
+        <span class="sc-val blue">${item.action}</span>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-btn cancel" data-action="closeModal">关闭</button>
+      <button class="modal-btn primary" data-action="resolveIncident" data-inc-id="${item.id}" ${isHandled ? 'disabled' : ''}>
+        ${isHandled ? '✓ 已处理' : '✓ 标记已处理'}
+      </button>
     </div>
   `;
   modal.hidden = false;
