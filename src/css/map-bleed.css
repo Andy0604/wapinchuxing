@@ -1,0 +1,33 @@
+/* Paint the world under the desktop HUD. Keep the interaction/label viewport
+   at its original size so the camera, tracking and pointer math stay aligned. */
+@media (min-width: 901px) {
+  /* A growing map must not scroll the fixed dashboard when a marker gets focus. */
+  #app {
+    overflow: clip;
+  }
+
+  .map-area > #viewport {
+    overflow: visible;
+    -webkit-mask-image: none;
+    mask-image: none;
+  }
+  #viewport > #atlas {
+    overflow: visible;
+    pointer-events: none;
+  }
+  #viewport > #labels {
+    overflow: hidden;
+  }
+  #viewport > #city {
+    inset: auto;
+    left: 50%;
+    top: 50%;
+    width: 100vw;
+    height: max(100svh, calc(100% + 280px));
+    transform: translate(-50%, -50%);
+    pointer-events: none;
+  }
+  footer {
+    z-index: 3;
+  }
+}

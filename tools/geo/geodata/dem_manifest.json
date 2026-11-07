@@ -1,0 +1,61 @@
+{
+  "z": 13,
+  "bbox": [
+    20.99,
+    109.07,
+    21.1,
+    109.16
+  ],
+  "tiles": [
+    [
+      "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/6577/3604.png",
+      "dem_13_6577_3604.png"
+    ],
+    [
+      "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/6577/3605.png",
+      "dem_13_6577_3605.png"
+    ],
+    [
+      "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/6577/3606.png",
+      "dem_13_6577_3606.png"
+    ],
+    [
+      "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/6577/3607.png",
+      "dem_13_6577_3607.png"
+    ],
+    [
+      "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/6578/3604.png",
+      "dem_13_6578_3604.png"
+    ],
+    [
+      "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/6578/3605.png",
+      "dem_13_6578_3605.png"
+    ],
+    [
+      "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/6578/3606.png",
+      "dem_13_6578_3606.png"
+    ],
+    [
+      "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/6578/3607.png",
+      "dem_13_6578_3607.png"
+    ],
+    [
+      "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/6579/3604.png",
+      "dem_13_6579_3604.png"
+    ],
+    [
+      "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/6579/3605.png",
+      "dem_13_6579_3605.png"
+    ],
+    [
+      "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/6579/3606.png",
+      "dem_13_6579_3606.png"
+    ],
+    [
+      "https://s3.amazonaws.com/elevation-tiles-prod/terrarium/13/6579/3607.png",
+      "dem_13_6579_3607.png"
+    ]
+  ],
+  "source": "https://registry.opendata.aws/terrain-tiles/",
+  "accessed": "2026-09-08"
+}

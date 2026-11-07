@@ -1,0 +1,32 @@
+<!doctype html>
+<html lang="zh-CN"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover"><meta name="theme-color" content="#04101c"><title>智慧出行监管平台</title><style>__CSS__</style></head>
+<body>
+<div id="app">
+<header>
+ <div class="brand"><svg class="brandmark" viewBox="0 0 52 52" aria-hidden="true"><path d="m26 2 21 12v24L26 50 5 38V14Z" fill="#0d2938" stroke="#429bba"/><g fill="none" stroke="#77ffdd" stroke-width="2.3" stroke-linejoin="round"><path d="m11 30 9-15 7 13 6-9 8 13-15 8Z"/><path d="m13 34 13 7 13-7" stroke="#3ba4d0"/></g></svg><div><strong>北海 · 涠洲岛</strong><small>WEIZHOU ISLAND</small></div></div>
+ <div class="mast"><h1>智慧出行监管平台</h1><div class="mast-sub">哇品出行</div></div>
+ <div class="head-right"><div class="clock"><strong id="clock">--:--:--</strong><small id="date"></small></div><button class="icbtn" data-action="fullscreen" title="进入全屏" aria-label="进入全屏" data-icon="expand"></button></div>
+ <svg class="head-rule" width="100%" height="12" viewBox="0 0 1600 12" preserveAspectRatio="none" aria-hidden="true"><path d="M0 2H485l12 8h606l12-8h485" fill="none" stroke="#22465d"/><path d="M390 2h86l12 8h53m518 0h53l12-8h86" fill="none" stroke="#4299ad"/><path d="M680 10h240" stroke="#69ead6" stroke-width="2"/></svg>
+</header>
+<main>
+ <aside class="rail left-rail" aria-label="交通统计" id="left"></aside>
+ <section class="map-area" aria-label="涠洲岛交互地图">
+  <div class="map-top"><div class="map-title"><div class="eyebrow"><i></i>SPATIAL MONITOR</div><h2 id="map-title">全域交通态势</h2><button class="fleet-shortcut" data-action="openFleet" aria-label="查看哇品出行演示车队"><span data-icon="bus"></span>哇品出行 <b>12 辆</b><span class="sep">/</span>在车 <b><span data-fleet-total>—</span> 人</b><span data-icon="chevron"></span></button></div><div class="view-switch" aria-label="地图视角"><button data-action="view3" aria-pressed="true">3D</button><button data-action="view2" aria-pressed="false">2D</button></div></div>
+  <div class="viewport" id="viewport" title="拖动平移 · 滚轮缩放 · 按住 Shift 拖动旋转视角">
+    <svg id="atlas" viewBox="0 0 900 740" aria-label="涠洲岛交通立体示意图">
+      <defs><pattern id="oceanDots" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1.15" fill="#3b92ac" opacity=".28"/></pattern><pattern id="oceanGrid" width="128" height="128" patternUnits="userSpaceOnUse"><path d="M0 128V0h128" fill="none" stroke="#346580" stroke-opacity=".23" stroke-dasharray="3 5"/><path d="M-4 0h8M0-4v8" stroke="#4c91a1" opacity=".55"/></pattern><radialGradient id="attentionGlow"><stop stop-color="#ffb75d" stop-opacity=".37"/><stop offset=".47" stop-color="#e79b48" stop-opacity=".10"/><stop offset="1" stop-color="#ee9647" stop-opacity="0"/></radialGradient><linearGradient id="alertBeacon" x1="0" y1="1" x2="0" y2="0"><stop stop-color="#ffb760" stop-opacity=".75"/><stop offset="1" stop-color="#f8a652" stop-opacity="0"/></linearGradient><filter id="bloom" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3.5"/></filter></defs>
+      <g id="world"><rect x="-3000" y="-3000" width="6900" height="6740" fill="url(#oceanDots)"/><rect x="-3000" y="-3000" width="6900" height="6740" fill="url(#oceanGrid)"/>
+      <g id="ocean"></g><g id="geography">__ISLAND__</g><g id="seaRoute"></g><g id="routes"></g><g id="objects"></g></g>
+      
+    </svg><canvas id="city" aria-hidden="true"></canvas><svg id="labels" viewBox="0 0 900 740" aria-label="监管点位"><g id="pins"></g></svg>
+  </div>
+  <div class="compass" aria-hidden="true"><b>N</b><svg width="30" height="30" viewBox="0 0 32 32"><path d="m16 2 6 23-6-5-6 5z" fill="#93d5dc"/><path d="m16 2 0 18-6 5z" fill="#345365"/></svg></div>
+  <div class="map-tools"><button class="icbtn" data-action="layers" title="地图图层" aria-label="地图图层" data-icon="layers"></button><button class="icbtn" data-action="zoomIn" title="放大地图" aria-label="放大地图" data-icon="plus"></button><button class="icbtn" data-action="zoomOut" title="缩小地图" aria-label="缩小地图" data-icon="minus"></button><button class="icbtn" data-action="rotate" title="旋转视角" aria-label="旋转视角" data-icon="rotate"></button><button class="icbtn" data-action="reset" title="复位视角" aria-label="复位视角" data-icon="focus"></button></div>
+  <div id="layer-pop" hidden></div><div id="detail" hidden></div>
+  <div class="map-credit">路网示意 · <a href="https://www.openstreetmap.org/copyright" target="_blank" rel="noopener">© OpenStreetMap contributors</a></div><div class="map-foot"><div class="legend"><span><i class="key mint"></i>畅通</span><span><i class="key amber"></i>缓行</span><span><i class="key blue dashed"></i>航线</span></div><button data-action="tour" class="tour" id="tour"></button></div>
+ </section>
+ <aside class="rail right-rail" aria-label="道路与事件" id="right"></aside>
+</main>
+<footer><div class="env"><span class="live-dot"></span>模拟数据<span class="env-sep">/</span><span class="env-extra">场景演示</span></div><nav aria-label="监管场景" id="nav"></nav><div class="foot-id"><span class="cross-small">⌖</span> 109°07′ E <em>/</em> 21°02′ N</div></footer>
+<div id="toast" role="status"></div><div id="event-modal" hidden></div>
+</div><script>__JS__</script></body></html>

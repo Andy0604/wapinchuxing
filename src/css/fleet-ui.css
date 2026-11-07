@@ -1,0 +1,52 @@
+.fleet-roster{flex:1.45;min-height:0}
+.bus-roster-list{min-height:0;overflow:auto;display:flex;flex-direction:column;justify-content:space-around;gap:4px;scrollbar-width:thin;scrollbar-color:#2d4653 transparent}
+.bus-roster-row{display:grid;flex:1 0 auto;gap:5px;width:100%;padding:8px 7px;text-align:left;background:#0b202d;border:1px solid #1b3948;border-radius:3px}
+.bus-roster-row:hover,.bus-roster-row[aria-pressed="true"]{background:#103338;border-color:#39706e}
+.bus-roster-row:focus-visible{outline-offset:-2px}
+.bus-roster-top,.bus-roster-bottom,.bus-roster-direction,.bus-roster-load,.bus-state,.bus-card-brand,.bus-card-id,.bus-itinerary,.bus-trip-key,.bus-segment,.bus-telemetry,.bus-card-actions{display:flex;align-items:center}
+.bus-roster-top,.bus-roster-bottom{gap:6px;min-width:0}
+.bus-roster-brand{font-size:10px;color:var(--mute)}
+.bus-roster-id{font:600 clamp(12px,1.05vw,17px)/1.1 var(--mono);letter-spacing:.015em;color:#e1f1f8;white-space:nowrap}
+.bus-state{gap:5px;font-size:10px;font-weight:400;letter-spacing:0;line-height:1.45;white-space:nowrap}
+.bus-state:before{content:"";width:4px;height:4px;border-radius:50%;background:currentColor}
+.bus-state.on-road{color:var(--mint)}.bus-state.at-stop{color:var(--amber)}
+.bus-roster-row .bus-state,.bus-roster-load{margin-left:auto}
+.bus-roster-direction{min-width:0;gap:4px;font-size:clamp(10px,.76vw,13px);color:#afc6d3}
+.bus-roster-direction i{font-style:normal;color:#7094a6}
+.bus-roster-load{font-size:10px;gap:2px;color:var(--mute);white-space:nowrap}
+.bus-roster-load .icon{width:12px;height:12px;color:#80b1bf}
+.bus-roster-load b{font:600 12px var(--num);color:var(--ink)}
+#detail:has(.bus-card){width:min(324px,calc(100% - 82px));max-height:calc(100% - 92px);overflow:auto;scrollbar-width:thin}
+.bus-card-brand{gap:5px;font-size:11px;font-weight:550;color:var(--mint)}
+.bus-card-brand .icon{width:14px;height:14px}
+.bus-card-brand span{padding-left:7px;margin-left:2px;border-left:1px solid var(--line);color:#9cb6c6;font-size:10px;font-weight:400}
+.bus-card .detail-head h3{margin:5px 0 3px;font:600 21px/1.2 var(--mono);letter-spacing:.01em;gap:9px}
+.bus-itinerary,.bus-segment,.bus-trip-key,.bus-card-actions{justify-content:space-between}
+.bus-itinerary{margin:9px 0 7px;gap:8px}
+.bus-itinerary>span:last-child,.bus-segment>div:last-child{text-align:right}
+.bus-itinerary small,.bus-segment small,.bus-telemetry small{font-size:10px;font-weight:400;color:var(--mute)}
+.bus-itinerary strong{font-size:14px;font-weight:550;color:#deeff5}
+.bus-itinerary>.icon{width:20px;height:18px;color:#7097a6}
+.bus-trip-track{height:4px;position:relative;background:repeating-linear-gradient(90deg,#4e748b 0 4px,transparent 4px 7px);border-radius:4px}
+.bus-trip-track>i{position:absolute;inset:0 auto 0 0;width:var(--trip-position);border-radius:inherit;background:linear-gradient(90deg,#47a1c1,#63efd3)}
+.bus-trip-track>b{position:absolute;top:50%;left:clamp(3px,var(--trip-position),calc(100% - 3px));transform:translate(-50%,-50%);width:7px;height:7px;border-radius:50%;background:#95ffdf;box-shadow:0 0 7px #64e5ba70}
+.bus-trip-key{margin:6px 0 9px;color:#a8bfca;font-size:9px}.bus-trip-key b{font-weight:500;font-variant-numeric:tabular-nums}
+.bus-trip-key i{display:inline-block;width:11px;height:2px;vertical-align:middle;background:var(--mint);margin-right:3px}
+.bus-trip-key span+span i{background:repeating-linear-gradient(90deg,#75a3b7 0 3px,transparent 3px 5px)}
+.bus-segment{padding:6px 8px;background:#081e2c;border:1px solid #203d4d;border-radius:3px;font-size:11px;color:#d2e3ec}
+.bus-segment small{display:inline;margin-right:6px}
+.bus-telemetry{justify-content:space-between;gap:5px;padding:10px 0}
+.bus-telemetry b{font:600 21px/1.25 var(--num);color:#edf9fc}
+.bus-telemetry em{color:#a0b7c6;font-size:10px;font-style:normal;white-space:nowrap}
+.bus-card-actions{gap:7px;padding-top:8px;border-top:1px solid var(--line)}
+.bus-card-actions button{display:inline-flex;justify-content:center;align-items:center;gap:5px;flex:1;border:1px solid #2c4c5c;border-radius:3px;padding:5px;background:#102a38;color:#bdd6df;font-size:11px;line-height:1.3}
+.bus-card-actions button:first-child{border-color:#386966;background:#123438;color:var(--mint)}
+.bus-card-actions button[aria-pressed="true"]{border-color:#6ac8b7}
+.bus-card-actions .icon{width:13px;height:13px}
+@media(max-width:1130px) and (min-width:901px){.bus-roster-brand{font-size:9px}.bus-roster-row{padding:7px 5px}.bus-roster-top,.bus-roster-bottom,.bus-roster-direction{gap:3px}}
+@media(max-height:760px) and (min-width:901px){.bus-roster-row{gap:2px;padding-block:5px}.bus-roster-list{gap:3px}}
+@media(max-width:900px){#detail:has(.bus-card){width:min(312px,calc(100% - 47px));max-height:calc(100% - 82px)}.bus-roster-id{font-size:15px}}
+@media(max-width:540px){.fleet-roster{flex:auto}.bus-roster-list{gap:5px}.bus-roster-row{padding:8px 10px}.bus-roster-direction{font-size:12px}.bus-telemetry{padding-block:8px}.bus-itinerary{margin-block:6px}.bus-card-actions button{min-height:30px}}
+@media(max-width:350px){.bus-segment small{display:block;margin:0}.bus-itinerary strong{font-size:13px}.bus-card .detail-head h3{font-size:18px}.bus-telemetry b{font-size:18px}}
+.bus-end-eta{display:flex;align-items:center;justify-content:space-between;font-size:10px;color:var(--mute);margin:-2px 0 7px}
+.bus-end-eta strong{font-weight:400;color:#abccdc}.bus-end-eta b{font:600 12px var(--num)}

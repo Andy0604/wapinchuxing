@@ -1,0 +1,25 @@
+const icons={
+  radar:'<circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="5"/><path d="m12 12 7-7"/><circle cx="8" cy="15" r="1"/>',
+  layers:'<path d="m3 8 9-5 9 5-9 5zM3 12l9 5 9-5M3 16l9 5 9-5"/>',
+  expand:'<path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/>',
+  ship:'<path d="M4 14 12 11l8 3-3 5H7zM7 12V6h10v6M10 6V3h4v3M2 21q2 1 4-1 3 2 6 0 3 2 6 0 2 1 4 0"/>',
+  bus:'<rect x="5" y="3" width="14" height="16" rx="3"/><path d="M5 12h14M8 19v2m8-2v2M8 16h1m6 0h1M8 6h8"/>',
+  route:'<circle cx="5" cy="17" r="2"/><circle cx="19" cy="7" r="2"/><path d="M7 17h8a3 3 0 0 0 0-6H9a2 2 0 0 1 0-4h8"/>',
+  alert:'<path d="m12 3 10 17H2zM12 9v5m0 2v1"/>',
+  focus:'<path d="M8 3H3v5m13-5h5v5M3 16v5h5m13-5v5h-5"/><circle cx="12" cy="12" r="3"/>',
+  play:'<path d="m8 4 12 8-12 8z"/>', pause:'<path d="M8 5v14M16 5v14"/>',
+  pin:'<path d="M19 10c0 5-7 11-7 11S5 15 5 10a7 7 0 1 1 14 0Z"/><circle cx="12" cy="10" r="2"/>',
+  arrow:'<path d="M5 12h14m-5-5 5 5-5 5"/>', up:'<path d="m6 16 12-10M9 6h9v9"/>', chevron:'<path d="m9 5 7 7-7 7"/>', down:'<path d="m5 9 7 7 7-7"/>',
+  time:'<circle cx="12" cy="12" r="9"/><path d="M12 6v6l4 2"/>', signal:'<path d="M3 19v-3m5 3v-7m5 7V8m5 11V4"/>',
+  cloud:'<path d="M5 18a4 4 0 0 1 0-8 6 6 0 0 1 11-2 5 5 0 1 1 2 10z"/>',
+  plus:'<path d="M5 12h14m-7-7v14"/>', minus:'<path d="M5 12h14"/>', close:'<path d="m6 6 12 12m0-12L6 18"/>',
+  grid:'<rect x="3" y="3" width="7" height="7"/><rect x="14" y="3" width="7" height="7"/><rect x="3" y="14" width="7" height="7"/><rect x="14" y="14" width="7" height="7"/>',
+  chart:'<path d="M3 20h18M5 16l5-7 4 4 6-9"/>', parking:'<rect x="3" y="3" width="18" height="18" rx="3"/><path d="M10 17V7h3a3 3 0 0 1 0 6h-3"/>',
+  people:'<circle cx="9" cy="8" r="3"/><path d="M2 20v-2a7 7 0 0 1 14 0v2m0-15a3 3 0 0 1 0 6m2 2q4 1 4 7"/>',
+  stack:'<path d="m3 8 9-5 9 5-9 5zM3 12l9 5 9-5M3 16l9 5 9-5"/>',
+  scan:'<path d="M3 8V3h5m8 0h5v5M3 16v5h5m13-5v5h-5M3 12h18"/>', 
+  location:'<circle cx="12" cy="12" r="7"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/><circle cx="12" cy="12" r="2"/>',
+  wind:'<path d="M2 8h11a3 3 0 1 0-3-3M2 12h16a3 3 0 1 1-3 3M2 16h5a2 2 0 1 1-2 2"/>',
+  check:'<path d="m4 12 5 6L20 6"/>', list:'<path d="M8 6h13M8 12h13M8 18h13M3 6h1M3 12h1M3 18h1"/>',rotate:'<path d="M4 10a8 8 0 1 1 0 5m0-12v7h7"/>',tower:'<path d="m8 21 4-12 4 12m-6-4h4M7 5a7 7 0 0 0 0 10M4 2a11 11 0 0 0 0 16M17 5a7 7 0 0 1 0 10m3-13a11 11 0 0 1 0 16"/><circle cx="12" cy="8" r="1"/>'
+};
+function ico(name,cls=''){return '<svg class="icon '+cls+'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(icons[name]||'')+'</svg>'}
