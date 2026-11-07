@@ -111,7 +111,7 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
    左侧模块 1: 全岛出行总览
    -------------------------------------------------------------------------- */
 .panel-overview {
-  flex: 1;
+  flex: 0.92;
 }
 .overview-dual {
   display: grid;
@@ -220,91 +220,11 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   margin-top: 3px;
 }
 
-/* 全岛客流趋势图与枢纽占比 */
-.sub-section-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: #d8ecff;
-  margin-bottom: 5px;
-}
-.sub-section-title small {
-  font-size: 11px;
-  color: #79a8d4;
-  font-weight: normal;
-}
-.overview-extra-block {
-  margin-top: 8px;
-  padding-top: 6px;
-  border-top: 1px dashed rgba(95, 175, 250, 0.2);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.flow-mini-chart {
-  width: 100%;
-  position: relative;
-  background: rgba(10, 24, 48, 0.45);
-  border-radius: 6px;
-  padding: 4px 6px 2px;
-  border: 1px solid rgba(85, 160, 240, 0.15);
-}
-.flow-mini-chart svg {
-  width: 100%;
-  height: 38px;
-  display: block;
-}
-.flow-chart-axis {
-  display: flex;
-  justify-content: space-between;
-  font-size: 10.5px;
-  color: #6d90b4;
-  font-family: var(--num);
-  margin-top: 2px;
-}
-.hub-flow-strip {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 4px;
-  margin-top: 2px;
-}
-.hub-chip {
-  background: rgba(12, 32, 64, 0.65);
-  border: 1px solid rgba(85, 160, 240, 0.2);
-  border-radius: 4px;
-  padding: 3px 5px;
-  font-size: 11px;
-  color: #bcd5ee;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  white-space: nowrap;
-}
-.hub-chip b {
-  font-family: var(--num);
-  color: #f7fbff;
-  margin-left: 2px;
-}
-.h-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 4px;
-  flex-shrink: 0;
-}
-.h-dot.port { background: #00d8ff; box-shadow: 0 0 4px #00d8ff; }
-.h-dot.sports { background: #38efbd; box-shadow: 0 0 4px #38efbd; }
-.h-dot.beach { background: #f5b842; box-shadow: 0 0 4px #f5b842; }
-.h-dot.east { background: #a78bfa; box-shadow: 0 0 4px #a78bfa; }
-
 /* --------------------------------------------------------------------------
    左侧模块 2: 运营监控
    -------------------------------------------------------------------------- */
 .panel-ops {
-  flex: 1;
+  flex: 0.95;
 }
 .gmv-dual {
   display: flex;
@@ -452,72 +372,11 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   box-shadow: 0 0 6px rgba(255, 190, 66, 0.5);
 }
 
-/* 7日营收柱状趋势与热点区间 */
-.ops-extra-block {
-  margin-top: 8px;
-  padding-top: 6px;
-  border-top: 1px dashed rgba(95, 175, 250, 0.2);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.ops-mini-bars {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  height: 48px;
-  padding: 4px 8px 3px;
-  background: rgba(10, 24, 48, 0.45);
-  border-radius: 6px;
-  border: 1px solid rgba(85, 160, 240, 0.15);
-  gap: 6px;
-}
-.bar-col {
-  flex: 1;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 3px;
-}
-.bar-fill {
-  width: 12px;
-  border-radius: 2px 2px 0 0;
-  background: linear-gradient(180deg, #38efbd, #0284c7);
-  box-shadow: 0 0 6px rgba(56, 239, 189, 0.3);
-  transition: height 0.3s ease;
-}
-.bar-col.active .bar-fill {
-  background: linear-gradient(180deg, #ffbe42, #ea580c);
-  box-shadow: 0 0 8px rgba(255, 190, 66, 0.6);
-}
-.bar-lbl {
-  font-size: 10px;
-  color: #79a0c7;
-  font-family: var(--num);
-  white-space: nowrap;
-}
-.ops-foot-summary {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 11.5px;
-  color: #8eb3d8;
-  padding: 2px 4px;
-  background: rgba(10, 24, 48, 0.35);
-  border-radius: 4px;
-}
-.ops-foot-summary b {
-  color: #38efbd;
-  font-family: var(--num);
-}
-
 /* --------------------------------------------------------------------------
    左侧模块 3: 服务监控
    -------------------------------------------------------------------------- */
 .panel-service {
-  flex: 1.25;
+  flex: 1.35;
 }
 .svc-grid {
   display: grid;
@@ -595,23 +454,6 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   border-color: rgba(95, 185, 255, 0.65);
   transform: translateY(-1px);
 }
-.svc-foot-note {
-  margin-top: 6px;
-  font-size: 11.5px;
-  color: #8bb2d6;
-  text-align: center;
-  background: rgba(10, 25, 52, 0.55);
-  border-radius: 4px;
-  padding: 4px 8px;
-  border: 1px solid rgba(90, 160, 230, 0.16);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.svc-foot-note b {
-  color: #38efbd;
-  font-family: var(--num);
-}
 .queue-route {
   display: flex;
   flex-direction: column;
@@ -670,7 +512,7 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
    右侧模块 1: 运力总览
    -------------------------------------------------------------------------- */
 .panel-capacity {
-  flex: 0.98;
+  flex: 0.82;
 }
 .cap-grid {
   display: grid;
@@ -780,70 +622,11 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   text-shadow: 0 0 8px rgba(6, 182, 212, 0.35);
 }
 
-/* 示范路线实时运力分配 */
-.cap-extra-block {
-  margin-top: 8px;
-  padding-top: 6px;
-  border-top: 1px dashed rgba(95, 175, 250, 0.2);
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-.route-cap-list {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-.route-cap-item {
-  background: rgba(12, 32, 64, 0.65);
-  border: 1px solid rgba(85, 160, 240, 0.2);
-  border-radius: 5px;
-  padding: 5px 8px;
-}
-.rc-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 12px;
-  margin-bottom: 3px;
-}
-.rc-name {
-  color: #d6e8fb;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.rc-name i {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-}
-.rc-meta {
-  color: #8eb3d8;
-  font-size: 11.5px;
-}
-.rc-meta b {
-  color: #f7fbff;
-}
-.rc-bar {
-  height: 4px;
-  border-radius: 2px;
-  background: rgba(10, 24, 48, 0.7);
-  overflow: hidden;
-}
-.rc-bar i {
-  display: block;
-  height: 100%;
-  border-radius: 2px;
-}
-
 /* --------------------------------------------------------------------------
    右侧模块 2: 车辆监控 (驾驶员异常 + ADAS 统计)
    -------------------------------------------------------------------------- */
 .panel-vehicles {
-  flex: 1.12;
+  flex: 1.25;
 }
 .driver-alert-box {
   display: flex;
@@ -972,45 +755,6 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 .adas-val.zero {
   color: #5d7d9e;
   font-weight: 500;
-}
-
-/* 主动安全与运行状态条 */
-.veh-extra-block {
-  margin-top: 7px;
-  padding-top: 6px;
-  border-top: 1px dashed rgba(95, 175, 250, 0.2);
-}
-.veh-safety-strip {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 5px;
-}
-.safety-chip {
-  background: rgba(12, 32, 64, 0.65);
-  border: 1px solid rgba(85, 160, 240, 0.2);
-  border-radius: 5px;
-  padding: 4px 4px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-.s-lbl {
-  font-size: 11px;
-  color: #82a8cd;
-  white-space: nowrap;
-}
-.s-val {
-  font-size: 13.5px;
-  color: #f7fbff;
-}
-.s-val.c-mint {
-  color: #00d68f;
-  text-shadow: 0 0 6px rgba(0, 214, 143, 0.4);
-}
-.s-val.c-amber {
-  color: #f5b842;
-  text-shadow: 0 0 6px rgba(245, 184, 66, 0.4);
 }
 
 /* --------------------------------------------------------------------------
@@ -1195,22 +939,6 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-.inc-foot-summary {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 11.5px;
-  color: #8eb3d8;
-  padding: 4px 8px;
-  background: rgba(10, 24, 48, 0.45);
-  border-radius: 4px;
-  border: 1px solid rgba(85, 160, 240, 0.16);
-  margin-top: 6px;
-}
-.inc-foot-summary b {
-  color: #38efbd;
-  font-family: var(--num);
 }
 
 /* --------------------------------------------------------------------------
@@ -2532,394 +2260,365 @@ footer {
     border-radius: 14px;
   }
 
-  /* Sub titles */
-  .sub-section-title {
-    font-size: 18px;
-    margin-bottom: 8px;
-  }
-  .sub-section-title small {
-    font-size: 15px;
-  }
-
   /* Left Module 1: Island Overview */
   .overview-dual {
-    gap: 12px;
+    flex: 1.1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
   }
   .metric-card {
-    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 18px 22px;
     border-radius: 8px;
   }
   .m-lbl {
-    font-size: 18.5px;
-    margin-bottom: 5px;
+    font-size: 20px;
+    margin-bottom: 6px;
   }
   .m-val strong {
-    font-size: 54px;
+    font-size: 60px;
   }
   .m-val small {
-    font-size: 20px;
+    font-size: 22px;
     margin-left: 6px;
   }
   .m-delta {
-    font-size: 17.5px;
+    font-size: 19px;
     margin-top: 6px;
   }
   .m-delta b {
-    font-size: 21px;
+    font-size: 23px;
   }
   .badge-pill {
-    font-size: 17px;
-    padding: 3px 12px;
+    font-size: 19px;
+    padding: 4px 12px;
   }
   .env-grid {
-    gap: 10px;
-    margin-top: 12px;
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 14px;
   }
   .env-box {
-    padding: 10px 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 8px;
     border-radius: 8px;
   }
   .env-ico {
-    width: 32px;
-    height: 32px;
-    margin-bottom: 5px;
+    width: 38px;
+    height: 38px;
+    margin-bottom: 6px;
   }
   .env-ico svg {
-    width: 28px;
-    height: 28px;
+    width: 34px;
+    height: 34px;
   }
   .env-val {
-    font-size: 27px;
+    font-size: 32px;
   }
   .env-lbl {
-    font-size: 17px;
-    margin-top: 4px;
-  }
-  .overview-extra-block {
-    margin-top: 14px;
-    padding-top: 10px;
-    gap: 6px;
-  }
-  .flow-mini-chart {
-    padding: 6px 10px 4px;
-    border-radius: 8px;
-  }
-  .flow-mini-chart svg {
-    height: 52px;
-  }
-  .flow-chart-axis {
-    font-size: 14px;
-    margin-top: 4px;
-  }
-  .hub-flow-strip {
-    gap: 8px;
+    font-size: 19px;
     margin-top: 6px;
-  }
-  .hub-chip {
-    padding: 6px 10px;
-    font-size: 15.5px;
-    border-radius: 6px;
-  }
-  .h-dot {
-    width: 8px;
-    height: 8px;
-    margin-right: 6px;
   }
 
   /* Left Module 2: Operations Monitor */
   .gmv-dual {
-    gap: 16px;
-    padding-bottom: 10px;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 18px;
+    padding: 18px 22px;
+    background: rgba(14, 34, 68, 0.45);
+    border-radius: 8px;
+    border: 1px solid rgba(85, 160, 240, 0.2);
+  }
+  .gmv-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   .gmv-val {
-    font-size: 56px;
-    margin: 4px 0;
+    font-size: 62px;
+    margin: 6px 0;
   }
   .arpu-card {
-    padding: 12px 18px;
-    min-width: 120px;
+    padding: 16px 26px;
+    min-width: 130px;
     border-radius: 8px;
+    justify-content: center;
+    align-items: center;
   }
   .arpu-val {
-    font-size: 46px;
+    font-size: 50px;
   }
   .arpu-lbl {
-    font-size: 18px;
+    font-size: 20px;
   }
   .order-grid {
-    gap: 10px;
-    margin-top: 8px;
+    flex: 1.25;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 14px;
   }
   .order-box {
-    padding: 12px 6px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 8px;
     border-radius: 8px;
   }
   .order-box strong {
-    font-size: 42px;
+    font-size: 48px;
   }
   .order-box small {
-    font-size: 18px;
-    margin-top: 5px;
+    font-size: 20px;
+    margin-top: 8px;
   }
   .order-progress-strip {
-    height: 6px;
-    margin-top: 12px;
-  }
-  .ops-extra-block {
+    height: 8px;
     margin-top: 14px;
-    padding-top: 10px;
-    gap: 8px;
-  }
-  .ops-mini-bars {
-    height: 72px;
-    padding: 6px 12px 6px;
-    gap: 10px;
-  }
-  .bar-fill {
-    width: 20px;
-  }
-  .bar-lbl {
-    font-size: 14.5px;
-  }
-  .ops-foot-summary {
-    font-size: 16px;
-    padding: 6px 10px;
   }
 
   /* Left Module 3: Service Monitor */
   .svc-grid {
-    gap: 10px;
+    flex: 0.9;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
   }
   .svc-box {
-    padding: 12px 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 8px;
     border-radius: 8px;
   }
   .svc-num strong {
-    font-size: 42px;
+    font-size: 48px;
   }
   .svc-num small {
-    font-size: 20px;
+    font-size: 22px;
     margin-left: 4px;
   }
   .svc-lbl {
-    font-size: 18px;
+    font-size: 20px;
     margin-top: 4px;
   }
   .queue-header-grid {
     gap: 14px;
-    margin: 12px 4px 8px;
+    margin: 14px 4px 8px;
   }
   .q-hdr-cell {
-    font-size: 16.5px;
+    font-size: 18px;
     padding: 0 6px;
   }
   .queue-grid-2col {
-    gap: 8px 14px;
+    flex: 2.2;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 14px;
   }
   .queue-row {
-    padding: 9px 14px;
+    padding: 11px 16px;
     border-radius: 8px;
   }
   .q-stop {
-    font-size: 18px;
-    padding-left: 20px;
+    font-size: 19px;
+    padding-left: 22px;
   }
   .q-stop:before {
-    width: 8px;
-    height: 8px;
+    width: 9px;
+    height: 9px;
   }
   .q-pax {
-    font-size: 17.5px;
+    font-size: 18.5px;
   }
   .q-time {
-    font-size: 22px;
-  }
-  .svc-foot-note {
-    font-size: 16px;
-    padding: 7px 12px;
-    margin-top: 10px;
+    font-size: 23px;
   }
 
   /* Right Module 1: Capacity Overview */
   .cap-grid {
-    gap: 10px;
+    flex: 1.2;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
   }
   .cap-box {
-    padding: 12px 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 8px;
     border-radius: 8px;
   }
   .cap-box strong {
-    font-size: 42px;
+    font-size: 48px;
   }
   .cap-box small {
-    font-size: 18px;
-    margin-top: 4px;
+    font-size: 20px;
+    margin-top: 8px;
   }
   .cap-dist-bar {
-    height: 6px;
-    margin: 10px 0;
+    height: 8px;
+    margin: 16px 0;
   }
   .cap-metrics-dual {
-    gap: 10px;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
   }
   .cap-chip {
-    padding: 8px 14px;
+    padding: 18px 24px;
     border-radius: 8px;
   }
   .cap-chip-lbl {
-    font-size: 18px;
+    font-size: 21px;
   }
   .cap-chip-val {
-    font-size: 24px;
-  }
-  .cap-extra-block {
-    margin-top: 14px;
-    padding-top: 10px;
-    gap: 8px;
-  }
-  .route-cap-list {
-    gap: 8px;
-  }
-  .route-cap-item {
-    padding: 9px 14px;
-    border-radius: 8px;
-  }
-  .rc-info {
-    font-size: 17px;
-    margin-bottom: 5px;
-  }
-  .rc-name i {
-    width: 8px;
-    height: 8px;
-  }
-  .rc-meta {
-    font-size: 16px;
-  }
-  .rc-bar {
-    height: 6px;
+    font-size: 32px;
   }
 
   /* Right Module 2: Vehicles Monitor */
   .driver-alert-box {
-    padding: 12px 16px;
+    padding: 16px 22px;
     border-radius: 8px;
-    margin-bottom: 10px;
+    margin-bottom: 14px;
   }
   .alert-lbl {
-    font-size: 19px;
+    font-size: 22px;
   }
   .alert-val {
-    font-size: 34px;
+    font-size: 40px;
   }
   .alert-tag {
-    font-size: 15px;
-    padding: 3px 10px;
+    font-size: 16px;
+    padding: 4px 12px;
   }
   .alert-unit {
-    font-size: 17px;
+    font-size: 18px;
   }
   .adas-section {
-    gap: 7px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
   }
   .adas-header {
-    font-size: 19px;
-    margin-bottom: 4px;
+    font-size: 21px;
+    margin-bottom: 6px;
   }
   .adas-header .icon {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
   }
   .adas-grid {
-    gap: 8px;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 14px;
   }
   .adas-col {
-    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
   }
   .adas-item {
-    padding: 6.5px 10px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 11px 14px;
     border-radius: 6px;
   }
   .adas-dot {
-    width: 8px;
-    height: 8px;
-    margin-right: 8px;
+    width: 9px;
+    height: 9px;
+    margin-right: 9px;
   }
   .adas-name {
-    font-size: 17px;
+    font-size: 18.5px;
   }
   .adas-val {
-    font-size: 20px;
-  }
-  .veh-extra-block {
-    margin-top: 12px;
-    padding-top: 9px;
-  }
-  .veh-safety-strip {
-    gap: 8px;
-  }
-  .safety-chip {
-    padding: 7px 6px;
-    border-radius: 6px;
-  }
-  .s-lbl {
-    font-size: 15px;
-  }
-  .s-val {
-    font-size: 18.5px;
+    font-size: 23px;
   }
 
   /* Right Module 3: Incidents Monitor */
   .inc-stats-row {
-    gap: 10px;
-    margin-bottom: 10px;
+    flex: 0.9;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 14px;
   }
   .inc-stat-box {
-    padding: 12px 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 8px;
     border-radius: 8px;
   }
   .inc-stat-box strong {
-    font-size: 42px;
+    font-size: 48px;
   }
   .inc-stat-box small {
-    font-size: 18px;
-    margin-top: 4px;
+    font-size: 20px;
+    margin-top: 6px;
   }
   .incident-list-v2 {
-    gap: 8px;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 14px;
   }
   .inc-v2-card {
-    padding: 10px 14px;
+    flex: 1;
+    padding: 18px 22px;
     border-radius: 8px;
-    gap: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
   }
   .inc-v2-time {
-    font-size: 17px;
+    font-size: 19px;
   }
   .inc-v2-badge {
-    font-size: 15px;
-    padding: 2px 8px;
+    font-size: 17px;
+    padding: 3px 10px;
   }
   .inc-v2-title {
-    font-size: 18px;
+    font-size: 21px;
+    margin: 6px 0;
   }
   .inc-v2-status {
-    font-size: 15px;
-    padding: 2px 10px;
-  }
-  .inc-v2-bottom {
     font-size: 16px;
-    padding-left: 40px;
+    padding: 3px 12px;
+  }
+  .inc-v2-footer {
+    font-size: 17px;
   }
   .inc-v2-act-lbl {
-    font-size: 14px;
+    font-size: 16px;
+    padding: 2px 8px;
   }
   .inc-v2-act-val {
-    font-size: 16px;
-  }
-  .inc-foot-summary {
-    font-size: 16px;
-    padding: 7px 12px;
-    margin-top: 10px;
+    font-size: 18px;
   }
 
   /* Floating Popups */
@@ -3187,31 +2886,6 @@ function islandOverviewPanel(period = '今日') {
         <small class="env-lbl">航线状态</small>
       </div>
     </div>
-    <div class="overview-extra-block">
-      <div class="sub-section-title"><span>24小时客流时段分布走势</span><small>峰值 14:00 (1,280 人/h) · 实时 860 人/h</small></div>
-      <div class="flow-mini-chart">
-        <svg viewBox="0 0 500 58" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="flowWaveGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#38efbd" stop-opacity="0.38"/>
-              <stop offset="100%" stop-color="#38efbd" stop-opacity="0.02"/>
-            </linearGradient>
-          </defs>
-          <path d="M0 46 Q 60 48, 120 38 T 240 22 T 350 12 T 500 30 L 500 58 L 0 58 Z" fill="url(#flowWaveGrad)"/>
-          <path d="M0 46 Q 60 48, 120 38 T 240 22 T 350 12 T 500 30" fill="none" stroke="#38efbd" stroke-width="2.6"/>
-          <circle cx="350" cy="12" r="4" fill="#38efbd" filter="drop-shadow(0 0 6px #38efbd)"/>
-        </svg>
-        <div class="flow-chart-axis">
-          <span>02:00</span><span>06:00</span><span>10:00</span><span class="c-mint">14:00 (峰)</span><span>18:00</span><span>22:00</span>
-        </div>
-      </div>
-      <div class="hub-flow-strip">
-        <div class="hub-chip"><span class="h-dot port"></span>西角码头 <b>50.3%</b></div>
-        <div class="hub-chip"><span class="h-dot sports"></span>南湾运动公园 <b>26.6%</b></div>
-        <div class="hub-chip"><span class="h-dot beach"></span>石螺口 <b>14.0%</b></div>
-        <div class="hub-chip"><span class="h-dot east"></span>五彩滩 <b>9.1%</b></div>
-      </div>
-    </div>
   </section>`;
 }
 
@@ -3256,22 +2930,6 @@ function operationsMonitorPanel() {
       <span class="seg done" style="width: 81.2%;" title="已完成: 286单 (81.2%)"></span>
       <span class="seg serving" style="width: 7.4%;" title="服务中: 26单 (7.4%)"></span>
       <span class="seg pending" style="width: 9.1%;" title="待接单: 32单 (9.1%)"></span>
-    </div>
-    <div class="ops-extra-block">
-      <div class="sub-section-title"><span>近7日营运收益走势</span><small>达标率 106.8% · 运营超额</small></div>
-      <div class="ops-mini-bars">
-        <div class="bar-col"><div class="bar-fill" style="height: 64%;"></div><span class="bar-lbl">11-01</span></div>
-        <div class="bar-col"><div class="bar-fill" style="height: 69%;"></div><span class="bar-lbl">11-02</span></div>
-        <div class="bar-col"><div class="bar-fill" style="height: 74%;"></div><span class="bar-lbl">11-03</span></div>
-        <div class="bar-col"><div class="bar-fill" style="height: 80%;"></div><span class="bar-lbl">11-04</span></div>
-        <div class="bar-col"><div class="bar-fill" style="height: 88%;"></div><span class="bar-lbl">11-05</span></div>
-        <div class="bar-col"><div class="bar-fill" style="height: 98%;"></div><span class="bar-lbl">11-06</span></div>
-        <div class="bar-col active"><div class="bar-fill" style="height: 85%;"></div><span class="bar-lbl">今日</span></div>
-      </div>
-      <div class="ops-foot-summary">
-        <span>🔥 热门呼叫区间: <b>西角码头 ⇄ 南湾海鲜市场</b></span>
-        <span>⚡ 派单响应均速: <b>2.4s</b></span>
-      </div>
     </div>
   </section>`;
 }
@@ -3486,9 +3144,6 @@ function serviceMonitorPanel() {
       <div class="q-hdr-cell"><span>出发地 / 目的地</span><span>人数 / 等待时长</span></div>
     </div>
     <div class="queue-grid-2col">${rows}</div>
-    <div class="svc-foot-note">
-      <span>全岛当前排队候车 <b>30 人</b> · 平均调度响应 <b>4.8 分钟</b> · 运力储备充足</span>
-    </div>
   </section>`;
 }
 
@@ -3530,32 +3185,6 @@ function capacityOverviewPanel() {
       <div class="cap-chip">
         <span class="cap-chip-lbl">平均满载率</span>
         <span class="cap-chip-val font-num c-cyan">86%</span>
-      </div>
-    </div>
-    <div class="cap-extra-block">
-      <div class="sub-section-title"><span>示范路线实时运力分配</span><small>全岛 12 辆示范车</small></div>
-      <div class="route-cap-list">
-        <div class="route-cap-item">
-          <div class="rc-info">
-            <span class="rc-name"><i style="background:#5cf1d1"></i>环岛观光线 (L01)</span>
-            <span class="rc-meta font-num"><b>4 辆在线</b> · 满载率 88%</span>
-          </div>
-          <div class="rc-bar"><i style="width:88%; background:#5cf1d1"></i></div>
-        </div>
-        <div class="route-cap-item">
-          <div class="rc-info">
-            <span class="rc-name"><i style="background:#68b7ff"></i>码头接驳线 (L02)</span>
-            <span class="rc-meta font-num"><b>4 辆在线</b> · 满载率 92%</span>
-          </div>
-          <div class="rc-bar"><i style="width:92%; background:#68b7ff"></i></div>
-        </div>
-        <div class="route-cap-item">
-          <div class="rc-info">
-            <span class="rc-name"><i style="background:#f0b765"></i>东岸景区线 (L03)</span>
-            <span class="rc-meta font-num"><b>3 辆在线 / 1 充维</b> · 满载率 76%</span>
-          </div>
-          <div class="rc-bar"><i style="width:76%; background:#f0b765"></i></div>
-        </div>
       </div>
     </div>
   </section>`;
@@ -3609,14 +3238,6 @@ function vehicleMonitorPanel() {
         <div class="adas-col">${adasRight.map(renderItem).join('')}</div>
       </div>
     </div>
-    <div class="veh-extra-block">
-      <div class="veh-safety-strip">
-        <div class="safety-chip"><span class="s-lbl">限速符合率</span><b class="s-val c-mint">99.4%</b></div>
-        <div class="safety-chip"><span class="s-lbl">全岛平均时速</span><b class="s-val font-num">28.6 km/h</b></div>
-        <div class="safety-chip"><span class="s-lbl">主动防撞避险</span><b class="s-val c-amber">2 次化解</b></div>
-        <div class="safety-chip"><span class="s-lbl">设备在线率</span><b class="s-val font-num c-mint">100%</b></div>
-      </div>
-    </div>
   </section>`;
 }
 
@@ -3629,7 +3250,7 @@ const incidentStore = [
     time: '15:20',
     type: 'warn',
     tag: '预警',
-    title: '船舶 15:20 分到港，客流瞬时上升',
+    title: '船舶 15:20 分到港，客流上升',
     content: '监测到「北海—涠洲」航线 15:20 班次到港，预计西角码头瞬时客流上升约 260 人，现有候车运力存在缺口。',
     location: '西角码头',
     car: '—',
@@ -3647,35 +3268,11 @@ const incidentStore = [
     car: 'WZ-102',
     action: '提醒司机注意安全',
     status: '未处理'
-  },
-  {
-    id: 'EV202611060012',
-    time: '14:45',
-    type: 'warn',
-    tag: '预警',
-    title: '南湾运动公园充电桩 03 号桩离线',
-    content: '运动公园快充桩 03 号通信断开，已通知现场运维人员检查配电与网络线缆。',
-    location: '南湾运动公园充电站',
-    car: '—',
-    action: '派单现场运维巡检',
-    status: '已处理'
-  },
-  {
-    id: 'EV202611060009',
-    time: '14:15',
-    type: 'warn',
-    tag: '预警',
-    title: '蓝桥引桥风力达 6 级，提醒减速慢行',
-    content: '受冷空气影响北部湾瞬时阵风达到 6 级，已向沿线运营车辆发送限速与防风驾驶提示。',
-    location: '蓝桥观光路段',
-    car: '全岛车辆',
-    action: '车载广播与调度提醒',
-    status: '已处理'
   }
 ];
 
 function incidentMonitorPanel(handled = new Set()) {
-  const badge = `<span class="tag-badge">今日 6 起 · 最新4条</span>`;
+  const badge = `<span class="tag-badge">今日 6 起 · 待处理 2 条</span>`;
   
   // 实时统计各状态数量
   const handledItems = incidentStore.filter(i => i.status === '已处理');
@@ -3694,7 +3291,7 @@ function incidentMonitorPanel(handled = new Set()) {
       </div>
       <div class="inc-v2-title">${item.title}</div>
       <div class="inc-v2-footer">
-        <span class="inc-v2-act-lbl">处理方式</span>
+        <span class="inc-v2-act-lbl">处理方式:</span>
         <span class="inc-v2-act-val">${item.action}</span>
       </div>
     </div>
@@ -3717,10 +3314,6 @@ function incidentMonitorPanel(handled = new Set()) {
       </div>
     </div>
     <div class="incident-list-v2">${cards}</div>
-    <div class="inc-foot-summary">
-      <span>⏱ 平均处置用时: <b>3.8 分钟</b></span>
-      <span>✓ 今日闭环率: <b>95.8%</b></span>
-    </div>
   </section>`;
 }
 

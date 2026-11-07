@@ -96,7 +96,7 @@
    左侧模块 1: 全岛出行总览
    -------------------------------------------------------------------------- */
 .panel-overview {
-  flex: 1;
+  flex: 0.92;
 }
 .overview-dual {
   display: grid;
@@ -205,91 +205,11 @@
   margin-top: 3px;
 }
 
-/* 全岛客流趋势图与枢纽占比 */
-.sub-section-title {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 12.5px;
-  font-weight: 600;
-  color: #d8ecff;
-  margin-bottom: 5px;
-}
-.sub-section-title small {
-  font-size: 11px;
-  color: #79a8d4;
-  font-weight: normal;
-}
-.overview-extra-block {
-  margin-top: 8px;
-  padding-top: 6px;
-  border-top: 1px dashed rgba(95, 175, 250, 0.2);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.flow-mini-chart {
-  width: 100%;
-  position: relative;
-  background: rgba(10, 24, 48, 0.45);
-  border-radius: 6px;
-  padding: 4px 6px 2px;
-  border: 1px solid rgba(85, 160, 240, 0.15);
-}
-.flow-mini-chart svg {
-  width: 100%;
-  height: 38px;
-  display: block;
-}
-.flow-chart-axis {
-  display: flex;
-  justify-content: space-between;
-  font-size: 10.5px;
-  color: #6d90b4;
-  font-family: var(--num);
-  margin-top: 2px;
-}
-.hub-flow-strip {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 4px;
-  margin-top: 2px;
-}
-.hub-chip {
-  background: rgba(12, 32, 64, 0.65);
-  border: 1px solid rgba(85, 160, 240, 0.2);
-  border-radius: 4px;
-  padding: 3px 5px;
-  font-size: 11px;
-  color: #bcd5ee;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  white-space: nowrap;
-}
-.hub-chip b {
-  font-family: var(--num);
-  color: #f7fbff;
-  margin-left: 2px;
-}
-.h-dot {
-  width: 5px;
-  height: 5px;
-  border-radius: 50%;
-  display: inline-block;
-  margin-right: 4px;
-  flex-shrink: 0;
-}
-.h-dot.port { background: #00d8ff; box-shadow: 0 0 4px #00d8ff; }
-.h-dot.sports { background: #38efbd; box-shadow: 0 0 4px #38efbd; }
-.h-dot.beach { background: #f5b842; box-shadow: 0 0 4px #f5b842; }
-.h-dot.east { background: #a78bfa; box-shadow: 0 0 4px #a78bfa; }
-
 /* --------------------------------------------------------------------------
    左侧模块 2: 运营监控
    -------------------------------------------------------------------------- */
 .panel-ops {
-  flex: 1;
+  flex: 0.95;
 }
 .gmv-dual {
   display: flex;
@@ -437,72 +357,11 @@
   box-shadow: 0 0 6px rgba(255, 190, 66, 0.5);
 }
 
-/* 7日营收柱状趋势与热点区间 */
-.ops-extra-block {
-  margin-top: 8px;
-  padding-top: 6px;
-  border-top: 1px dashed rgba(95, 175, 250, 0.2);
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
-.ops-mini-bars {
-  display: flex;
-  align-items: flex-end;
-  justify-content: space-between;
-  height: 48px;
-  padding: 4px 8px 3px;
-  background: rgba(10, 24, 48, 0.45);
-  border-radius: 6px;
-  border: 1px solid rgba(85, 160, 240, 0.15);
-  gap: 6px;
-}
-.bar-col {
-  flex: 1;
-  height: 100%;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-end;
-  gap: 3px;
-}
-.bar-fill {
-  width: 12px;
-  border-radius: 2px 2px 0 0;
-  background: linear-gradient(180deg, #38efbd, #0284c7);
-  box-shadow: 0 0 6px rgba(56, 239, 189, 0.3);
-  transition: height 0.3s ease;
-}
-.bar-col.active .bar-fill {
-  background: linear-gradient(180deg, #ffbe42, #ea580c);
-  box-shadow: 0 0 8px rgba(255, 190, 66, 0.6);
-}
-.bar-lbl {
-  font-size: 10px;
-  color: #79a0c7;
-  font-family: var(--num);
-  white-space: nowrap;
-}
-.ops-foot-summary {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 11.5px;
-  color: #8eb3d8;
-  padding: 2px 4px;
-  background: rgba(10, 24, 48, 0.35);
-  border-radius: 4px;
-}
-.ops-foot-summary b {
-  color: #38efbd;
-  font-family: var(--num);
-}
-
 /* --------------------------------------------------------------------------
    左侧模块 3: 服务监控
    -------------------------------------------------------------------------- */
 .panel-service {
-  flex: 1.25;
+  flex: 1.35;
 }
 .svc-grid {
   display: grid;
@@ -580,23 +439,6 @@
   border-color: rgba(95, 185, 255, 0.65);
   transform: translateY(-1px);
 }
-.svc-foot-note {
-  margin-top: 6px;
-  font-size: 11.5px;
-  color: #8bb2d6;
-  text-align: center;
-  background: rgba(10, 25, 52, 0.55);
-  border-radius: 4px;
-  padding: 4px 8px;
-  border: 1px solid rgba(90, 160, 230, 0.16);
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-.svc-foot-note b {
-  color: #38efbd;
-  font-family: var(--num);
-}
 .queue-route {
   display: flex;
   flex-direction: column;
@@ -655,7 +497,7 @@
    右侧模块 1: 运力总览
    -------------------------------------------------------------------------- */
 .panel-capacity {
-  flex: 0.98;
+  flex: 0.82;
 }
 .cap-grid {
   display: grid;
@@ -765,70 +607,11 @@
   text-shadow: 0 0 8px rgba(6, 182, 212, 0.35);
 }
 
-/* 示范路线实时运力分配 */
-.cap-extra-block {
-  margin-top: 8px;
-  padding-top: 6px;
-  border-top: 1px dashed rgba(95, 175, 250, 0.2);
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-.route-cap-list {
-  display: flex;
-  flex-direction: column;
-  gap: 5px;
-}
-.route-cap-item {
-  background: rgba(12, 32, 64, 0.65);
-  border: 1px solid rgba(85, 160, 240, 0.2);
-  border-radius: 5px;
-  padding: 5px 8px;
-}
-.rc-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 12px;
-  margin-bottom: 3px;
-}
-.rc-name {
-  color: #d6e8fb;
-  font-weight: 600;
-  display: flex;
-  align-items: center;
-  gap: 5px;
-}
-.rc-name i {
-  display: inline-block;
-  width: 6px;
-  height: 6px;
-  border-radius: 50%;
-}
-.rc-meta {
-  color: #8eb3d8;
-  font-size: 11.5px;
-}
-.rc-meta b {
-  color: #f7fbff;
-}
-.rc-bar {
-  height: 4px;
-  border-radius: 2px;
-  background: rgba(10, 24, 48, 0.7);
-  overflow: hidden;
-}
-.rc-bar i {
-  display: block;
-  height: 100%;
-  border-radius: 2px;
-}
-
 /* --------------------------------------------------------------------------
    右侧模块 2: 车辆监控 (驾驶员异常 + ADAS 统计)
    -------------------------------------------------------------------------- */
 .panel-vehicles {
-  flex: 1.12;
+  flex: 1.25;
 }
 .driver-alert-box {
   display: flex;
@@ -957,45 +740,6 @@
 .adas-val.zero {
   color: #5d7d9e;
   font-weight: 500;
-}
-
-/* 主动安全与运行状态条 */
-.veh-extra-block {
-  margin-top: 7px;
-  padding-top: 6px;
-  border-top: 1px dashed rgba(95, 175, 250, 0.2);
-}
-.veh-safety-strip {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 5px;
-}
-.safety-chip {
-  background: rgba(12, 32, 64, 0.65);
-  border: 1px solid rgba(85, 160, 240, 0.2);
-  border-radius: 5px;
-  padding: 4px 4px;
-  text-align: center;
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-.s-lbl {
-  font-size: 11px;
-  color: #82a8cd;
-  white-space: nowrap;
-}
-.s-val {
-  font-size: 13.5px;
-  color: #f7fbff;
-}
-.s-val.c-mint {
-  color: #00d68f;
-  text-shadow: 0 0 6px rgba(0, 214, 143, 0.4);
-}
-.s-val.c-amber {
-  color: #f5b842;
-  text-shadow: 0 0 6px rgba(245, 184, 66, 0.4);
 }
 
 /* --------------------------------------------------------------------------
@@ -1180,22 +924,6 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-}
-.inc-foot-summary {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  font-size: 11.5px;
-  color: #8eb3d8;
-  padding: 4px 8px;
-  background: rgba(10, 24, 48, 0.45);
-  border-radius: 4px;
-  border: 1px solid rgba(85, 160, 240, 0.16);
-  margin-top: 6px;
-}
-.inc-foot-summary b {
-  color: #38efbd;
-  font-family: var(--num);
 }
 
 /* --------------------------------------------------------------------------

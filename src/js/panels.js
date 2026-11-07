@@ -47,31 +47,6 @@ function islandOverviewPanel(period = '今日') {
         <small class="env-lbl">航线状态</small>
       </div>
     </div>
-    <div class="overview-extra-block">
-      <div class="sub-section-title"><span>24小时客流时段分布走势</span><small>峰值 14:00 (1,280 人/h) · 实时 860 人/h</small></div>
-      <div class="flow-mini-chart">
-        <svg viewBox="0 0 500 58" preserveAspectRatio="none">
-          <defs>
-            <linearGradient id="flowWaveGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#38efbd" stop-opacity="0.38"/>
-              <stop offset="100%" stop-color="#38efbd" stop-opacity="0.02"/>
-            </linearGradient>
-          </defs>
-          <path d="M0 46 Q 60 48, 120 38 T 240 22 T 350 12 T 500 30 L 500 58 L 0 58 Z" fill="url(#flowWaveGrad)"/>
-          <path d="M0 46 Q 60 48, 120 38 T 240 22 T 350 12 T 500 30" fill="none" stroke="#38efbd" stroke-width="2.6"/>
-          <circle cx="350" cy="12" r="4" fill="#38efbd" filter="drop-shadow(0 0 6px #38efbd)"/>
-        </svg>
-        <div class="flow-chart-axis">
-          <span>02:00</span><span>06:00</span><span>10:00</span><span class="c-mint">14:00 (峰)</span><span>18:00</span><span>22:00</span>
-        </div>
-      </div>
-      <div class="hub-flow-strip">
-        <div class="hub-chip"><span class="h-dot port"></span>西角码头 <b>50.3%</b></div>
-        <div class="hub-chip"><span class="h-dot sports"></span>南湾运动公园 <b>26.6%</b></div>
-        <div class="hub-chip"><span class="h-dot beach"></span>石螺口 <b>14.0%</b></div>
-        <div class="hub-chip"><span class="h-dot east"></span>五彩滩 <b>9.1%</b></div>
-      </div>
-    </div>
   </section>`;
 }
 
@@ -116,22 +91,6 @@ function operationsMonitorPanel() {
       <span class="seg done" style="width: 81.2%;" title="已完成: 286单 (81.2%)"></span>
       <span class="seg serving" style="width: 7.4%;" title="服务中: 26单 (7.4%)"></span>
       <span class="seg pending" style="width: 9.1%;" title="待接单: 32单 (9.1%)"></span>
-    </div>
-    <div class="ops-extra-block">
-      <div class="sub-section-title"><span>近7日营运收益走势</span><small>达标率 106.8% · 运营超额</small></div>
-      <div class="ops-mini-bars">
-        <div class="bar-col"><div class="bar-fill" style="height: 64%;"></div><span class="bar-lbl">11-01</span></div>
-        <div class="bar-col"><div class="bar-fill" style="height: 69%;"></div><span class="bar-lbl">11-02</span></div>
-        <div class="bar-col"><div class="bar-fill" style="height: 74%;"></div><span class="bar-lbl">11-03</span></div>
-        <div class="bar-col"><div class="bar-fill" style="height: 80%;"></div><span class="bar-lbl">11-04</span></div>
-        <div class="bar-col"><div class="bar-fill" style="height: 88%;"></div><span class="bar-lbl">11-05</span></div>
-        <div class="bar-col"><div class="bar-fill" style="height: 98%;"></div><span class="bar-lbl">11-06</span></div>
-        <div class="bar-col active"><div class="bar-fill" style="height: 85%;"></div><span class="bar-lbl">今日</span></div>
-      </div>
-      <div class="ops-foot-summary">
-        <span>🔥 热门呼叫区间: <b>西角码头 ⇄ 南湾海鲜市场</b></span>
-        <span>⚡ 派单响应均速: <b>2.4s</b></span>
-      </div>
     </div>
   </section>`;
 }
@@ -346,9 +305,6 @@ function serviceMonitorPanel() {
       <div class="q-hdr-cell"><span>出发地 / 目的地</span><span>人数 / 等待时长</span></div>
     </div>
     <div class="queue-grid-2col">${rows}</div>
-    <div class="svc-foot-note">
-      <span>全岛当前排队候车 <b>30 人</b> · 平均调度响应 <b>4.8 分钟</b> · 运力储备充足</span>
-    </div>
   </section>`;
 }
 
@@ -390,32 +346,6 @@ function capacityOverviewPanel() {
       <div class="cap-chip">
         <span class="cap-chip-lbl">平均满载率</span>
         <span class="cap-chip-val font-num c-cyan">86%</span>
-      </div>
-    </div>
-    <div class="cap-extra-block">
-      <div class="sub-section-title"><span>示范路线实时运力分配</span><small>全岛 12 辆示范车</small></div>
-      <div class="route-cap-list">
-        <div class="route-cap-item">
-          <div class="rc-info">
-            <span class="rc-name"><i style="background:#5cf1d1"></i>环岛观光线 (L01)</span>
-            <span class="rc-meta font-num"><b>4 辆在线</b> · 满载率 88%</span>
-          </div>
-          <div class="rc-bar"><i style="width:88%; background:#5cf1d1"></i></div>
-        </div>
-        <div class="route-cap-item">
-          <div class="rc-info">
-            <span class="rc-name"><i style="background:#68b7ff"></i>码头接驳线 (L02)</span>
-            <span class="rc-meta font-num"><b>4 辆在线</b> · 满载率 92%</span>
-          </div>
-          <div class="rc-bar"><i style="width:92%; background:#68b7ff"></i></div>
-        </div>
-        <div class="route-cap-item">
-          <div class="rc-info">
-            <span class="rc-name"><i style="background:#f0b765"></i>东岸景区线 (L03)</span>
-            <span class="rc-meta font-num"><b>3 辆在线 / 1 充维</b> · 满载率 76%</span>
-          </div>
-          <div class="rc-bar"><i style="width:76%; background:#f0b765"></i></div>
-        </div>
       </div>
     </div>
   </section>`;
@@ -469,14 +399,6 @@ function vehicleMonitorPanel() {
         <div class="adas-col">${adasRight.map(renderItem).join('')}</div>
       </div>
     </div>
-    <div class="veh-extra-block">
-      <div class="veh-safety-strip">
-        <div class="safety-chip"><span class="s-lbl">限速符合率</span><b class="s-val c-mint">99.4%</b></div>
-        <div class="safety-chip"><span class="s-lbl">全岛平均时速</span><b class="s-val font-num">28.6 km/h</b></div>
-        <div class="safety-chip"><span class="s-lbl">主动防撞避险</span><b class="s-val c-amber">2 次化解</b></div>
-        <div class="safety-chip"><span class="s-lbl">设备在线率</span><b class="s-val font-num c-mint">100%</b></div>
-      </div>
-    </div>
   </section>`;
 }
 
@@ -489,7 +411,7 @@ const incidentStore = [
     time: '15:20',
     type: 'warn',
     tag: '预警',
-    title: '船舶 15:20 分到港，客流瞬时上升',
+    title: '船舶 15:20 分到港，客流上升',
     content: '监测到「北海—涠洲」航线 15:20 班次到港，预计西角码头瞬时客流上升约 260 人，现有候车运力存在缺口。',
     location: '西角码头',
     car: '—',
@@ -507,35 +429,11 @@ const incidentStore = [
     car: 'WZ-102',
     action: '提醒司机注意安全',
     status: '未处理'
-  },
-  {
-    id: 'EV202611060012',
-    time: '14:45',
-    type: 'warn',
-    tag: '预警',
-    title: '南湾运动公园充电桩 03 号桩离线',
-    content: '运动公园快充桩 03 号通信断开，已通知现场运维人员检查配电与网络线缆。',
-    location: '南湾运动公园充电站',
-    car: '—',
-    action: '派单现场运维巡检',
-    status: '已处理'
-  },
-  {
-    id: 'EV202611060009',
-    time: '14:15',
-    type: 'warn',
-    tag: '预警',
-    title: '蓝桥引桥风力达 6 级，提醒减速慢行',
-    content: '受冷空气影响北部湾瞬时阵风达到 6 级，已向沿线运营车辆发送限速与防风驾驶提示。',
-    location: '蓝桥观光路段',
-    car: '全岛车辆',
-    action: '车载广播与调度提醒',
-    status: '已处理'
   }
 ];
 
 function incidentMonitorPanel(handled = new Set()) {
-  const badge = `<span class="tag-badge">今日 6 起 · 最新4条</span>`;
+  const badge = `<span class="tag-badge">今日 6 起 · 待处理 2 条</span>`;
   
   // 实时统计各状态数量
   const handledItems = incidentStore.filter(i => i.status === '已处理');
@@ -554,7 +452,7 @@ function incidentMonitorPanel(handled = new Set()) {
       </div>
       <div class="inc-v2-title">${item.title}</div>
       <div class="inc-v2-footer">
-        <span class="inc-v2-act-lbl">处理方式</span>
+        <span class="inc-v2-act-lbl">处理方式:</span>
         <span class="inc-v2-act-val">${item.action}</span>
       </div>
     </div>
@@ -577,10 +475,6 @@ function incidentMonitorPanel(handled = new Set()) {
       </div>
     </div>
     <div class="incident-list-v2">${cards}</div>
-    <div class="inc-foot-summary">
-      <span>⏱ 平均处置用时: <b>3.8 分钟</b></span>
-      <span>✓ 今日闭环率: <b>95.8%</b></span>
-    </div>
   </section>`;
 }
 

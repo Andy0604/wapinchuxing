@@ -802,394 +802,365 @@
     border-radius: 14px;
   }
 
-  /* Sub titles */
-  .sub-section-title {
-    font-size: 18px;
-    margin-bottom: 8px;
-  }
-  .sub-section-title small {
-    font-size: 15px;
-  }
-
   /* Left Module 1: Island Overview */
   .overview-dual {
-    gap: 12px;
+    flex: 1.1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
   }
   .metric-card {
-    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 18px 22px;
     border-radius: 8px;
   }
   .m-lbl {
-    font-size: 18.5px;
-    margin-bottom: 5px;
+    font-size: 20px;
+    margin-bottom: 6px;
   }
   .m-val strong {
-    font-size: 54px;
+    font-size: 60px;
   }
   .m-val small {
-    font-size: 20px;
+    font-size: 22px;
     margin-left: 6px;
   }
   .m-delta {
-    font-size: 17.5px;
+    font-size: 19px;
     margin-top: 6px;
   }
   .m-delta b {
-    font-size: 21px;
+    font-size: 23px;
   }
   .badge-pill {
-    font-size: 17px;
-    padding: 3px 12px;
+    font-size: 19px;
+    padding: 4px 12px;
   }
   .env-grid {
-    gap: 10px;
-    margin-top: 12px;
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 14px;
   }
   .env-box {
-    padding: 10px 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 16px 8px;
     border-radius: 8px;
   }
   .env-ico {
-    width: 32px;
-    height: 32px;
-    margin-bottom: 5px;
+    width: 38px;
+    height: 38px;
+    margin-bottom: 6px;
   }
   .env-ico svg {
-    width: 28px;
-    height: 28px;
+    width: 34px;
+    height: 34px;
   }
   .env-val {
-    font-size: 27px;
+    font-size: 32px;
   }
   .env-lbl {
-    font-size: 17px;
-    margin-top: 4px;
-  }
-  .overview-extra-block {
-    margin-top: 14px;
-    padding-top: 10px;
-    gap: 6px;
-  }
-  .flow-mini-chart {
-    padding: 6px 10px 4px;
-    border-radius: 8px;
-  }
-  .flow-mini-chart svg {
-    height: 52px;
-  }
-  .flow-chart-axis {
-    font-size: 14px;
-    margin-top: 4px;
-  }
-  .hub-flow-strip {
-    gap: 8px;
+    font-size: 19px;
     margin-top: 6px;
-  }
-  .hub-chip {
-    padding: 6px 10px;
-    font-size: 15.5px;
-    border-radius: 6px;
-  }
-  .h-dot {
-    width: 8px;
-    height: 8px;
-    margin-right: 6px;
   }
 
   /* Left Module 2: Operations Monitor */
   .gmv-dual {
-    gap: 16px;
-    padding-bottom: 10px;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 18px;
+    padding: 18px 22px;
+    background: rgba(14, 34, 68, 0.45);
+    border-radius: 8px;
+    border: 1px solid rgba(85, 160, 240, 0.2);
+  }
+  .gmv-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   .gmv-val {
-    font-size: 56px;
-    margin: 4px 0;
+    font-size: 62px;
+    margin: 6px 0;
   }
   .arpu-card {
-    padding: 12px 18px;
-    min-width: 120px;
+    padding: 16px 26px;
+    min-width: 130px;
     border-radius: 8px;
+    justify-content: center;
+    align-items: center;
   }
   .arpu-val {
-    font-size: 46px;
+    font-size: 50px;
   }
   .arpu-lbl {
-    font-size: 18px;
+    font-size: 20px;
   }
   .order-grid {
-    gap: 10px;
-    margin-top: 8px;
+    flex: 1.25;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
+    margin-top: 14px;
   }
   .order-box {
-    padding: 12px 6px 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 18px 8px;
     border-radius: 8px;
   }
   .order-box strong {
-    font-size: 42px;
+    font-size: 48px;
   }
   .order-box small {
-    font-size: 18px;
-    margin-top: 5px;
+    font-size: 20px;
+    margin-top: 8px;
   }
   .order-progress-strip {
-    height: 6px;
-    margin-top: 12px;
-  }
-  .ops-extra-block {
+    height: 8px;
     margin-top: 14px;
-    padding-top: 10px;
-    gap: 8px;
-  }
-  .ops-mini-bars {
-    height: 72px;
-    padding: 6px 12px 6px;
-    gap: 10px;
-  }
-  .bar-fill {
-    width: 20px;
-  }
-  .bar-lbl {
-    font-size: 14.5px;
-  }
-  .ops-foot-summary {
-    font-size: 16px;
-    padding: 6px 10px;
   }
 
   /* Left Module 3: Service Monitor */
   .svc-grid {
-    gap: 10px;
+    flex: 0.9;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
   }
   .svc-box {
-    padding: 12px 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 14px 8px;
     border-radius: 8px;
   }
   .svc-num strong {
-    font-size: 42px;
+    font-size: 48px;
   }
   .svc-num small {
-    font-size: 20px;
+    font-size: 22px;
     margin-left: 4px;
   }
   .svc-lbl {
-    font-size: 18px;
+    font-size: 20px;
     margin-top: 4px;
   }
   .queue-header-grid {
     gap: 14px;
-    margin: 12px 4px 8px;
+    margin: 14px 4px 8px;
   }
   .q-hdr-cell {
-    font-size: 16.5px;
+    font-size: 18px;
     padding: 0 6px;
   }
   .queue-grid-2col {
-    gap: 8px 14px;
+    flex: 2.2;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px 14px;
   }
   .queue-row {
-    padding: 9px 14px;
+    padding: 11px 16px;
     border-radius: 8px;
   }
   .q-stop {
-    font-size: 18px;
-    padding-left: 20px;
+    font-size: 19px;
+    padding-left: 22px;
   }
   .q-stop:before {
-    width: 8px;
-    height: 8px;
+    width: 9px;
+    height: 9px;
   }
   .q-pax {
-    font-size: 17.5px;
+    font-size: 18.5px;
   }
   .q-time {
-    font-size: 22px;
-  }
-  .svc-foot-note {
-    font-size: 16px;
-    padding: 7px 12px;
-    margin-top: 10px;
+    font-size: 23px;
   }
 
   /* Right Module 1: Capacity Overview */
   .cap-grid {
-    gap: 10px;
+    flex: 1.2;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
   }
   .cap-box {
-    padding: 12px 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 8px;
     border-radius: 8px;
   }
   .cap-box strong {
-    font-size: 42px;
+    font-size: 48px;
   }
   .cap-box small {
-    font-size: 18px;
-    margin-top: 4px;
+    font-size: 20px;
+    margin-top: 8px;
   }
   .cap-dist-bar {
-    height: 6px;
-    margin: 10px 0;
+    height: 8px;
+    margin: 16px 0;
   }
   .cap-metrics-dual {
-    gap: 10px;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 14px;
   }
   .cap-chip {
-    padding: 8px 14px;
+    padding: 18px 24px;
     border-radius: 8px;
   }
   .cap-chip-lbl {
-    font-size: 18px;
+    font-size: 21px;
   }
   .cap-chip-val {
-    font-size: 24px;
-  }
-  .cap-extra-block {
-    margin-top: 14px;
-    padding-top: 10px;
-    gap: 8px;
-  }
-  .route-cap-list {
-    gap: 8px;
-  }
-  .route-cap-item {
-    padding: 9px 14px;
-    border-radius: 8px;
-  }
-  .rc-info {
-    font-size: 17px;
-    margin-bottom: 5px;
-  }
-  .rc-name i {
-    width: 8px;
-    height: 8px;
-  }
-  .rc-meta {
-    font-size: 16px;
-  }
-  .rc-bar {
-    height: 6px;
+    font-size: 32px;
   }
 
   /* Right Module 2: Vehicles Monitor */
   .driver-alert-box {
-    padding: 12px 16px;
+    padding: 16px 22px;
     border-radius: 8px;
-    margin-bottom: 10px;
+    margin-bottom: 14px;
   }
   .alert-lbl {
-    font-size: 19px;
+    font-size: 22px;
   }
   .alert-val {
-    font-size: 34px;
+    font-size: 40px;
   }
   .alert-tag {
-    font-size: 15px;
-    padding: 3px 10px;
+    font-size: 16px;
+    padding: 4px 12px;
   }
   .alert-unit {
-    font-size: 17px;
+    font-size: 18px;
   }
   .adas-section {
-    gap: 7px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 10px;
   }
   .adas-header {
-    font-size: 19px;
-    margin-bottom: 4px;
+    font-size: 21px;
+    margin-bottom: 6px;
   }
   .adas-header .icon {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
   }
   .adas-grid {
-    gap: 8px;
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 14px;
   }
   .adas-col {
-    gap: 5px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
   }
   .adas-item {
-    padding: 6.5px 10px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    padding: 11px 14px;
     border-radius: 6px;
   }
   .adas-dot {
-    width: 8px;
-    height: 8px;
-    margin-right: 8px;
+    width: 9px;
+    height: 9px;
+    margin-right: 9px;
   }
   .adas-name {
-    font-size: 17px;
+    font-size: 18.5px;
   }
   .adas-val {
-    font-size: 20px;
-  }
-  .veh-extra-block {
-    margin-top: 12px;
-    padding-top: 9px;
-  }
-  .veh-safety-strip {
-    gap: 8px;
-  }
-  .safety-chip {
-    padding: 7px 6px;
-    border-radius: 6px;
-  }
-  .s-lbl {
-    font-size: 15px;
-  }
-  .s-val {
-    font-size: 18.5px;
+    font-size: 23px;
   }
 
   /* Right Module 3: Incidents Monitor */
   .inc-stats-row {
-    gap: 10px;
-    margin-bottom: 10px;
+    flex: 0.9;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 12px;
+    margin-bottom: 14px;
   }
   .inc-stat-box {
-    padding: 12px 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px 8px;
     border-radius: 8px;
   }
   .inc-stat-box strong {
-    font-size: 42px;
+    font-size: 48px;
   }
   .inc-stat-box small {
-    font-size: 18px;
-    margin-top: 4px;
+    font-size: 20px;
+    margin-top: 6px;
   }
   .incident-list-v2 {
-    gap: 8px;
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 14px;
   }
   .inc-v2-card {
-    padding: 10px 14px;
+    flex: 1;
+    padding: 18px 22px;
     border-radius: 8px;
-    gap: 6px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 8px;
   }
   .inc-v2-time {
-    font-size: 17px;
+    font-size: 19px;
   }
   .inc-v2-badge {
-    font-size: 15px;
-    padding: 2px 8px;
+    font-size: 17px;
+    padding: 3px 10px;
   }
   .inc-v2-title {
-    font-size: 18px;
+    font-size: 21px;
+    margin: 6px 0;
   }
   .inc-v2-status {
-    font-size: 15px;
-    padding: 2px 10px;
-  }
-  .inc-v2-bottom {
     font-size: 16px;
-    padding-left: 40px;
+    padding: 3px 12px;
+  }
+  .inc-v2-footer {
+    font-size: 17px;
   }
   .inc-v2-act-lbl {
-    font-size: 14px;
+    font-size: 16px;
+    padding: 2px 8px;
   }
   .inc-v2-act-val {
-    font-size: 16px;
-  }
-  .inc-foot-summary {
-    font-size: 16px;
-    padding: 7px 12px;
-    margin-top: 10px;
+    font-size: 18px;
   }
 
   /* Floating Popups */
