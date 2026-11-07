@@ -1,6 +1,6 @@
 const byId=id=>document.getElementById(id);
-const xy={port:[197,279],church:[678,224],bay:[493,465],beach:[213,489],park:[371,585],east:[693,480]};
-const palette={port:'#78caff',church:'#69f2cd',bay:'#ffc277',beach:'#71d7ff',park:'#8de9ce',east:'#77d4ff'};
+const xy={port:[197,279],lanqiao:[426,185],shell:[716,198],church:[678,224],east:[693,480],sports:[417,440],bay:[520,465],park:[371,585],beach:[213,489]};
+const palette={port:'#78caff',lanqiao:'#64f1d1',shell:'#ffd269',church:'#69f2cd',east:'#77d4ff',sports:'#52ffc9',bay:'#ffbe52',park:'#8de9ce',beach:'#71d7ff'};
 const routeIds=['loop','shuttle','east'];
 const state={mode:'overview',period:'今日',line:0,view3:true,place:null,event:null,bus:null,follow:false,tour:false,tourStep:0, layers:{places:true,cars:true,roads:true,buildings:true}};
 const handled=new Set(events.filter(e=>e.done).map(e=>e.id));
@@ -9,7 +9,7 @@ const camera={x:450,y:355,z:1.18,angle:0,tilt:.86};
 let tourStart=0,tourYaw=0;
 let target={...camera},dirty=true,lastTimestamp=0,tourTimer=0,toastTimer=0,hasCity=false;
 const motionReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-const markerEls={},runs=[],routeSamples=[],tourOrder=['port','church','east','bay','park','beach'];
+const markerEls={},runs=[],routeSamples=[],tourOrder=['port','lanqiao','church','shell','east','bay','sports','park','beach'];
 function project(x,y){const a=camera.angle*Math.PI/180,c=Math.cos(a),s=Math.sin(a);return [450+camera.z*((x-camera.x)*c-(y-camera.y)*s),370+camera.z*camera.tilt*((x-camera.x)*s+(y-camera.y)*c)]}
 function home(){target={x:450,y:355,z:1.18,angle:0,tilt:state.view3?.86:1};dirty=true}
 function makeMap(){
@@ -20,7 +20,7 @@ function makeMap(){
   byId('routes').insertAdjacentHTML('beforeend','<g id="traffic-hotspot"><circle cx="493" cy="465" r="60" fill="url(#attentionGlow)"/><g fill="none" stroke="#ffbd6c" stroke-width=".9"><circle cx="493" cy="465" r="18" opacity=".68"/><circle cx="493" cy="465" r="30" opacity=".6" stroke-dasharray="3 5"/><circle cx="493" cy="465" r="41" opacity=".2"/></g></g>');
   const pins=byId('pins');
   places.forEach((p,i)=>{
-    const right=p.id==='port'||p.id==='beach'||p.id==='park',labelColor=palette[p.id],width=40+p.name.length*15;
+    const right=['port','beach','park','lanqiao','sports'].includes(p.id),labelColor=palette[p.id],width=40+p.name.length*15;
     const x=right?-width-4:4,y=-42;
     const label='<g transform="translate('+x+' '+y+')"><rect class="label-bg" width="'+width+'" height="28" rx="3"/><rect width="2.5" height="17" y="5" fill="'+labelColor+'"/><g transform="translate(7 6) scale(.69)" stroke="'+labelColor+'" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" fill="none">'+icons[p.icon]+'</g><text x="29" y="19">'+p.name+'</text></g>';
     const markup='<g data-place="'+p.id+'" class="map-pin" tabindex="0" role="button" aria-label="查看'+p.name+'"><ellipse rx="15" ry="6" fill="'+labelColor+'" opacity=".13"/><ellipse class="ring" rx="10" ry="4.8" fill="none" stroke="'+labelColor+'" stroke-width="1.1"/><ellipse rx="6" ry="2.5" fill="none" stroke="'+labelColor+'"/><path d="M0 -1v-22l'+(right?'-':'')+'5 -5" stroke="'+labelColor+'" fill="none"/><circle cy="-1" r="2.5" fill="'+labelColor+'"/>'+label+'</g>';
@@ -75,7 +75,7 @@ function tick(t){
     for(const p of places){
       const pos=project(...xy[p.id]),el=markerEls[p.id],sc=Math.max(.82,Math.min(1.75, .98/Math.max(.55,factor)));
       // Keep labels attached to their point, flipping to the inside near screen edges.
-      const label=el.lastElementChild,w=40+p.name.length*15,preferLeft=['port','beach','park'].includes(p.id);
+      const label=el.lastElementChild,w=40+p.name.length*15,preferLeft=['port','beach','park','lanqiao','sports'].includes(p.id);
       const edgeL=450-vw/2,edgeR=450+vw/2;
       const left=pos[0]+(w+6)*sc>edgeR?true:pos[0]-(w+6)*sc<edgeL?false:preferLeft;
       label.setAttribute('transform','translate('+(left?-w-4:4)+' -42)');

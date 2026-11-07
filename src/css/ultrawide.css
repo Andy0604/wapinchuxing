@@ -8,8 +8,8 @@
    -------------------------------------------------------------------------- */
 @media (min-width: 2560px) {
   :root {
-    --glass-rim: inset 0 1.5px 0 rgba(220, 255, 255, .18), inset 1.5px 0 0 rgba(178, 247, 240, .07);
-    --glass-float: 0 16px 36px -16px rgba(0, 8, 18, .9);
+    --glass-rim: inset 0 1.5px 0 rgba(70, 150, 245, .18), inset 1.5px 0 0 rgba(56, 148, 255, .08);
+    --glass-float: 0 16px 36px -16px rgba(1, 6, 16, .9);
   }
 
   body {
@@ -189,542 +189,437 @@
    -------------------------------------------------------------------------- */
 @media (min-width: 4200px), (min-width: 3400px) and (min-aspect-ratio: 24/10) {
   body {
-    font-size: 22px;
-    line-height: 1.5;
+    font-size: 16px;
+    line-height: 1.4;
   }
 
-  /* Deepen perspective for giant room viewing */
+  /* Reset 3D pane yaw on giant screens so all data stays crisp and flat */
   @media (min-width: 1100px) {
-    .left-rail { --pane-yaw: 1.25deg; }
-    .right-rail { --pane-yaw: -1.25deg; }
+    .left-rail { --pane-yaw: 0deg; }
+    .right-rail { --pane-yaw: 0deg; }
     .rail > .panel::after {
-      transform: perspective(3400px) rotateY(var(--pane-yaw));
-      border-radius: 12px;
+      display: none !important;
     }
   }
 
   /* Header scaling */
   header {
-    height: clamp(130px, 7.4vh, 165px);
-    padding: 0 clamp(40px, 2.6vw, 96px) 10px;
+    height: clamp(100px, 5.8vh, 130px);
+    padding: 0 clamp(36px, 2.2vw, 80px) 8px;
   }
   .brand {
-    gap: 20px;
+    gap: 16px;
   }
   .brandmark {
-    width: 74px;
-    height: 74px;
+    width: 60px;
+    height: 60px;
   }
   .brand strong {
-    font-size: 28px;
+    font-size: 24px;
     letter-spacing: .18em;
   }
   .brand small {
-    font-size: 15px;
+    font-size: 13px;
     letter-spacing: .2em;
-    margin-top: 5px;
+    margin-top: 4px;
   }
   .mast h1 {
-    font-size: clamp(48px, 1.8vw, 68px);
+    font-size: clamp(40px, 1.6vw, 56px);
     letter-spacing: .16em;
-    margin-bottom: 6px;
-    text-shadow: 0 0 36px #81cafa55;
+    margin-bottom: 4px;
+    text-shadow: 0 0 32px #81cafa55;
   }
   .mast-sub {
-    font-size: clamp(20px, .75vw, 26px);
+    font-size: clamp(16px, .7vw, 22px);
     letter-spacing: .36em;
   }
   .clock {
     gap: 2px;
   }
   .clock strong {
-    font-size: 42px;
+    font-size: 34px;
   }
   .clock small {
-    font-size: 16px;
+    font-size: 14px;
   }
   .icbtn {
-    width: 62px;
-    height: 62px;
-    border-radius: 8px;
+    width: 52px;
+    height: 52px;
+    border-radius: 6px;
     border-width: 1.5px;
   }
   .icbtn .icon {
-    width: 28px;
-    height: 28px;
+    width: 24px;
+    height: 24px;
   }
   .head-right {
-    gap: 32px;
+    gap: 24px;
   }
   .head-rule {
     bottom: -4px;
   }
 
-  /* Three-rail Layout: allocating ~21.5% each to side rails, ~55% to central map */
+  /* Professional HUD Wings: Golden width proportion (around 720px~840px each), leaving huge center for 3D map */
   main {
-    grid-template-columns: clamp(1550px, 21.5vw, 1920px) minmax(0, 1fr) clamp(1550px, 21.5vw, 1920px);
-    gap: clamp(28px, 1vw, 44px);
-    padding: clamp(24px, 1.8vh, 42px) clamp(36px, 1.8vw, 68px) clamp(18px, 1.3vh, 32px);
+    grid-template-columns: clamp(660px, 9.2vw, 840px) minmax(0, 1fr) clamp(660px, 9.2vw, 840px);
+    gap: clamp(24px, 1vw, 40px);
+    padding: clamp(18px, 1.4vh, 32px) clamp(28px, 1.5vw, 56px) clamp(14px, 1.1vh, 24px);
   }
 
   .rail {
-    gap: clamp(20px, 1.5vh, 32px);
+    gap: clamp(14px, 1.1vh, 22px);
   }
 
   .panel {
-    padding: clamp(26px, 1.2vw, 38px);
-    border-radius: 12px;
-    border-width: 1.5px;
-    box-shadow: 0 16px 48px #010a1336;
-  }
-  .panel:before {
-    top: 24px;
-    width: 4px;
-    height: 32px;
-    box-shadow: 0 0 14px #70ffe566;
-  }
-  .panel:after {
-    right: 12px;
-    top: 12px;
-    width: 16px;
-    height: 8px;
-    border-top-width: 2px;
-    border-right-width: 2px;
+    background: rgba(9, 22, 42, 0.94) !important;
+    border: 1px solid rgba(35, 88, 150, 0.65) !important;
+    border-radius: 8px !important;
+    box-shadow: 0 10px 32px rgba(1, 6, 16, 0.7), inset 0 1px 0 rgba(70, 150, 245, 0.16) !important;
+    padding: clamp(16px, 1.2vw, 24px) clamp(16px, 1.2vw, 24px) !important;
   }
   .panel-head {
-    margin-bottom: clamp(18px, 1.3vh, 30px);
+    margin-bottom: clamp(12px, 1vh, 18px);
   }
   .panel-title {
-    font-size: clamp(24px, 1.1vw, 32px);
-    gap: 14px;
+    font-size: 20px;
+    padding-left: 14px;
   }
-  .panel-title .icon {
-    width: 28px;
-    height: 28px;
+  .panel-title:before {
+    width: 5px;
+    height: 18px;
+    border-radius: 2.5px;
   }
-  .section-en {
+  .tag-badge {
+    font-size: 13px;
+    padding: 3px 12px;
+    border-radius: 14px;
+  }
+
+  /* Left Module 1: Island Overview */
+  .overview-dual {
+    gap: 10px;
+  }
+  .metric-card {
+    padding: 12px 14px;
+    border-radius: 6px;
+  }
+  .m-lbl {
     font-size: 13px;
   }
-  .tag, .microbtn, .tag-static {
-    font-size: 16px;
-    padding: 5px 14px;
+  .m-val strong {
+    font-size: 32px;
+  }
+  .m-val small {
+    font-size: 13px;
+    margin-left: 5px;
+  }
+  .m-delta {
+    font-size: 13px;
+  }
+  .m-delta b {
+    font-size: 15px;
+  }
+  .badge-pill {
+    font-size: 13px;
+    padding: 3px 8px;
+  }
+  .env-grid {
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .env-box {
+    padding: 10px 6px;
     border-radius: 6px;
-    gap: 6px;
   }
-  .tag .icon, .microbtn .icon {
-    width: 15px;
-    height: 15px;
+  .env-ico {
+    width: 24px;
+    height: 24px;
+    margin-bottom: 4px;
   }
-
-  /* Overview Panel */
-  .klabel, .mini-stats small {
-    font-size: clamp(16px, .8vw, 22px);
+  .env-ico svg {
+    width: 22px;
+    height: 22px;
   }
-  .total-num {
-    font-size: clamp(68px, 3.2vw, 98px);
-    letter-spacing: .02em;
-  }
-  .total-num small {
+  .env-val {
     font-size: 18px;
-    margin-left: 10px;
   }
-  .delta {
-    font-size: 16px;
-    margin-top: 6px;
-  }
-  .delta b {
-    font-size: 20px;
-    padding-left: 8px;
-  }
-  .mini-stats {
-    padding-top: clamp(16px, 1.5vh, 28px);
-    margin-top: clamp(14px, 1.4vh, 26px);
-  }
-  .mini-stats div + div {
-    padding-left: 20px;
-  }
-  .mini-stats b {
-    font-size: clamp(38px, 1.6vw, 52px);
+  .env-lbl {
+    font-size: 12px;
+    margin-top: 4px;
   }
 
-  /* Trend Chart & Fleet Panels */
-  .chart-info {
-    font-size: 15px;
-    margin-bottom: 8px;
+  /* Left Module 2: Operations Monitor */
+  .gmv-dual {
+    gap: 14px;
+    padding-bottom: 8px;
   }
-  .chart-unit {
-    font-size: 15px;
+  .gmv-val {
+    font-size: 34px;
+    margin: 4px 0;
   }
-  .chart-keys {
-    font-size: 16px;
-    gap: 20px;
+  .arpu-card {
+    padding: 10px 18px;
+    min-width: 90px;
+    border-radius: 6px;
   }
-  .chart-keys i, .legend i {
-    width: 18px;
-    height: 3px;
-    margin-right: 8px;
-  }
-  .fleet-main {
-    gap: 10%;
-  }
-  .fleet-main > svg {
-    max-height: 220px;
-  }
-  .fleet-list {
-    gap: clamp(10px, 1.1vh, 22px);
-  }
-  .fleet-list li {
-    font-size: 20px;
-  }
-  .fleet-list span:before {
-    width: 9px;
-    height: 9px;
-    margin-right: 12px;
-  }
-  .fleet-list b {
+  .arpu-val {
     font-size: 28px;
   }
-  .fleet-list b small {
-    font-size: 16px;
+  .arpu-lbl {
+    font-size: 12px;
   }
-
-  /* Road Health & Events */
-  .gauge-box svg {
-    max-height: 210px;
-  }
-  .road-row {
-    font-size: 20px;
-    padding: 16px 0;
-  }
-  .road-row .bar {
-    height: 8px;
-    max-width: 180px;
-    gap: 4px;
-  }
-  .road-row b {
-    font-size: 17px;
-  }
-  .event-symbol {
-    width: 52px;
-    height: 52px;
-    border-radius: 6px;
-  }
-  .event-symbol .icon {
-    width: 26px;
-    height: 26px;
-  }
-  .event-text strong {
-    font-size: clamp(18px, .9vw, 23px);
-  }
-  .event-text small {
-    font-size: 16px;
+  .order-grid {
+    gap: 8px;
     margin-top: 6px;
   }
-  .event-row time {
-    font-size: 16px;
+  .order-box {
+    padding: 10px 6px;
+    border-radius: 6px;
   }
-  .mini-head {
-    font-size: 15px;
+  .order-box strong {
+    font-size: 23px;
+  }
+  .order-box small {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+
+  /* Left Module 3: Service Monitor */
+  .svc-grid {
+    gap: 8px;
+  }
+  .svc-box {
+    padding: 10px 6px;
+    border-radius: 6px;
+  }
+  .svc-num strong {
+    font-size: 24px;
+  }
+  .svc-num small {
+    font-size: 13px;
+    margin-left: 3px;
+  }
+  .svc-lbl {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  .queue-header {
+    font-size: 13px;
+    margin: 12px 4px 6px;
+  }
+  .queue-list {
     gap: 6px;
   }
-  .mini-head .icon {
-    width: 16px;
-    height: 16px;
-  }
-
-  /* Central Map Area */
-  .map-title .eyebrow {
-    font-size: 15px;
-  }
-  .map-title i {
-    width: 22px;
-    height: 3px;
-    margin-right: 10px;
-  }
-  .map-title h2 {
-    font-size: clamp(32px, 1.4vw, 44px);
-    margin-top: 6px;
-  }
-  .fleet-shortcut {
-    font-size: 18px;
-    padding: 10px 18px;
-    gap: 10px;
+  .queue-row {
+    padding: 9px 14px;
     border-radius: 6px;
   }
-  .fleet-shortcut .icon {
-    width: 20px;
-    height: 20px;
+  .q-stop {
+    font-size: 13px;
+    padding-left: 16px;
   }
-  .view-switch {
-    padding: 4px;
-    border-radius: 6px;
-  }
-  .view-switch button {
-    padding: 8px 18px;
-    font-size: 16px;
-  }
-  .compass {
-    right: clamp(40px, 2vw, 68px);
-    top: 78px;
-  }
-  .compass b {
-    font-size: 16px;
-  }
-  .compass svg {
-    width: 48px;
-    height: 48px;
-  }
-  .map-tools {
-    gap: 10px;
-    bottom: 110px;
-    right: clamp(26px, 1.6vw, 48px);
-  }
-  .legend {
-    font-size: 18px;
-    gap: 24px;
-    padding: 10px 0;
-  }
-  .tour {
-    font-size: 18px;
-    padding: 12px 24px;
-    gap: 10px;
-    border-radius: 6px;
-  }
-  .tour svg {
-    width: 20px;
-    height: 20px;
-  }
-  .map-credit {
-    font-size: 14px;
-    left: clamp(26px, 1.6vw, 48px);
-    bottom: 64px;
-  }
-  .map-credit .scale {
-    width: 64px;
+  .q-stop:before {
+    width: 6px;
     height: 6px;
   }
+  .q-pax {
+    font-size: 13px;
+  }
+  .q-time {
+    font-size: 15px;
+  }
 
-  /* Detail Card & Layer Popup */
-  #detail {
-    width: min(580px, calc(100% - 140px));
-    bottom: 96px;
-    left: clamp(24px, 1.5vw, 48px);
-    padding: 24px 28px;
-    border-radius: 10px;
+  /* Right Module 1: Capacity Overview */
+  .cap-grid {
+    gap: 8px;
   }
-  .detail-head h3 {
-    font-size: 28px;
+  .cap-box {
+    padding: 12px 6px;
+    border-radius: 6px;
   }
-  .detail-kind {
-    font-size: 14px;
+  .cap-box strong {
+    font-size: 26px;
   }
-  .detail-state {
-    font-size: 16px;
-    gap: 10px;
+  .cap-box small {
+    font-size: 12px;
+    margin-top: 4px;
   }
-  .detail-stats small {
+  .cap-bar-info {
+    margin-top: 10px;
+    padding: 10px 14px;
+    font-size: 13px;
+    border-radius: 6px;
+  }
+  .cap-bar-info b {
     font-size: 15px;
   }
-  .detail-stats b {
-    font-size: 36px;
-  }
-  .detail-stats em {
-    font-size: 15px;
-  }
-  .detail-note {
-    font-size: 16px;
-    margin-top: 12px;
-  }
-  .detail-act {
-    margin-top: 15px;
-    padding-top: 15px;
-  }
-  .detail-act small {
-    font-size: 15px;
-  }
-  .detail-act button {
-    padding: 7px 16px;
-    font-size: 16px;
-    border-radius: 5px;
-  }
-  #layer-pop {
-    right: 98px;
-    bottom: 180px;
-    width: 220px;
-    padding: 16px 20px;
-    border-radius: 8px;
-  }
-  #layer-pop h3 {
-    font-size: 18px;
+
+  /* Right Module 2: Vehicles Monitor (ADAS & Driver) */
+  .driver-alert-box {
+    padding: 10px 14px;
+    border-radius: 6px;
     margin-bottom: 10px;
   }
-  #layer-pop label {
-    font-size: 16px;
-    padding: 8px 0;
+  .alert-dot {
+    width: 9px;
+    height: 9px;
+    border-radius: 2px;
+    margin-right: 10px;
+  }
+  .alert-lbl {
+    font-size: 13px;
+  }
+  .alert-val {
+    font-size: 20px;
+  }
+  .adas-section {
+    gap: 6px;
+  }
+  .adas-header {
+    font-size: 13px;
+    gap: 8px;
+    margin-bottom: 3px;
+  }
+  .adas-header .icon {
+    width: 17px;
+    height: 17px;
+  }
+  .adas-grid {
+    gap: 8px;
+  }
+  .adas-col {
+    gap: 6px;
+  }
+  .adas-item {
+    padding: 7px 10px;
+    border-radius: 5px;
+  }
+  .adas-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 2px;
+    margin-right: 8px;
+  }
+  .adas-name {
+    font-size: 12px;
+  }
+  .adas-val {
+    font-size: 14px;
+  }
+
+  /* Right Module 3: Incidents Monitor */
+  .inc-stats-row {
+    gap: 8px;
+  }
+  .inc-stat-box {
+    padding: 10px 6px;
+    border-radius: 6px;
+  }
+  .inc-stat-box strong {
+    font-size: 24px;
+  }
+  .inc-stat-box small {
+    font-size: 12px;
+    margin-top: 4px;
+  }
+  .incident-list-v2 {
+    gap: 8px;
+    margin-top: 10px;
+  }
+  .inc-v2-card {
+    padding: 11px 14px;
+    border-radius: 6px;
+    gap: 7px;
+  }
+  .inc-v2-top {
+    gap: 8px;
+  }
+  .inc-v2-time {
+    font-size: 13px;
+  }
+  .inc-v2-badge {
+    font-size: 11px;
+    padding: 2px 6px;
+    border-radius: 2px;
+  }
+  .inc-v2-title {
+    font-size: 13px;
+  }
+  .inc-v2-status {
+    font-size: 11px;
+    padding: 2px 7px;
+    border-radius: 2px;
+  }
+  .inc-v2-bottom {
+    font-size: 12px;
+    padding-left: 38px;
+    gap: 8px;
+  }
+  .inc-v2-act-lbl {
+    font-size: 11px;
+    padding: 1px 5px;
+    border-radius: 2px;
+  }
+  .inc-v2-act-val {
+    font-size: 12px;
   }
 
   /* Footer Navigation */
   footer {
-    height: clamp(96px, 6vh, 128px);
-    padding: 0 clamp(36px, 2.2vw, 76px);
+    height: clamp(80px, 5vh, 105px);
+    padding: 0 clamp(32px, 2vw, 68px);
   }
   .env {
-    font-size: 17px;
-    gap: 12px;
+    font-size: 15px;
+    gap: 10px;
   }
   .live-dot {
-    width: 10px;
-    height: 10px;
+    width: 8px;
+    height: 8px;
   }
   .foot-id {
-    font-size: 16px;
+    font-size: 14px;
   }
   .cross-small {
-    font-size: 22px;
+    font-size: 18px;
   }
   nav {
-    gap: 16px;
+    gap: 12px;
   }
   .navbtn {
-    height: 60px;
-    padding: 0 clamp(28px, 1.8vw, 54px);
-    font-size: 20px;
-    gap: 14px;
-    border-radius: 6px;
+    height: 52px;
+    padding: 0 clamp(24px, 1.8vw, 48px);
+    font-size: 16px;
+    gap: 10px;
+    border-radius: 5px;
   }
   .navbtn svg {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
   }
 
-  /* Fleet Mode: 2-column Grid for bus roster cards on giant width */
-  .tracking-fleet .fleet-roster .bus-roster-list {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px;
-    overflow: visible;
-  }
-  .bus-roster-row {
-    padding: 12px 14px;
-    border-radius: 6px;
-    gap: 8px;
-  }
-  .bus-roster-id {
-    font-size: 20px;
-  }
-  .bus-roster-brand {
-    font-size: 14px;
-  }
-  .bus-state {
-    font-size: 14px;
-    gap: 8px;
-  }
-  .bus-state:before {
-    width: 7px;
-    height: 7px;
-  }
-  .bus-roster-direction {
-    font-size: 16px;
-    gap: 8px;
-  }
-  .bus-roster-load {
-    font-size: 15px;
-    gap: 5px;
-  }
-  .bus-roster-load .icon {
-    width: 17px;
-    height: 17px;
-  }
-  .bus-roster-load b {
-    font-size: 18px;
-  }
-
-  /* Fleet Summary & Filters */
-  .fleet-totals strong {
-    font-size: 54px;
-  }
-  .fleet-totals small {
-    font-size: 17px;
-  }
-  .fleet-clock {
-    font-size: 17px;
-    padding-top: 14px;
-    gap: 14px;
-  }
-  .fleet-clock > span {
-    font-size: 17px;
-  }
-  .fleet-clock button {
-    font-size: 16px;
-    padding: 7px 14px;
-    min-height: 36px;
-  }
-  .fleet-clock .icon {
-    width: 16px;
-    height: 16px;
-  }
-  .fleet-line-filter button {
-    font-size: 18px;
-    padding: 10px 14px;
-    border-radius: 5px;
-  }
-  .fleet-line-filter span {
-    font-size: 15px;
-  }
-
-  /* Fleet Trip Panel */
-  .trip-panel .bus-card-brand {
-    font-size: 16px;
-  }
-  .trip-panel .bus-card-brand .icon {
-    width: 18px;
-    height: 18px;
-  }
-  .bus-itinerary strong {
-    font-size: 22px;
-  }
-  .bus-itinerary small, .bus-segment small, .bus-telemetry small {
-    font-size: 15px;
-  }
-  .bus-trip-track {
-    height: 7px;
-  }
-  .bus-trip-track > b {
-    width: 12px;
-    height: 12px;
-  }
-  .bus-trip-key {
-    font-size: 14px;
-  }
-  .bus-trip-key i {
-    width: 16px;
-    height: 3px;
-  }
-  .bus-segment {
-    font-size: 16px;
-    padding: 10px 14px;
-  }
-  .bus-telemetry b {
-    font-size: 34px;
-  }
-  .bus-telemetry em {
-    font-size: 15px;
-  }
-  .bus-card-actions button {
-    padding: 10px;
-    font-size: 16px;
-    border-radius: 5px;
-  }
-  .bus-card-actions .icon {
-    width: 18px;
-    height: 18px;
-  }
-
-  /* Toast Notification */
-  #toast {
-    font-size: 18px;
-    padding: 12px 28px;
-    bottom: 120px;
+  /* Detail Card & Layer Popup */
+  #detail {
+    width: 480px;
+    bottom: 80px;
+    left: clamp(24px, 1.5vw, 48px);
+    padding: 20px 24px;
     border-radius: 8px;
+  }
+  .detail-head h3 {
+    font-size: 24px;
+  }
+  .detail-stats b {
+    font-size: 30px;
+  }
+  .detail-note {
+    font-size: 14px;
+  }
+
+  #toast {
+    font-size: 15px;
+    padding: 10px 22px;
+    bottom: 100px;
+    border-radius: 6px;
   }
 }

@@ -19,7 +19,12 @@ const icons={
   stack:'<path d="m3 8 9-5 9 5-9 5zM3 12l9 5 9-5M3 16l9 5 9-5"/>',
   scan:'<path d="M3 8V3h5m8 0h5v5M3 16v5h5m13-5v5h-5M3 12h18"/>', 
   location:'<circle cx="12" cy="12" r="7"/><path d="M12 2v4m0 12v4M2 12h4m12 0h4"/><circle cx="12" cy="12" r="2"/>',
+  dish:'<path d="M12 2a10 10 0 0 1 10 10M12 6a6 6 0 0 1 6 6m-9 7L4 22m0-3 3 3m1-7a4 4 0 1 1 8 0 4 4 0 0 1-8 0z"/>',
   wind:'<path d="M2 8h11a3 3 0 1 0-3-3M2 12h16a3 3 0 1 1-3 3M2 16h5a2 2 0 1 1-2 2"/>',
+  sun:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2m0 16v2M4.93 4.93l1.41 1.41m11.32 11.32 1.41 1.41M2 12h2m16 0h2M6.34 17.66l-1.41 1.41M19.07 4.93l-1.41 1.41"/>',
+  wave:'<path d="M2 12c2.5-3 5.5-3 8 0s5.5 3 8 0 5.5-3 8 0M2 17c2.5-3 5.5-3 8 0s5.5 3 8 0 5.5-3 8 0"/>',
+  anchor:'<circle cx="12" cy="5" r="3"/><path d="M12 22V8m-7 4a7 7 0 0 0 14 0M5 12H2m20 0h-3"/>',
+  battery:'<rect x="2" y="7" width="16" height="10" rx="2"/><path d="M21 10v4M6 10v4m3-4v4m3-4v4"/>',
   check:'<path d="m4 12 5 6L20 6"/>', list:'<path d="M8 6h13M8 12h13M8 18h13M3 6h1M3 12h1M3 18h1"/>',rotate:'<path d="M4 10a8 8 0 1 1 0 5m0-12v7h7"/>',tower:'<path d="m8 21 4-12 4 12m-6-4h4M7 5a7 7 0 0 0 0 10M4 2a11 11 0 0 0 0 16M17 5a7 7 0 0 1 0 10m3-13a11 11 0 0 1 0 16"/><circle cx="12" cy="8" r="1"/>'
 };
 function ico(name,cls=''){return '<svg class="icon '+cls+'" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">'+(icons[name]||'')+'</svg>'}

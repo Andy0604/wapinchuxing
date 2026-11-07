@@ -37,7 +37,7 @@ function locationDetail(p){
     html+='<div class="detail-act"><small>'+event.id+'</small>'+(handled.has(event.id)?'<span class="tag-static">'+ico('check')+' 已处置</span>':'<button data-action="resolve">标记已处置</button>')+'</div>';
   }else{
     html+='<div class="detail-state" style="color:'+palette[p.id]+'"><i class="live-dot" style="background:currentColor"></i>'+p.status+'</div>'+metrics(p.metrics);
-    html+='<div class="detail-act"><small>监测点 '+String(places.indexOf(p)+1).padStart(2,'0')+' / 06</small><button data-action="'+(state.tour?'nextTour':'street')+'">'+(state.tour?'下一站 →':'近景巡检')+'</button></div>';
+    html+='<div class="detail-act"><small>监测点 '+String(places.indexOf(p)+1).padStart(2,'0')+' / '+String(places.length).padStart(2,'0')+'</small><button data-action="'+(state.tour?'nextTour':'street')+'">'+(state.tour?'下一站 →':'近景巡检')+'</button></div>';
   }
   detail.innerHTML=html;detail.hidden=false;
 }
