@@ -74,17 +74,23 @@ function operationsMonitorPanel() {
         <small>已取消</small>
       </div>
       <div class="order-box">
-        <strong class="font-num c-mint">286</strong>
+        <strong class="font-num">286</strong>
         <small>已完成</small>
       </div>
       <div class="order-box">
-        <strong class="font-num c-blue">26</strong>
+        <strong class="font-num">26</strong>
         <small>服务中</small>
       </div>
-      <div class="order-box highlight-amber">
-        <strong class="font-num c-amber">32</strong>
+      <div class="order-box">
+        <strong class="font-num">32</strong>
         <small>待接单</small>
       </div>
+    </div>
+    <div class="order-progress-strip" title="订单状态比例分布">
+      <span class="seg cancel" style="width: 2.3%;" title="已取消: 8单 (2.3%)"></span>
+      <span class="seg done" style="width: 81.2%;" title="已完成: 286单 (81.2%)"></span>
+      <span class="seg serving" style="width: 7.4%;" title="服务中: 26单 (7.4%)"></span>
+      <span class="seg pending" style="width: 9.1%;" title="待接单: 32单 (9.1%)"></span>
     </div>
   </section>`;
 }
@@ -107,9 +113,9 @@ const queueOrderDetails = [
     to: '南湾运动公园',
     route: '石螺口 → 南湾运动公园',
     pax: '6 / 7 人',
+    paxCount: '6 人',
     price: '¥49.00',
     wait: '11:49',
-    hot: true,
     timeline: [
       { name: '叫车时间', time: '08:38' },
       { name: '司机接单时间', time: '08:40' },
@@ -128,9 +134,9 @@ const queueOrderDetails = [
     to: '五彩滩',
     route: '南湾运动公园 → 五彩滩',
     pax: '4 / 7 人',
+    paxCount: '4 人',
     price: '¥38.00',
     wait: '10:17',
-    hot: true,
     timeline: [
       { name: '叫车时间', time: '10:17' },
       { name: '司机接单时间', time: '10:19' },
@@ -149,9 +155,9 @@ const queueOrderDetails = [
     to: '盛塘天主教堂',
     route: '西角码头 → 盛塘天主教堂',
     pax: '3 / 7 人',
+    paxCount: '3 人',
     price: '¥35.00',
     wait: '08:42',
-    hot: false,
     timeline: [
       { name: '叫车时间', time: '08:42' },
       { name: '司机接单时间', time: '08:43' },
@@ -170,9 +176,9 @@ const queueOrderDetails = [
     to: '鳄鱼山景区',
     route: '五彩滩 → 鳄鱼山景区',
     pax: '2 / 7 人',
+    paxCount: '2 人',
     price: '¥28.00',
     wait: '07:55',
-    hot: false,
     timeline: [
       { name: '叫车时间', time: '07:55' },
       { name: '司机接单时间', time: '07:57' },
@@ -191,8 +197,8 @@ function serviceMonitorPanel() {
         <span class="q-stop to">${q.to}</span>
       </div>
       <div class="queue-meta">
-        <span class="q-pax font-num">${q.pax}</span>
-        <span class="q-time ${q.hot ? 'warn' : ''}">${q.wait}</span>
+        <span class="q-pax font-num">${q.paxCount}</span>
+        <span class="q-time font-num">${q.wait}</span>
       </div>
     </div>
   `).join('');

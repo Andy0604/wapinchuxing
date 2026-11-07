@@ -235,8 +235,8 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   flex: 1;
 }
 .gmv-val {
-  font: 700 25px/1.1 var(--num);
-  color: #ffbe42;
+  font: 700 26px/1.1 var(--num);
+  color: #f7fbff;
   margin: 4px 0 3px;
   letter-spacing: .02em;
 }
@@ -269,25 +269,59 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   margin-top: 5px;
 }
 .order-box {
-  background: rgba(15, 36, 72, 0.72);
-  border: 1px solid rgba(95, 175, 250, 0.22);
-  border-radius: 8px;
-  padding: 7px 4px;
+  background: linear-gradient(180deg, rgba(22, 52, 98, 0.75), rgba(12, 32, 65, 0.75));
+  border: 1px solid rgba(85, 160, 235, 0.28);
+  border-radius: 6px;
+  padding: 8px 4px 7px;
   text-align: center;
+  box-shadow: inset 0 1px 0 rgba(160, 225, 255, 0.12);
+  transition: all 0.15s ease-out;
+}
+.order-box:hover {
+  border-color: rgba(95, 185, 255, 0.55);
+  background: linear-gradient(180deg, rgba(28, 62, 115, 0.85), rgba(16, 38, 76, 0.85));
 }
 .order-box strong {
-  font: 700 17px/1 var(--num);
+  font: 700 20px/1.1 var(--num);
   display: block;
   color: #f7fbff;
+  letter-spacing: 0.03em;
+  text-shadow: 0 0 10px rgba(125, 200, 255, 0.25);
 }
 .order-box small {
-  font-size: 10px;
+  font-size: 11px;
   color: #92b4d6;
   margin-top: 4px;
   display: block;
+  font-weight: 500;
 }
-.order-box.highlight-amber {
-  border-color: rgba(220, 162, 52, 0.5);
+.order-progress-strip {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(10, 25, 45, 0.6);
+  display: flex;
+  overflow: hidden;
+  gap: 2px;
+  margin-top: 8px;
+}
+.order-progress-strip .seg {
+  height: 100%;
+  border-radius: 1px;
+}
+.order-progress-strip .seg.cancel {
+  background: #5a7590;
+}
+.order-progress-strip .seg.done {
+  background: #00d68f;
+  box-shadow: 0 0 6px rgba(0, 214, 143, 0.5);
+}
+.order-progress-strip .seg.serving {
+  background: #00b4ff;
+  box-shadow: 0 0 6px rgba(0, 180, 255, 0.5);
+}
+.order-progress-strip .seg.pending {
+  background: #ffbe42;
+  box-shadow: 0 0 6px rgba(255, 190, 66, 0.5);
 }
 
 /* --------------------------------------------------------------------------
@@ -328,12 +362,12 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   justify-content: space-between;
   font-size: 11px;
   color: #92b4d6;
-  margin: 10px 4px 5px;
+  margin: 10px 4px 6px;
 }
 .queue-list {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 6px;
 }
 .queue-row {
   display: flex;
@@ -342,18 +376,20 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   background: rgba(15, 36, 72, 0.72);
   border: 1px solid rgba(95, 175, 250, 0.22);
   border-radius: 8px;
-  padding: 6px 10px;
+  padding: 8px 12px;
 }
 .queue-route {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 }
 .q-stop {
   position: relative;
   padding-left: 14px;
-  font-size: 11px;
-  color: #b8d4f0;
+  font-size: 12px;
+  font-weight: 500;
+  color: #f7fbff;
+  letter-spacing: 0.02em;
 }
 .q-stop:before {
   content: '';
@@ -361,35 +397,39 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   left: 1px;
   top: 50%;
   transform: translateY(-50%);
-  width: 5px;
-  height: 5px;
+  width: 6px;
+  height: 6px;
   border-radius: 50%;
 }
 .q-stop.from:before {
-  background: #38efbd;
-  box-shadow: 0 0 5px rgba(56, 239, 189, 0.6);
+  background: #00d8ff;
+  box-shadow: 0 0 6px rgba(0, 216, 255, 0.75);
 }
 .q-stop.to:before {
-  border: 1.5px solid #73d8ff;
+  border: 1.5px solid #f5b842;
   background: transparent;
+  width: 5px;
+  height: 5px;
 }
 .queue-meta {
   text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
 }
 .q-pax {
-  font-size: 11px;
-  color: #b8d4f0;
-  display: block;
+  font-size: 12px;
+  color: #e6f1fc;
+  font-family: var(--num);
+  font-weight: 500;
 }
 .q-time {
-  font: 600 13px var(--mono);
-  color: #92b4d6;
+  font: 700 13px var(--num);
+  color: #ff5e6a;
+  text-shadow: 0 0 8px rgba(255, 94, 106, 0.45);
+  letter-spacing: 0.02em;
   display: block;
   margin-top: 1px;
-}
-.q-time.warn {
-  color: #ff9d42;
-  text-shadow: 0 0 8px rgba(255, 157, 66, 0.4);
 }
 
 /* --------------------------------------------------------------------------
@@ -2042,17 +2082,23 @@ function operationsMonitorPanel() {
         <small>已取消</small>
       </div>
       <div class="order-box">
-        <strong class="font-num c-mint">286</strong>
+        <strong class="font-num">286</strong>
         <small>已完成</small>
       </div>
       <div class="order-box">
-        <strong class="font-num c-blue">26</strong>
+        <strong class="font-num">26</strong>
         <small>服务中</small>
       </div>
-      <div class="order-box highlight-amber">
-        <strong class="font-num c-amber">32</strong>
+      <div class="order-box">
+        <strong class="font-num">32</strong>
         <small>待接单</small>
       </div>
+    </div>
+    <div class="order-progress-strip" title="订单状态比例分布">
+      <span class="seg cancel" style="width: 2.3%;" title="已取消: 8单 (2.3%)"></span>
+      <span class="seg done" style="width: 81.2%;" title="已完成: 286单 (81.2%)"></span>
+      <span class="seg serving" style="width: 7.4%;" title="服务中: 26单 (7.4%)"></span>
+      <span class="seg pending" style="width: 9.1%;" title="待接单: 32单 (9.1%)"></span>
     </div>
   </section>`;
 }
@@ -2075,9 +2121,9 @@ const queueOrderDetails = [
     to: '南湾运动公园',
     route: '石螺口 → 南湾运动公园',
     pax: '6 / 7 人',
+    paxCount: '6 人',
     price: '¥49.00',
     wait: '11:49',
-    hot: true,
     timeline: [
       { name: '叫车时间', time: '08:38' },
       { name: '司机接单时间', time: '08:40' },
@@ -2096,9 +2142,9 @@ const queueOrderDetails = [
     to: '五彩滩',
     route: '南湾运动公园 → 五彩滩',
     pax: '4 / 7 人',
+    paxCount: '4 人',
     price: '¥38.00',
     wait: '10:17',
-    hot: true,
     timeline: [
       { name: '叫车时间', time: '10:17' },
       { name: '司机接单时间', time: '10:19' },
@@ -2117,9 +2163,9 @@ const queueOrderDetails = [
     to: '盛塘天主教堂',
     route: '西角码头 → 盛塘天主教堂',
     pax: '3 / 7 人',
+    paxCount: '3 人',
     price: '¥35.00',
     wait: '08:42',
-    hot: false,
     timeline: [
       { name: '叫车时间', time: '08:42' },
       { name: '司机接单时间', time: '08:43' },
@@ -2138,9 +2184,9 @@ const queueOrderDetails = [
     to: '鳄鱼山景区',
     route: '五彩滩 → 鳄鱼山景区',
     pax: '2 / 7 人',
+    paxCount: '2 人',
     price: '¥28.00',
     wait: '07:55',
-    hot: false,
     timeline: [
       { name: '叫车时间', time: '07:55' },
       { name: '司机接单时间', time: '07:57' },
@@ -2159,8 +2205,8 @@ function serviceMonitorPanel() {
         <span class="q-stop to">${q.to}</span>
       </div>
       <div class="queue-meta">
-        <span class="q-pax font-num">${q.pax}</span>
-        <span class="q-time ${q.hot ? 'warn' : ''}">${q.wait}</span>
+        <span class="q-pax font-num">${q.paxCount}</span>
+        <span class="q-time font-num">${q.wait}</span>
       </div>
     </div>
   `).join('');
