@@ -488,6 +488,7 @@ function vehicleBehaviorAndAdasPanel() {
   const adasRight = [
     { name: '道路标识超限报警', val: 0, c: '#627d98', level: 'zero' },
     { name: '障碍物报警', val: 0, c: '#627d98', level: 'zero' },
+    { name: '盲区监测报警', val: 0, c: '#627d98', level: 'zero' },
     { name: '道路标识识别事件', val: 0, c: '#627d98', level: 'zero' },
     { name: '主动抓拍事件', val: 0, c: '#627d98', level: 'zero' }
   ];
@@ -503,7 +504,7 @@ function vehicleBehaviorAndAdasPanel() {
   return `<section class="panel panel-veh-behavior-adas">
     ${panelHeader('驾驶监控')}
     <div class="veh-split-grid">
-      <!-- 左列: 驾驶行为 -->
+      <!-- 左列: 驾驶行为 (10项) -->
       <div class="behavior-side">
         <div class="veh-sec-title">
           <div class="vst-left">${ico('bus')} <span>驾驶行为</span></div>
@@ -517,11 +518,12 @@ function vehicleBehaviorAndAdasPanel() {
           <div class="b-item"><span class="b-dot red"></span><span class="b-name">未系安全带</span><span class="b-val font-num zero">0</span></div>
           <div class="b-item"><span class="b-dot blue"></span><span class="b-name">分神驾驶</span><span class="b-val font-num danger">8</span></div>
           <div class="b-item"><span class="b-dot red"></span><span class="b-name">摄像头遮挡</span><span class="b-val font-num zero">0</span></div>
-          <div class="b-item span2"><span class="b-dot amber"></span><span class="b-name">驾驶员异常</span><span class="b-val font-num warn">2</span></div>
+          <div class="b-item"><span class="b-dot amber"></span><span class="b-name">驾驶员异常</span><span class="b-val font-num warn">2</span></div>
+          <div class="b-item"><span class="b-dot blue"></span><span class="b-name">视线偏离</span><span class="b-val font-num zero">0</span></div>
         </div>
       </div>
 
-      <!-- 右列: ADAS 统计 -->
+      <!-- 右列: ADAS 统计 (10项，每列5项撑满) -->
       <div class="adas-side">
         <div class="veh-sec-title">
           <div class="vst-left">${ico('dish')} <span>ADAS 统计</span></div>

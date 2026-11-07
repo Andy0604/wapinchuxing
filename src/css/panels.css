@@ -139,7 +139,6 @@
   max-width: 44px;
   flex: 1;
   min-height: 80px;
-  max-height: 240px;
   background: rgba(10, 30, 60, 0.45);
   border: 1px solid rgba(56, 189, 248, 0.22);
   border-radius: 4px;
@@ -184,15 +183,15 @@
 .overview-dual {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 8px;
-  flex: 1.15;
+  gap: 6px;
+  flex: 1.05;
   min-height: 0;
 }
 .metric-card {
   background: rgba(15, 36, 72, 0.72);
   border: 1px solid rgba(95, 175, 250, 0.22);
   border-radius: 8px;
-  padding: 10px 12px;
+  padding: 8px 10px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -200,7 +199,7 @@
   box-sizing: border-box;
 }
 .m-lbl {
-  font-size: 14px;
+  font-size: 13px;
   color: #a4c8e8;
   font-weight: 500;
   letter-spacing: .02em;
@@ -208,32 +207,32 @@
 .m-val {
   display: flex;
   align-items: baseline;
-  gap: 4px;
-  margin: 4px 0 3px;
+  gap: 3px;
+  margin: 2px 0;
 }
 .m-val strong {
-  font: 700 32px/1 var(--num);
+  font: 700 27px/1 var(--num);
   color: #f7fbff;
   letter-spacing: .02em;
 }
 .m-val small {
-  font-size: 13px;
+  font-size: 12px;
   color: #92b4d6;
 }
 .m-delta {
-  font-size: 13px;
+  font-size: 12px;
   color: #92b4d6;
 }
 .m-delta.up {
   color: #38efbd;
 }
 .m-delta .c-arrow {
-  font-size: 11px;
+  font-size: 10px;
   margin-right: 2px;
 }
 .m-delta b {
   font-family: var(--num);
-  font-size: 14.5px;
+  font-size: 13.5px;
   font-weight: 600;
 }
 .m-badges {
@@ -245,8 +244,8 @@
   background: rgba(5, 25, 45, 0.8);
   border: 1px solid rgba(125, 181, 230, 0.25);
   color: #73d8ff;
-  font: 600 13px/1.2 var(--num);
-  padding: 2px 8px;
+  font: 600 12px/1.2 var(--num);
+  padding: 2px 6px;
   border-radius: 3px;
   white-space: nowrap;
 }
@@ -255,8 +254,8 @@
 .env-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
-  margin-top: 8px;
+  gap: 5px;
+  margin-top: 6px;
   flex: 1;
   min-height: 0;
 }
@@ -264,7 +263,7 @@
   background: rgba(15, 36, 72, 0.72);
   border: 1px solid rgba(95, 175, 250, 0.22);
   border-radius: 8px;
-  padding: 8px 4px;
+  padding: 6px 4px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -274,20 +273,33 @@
   box-sizing: border-box;
 }
 .env-ico {
-  width: 22px;
-  height: 22px;
+  width: 30px;
+  height: 30px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 3px;
+  margin-bottom: 4px;
+  flex-shrink: 0;
 }
-.env-ico.c-sun { color: #f5b842; }
-.env-ico.c-wind { color: #6bc8ff; }
-.env-ico.c-wave { color: #52afff; }
-.env-ico.c-anchor { color: #38efbd; }
+.env-ico svg {
+  width: 26px;
+  height: 26px;
+  stroke-width: 2;
+}
+.env-ico.c-sun { color: #f5b842; filter: drop-shadow(0 0 6px rgba(245, 184, 66, 0.5)); }
+.env-ico.c-wind { color: #6bc8ff; filter: drop-shadow(0 0 6px rgba(107, 200, 255, 0.5)); }
+.env-ico.c-wave { color: #52afff; filter: drop-shadow(0 0 6px rgba(82, 175, 255, 0.5)); }
+.env-ico.c-anchor { color: #38efbd; filter: drop-shadow(0 0 6px rgba(56, 239, 189, 0.5)); }
 .env-val {
   font: 700 17px/1.15 var(--num);
   color: #f7fbff;
+}
+.env-lbl {
+  font-size: 12px;
+  font-weight: 500;
+  color: #a4c8e8;
+  margin-top: 2px;
+}
 }
 .env-lbl {
   font-size: 12.5px;
@@ -877,10 +889,6 @@
   height: 100%;
   box-sizing: border-box;
 }
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-}
 .cap-chip-lbl {
   font-size: 13px;
   font-weight: 500;
@@ -899,25 +907,28 @@
 }
 
 /* --------------------------------------------------------------------------
-   右侧模块 2: 车辆监控 (驾驶员异常 + ADAS 统计)
-   -------------------------------------------------------------------------- */
-/* --------------------------------------------------------------------------
    右侧模块 2: 车辆监控 (驾驶行为 + ADAS 统计，带今日预警 59 起)
    -------------------------------------------------------------------------- */
 .panel-veh-behavior-adas {
   flex: 1.25;
+  display: flex;
+  flex-direction: column;
 }
 .veh-split-grid {
   display: grid;
-  grid-template-columns: 1fr 1.25fr;
+  grid-template-columns: 1fr 1.15fr;
   gap: 12px;
   flex: 1;
   min-height: 0;
+  width: 100%;
 }
 .behavior-side, .adas-side {
   display: flex;
   flex-direction: column;
+  justify-content: space-between;
+  flex: 1;
   min-height: 0;
+  width: 100%;
 }
 .veh-sec-title {
   display: flex;
@@ -952,14 +963,20 @@
   grid-template-rows: repeat(5, 1fr);
   gap: 6px;
   flex: 1;
+  min-height: 0;
+  width: 100%;
 }
 .b-item {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background: rgba(12, 32, 64, 0.65);
   border: 1px solid rgba(85, 160, 240, 0.18);
   border-radius: 5px;
   padding: 5px 9px;
+  height: 100%;
+  box-sizing: border-box;
+  width: 100%;
   transition: all 0.15s;
 }
 .b-item:hover {
@@ -981,7 +998,7 @@
 .b-dot.red { background: #ff5e6a; box-shadow: 0 0 5px rgba(255, 94, 106, 0.7); }
 .b-name {
   color: #a4c4e2;
-  font-size: 16px;
+  font-size: 13.5px;
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
@@ -989,7 +1006,7 @@
   flex: 1;
 }
 .b-val {
-  font: 700 18px/1 var(--num);
+  font: 700 16px/1 var(--num);
   margin-left: 4px;
 }
 .b-val.zero { color: #5d7d9e; }
@@ -1073,20 +1090,30 @@
 .adas-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 6px;
+  gap: 8px;
+  flex: 1;
+  min-height: 0;
+  width: 100%;
 }
 .adas-col {
   display: grid;
   grid-template-rows: repeat(5, 1fr);
-  gap: 4px;
+  gap: 6px;
+  height: 100%;
+  min-height: 0;
+  width: 100%;
 }
 .adas-item {
   display: flex;
   align-items: center;
+  justify-content: space-between;
   background: rgba(12, 32, 64, 0.65);
   border: 1px solid rgba(85, 160, 240, 0.18);
   border-radius: 5px;
   padding: 5px 9px;
+  height: 100%;
+  box-sizing: border-box;
+  width: 100%;
   transition: background 0.15s, border-color 0.15s;
 }
 .adas-item:hover {
@@ -1103,7 +1130,7 @@
 }
 .adas-name {
   color: #a4c4e2;
-  font-size: 16px;
+  font-size: 13px;
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
@@ -1111,9 +1138,9 @@
   flex: 1;
 }
 .adas-val {
-  font: 700 18px/1 var(--num);
+  font: 700 16px/1 var(--num);
   margin-left: 5px;
-  min-width: 16px;
+  min-width: 14px;
   text-align: right;
 }
 .adas-val.danger {

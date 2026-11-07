@@ -383,13 +383,14 @@
     border-radius: 6px;
   }
   .env-ico {
-    width: 22px;
-    height: 22px;
-    margin-bottom: 3px;
+    width: 44px;
+    height: 44px;
+    margin-bottom: 6px;
   }
   .env-ico svg {
-    width: 20px;
-    height: 20px;
+    width: 38px;
+    height: 38px;
+    stroke-width: 2.2;
   }
   .env-val {
     font-size: 21px;
@@ -576,13 +577,27 @@
   }
   .adas-grid {
     gap: 10px;
+    flex: 1;
+    min-height: 0;
+    width: 100%;
   }
   .adas-col {
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
     gap: 6px;
+    height: 100%;
+    min-height: 0;
+    width: 100%;
   }
   .adas-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 7px 12px;
     border-radius: 6px;
+    height: 100%;
+    box-sizing: border-box;
+    width: 100%;
   }
   .adas-dot {
     width: 8px;
@@ -975,13 +990,14 @@
     box-sizing: border-box;
   }
   .env-ico {
-    width: 48px;
-    height: 48px;
-    margin-bottom: 8px;
+    width: 62px;
+    height: 62px;
+    margin-bottom: 12px;
   }
   .env-ico svg {
-    width: 44px;
-    height: 44px;
+    width: 54px;
+    height: 54px;
+    stroke-width: 2.4;
   }
   .env-val {
     font-size: 42px;
@@ -1344,10 +1360,14 @@
     min-height: 0;
   }
   .adas-item {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 14px 22px;
     border-radius: 9px;
     height: 100%;
     box-sizing: border-box;
+    width: 100%;
   }
   .adas-dot {
     width: 12px;
@@ -1673,6 +1693,24 @@ html.giant-screen .b-val,
 html.giant-screen .adas-val {
   font-size: 34px !important;
   font-weight: 700 !important;
+}
+html.giant-screen .b-item,
+html.giant-screen .adas-item {
+  width: 100% !important;
+  height: 100% !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: space-between !important;
+}
+html.giant-screen .env-ico {
+  width: 62px !important;
+  height: 62px !important;
+  margin-bottom: 12px !important;
+}
+html.giant-screen .env-ico svg {
+  width: 54px !important;
+  height: 54px !important;
+  stroke-width: 2.4 !important;
 }
 html.giant-screen .env-val {
   font-size: 42px !important;
