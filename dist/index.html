@@ -4464,109 +4464,180 @@ function panelHeader(name, badge = '', icon = '') {
 }
 
 /* --------------------------------------------------------------------------
-   左侧模块 1A: 未来客流预测
+   左侧模块 1A: 未来客流预测 (基于船票预售 - 柱状图)
    -------------------------------------------------------------------------- */
-function passengerPredictionPanel() {
-  return `<section class="panel panel-prediction">
-    ${panelHeader('未来客流预测')}
-    <div class="pred-summary">
-      <div class="pred-kpi">
-        <span class="pred-lbl">预测今日上岛</span>
-        <strong class="pred-val font-num">1.42<small>万人</small></strong>
+function forecastFlowPanel() {
+  const badge = `<span class="tag-badge">基于船票预售</span>`;
+  const days = [
+    { day: '明日 周六', val: '12,000', h: 72, highlight: false },
+    { day: '周日', val: '13,500', h: 90, highlight: false },
+    { day: '周一', val: '9,800', h: 58, highlight: false },
+    { day: '周二', val: '7,200', h: 42, highlight: true },
+    { day: '周三', val: '8,500', h: 52, highlight: false }
+  ];
+
+  const bars = days.map(d => `
+    <div class="forecast-col ${d.highlight ? 'is-gold' : ''}">
+      <span class="f-val font-num">${d.val}</span>
+      <div class="f-bar-wrap">
+        <div class="f-bar-fill" style="height: ${d.h}%;"></div>
       </div>
-      <div class="pred-kpi">
-        <span class="pred-lbl">晚间离岛峰值</span>
-        <strong class="pred-val font-num">17:30</strong>
-      </div>
-      <div class="pred-trend up">
-        <span class="trend-txt">客流较昨日</span>
-        <span class="trend-val font-num">▲ 14.8%</span>
-      </div>
+      <span class="f-day">${d.day}</span>
     </div>
-    <div class="pred-chart-wrap">
-      <div class="pred-chart-header">
-        <span class="pch-title">24小时客流时序预测（人次）</span>
-        <span class="pch-legend"><i class="leg-dot"></i>预测曲线</span>
-      </div>
-      <div class="pred-svg-box">
-        <svg viewBox="0 0 460 110" preserveAspectRatio="none" class="pred-svg">
-          <defs>
-            <linearGradient id="predGrad" x1="0" y1="0" x2="0" y2="1">
-              <stop offset="0%" stop-color="#00d8ff" stop-opacity="0.38"/>
-              <stop offset="100%" stop-color="#00d8ff" stop-opacity="0.0"/>
-            </linearGradient>
-          </defs>
-          <path d="M 0,110 L 0,95 Q 60,90 100,75 T 180,30 T 260,20 T 340,45 T 420,80 L 460,95 L 460,110 Z" fill="url(#predGrad)" />
-          <path d="M 0,95 Q 60,90 100,75 T 180,30 T 260,20 T 340,45 T 420,80 L 460,95" fill="none" stroke="#00d8ff" stroke-width="2.5" />
-          <circle cx="260" cy="20" r="4" fill="#00d8ff" stroke="#041226" stroke-width="2"/>
-          <text x="260" y="14" fill="#00d8ff" font-size="11" font-family="monospace" text-anchor="middle" font-weight="700">峰值 14:00 (1,840人)</text>
-        </svg>
-      </div>
-      <div class="pred-timeline">
-        <span>06:00</span>
-        <span>09:00</span>
-        <span>12:00</span>
-        <span class="active">14:00</span>
-        <span>18:00</span>
-        <span>21:00</span>
-      </div>
-    </div>
+  `).join('');
+
+  return `<section class="panel panel-forecast">
+    ${panelHeader('未来客流预测', badge)}
+    <div class="forecast-bars-grid">${bars}</div>
   </section>`;
 }
 
 /* --------------------------------------------------------------------------
-   左侧模块 1B: 全岛出行导览 (环境数据 + 景区速览)
+   左侧模块 1B: 全岛出行总览 (客流大指标 + 4格天气海况)
    -------------------------------------------------------------------------- */
-function islandTourGuidePanel() {
-  return `<section class="panel panel-tour-guide">
-    ${panelHeader('全岛出行导览')}
+function islandOverviewPanel(period = '今日') {
+  const dyn = getDynamicState();
+  const isTomorrow = dyn.activeDate === '2026-11-08';
+  const badge = `<button class="tag-badge" data-action="period">${period}</button>`;
+  return `<section class="panel panel-overview">
+    ${panelHeader('全岛出行总览', badge)}
+    <div class="overview-dual">
+      <div class="metric-card">
+        <span class="m-lbl">${isTomorrow ? '明日预计上岛' : '今日上岛客流'}</span>
+        <div class="m-val"><strong>${isTomorrow ? '8,500' : '7,000'}</strong><small>人次</small></div>
+        <div class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>10.4%</b></div>
+      </div>
+      <div class="metric-card">
+        <span class="m-lbl">运送客流</span>
+        <div class="m-val"><strong>${dyn.totalPax.toLocaleString()}</strong><small>人次</small></div>
+        <div class="m-badges">
+          <span class="badge-pill">${dyn.totalOrders} 单</span>
+          <span class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>10%</b></span>
+        </div>
+      </div>
+    </div>
     <div class="env-grid">
       <div class="env-box">
-        <div class="env-icon-title">${ico('cloud')} <span>实时天气</span></div>
-        <div class="env-val">晴间多云 <strong class="font-num">26℃</strong></div>
+        <span class="env-ico c-sun">${ico('sun')}</span>
+        <strong class="env-val">26°C</strong>
+        <small class="env-lbl">天气</small>
       </div>
       <div class="env-box">
-        <div class="env-icon-title">${ico('wind')} <span>风向风力</span></div>
-        <div class="env-val">东南风 <strong class="font-num">3级</strong></div>
+        <span class="env-ico c-wind">${ico('wind')}</span>
+        <strong class="env-val">5级</strong>
+        <small class="env-lbl">东北风</small>
       </div>
       <div class="env-box">
-        <div class="env-icon-title">${ico('wave')} <span>潮汐状况</span></div>
-        <div class="env-val">退潮中 <strong class="font-num">1.4m</strong></div>
+        <span class="env-ico c-wave">${ico('wave')}</span>
+        <strong class="env-val">1.2m</strong>
+        <small class="env-lbl">浪高</small>
       </div>
       <div class="env-box">
-        <div class="env-icon-title">${ico('camera')} <span>客流指数</span></div>
-        <div class="env-val">舒适 <strong class="font-num c-mint">72</strong></div>
+        <span class="env-ico c-anchor">${ico('anchor')}</span>
+        <strong class="env-val c-mint">通航</strong>
+        <small class="env-lbl">航线状态</small>
       </div>
     </div>
-    <div class="scenic-list">
-      <div class="scenic-chip" data-place="port" role="button" tabindex="0">
-        <span class="s-dot dot-port"></span>
-        <span class="s-name">西角码头</span>
-        <span class="s-status font-num">运力充足</span>
-      </div>
-      <div class="scenic-chip" data-place="bay" role="button" tabindex="0">
-        <span class="s-dot dot-bay"></span>
-        <span class="s-name">南湾运动公园</span>
-        <span class="s-status font-num">需求旺盛</span>
-      </div>
-      <div class="scenic-chip" data-place="croc" role="button" tabindex="0">
-        <span class="s-dot dot-croc"></span>
-        <span class="s-name">鳄鱼山景区</span>
-        <span class="s-status font-num">缓行</span>
-      </div>
-      <div class="scenic-chip" data-place="shiluokou" role="button" tabindex="0">
-        <span class="s-dot dot-shiluokou"></span>
-        <span class="s-name">石螺口海滩</span>
-        <span class="s-status font-num">适宜游览</span>
-      </div>
+  </section>`;
+}
+/* --------------------------------------------------------------------------
+   左侧模块 2A: 订单趋势 (平滑折线图 - 06:00-22:00 每两小时)
+   -------------------------------------------------------------------------- */
+let orderTrendPeriod = '今日';
+
+function setOrderTrendPeriod(p) {
+  orderTrendPeriod = p;
+  const pnl = document.querySelector('.panel-order-trend');
+  if (pnl) {
+    pnl.outerHTML = orderTrendPanel(orderTrendPeriod);
+  } else if (typeof updatePanels === 'function') {
+    updatePanels();
+  }
+}
+
+function orderTrendPanel(period = orderTrendPeriod) {
+  const badge = `
+    <div class="trend-tabs">
+      <button class="tag-badge ${period === '今日' ? 'active' : ''}" data-action="setOrderTrend" data-trend-period="今日">今日</button>
+      <button class="tag-badge ${period === '昨日' ? 'active' : ''}" data-action="setOrderTrend" data-trend-period="昨日">昨日</button>
+    </div>
+  `;
+
+  const points = period === '今日'
+    ? [
+        { t: '06:00', v: 0 },
+        { t: '08:00', v: 68 },
+        { t: '10:00', v: 102 },
+        { t: '12:00', v: 68 },
+        { t: '14:00', v: 85 },
+        { t: '16:00', v: 40 },
+        { t: '18:00', v: 0 },
+        { t: '20:00', v: 0 },
+        { t: '22:00', v: 0 }
+      ]
+    : [
+        { t: '06:00', v: 0 },
+        { t: '08:00', v: 54 },
+        { t: '10:00', v: 88 },
+        { t: '12:00', v: 60 },
+        { t: '14:00', v: 76 },
+        { t: '16:00', v: 35 },
+        { t: '18:00', v: 0 },
+        { t: '20:00', v: 0 },
+        { t: '22:00', v: 0 }
+      ];
+
+  const coords = points.map((p, i) => {
+    const x = 24 + i * 56.5;
+    const y = 110 - (p.v / 115) * 88;
+    return { x, y, v: p.v, t: p.t };
+  });
+
+  let pathD = `M ${coords[0].x} ${coords[0].y}`;
+  for (let i = 0; i < coords.length - 1; i++) {
+    const p0 = coords[i];
+    const p1 = coords[i + 1];
+    const mx = (p0.x + p1.x) / 2;
+    pathD += ` C ${mx} ${p0.y}, ${mx} ${p1.y}, ${p1.x} ${p1.y}`;
+  }
+  const areaD = `${pathD} L ${coords[coords.length - 1].x} 122 L ${coords[0].x} 122 Z`;
+
+  const circles = coords.map(c => `
+    <circle cx="${c.x}" cy="${c.y}" r="3.5" class="trend-pt" filter="drop-shadow(0 0 5px #00d8ff)"/>
+  `).join('');
+
+  const xLabels = points.map(p => `<span>${p.t}</span>`).join('');
+
+  return `<section class="panel panel-order-trend">
+    ${panelHeader('订单趋势', badge)}
+    <div class="trend-sub-bar">
+      <span class="trend-unit">订单 / 2小时</span>
+      <span class="trend-peak-lbl">最高时段: <b>10:00 (${period === '今日' ? '102' : '88'}单)</b></span>
+    </div>
+    <div class="trend-svg-wrap">
+      <svg viewBox="0 0 500 128" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="orderTrendAreaGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#00d8ff" stop-opacity="0.38"/>
+            <stop offset="100%" stop-color="#00d8ff" stop-opacity="0.01"/>
+          </linearGradient>
+        </defs>
+        <line x1="24" y1="22" x2="476" y2="22" stroke="rgba(125,185,245,0.12)" stroke-dasharray="3,3"/>
+        <line x1="24" y1="66" x2="476" y2="66" stroke="rgba(125,185,245,0.12)" stroke-dasharray="3,3"/>
+        <line x1="24" y1="110" x2="476" y2="110" stroke="rgba(125,185,245,0.16)"/>
+        <path d="${areaD}" fill="url(#orderTrendAreaGrad)"/>
+        <path d="${pathD}" fill="none" stroke="#00d8ff" stroke-width="2.6" stroke-linecap="round"/>
+        ${circles}
+      </svg>
+      <div class="trend-axis-x">${xLabels}</div>
     </div>
   </section>`;
 }
 
 /* --------------------------------------------------------------------------
-   左侧模块 2: 运营监控 (动态真实计算)
+   左侧模块 2B: 运营监控 (GMV + 客单价 + 订单状态格，动态计算)
    -------------------------------------------------------------------------- */
-function operationMonitorPanel() {
+function operationsMonitorPanel() {
   const dyn = getDynamicState();
   const safeTotal = dyn.totalOrders || 1;
   const donePct = Math.round((dyn.doneOrders / safeTotal) * 100);
@@ -4574,22 +4645,18 @@ function operationMonitorPanel() {
   const servingPct = Math.round((dyn.servingOrders / safeTotal) * 100);
   const pendingPct = Math.max(0, 100 - donePct - cancelPct - servingPct);
 
+  const badge = `<span class="tag-badge">订单总数 ${dyn.totalOrders}</span>`;
   return `<section class="panel panel-ops">
-    ${panelHeader('运营监控')}
-    <div class="ops-kpi-row">
-      <div class="m-card">
-        <div class="m-label">累计订单数</div>
-        <strong class="m-val font-num num-orders">${dyn.totalOrders}</strong>
-        <div class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>12%</b></div>
-      </div>
-      <div class="m-card">
-        <div class="m-label">运营总流水</div>
-        <div class="m-val-wrap"><span class="m-unit">¥</span><strong class="m-val font-num num-gmv">${dyn.gmv.toLocaleString()}</strong></div>
+    ${panelHeader('运营监控', badge)}
+    <div class="gmv-dual">
+      <div class="gmv-left">
+        <span class="m-lbl">今日营收 <small>GMV</small></span>
+        <div class="gmv-val font-num">¥${dyn.gmv.toLocaleString()}</div>
         <div class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>10%</b></div>
       </div>
       <div class="arpu-card">
-        <span class="arpu-lbl">客单价</span>
-        <strong class="arpu-val font-num">¥${Math.round(dyn.gmv / safeTotal)}</strong>
+        <div class="arpu-val font-num">¥${Math.round(dyn.gmv / safeTotal)}</div>
+        <div class="arpu-lbl">客单价</div>
       </div>
     </div>
     <div class="order-grid">
