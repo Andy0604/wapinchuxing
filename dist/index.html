@@ -238,6 +238,737 @@ footer { border-top-color: rgba(144, 203, 224, .34); }
     z-index: 3;
   }
 }
+
+/* ==========================================================================
+   Ultrawide & High-Resolution Display Adaptation
+   Targets 4K, 8K, and multi-display stitched screens (e.g., 8320 x 2100)
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Level 1: 4K Displays (min-width: 2560px)
+   -------------------------------------------------------------------------- */
+@media (min-width: 2560px) {
+  :root {
+    --glass-rim: inset 0 1.5px 0 rgba(220, 255, 255, .18), inset 1.5px 0 0 rgba(178, 247, 240, .07);
+    --glass-float: 0 16px 36px -16px rgba(0, 8, 18, .9);
+  }
+
+  body {
+    font-size: 16px;
+  }
+
+  header {
+    height: clamp(86px, 8.5vh, 118px);
+    padding: 0 clamp(28px, 2.5vw, 64px) 6px;
+  }
+  .brandmark {
+    width: 52px;
+    height: 52px;
+  }
+  .brand strong {
+    font-size: 20px;
+  }
+  .brand small {
+    font-size: 11px;
+  }
+  .mast h1 {
+    font-size: clamp(32px, 2.3vw, 50px);
+  }
+  .mast-sub {
+    font-size: clamp(14px, .9vw, 18px);
+  }
+  .clock strong {
+    font-size: 28px;
+  }
+  .clock small {
+    font-size: 11px;
+  }
+  .icbtn {
+    width: 44px;
+    height: 44px;
+    border-radius: 6px;
+  }
+  .icbtn .icon {
+    width: 20px;
+    height: 20px;
+  }
+
+  main {
+    grid-template-columns: clamp(400px, 18.5vw, 560px) minmax(0, 1fr) clamp(400px, 18.5vw, 560px);
+    gap: 20px;
+    padding: clamp(18px, 1.8vh, 32px) clamp(24px, 1.8vw, 48px) clamp(12px, 1.2vh, 24px);
+  }
+
+  .panel {
+    padding: clamp(18px, 1.3vw, 28px);
+    border-radius: 8px;
+  }
+  .panel-title {
+    font-size: clamp(18px, 1.2vw, 24px);
+  }
+  .panel-title .icon {
+    width: 20px;
+    height: 20px;
+  }
+  .section-en {
+    font-size: 10px;
+  }
+  .tag, .microbtn, .tag-static {
+    font-size: 12px;
+    padding: 3px 10px;
+  }
+
+  .total-num {
+    font-size: clamp(44px, 3.2vw, 68px);
+  }
+  .klabel, .mini-stats small {
+    font-size: clamp(12px, .85vw, 16px);
+  }
+  .mini-stats b {
+    font-size: clamp(24px, 1.7vw, 36px);
+  }
+  .delta {
+    font-size: 12px;
+  }
+  .delta b {
+    font-size: 14px;
+  }
+
+  .road-row {
+    font-size: 14px;
+    padding: 12px 0;
+  }
+  .road-row .bar {
+    height: 6px;
+    max-width: 120px;
+  }
+
+  .event-symbol {
+    width: 38px;
+    height: 38px;
+  }
+  .event-symbol .icon {
+    width: 18px;
+    height: 18px;
+  }
+  .event-text strong {
+    font-size: clamp(13px, .9vw, 17px);
+  }
+  .event-text small {
+    font-size: 12px;
+  }
+  .event-row time {
+    font-size: 12px;
+  }
+
+  footer {
+    height: clamp(70px, 7vh, 92px);
+    padding: 0 clamp(24px, 2.2vw, 56px);
+  }
+  .navbtn {
+    height: 48px;
+    padding: 0 clamp(24px, 2.5vw, 60px);
+    font-size: 15px;
+    gap: 10px;
+  }
+  .navbtn svg {
+    width: 18px;
+    height: 18px;
+  }
+  .env {
+    font-size: 13px;
+  }
+  .live-dot {
+    width: 8px;
+    height: 8px;
+  }
+  .foot-id {
+    font-size: 12px;
+  }
+
+  .map-title h2 {
+    font-size: clamp(22px, 1.6vw, 32px);
+  }
+  .map-title .eyebrow {
+    font-size: 11px;
+  }
+  .fleet-shortcut {
+    font-size: 12px;
+    padding: 6px 12px;
+  }
+  .view-switch button {
+    padding: 6px 12px;
+    font-size: 12px;
+  }
+  .legend {
+    font-size: 13px;
+    gap: 18px;
+  }
+  .tour {
+    font-size: 14px;
+    padding: 8px 16px;
+  }
+
+  #detail {
+    width: min(420px, calc(100% - 100px));
+    padding: 18px 20px;
+  }
+  .detail-head h3 {
+    font-size: 21px;
+  }
+  .detail-stats b {
+    font-size: 26px;
+  }
+  .detail-note {
+    font-size: 13px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   Level 2: Ultrawide Giant Screens (8320 x 2100 & min-width: 4200px)
+   Tailored for massive command centers, video walls, and 4:1 display spans
+   -------------------------------------------------------------------------- */
+@media (min-width: 4200px), (min-width: 3400px) and (min-aspect-ratio: 24/10) {
+  body {
+    font-size: 22px;
+    line-height: 1.5;
+  }
+
+  /* Deepen perspective for giant room viewing */
+  @media (min-width: 1100px) {
+    .left-rail { --pane-yaw: 1.25deg; }
+    .right-rail { --pane-yaw: -1.25deg; }
+    .rail > .panel::after {
+      transform: perspective(3400px) rotateY(var(--pane-yaw));
+      border-radius: 12px;
+    }
+  }
+
+  /* Header scaling */
+  header {
+    height: clamp(130px, 7.4vh, 165px);
+    padding: 0 clamp(40px, 2.6vw, 96px) 10px;
+  }
+  .brand {
+    gap: 20px;
+  }
+  .brandmark {
+    width: 74px;
+    height: 74px;
+  }
+  .brand strong {
+    font-size: 28px;
+    letter-spacing: .18em;
+  }
+  .brand small {
+    font-size: 15px;
+    letter-spacing: .2em;
+    margin-top: 5px;
+  }
+  .mast h1 {
+    font-size: clamp(48px, 1.8vw, 68px);
+    letter-spacing: .16em;
+    margin-bottom: 6px;
+    text-shadow: 0 0 36px #81cafa55;
+  }
+  .mast-sub {
+    font-size: clamp(20px, .75vw, 26px);
+    letter-spacing: .36em;
+  }
+  .clock {
+    gap: 2px;
+  }
+  .clock strong {
+    font-size: 42px;
+  }
+  .clock small {
+    font-size: 16px;
+  }
+  .icbtn {
+    width: 62px;
+    height: 62px;
+    border-radius: 8px;
+    border-width: 1.5px;
+  }
+  .icbtn .icon {
+    width: 28px;
+    height: 28px;
+  }
+  .head-right {
+    gap: 32px;
+  }
+  .head-rule {
+    bottom: -4px;
+  }
+
+  /* Three-rail Layout: allocating ~21.5% each to side rails, ~55% to central map */
+  main {
+    grid-template-columns: clamp(1550px, 21.5vw, 1920px) minmax(0, 1fr) clamp(1550px, 21.5vw, 1920px);
+    gap: clamp(28px, 1vw, 44px);
+    padding: clamp(24px, 1.8vh, 42px) clamp(36px, 1.8vw, 68px) clamp(18px, 1.3vh, 32px);
+  }
+
+  .rail {
+    gap: clamp(20px, 1.5vh, 32px);
+  }
+
+  .panel {
+    padding: clamp(26px, 1.2vw, 38px);
+    border-radius: 12px;
+    border-width: 1.5px;
+    box-shadow: 0 16px 48px #010a1336;
+  }
+  .panel:before {
+    top: 24px;
+    width: 4px;
+    height: 32px;
+    box-shadow: 0 0 14px #70ffe566;
+  }
+  .panel:after {
+    right: 12px;
+    top: 12px;
+    width: 16px;
+    height: 8px;
+    border-top-width: 2px;
+    border-right-width: 2px;
+  }
+  .panel-head {
+    margin-bottom: clamp(18px, 1.3vh, 30px);
+  }
+  .panel-title {
+    font-size: clamp(24px, 1.1vw, 32px);
+    gap: 14px;
+  }
+  .panel-title .icon {
+    width: 28px;
+    height: 28px;
+  }
+  .section-en {
+    font-size: 13px;
+  }
+  .tag, .microbtn, .tag-static {
+    font-size: 16px;
+    padding: 5px 14px;
+    border-radius: 6px;
+    gap: 6px;
+  }
+  .tag .icon, .microbtn .icon {
+    width: 15px;
+    height: 15px;
+  }
+
+  /* Overview Panel */
+  .klabel, .mini-stats small {
+    font-size: clamp(16px, .8vw, 22px);
+  }
+  .total-num {
+    font-size: clamp(68px, 3.2vw, 98px);
+    letter-spacing: .02em;
+  }
+  .total-num small {
+    font-size: 18px;
+    margin-left: 10px;
+  }
+  .delta {
+    font-size: 16px;
+    margin-top: 6px;
+  }
+  .delta b {
+    font-size: 20px;
+    padding-left: 8px;
+  }
+  .mini-stats {
+    padding-top: clamp(16px, 1.5vh, 28px);
+    margin-top: clamp(14px, 1.4vh, 26px);
+  }
+  .mini-stats div + div {
+    padding-left: 20px;
+  }
+  .mini-stats b {
+    font-size: clamp(38px, 1.6vw, 52px);
+  }
+
+  /* Trend Chart & Fleet Panels */
+  .chart-info {
+    font-size: 15px;
+    margin-bottom: 8px;
+  }
+  .chart-unit {
+    font-size: 15px;
+  }
+  .chart-keys {
+    font-size: 16px;
+    gap: 20px;
+  }
+  .chart-keys i, .legend i {
+    width: 18px;
+    height: 3px;
+    margin-right: 8px;
+  }
+  .fleet-main {
+    gap: 10%;
+  }
+  .fleet-main > svg {
+    max-height: 220px;
+  }
+  .fleet-list {
+    gap: clamp(10px, 1.1vh, 22px);
+  }
+  .fleet-list li {
+    font-size: 20px;
+  }
+  .fleet-list span:before {
+    width: 9px;
+    height: 9px;
+    margin-right: 12px;
+  }
+  .fleet-list b {
+    font-size: 28px;
+  }
+  .fleet-list b small {
+    font-size: 16px;
+  }
+
+  /* Road Health & Events */
+  .gauge-box svg {
+    max-height: 210px;
+  }
+  .road-row {
+    font-size: 20px;
+    padding: 16px 0;
+  }
+  .road-row .bar {
+    height: 8px;
+    max-width: 180px;
+    gap: 4px;
+  }
+  .road-row b {
+    font-size: 17px;
+  }
+  .event-symbol {
+    width: 52px;
+    height: 52px;
+    border-radius: 6px;
+  }
+  .event-symbol .icon {
+    width: 26px;
+    height: 26px;
+  }
+  .event-text strong {
+    font-size: clamp(18px, .9vw, 23px);
+  }
+  .event-text small {
+    font-size: 16px;
+    margin-top: 6px;
+  }
+  .event-row time {
+    font-size: 16px;
+  }
+  .mini-head {
+    font-size: 15px;
+    gap: 6px;
+  }
+  .mini-head .icon {
+    width: 16px;
+    height: 16px;
+  }
+
+  /* Central Map Area */
+  .map-title .eyebrow {
+    font-size: 15px;
+  }
+  .map-title i {
+    width: 22px;
+    height: 3px;
+    margin-right: 10px;
+  }
+  .map-title h2 {
+    font-size: clamp(32px, 1.4vw, 44px);
+    margin-top: 6px;
+  }
+  .fleet-shortcut {
+    font-size: 18px;
+    padding: 10px 18px;
+    gap: 10px;
+    border-radius: 6px;
+  }
+  .fleet-shortcut .icon {
+    width: 20px;
+    height: 20px;
+  }
+  .view-switch {
+    padding: 4px;
+    border-radius: 6px;
+  }
+  .view-switch button {
+    padding: 8px 18px;
+    font-size: 16px;
+  }
+  .compass {
+    right: clamp(40px, 2vw, 68px);
+    top: 78px;
+  }
+  .compass b {
+    font-size: 16px;
+  }
+  .compass svg {
+    width: 48px;
+    height: 48px;
+  }
+  .map-tools {
+    gap: 10px;
+    bottom: 110px;
+    right: clamp(26px, 1.6vw, 48px);
+  }
+  .legend {
+    font-size: 18px;
+    gap: 24px;
+    padding: 10px 0;
+  }
+  .tour {
+    font-size: 18px;
+    padding: 12px 24px;
+    gap: 10px;
+    border-radius: 6px;
+  }
+  .tour svg {
+    width: 20px;
+    height: 20px;
+  }
+  .map-credit {
+    font-size: 14px;
+    left: clamp(26px, 1.6vw, 48px);
+    bottom: 64px;
+  }
+  .map-credit .scale {
+    width: 64px;
+    height: 6px;
+  }
+
+  /* Detail Card & Layer Popup */
+  #detail {
+    width: min(580px, calc(100% - 140px));
+    bottom: 96px;
+    left: clamp(24px, 1.5vw, 48px);
+    padding: 24px 28px;
+    border-radius: 10px;
+  }
+  .detail-head h3 {
+    font-size: 28px;
+  }
+  .detail-kind {
+    font-size: 14px;
+  }
+  .detail-state {
+    font-size: 16px;
+    gap: 10px;
+  }
+  .detail-stats small {
+    font-size: 15px;
+  }
+  .detail-stats b {
+    font-size: 36px;
+  }
+  .detail-stats em {
+    font-size: 15px;
+  }
+  .detail-note {
+    font-size: 16px;
+    margin-top: 12px;
+  }
+  .detail-act {
+    margin-top: 15px;
+    padding-top: 15px;
+  }
+  .detail-act small {
+    font-size: 15px;
+  }
+  .detail-act button {
+    padding: 7px 16px;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+  #layer-pop {
+    right: 98px;
+    bottom: 180px;
+    width: 220px;
+    padding: 16px 20px;
+    border-radius: 8px;
+  }
+  #layer-pop h3 {
+    font-size: 18px;
+    margin-bottom: 10px;
+  }
+  #layer-pop label {
+    font-size: 16px;
+    padding: 8px 0;
+  }
+
+  /* Footer Navigation */
+  footer {
+    height: clamp(96px, 6vh, 128px);
+    padding: 0 clamp(36px, 2.2vw, 76px);
+  }
+  .env {
+    font-size: 17px;
+    gap: 12px;
+  }
+  .live-dot {
+    width: 10px;
+    height: 10px;
+  }
+  .foot-id {
+    font-size: 16px;
+  }
+  .cross-small {
+    font-size: 22px;
+  }
+  nav {
+    gap: 16px;
+  }
+  .navbtn {
+    height: 60px;
+    padding: 0 clamp(28px, 1.8vw, 54px);
+    font-size: 20px;
+    gap: 14px;
+    border-radius: 6px;
+  }
+  .navbtn svg {
+    width: 24px;
+    height: 24px;
+  }
+
+  /* Fleet Mode: 2-column Grid for bus roster cards on giant width */
+  .tracking-fleet .fleet-roster .bus-roster-list {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+    overflow: visible;
+  }
+  .bus-roster-row {
+    padding: 12px 14px;
+    border-radius: 6px;
+    gap: 8px;
+  }
+  .bus-roster-id {
+    font-size: 20px;
+  }
+  .bus-roster-brand {
+    font-size: 14px;
+  }
+  .bus-state {
+    font-size: 14px;
+    gap: 8px;
+  }
+  .bus-state:before {
+    width: 7px;
+    height: 7px;
+  }
+  .bus-roster-direction {
+    font-size: 16px;
+    gap: 8px;
+  }
+  .bus-roster-load {
+    font-size: 15px;
+    gap: 5px;
+  }
+  .bus-roster-load .icon {
+    width: 17px;
+    height: 17px;
+  }
+  .bus-roster-load b {
+    font-size: 18px;
+  }
+
+  /* Fleet Summary & Filters */
+  .fleet-totals strong {
+    font-size: 54px;
+  }
+  .fleet-totals small {
+    font-size: 17px;
+  }
+  .fleet-clock {
+    font-size: 17px;
+    padding-top: 14px;
+    gap: 14px;
+  }
+  .fleet-clock > span {
+    font-size: 17px;
+  }
+  .fleet-clock button {
+    font-size: 16px;
+    padding: 7px 14px;
+    min-height: 36px;
+  }
+  .fleet-clock .icon {
+    width: 16px;
+    height: 16px;
+  }
+  .fleet-line-filter button {
+    font-size: 18px;
+    padding: 10px 14px;
+    border-radius: 5px;
+  }
+  .fleet-line-filter span {
+    font-size: 15px;
+  }
+
+  /* Fleet Trip Panel */
+  .trip-panel .bus-card-brand {
+    font-size: 16px;
+  }
+  .trip-panel .bus-card-brand .icon {
+    width: 18px;
+    height: 18px;
+  }
+  .bus-itinerary strong {
+    font-size: 22px;
+  }
+  .bus-itinerary small, .bus-segment small, .bus-telemetry small {
+    font-size: 15px;
+  }
+  .bus-trip-track {
+    height: 7px;
+  }
+  .bus-trip-track > b {
+    width: 12px;
+    height: 12px;
+  }
+  .bus-trip-key {
+    font-size: 14px;
+  }
+  .bus-trip-key i {
+    width: 16px;
+    height: 3px;
+  }
+  .bus-segment {
+    font-size: 16px;
+    padding: 10px 14px;
+  }
+  .bus-telemetry b {
+    font-size: 34px;
+  }
+  .bus-telemetry em {
+    font-size: 15px;
+  }
+  .bus-card-actions button {
+    padding: 10px;
+    font-size: 16px;
+    border-radius: 5px;
+  }
+  .bus-card-actions .icon {
+    width: 18px;
+    height: 18px;
+  }
+
+  /* Toast Notification */
+  #toast {
+    font-size: 18px;
+    padding: 12px 28px;
+    bottom: 120px;
+    border-radius: 8px;
+  }
+}
 </style></head>
 <body>
 <div id="app">
@@ -630,9 +1361,10 @@ const islandCity = (() => {
     // Sky and terrain can bleed under the HUD. The label viewport still owns
     // the camera fit; the larger canvas only expands its visible world.
     const labels=canvas.parentElement;
-    const maxPixels=7_000_000;
+    const clientPixels=canvas.clientWidth*canvas.clientHeight;
+    const maxPixels=Math.max(7_000_000, Math.min(26_000_000, clientPixels*1.2));
     const ratio=Math.min(window.devicePixelRatio||1,2,
-      Math.sqrt(maxPixels/(canvas.clientWidth*canvas.clientHeight)));
+      Math.sqrt(maxPixels/clientPixels));
     const w=Math.round(canvas.clientWidth*ratio),h=Math.round(canvas.clientHeight*ratio);
     if (canvas.width!==w || canvas.height!==h) {canvas.width=w;canvas.height=h;}
     const fit=Math.min(labels.clientWidth/900,labels.clientHeight/740)*ratio;

@@ -168,9 +168,10 @@ const islandCity = (() => {
     // Sky and terrain can bleed under the HUD. The label viewport still owns
     // the camera fit; the larger canvas only expands its visible world.
     const labels=canvas.parentElement;
-    const maxPixels=7_000_000;
+    const clientPixels=canvas.clientWidth*canvas.clientHeight;
+    const maxPixels=Math.max(7_000_000, Math.min(26_000_000, clientPixels*1.2));
     const ratio=Math.min(window.devicePixelRatio||1,2,
-      Math.sqrt(maxPixels/(canvas.clientWidth*canvas.clientHeight)));
+      Math.sqrt(maxPixels/clientPixels));
     const w=Math.round(canvas.clientWidth*ratio),h=Math.round(canvas.clientHeight*ratio);
     if (canvas.width!==w || canvas.height!==h) {canvas.width=w;canvas.height=h;}
     const fit=Math.min(labels.clientWidth/900,labels.clientHeight/740)*ratio;

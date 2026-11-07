@@ -8,7 +8,7 @@ SRC = ROOT / "src"
 OUTPUT = ROOT / "dist" / "index.html"
 
 # Preserve cascade order and the dependency order of the browser scripts.
-STYLES = ("style", "panels", "fleet-ui", "fleet-scene", "glass", "map-bleed")
+STYLES = ("style", "panels", "fleet-ui", "fleet-scene", "glass", "map-bleed", "ultrawide")
 SCRIPTS = (
     "icons", "data", "charts", "panels", "city", "map", "fleet-engine",
     "fleet-ui", "fleet-map", "fleet-screen", "app",
