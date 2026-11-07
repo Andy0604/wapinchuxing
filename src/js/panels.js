@@ -92,23 +92,106 @@ function operationsMonitorPanel() {
 /* --------------------------------------------------------------------------
    左侧模块 3: 服务监控
    -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   左侧模块 3: 服务监控 (排队路线与订单明细)
+   -------------------------------------------------------------------------- */
+const queueOrderDetails = [
+  {
+    id: 'WP20261106274',
+    status: '服务中',
+    passengerPhone: '1886****4562',
+    useTime: '今日 08:38',
+    driver: '冯雪 (WZ-267)',
+    driverPhone: '1356****6498',
+    from: '石螺口',
+    to: '南湾运动公园',
+    route: '石螺口 → 南湾运动公园',
+    pax: '6 / 7 人',
+    price: '¥49.00',
+    wait: '11:49',
+    hot: true,
+    timeline: [
+      { name: '叫车时间', time: '08:38' },
+      { name: '司机接单时间', time: '08:40' },
+      { name: '司机出发时间', time: '08:44' },
+      { name: '司机接到乘客时间', time: '08:52' }
+    ]
+  },
+  {
+    id: 'WP20261106275',
+    status: '服务中',
+    passengerPhone: '1597****8823',
+    useTime: '今日 10:17',
+    driver: '李磊 (WZ-303)',
+    driverPhone: '1387****1290',
+    from: '南湾运动公园',
+    to: '五彩滩',
+    route: '南湾运动公园 → 五彩滩',
+    pax: '4 / 7 人',
+    price: '¥38.00',
+    wait: '10:17',
+    hot: true,
+    timeline: [
+      { name: '叫车时间', time: '10:17' },
+      { name: '司机接单时间', time: '10:19' },
+      { name: '司机出发时间', time: '10:22' },
+      { name: '司机接到乘客时间', time: '10:28' }
+    ]
+  },
+  {
+    id: 'WP20261106276',
+    status: '服务中',
+    passengerPhone: '1397****5519',
+    useTime: '今日 08:42',
+    driver: '王海 (WZ-305)',
+    driverPhone: '1390****7761',
+    from: '西角码头',
+    to: '盛塘天主教堂',
+    route: '西角码头 → 盛塘天主教堂',
+    pax: '3 / 7 人',
+    price: '¥35.00',
+    wait: '08:42',
+    hot: false,
+    timeline: [
+      { name: '叫车时间', time: '08:42' },
+      { name: '司机接单时间', time: '08:43' },
+      { name: '司机出发时间', time: '08:46' },
+      { name: '司机接到乘客时间', time: '08:55' }
+    ]
+  },
+  {
+    id: 'WP20261106277',
+    status: '服务中',
+    passengerPhone: '1770****9932',
+    useTime: '今日 07:55',
+    driver: '陈飞 (WZ-309)',
+    driverPhone: '1361****3452',
+    from: '五彩滩',
+    to: '鳄鱼山景区',
+    route: '五彩滩 → 鳄鱼山景区',
+    pax: '2 / 7 人',
+    price: '¥28.00',
+    wait: '07:55',
+    hot: false,
+    timeline: [
+      { name: '叫车时间', time: '07:55' },
+      { name: '司机接单时间', time: '07:57' },
+      { name: '司机出发时间', time: '08:01' },
+      { name: '司机接到乘客时间', time: '08:10' }
+    ]
+  }
+];
+
 function serviceMonitorPanel() {
   const badge = `<span class="tag-badge mint-tag"><i class="live-dot"></i>实时</span>`;
-  const queues = [
-    { from: '石螺口', to: '南湾运动公园', pax: '6 人', wait: '11:49', hot: true },
-    { from: '南湾运动公园', to: '五彩滩', pax: '4 人', wait: '10:17', hot: true },
-    { from: '西角码头', to: '盛塘天主教堂', pax: '3 人', wait: '08:42', hot: false },
-    { from: '五彩滩', to: '鳄鱼山景区', pax: '2 人', wait: '07:55', hot: false }
-  ];
-
-  const rows = queues.map(q => `
-    <div class="queue-row">
+  const rows = queueOrderDetails.map((q, idx) => `
+    <div class="queue-row" data-action="openOrder" data-queue-idx="${idx}" role="button" tabindex="0" title="点击查看车辆订单详情">
       <div class="queue-route">
         <span class="q-stop from">${q.from}</span>
         <span class="q-stop to">${q.to}</span>
       </div>
       <div class="queue-meta">
-        <span class="q-pax">${q.pax}</span>
+        <span class="q-pax font-num">${q.pax}</span>
         <span class="q-time ${q.hot ? 'warn' : ''}">${q.wait}</span>
       </div>
     </div>
@@ -217,36 +300,51 @@ function vehicleMonitorPanel() {
 }
 
 /* --------------------------------------------------------------------------
-   右侧模块 3: 事件监控 (异常/预警/已处理 + 告警处置卡片)
+   右侧模块 3: 事件监控 (异常/预警/已处理 + 告警处置卡片及状态管理)
    -------------------------------------------------------------------------- */
+const incidentStore = [
+  {
+    id: 'EV202611060015',
+    time: '15:20',
+    type: 'warn',
+    tag: '预警',
+    title: '船舶 15:20 分到达，客流上升',
+    content: '监测到「北海—涠洲」航线 15:20 班次到港，预计西角码头瞬时客流上升约 260 人，现有候车运力存在缺口。',
+    location: '西角码头',
+    car: '—',
+    action: '通知调度，增派车辆',
+    status: '未处理'
+  },
+  {
+    id: 'EV202611060018',
+    time: '15:08',
+    type: 'err',
+    tag: '异常',
+    title: 'WZ-102 车辆超速，最高时速 70km/h',
+    content: '车辆 WZ-102 在西角码头往南湾街路段行驶速度达到 70km/h，超出限速 40km/h 指标，触发超速警报。',
+    location: '西角支线 K2+400',
+    car: 'WZ-102',
+    action: '提醒司机注意安全',
+    status: '未处理'
+  }
+];
+
 function incidentMonitorPanel(handled = new Set()) {
   const badge = `<span class="tag-badge">今日 6 起 · 最新3条</span>`;
-  const incidents = [
-    {
-      time: '15:20',
-      type: 'warn',
-      tag: '预警',
-      title: '船舶 15:20 分到达，客流上升',
-      status: '未处理',
-      action: '通知调度，增派车辆'
-    },
-    {
-      time: '15:08',
-      type: 'err',
-      tag: '异常',
-      title: 'WZ-102 车辆超速，最高时速 70km/h',
-      status: '未处理',
-      action: '提醒司机注意安全'
-    }
-  ];
+  
+  // 实时统计各状态数量
+  const handledItems = incidentStore.filter(i => i.status === '已处理');
+  const warnUnhandled = 4 - incidentStore.filter(i => i.type === 'warn' && i.status === '已处理').length;
+  const errUnhandled = 2 - incidentStore.filter(i => i.type === 'err' && i.status === '已处理').length;
+  const okTotal = handledItems.length;
 
-  const cards = incidents.map(item => `
-    <div class="inc-v2-card ${item.type}">
+  const cards = incidentStore.map(item => `
+    <div class="inc-v2-card ${item.type} ${item.status === '已处理' ? 'is-handled' : ''}" data-action="openIncident" data-inc-id="${item.id}" role="button" tabindex="0" title="点击查看事件详情">
       <div class="inc-v2-top">
         <span class="inc-v2-time">${item.time}</span>
         <span class="inc-v2-badge ${item.type}">${item.tag}</span>
         <strong class="inc-v2-title">${item.title}</strong>
-        <span class="inc-v2-status">${item.status}</span>
+        <span class="inc-v2-status ${item.status === '已处理' ? 'ok' : ''}">${item.status}</span>
       </div>
       <div class="inc-v2-bottom">
         <span class="inc-v2-act-lbl">处理方式：</span>
@@ -259,20 +357,154 @@ function incidentMonitorPanel(handled = new Set()) {
     ${panelHeader('事件监控', badge)}
     <div class="inc-stats-row">
       <div class="inc-stat-box err">
-        <strong>2</strong>
+        <strong>${errUnhandled}</strong>
         <small>异常</small>
       </div>
       <div class="inc-stat-box warn">
-        <strong>4</strong>
+        <strong>${warnUnhandled}</strong>
         <small>预警</small>
       </div>
       <div class="inc-stat-box ok">
-        <strong>0</strong>
+        <strong>${okTotal}</strong>
         <small>已处理</small>
       </div>
     </div>
     <div class="incident-list-v2">${cards}</div>
   </section>`;
+}
+
+/* --------------------------------------------------------------------------
+   弹窗展示与处理函数
+   -------------------------------------------------------------------------- */
+function openOrderModal(idx) {
+  const data = queueOrderDetails[idx] || queueOrderDetails[0];
+  const modal = document.getElementById('event-modal');
+  if (!modal) return;
+  modal.innerHTML = `
+    <div class="modal-dialog" role="dialog" aria-modal="true">
+      <div class="modal-head">
+        <h3 class="modal-title">车辆订单详情</h3>
+        <button class="modal-close-circle" data-action="closeModal" aria-label="关闭">✕</button>
+      </div>
+      <div class="modal-dashed-card">
+        <span class="modal-code font-num">${data.id}</span>
+        <span class="modal-pill serving">${data.status}</span>
+      </div>
+      <div class="modal-grid-2">
+        <div class="modal-sub-card">
+          <span class="sc-label">乘客电话</span>
+          <span class="sc-val font-num">${data.passengerPhone}</span>
+        </div>
+        <div class="modal-sub-card">
+          <span class="sc-label">用车时间</span>
+          <span class="sc-val font-num">${data.useTime}</span>
+        </div>
+        <div class="modal-sub-card">
+          <span class="sc-label">司机 · 车牌</span>
+          <span class="sc-val">${data.driver}</span>
+        </div>
+        <div class="modal-sub-card">
+          <span class="sc-label">司机电话</span>
+          <span class="sc-val font-num">${data.driverPhone}</span>
+        </div>
+        <div class="modal-sub-card full">
+          <span class="sc-label">行程路线</span>
+          <span class="sc-val">${data.route}</span>
+        </div>
+        <div class="modal-sub-card">
+          <span class="sc-label">乘车人数</span>
+          <span class="sc-val font-num">${data.pax}</span>
+        </div>
+        <div class="modal-sub-card">
+          <span class="sc-label">订单金额</span>
+          <span class="sc-val amber font-num">${data.price}</span>
+        </div>
+      </div>
+      <div class="modal-section-title">订单流转明细</div>
+      <div class="modal-timeline">
+        ${data.timeline.map(t => `
+          <div class="timeline-item">
+            <span class="timeline-name">${t.name}</span>
+            <span class="timeline-time">${t.time}</span>
+          </div>
+        `).join('')}
+      </div>
+    </div>
+  `;
+  modal.hidden = false;
+}
+
+function openIncidentModal(id) {
+  const item = incidentStore.find(i => i.id === id) || incidentStore[0];
+  const modal = document.getElementById('event-modal');
+  if (!modal) return;
+  const isHandled = item.status === '已处理';
+  modal.innerHTML = `
+    <div class="modal-dialog" role="dialog" aria-modal="true">
+      <div class="modal-head">
+        <h3 class="modal-title">事件详情</h3>
+        <button class="modal-close-circle" data-action="closeModal" aria-label="关闭">✕</button>
+      </div>
+      <div class="modal-dashed-card">
+        <span class="modal-code font-num">${item.id}</span>
+        <span class="modal-pill ${isHandled ? 'handled' : 'unhandled'}">${item.status}</span>
+      </div>
+      <div class="modal-grid-2">
+        <div class="modal-sub-card">
+          <span class="sc-label">事件时间</span>
+          <span class="sc-val font-num">今日 ${item.time}</span>
+        </div>
+        <div class="modal-sub-card">
+          <span class="sc-label">事件等级</span>
+          <span class="sc-val ${item.type === 'err' ? 'c-red' : 'warn'}">${item.tag}</span>
+        </div>
+        <div class="modal-sub-card full">
+          <span class="sc-label">${item.tag}内容</span>
+          <span class="sc-val" style="font-size:13px; line-height:1.5;">${item.content}</span>
+        </div>
+        <div class="modal-sub-card">
+          <span class="sc-label">发生位置</span>
+          <span class="sc-val">${item.location}</span>
+        </div>
+        <div class="modal-sub-card">
+          <span class="sc-label">关联车辆</span>
+          <span class="sc-val">${item.car}</span>
+        </div>
+        <div class="modal-sub-card full">
+          <span class="sc-label">建议处理方式</span>
+          <span class="sc-val blue">${item.action}</span>
+        </div>
+      </div>
+      <div class="modal-actions">
+        <button class="modal-btn cancel" data-action="closeModal">关闭</button>
+        <button class="modal-btn primary" data-action="resolveIncident" data-inc-id="${item.id}" ${isHandled ? 'disabled' : ''}>
+          ${isHandled ? '✓ 已处理' : '✓ 标记已处理'}
+        </button>
+      </div>
+    </div>
+  `;
+  modal.hidden = false;
+}
+
+function closeModal() {
+  const modal = document.getElementById('event-modal');
+  if (modal) modal.hidden = true;
+}
+
+function resolveIncident(id) {
+  const item = incidentStore.find(i => i.id === id);
+  if (item && item.status !== '已处理') {
+    item.status = '已处理';
+    closeModal();
+    if (typeof updatePanels === 'function') {
+      updatePanels();
+    } else if (typeof renderPanels === 'function') {
+      renderPanels('overview');
+    }
+    if (typeof toast === 'function') {
+      toast(`事件 ${item.id} 已标记为已处理`);
+    }
+  }
 }
 
 /* --------------------------------------------------------------------------

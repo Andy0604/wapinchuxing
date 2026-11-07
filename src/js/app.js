@@ -75,8 +75,12 @@ function viewToggle(three){
 async function toggleFullscreen(){
   try{if(document.fullscreenElement)await document.exitFullscreen();else if(document.documentElement.requestFullscreen)await document.documentElement.requestFullscreen();else toast('此浏览器使用系统全屏控制')}catch{toast('请从浏览器菜单进入全屏')}
 }
-function onAction(a){
+function onAction(a, d = {}){
   switch(a){
+    case 'openOrder': openOrderModal(Number(d.queueIdx || 0)); break;
+    case 'openIncident': openIncidentModal(d.incId); break;
+    case 'closeModal': closeModal(); break;
+    case 'resolveIncident': resolveIncident(d.incId); break;
     case 'fullscreen':toggleFullscreen();break;
     case 'events':modeChange('events');break;
     case 'openFleet':modeChange('fleet');break;
@@ -105,13 +109,23 @@ function launch(){
   updatePanels();updateChrome();renderMapLayers();setClock();setInterval(setClock,1000);
   cameraPointers();requestAnimationFrame(tick);
   document.addEventListener('click',e=>{
+    const modal = byId('event-modal');
+    if(modal && !modal.hidden && e.target === modal){closeModal();return}
     if(!byId('layer-pop').contains(e.target)&&!e.target.closest('[data-action="layers"]'))closeLayers();
     const el=e.target.closest('[data-action],[data-mode],[data-place],[data-event],[data-line],[data-bus],[data-fleet-line]');
     if(!el)return;const d=el.dataset;
-    if(d.action)onAction(d.action);else if(d.mode)modeChange(d.mode);else if(d.event)openEvent(d.event);else if(d.place)selectPlace(d.place);else if(d.line!==undefined)setLine(Number(d.line));else if(d.fleetLine!==undefined)pickBus(runs.find(v=>v.line===Number(d.fleetLine)).id);else if(d.bus)pickBus(d.bus);
+    if(d.action)onAction(d.action,d);else if(d.mode)modeChange(d.mode);else if(d.event)openEvent(d.event);else if(d.place)selectPlace(d.place);else if(d.line!==undefined)setLine(Number(d.line));else if(d.fleetLine!==undefined)pickBus(runs.find(v=>v.line===Number(d.fleetLine)).id);else if(d.bus)pickBus(d.bus);
   });
   document.addEventListener('change',e=>{if(e.target.dataset.layer){if(!e.target.checked&&e.target.dataset.layer==='cars'&&state.mode==='fleet')modeChange('overview');state.layers[e.target.dataset.layer]=e.target.checked;dirty=true;renderMapLayers()}});
-  document.addEventListener('keydown',e=>{if(e.key==='Escape'){if(!byId('layer-pop').hidden)closeLayers();else closeDetail()}if((e.key==='Enter'||e.key===' ')&&e.target.matches('g[role="button"]')){e.preventDefault();e.target.dispatchEvent(new MouseEvent('click',{bubbles:true}))}});
+  document.addEventListener('keydown',e=>{
+    if(e.key==='Escape'){
+      const modal = byId('event-modal');
+      if(modal && !modal.hidden)closeModal();
+      else if(!byId('layer-pop').hidden)closeLayers();
+      else closeDetail();
+    }
+    if((e.key==='Enter'||e.key===' ')&&e.target.matches('g[role="button"]')){e.preventDefault();e.target.dispatchEvent(new MouseEvent('click',{bubbles:true}))}
+  });
   document.addEventListener('fullscreenchange',()=>{const el=document.querySelector('[data-action="fullscreen"]');el.title=document.fullscreenElement?'退出全屏':'进入全屏';el.setAttribute('aria-label',el.title);dirty=true});
 }
 launch();
