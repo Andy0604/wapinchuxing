@@ -542,51 +542,51 @@ function vehicleBehaviorAndAdasPanel() {
 const carouselVehicles = [
   // Page 1
   [
-    { id: 'WZ-307', driver: '张盼', from: '石螺口', to: '南湾运动公园', pax: '3/7人', bat: 78 },
-    { id: 'WZ-303', driver: '李强', from: '石螺口', to: '南湾运动公园', pax: '4/7人', bat: 85 },
-    { id: 'WZ-305', driver: '王海', from: '石螺口', to: '南湾运动公园', pax: '3/7人', bat: 46 },
-    { id: 'WZ-309', driver: '陈飞', from: '石螺口', to: '南湾运动公园', pax: '5/7人', bat: 91 },
-    { id: 'WZ-312', driver: '刘洋', from: '西角码头', to: '盛塘天主教堂', pax: '2/7人', bat: 67 }
+    { id: 'WZ-307', driver: '张盼', from: '石螺口', to: '南湾运动公园', pax: '3人', bat: 78 },
+    { id: 'WZ-303', driver: '李强', from: '石螺口', to: '南湾运动公园', pax: '4人', bat: 85 },
+    { id: 'WZ-305', driver: '王海', from: '石螺口', to: '南湾运动公园', pax: '3人', bat: 46 },
+    { id: 'WZ-309', driver: '陈飞', from: '石螺口', to: '南湾运动公园', pax: '5人', bat: 91 },
+    { id: 'WZ-312', driver: '刘洋', from: '西角码头', to: '盛塘天主教堂', pax: '2人', bat: 67 }
   ],
   // Page 2
   [
-    { id: 'WZ-101', driver: '严旭', from: '西角码头', to: '南湾海鲜市场', pax: '5/7人', bat: 92 },
-    { id: 'WZ-102', driver: '魏刚', from: '西角码头', to: '鳄鱼山景区', pax: '4/7人', bat: 80 },
-    { id: 'WZ-103', driver: '陆涛', from: '石螺口', to: '贝壳沙滩', pax: '6/7人', bat: 74 },
-    { id: 'WZ-104', driver: '姜波', from: '蓝桥', to: '盛塘天主教堂', pax: '2/7人', bat: 63 },
-    { id: 'WZ-105', driver: '方敏', from: '南湾海鲜市场', to: '五彩滩', pax: '3/7人', bat: 88 }
+    { id: 'WZ-101', driver: '严旭', from: '西角码头', to: '南湾海鲜市场', pax: '5人', bat: 92 },
+    { id: 'WZ-102', driver: '魏刚', from: '西角码头', to: '鳄鱼山景区', pax: '4人', bat: 80 },
+    { id: 'WZ-103', driver: '陆涛', from: '石螺口', to: '贝壳沙滩', pax: '6人', bat: 74 },
+    { id: 'WZ-104', driver: '姜波', from: '蓝桥', to: '盛塘天主教堂', pax: '2人', bat: 63 },
+    { id: 'WZ-105', driver: '方敏', from: '南湾海鲜市场', to: '五彩滩', pax: '3人', bat: 88 }
   ],
   // Page 3
   [
-    { id: 'WZ-201', driver: '薛磊', from: '五彩滩', to: '鳄鱼山景区', pax: '4/7人', bat: 70 },
-    { id: 'WZ-202', driver: '朱浩', from: '南湾运动公园', to: '盛塘天主教堂', pax: '5/7人', bat: 82 },
-    { id: 'WZ-203', driver: '何彬', from: '西角码头', to: '石螺口', pax: '1/7人', bat: 55 },
-    { id: 'WZ-204', driver: '崔杰', from: '贝壳沙滩', to: '西角码头', pax: '3/7人', bat: 79 },
-    { id: 'WZ-205', driver: '杜伟', from: '鳄鱼山景区', to: '南湾运动公园', pax: '6/7人', bat: 86 }
+    { id: 'WZ-201', driver: '薛磊', from: '五彩滩', to: '鳄鱼山景区', pax: '4人', bat: 70 },
+    { id: 'WZ-202', driver: '朱浩', from: '南湾运动公园', to: '盛塘天主教堂', pax: '5人', bat: 82 },
+    { id: 'WZ-203', driver: '何彬', from: '西角码头', to: '石螺口', pax: '1人', bat: 55 },
+    { id: 'WZ-204', driver: '崔杰', from: '贝壳沙滩', to: '西角码头', pax: '3人', bat: 79 },
+    { id: 'WZ-205', driver: '杜伟', from: '鳄鱼山景区', to: '南湾运动公园', pax: '6人', bat: 86 }
   ],
   // Page 4
   [
-    { id: 'WZ-301', driver: '胡鹏', from: '石螺口', to: '南湾运动公园', pax: '4/7人', bat: 90 },
-    { id: 'WZ-302', driver: '卢亮', from: '南湾海鲜市场', to: '蓝桥', pax: '2/7人', bat: 65 },
-    { id: 'WZ-304', driver: '蔡勇', from: '盛塘天主教堂', to: '五彩滩', pax: '5/7人', bat: 72 },
-    { id: 'WZ-306', driver: '贾宁', from: '西角码头', to: '南湾运动公园', pax: '3/7人', bat: 81 },
-    { id: 'WZ-308', driver: '夏冬', from: '贝壳沙滩', to: '鳄鱼山景区', pax: '4/7人', bat: 58 }
+    { id: 'WZ-301', driver: '胡鹏', from: '石螺口', to: '南湾运动公园', pax: '4人', bat: 90 },
+    { id: 'WZ-302', driver: '卢亮', from: '南湾海鲜市场', to: '蓝桥', pax: '2人', bat: 65 },
+    { id: 'WZ-304', driver: '蔡勇', from: '盛塘天主教堂', to: '五彩滩', pax: '5人', bat: 72 },
+    { id: 'WZ-306', driver: '贾宁', from: '西角码头', to: '南湾运动公园', pax: '3人', bat: 81 },
+    { id: 'WZ-308', driver: '夏冬', from: '贝壳沙滩', to: '鳄鱼山景区', pax: '4人', bat: 58 }
   ],
   // Page 5
   [
-    { id: 'WZ-310', driver: '钱坤', from: '五彩滩', to: '石螺口', pax: '6/7人', bat: 84 },
-    { id: 'WZ-311', driver: '邹峰', from: '南湾运动公园', to: '蓝桥', pax: '3/7人', bat: 77 },
-    { id: 'WZ-106', driver: '顾成', from: '西角码头', to: '盛塘天主教堂', pax: '2/7人', bat: 69 },
-    { id: 'WZ-107', driver: '白龙', from: '石螺口', to: '鳄鱼山景区', pax: '5/7人', bat: 93 },
-    { id: 'WZ-108', driver: '毛磊', from: '盛塘天主教堂', to: '南湾海鲜市场', pax: '4/7人', bat: 75 }
+    { id: 'WZ-310', driver: '钱坤', from: '五彩滩', to: '石螺口', pax: '6人', bat: 84 },
+    { id: 'WZ-311', driver: '邹峰', from: '南湾运动公园', to: '蓝桥', pax: '3人', bat: 77 },
+    { id: 'WZ-106', driver: '顾成', from: '西角码头', to: '盛塘天主教堂', pax: '2人', bat: 69 },
+    { id: 'WZ-107', driver: '白龙', from: '石螺口', to: '鳄鱼山景区', pax: '5人', bat: 93 },
+    { id: 'WZ-108', driver: '毛磊', from: '盛塘天主教堂', to: '南湾海鲜市场', pax: '4人', bat: 75 }
   ],
   // Page 6
   [
-    { id: 'WZ-206', driver: '秦川', from: '蓝桥', to: '西角码头', pax: '1/7人', bat: 60 },
-    { id: 'WZ-207', driver: '龚平', from: '南湾运动公园', to: '五彩滩', pax: '4/7人', bat: 89 },
-    { id: 'WZ-208', driver: '武强', from: '鳄鱼山景区', to: '石螺口', pax: '5/7人', bat: 73 },
-    { id: 'WZ-313', driver: '常青', from: '西角码头', to: '南湾海鲜市场', pax: '3/7人', bat: 86 },
-    { id: 'WZ-314', driver: '董健', from: '贝壳沙滩', to: '盛塘天主教堂', pax: '2/7人', bat: 64 }
+    { id: 'WZ-206', driver: '秦川', from: '蓝桥', to: '西角码头', pax: '1人', bat: 60 },
+    { id: 'WZ-207', driver: '龚平', from: '南湾运动公园', to: '五彩滩', pax: '4人', bat: 89 },
+    { id: 'WZ-208', driver: '武强', from: '鳄鱼山景区', to: '石螺口', pax: '5人', bat: 73 },
+    { id: 'WZ-313', driver: '常青', from: '西角码头', to: '南湾海鲜市场', pax: '3人', bat: 86 },
+    { id: 'WZ-314', driver: '董健', from: '贝壳沙滩', to: '盛塘天主教堂', pax: '2人', bat: 64 }
   ]
 ];
 
@@ -613,7 +613,7 @@ function renderVehRosterInner() {
           <div class="vcm-stop"><i class="s-dot to"></i><span>${c.to}</span></div>
         </div>
         <div class="vcm-right">
-          <span class="vcm-pax font-num">${c.pax}</span>
+          <span class="vcm-pax font-num">${c.pax.replace(/\/7/, '')}</span>
           <div class="vcm-bat ${batClass}">
             <span class="bat-icon"></span>
             <span class="font-num">${c.bat}%</span>
