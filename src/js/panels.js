@@ -1,10 +1,242 @@
+/* --------------------------------------------------------------------------
+   智慧出行大屏面板组件与动态时序计算引擎
+   -------------------------------------------------------------------------- */
+
+const allOrders = [{"id": "WZ202611070001", "t": "08:00:40", "acceptSec": 39.0, "pickupMin": 2.0, "driver": "刘晓云", "car": "WZ-101", "from": "西角码头（客运码头）", "to": "南湾运动公园", "fromFull": "西角码头（客运码头）", "toFull": "南湾运动公园", "pax": 3, "status": "已完成"}, {"id": "WZ202611070002", "t": "08:04:32", "acceptSec": 76.0, "pickupMin": 2.0, "driver": "于海洋", "car": "WZ-105", "from": "盛塘天主教堂", "to": "南湾街", "fromFull": "盛塘天主教堂", "toFull": "南湾街 海鲜市场", "pax": 2, "status": "已完成"}, {"id": "WZ202611070003", "t": "08:07:18", "acceptSec": 88.0, "pickupMin": 3.0, "driver": "金洛林", "car": "WZ-104", "from": "五彩滩", "to": "西角码头（客运码头）", "fromFull": "五彩滩 渔家集市", "toFull": "西角码头（客运码头）", "pax": 5, "status": "已完成"}, {"id": "WZ202611070004", "t": "08:10:47", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "五彩滩", "to": "西角码头（客运码头）", "fromFull": "五彩滩 观景台", "toFull": "西角码头（客运码头）", "pax": 3, "status": "已取消"}, {"id": "WZ202611070005", "t": "08:12:44", "acceptSec": 62.0, "pickupMin": 4.0, "driver": "陈红", "car": "WZ-106", "from": "鳄鱼山景区", "to": "盛塘村", "fromFull": "鳄鱼山景区 火山口", "toFull": "盛塘村 农家客栈", "pax": 5, "status": "已完成"}, {"id": "WZ202611070006", "t": "08:15:27", "acceptSec": 130.0, "pickupMin": 3.0, "driver": "张红宇", "car": "WZ-103", "from": "上牛栏山", "to": "石螺口", "fromFull": "上牛栏山", "toFull": "石螺口 日落观景堤", "pax": 6, "status": "已完成"}, {"id": "WZ202611070007", "t": "08:15:58", "acceptSec": 113.0, "pickupMin": 2.0, "driver": "张雷", "car": "WZ-115", "from": "石螺口", "to": "南湾运动公园", "fromFull": "石螺口 海景民宿群", "toFull": "南湾运动公园", "pax": 1, "status": "已完成"}, {"id": "WZ202611070008", "t": "08:17:55", "acceptSec": 88.0, "pickupMin": 2.0, "driver": "杨荣", "car": "WZ-113", "from": "西角码头（客运码头）", "to": "后背塘", "fromFull": "西角码头（客运码头）", "toFull": "后背塘", "pax": 6, "status": "已完成"}, {"id": "WZ202611070009", "t": "08:20:46", "acceptSec": 40.0, "pickupMin": 2.0, "driver": "罗卿卿", "car": "WZ-125", "from": "西角码头", "to": "滴水村", "fromFull": "西角码头 落客区", "toFull": "滴水村 民宿区", "pax": 3, "status": "已完成"}, {"id": "WZ202611070010", "t": "08:22:50", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "石螺口海滩", "to": "南湾街", "fromFull": "石螺口海滩", "toFull": "南湾街 餐饮一条街", "pax": 7, "status": "已取消"}, {"id": "WZ202611070011", "t": "08:23:42", "acceptSec": 32.0, "pickupMin": 3.0, "driver": "陈义", "car": "WZ-109", "from": "西角码头", "to": "鳄鱼山景区", "fromFull": "西角码头 落客区", "toFull": "鳄鱼山景区 火山口", "pax": 4, "status": "已完成"}, {"id": "WZ202611070012", "t": "08:28:01", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "西角码头（客运码头）", "to": "南湾港", "fromFull": "西角码头（客运码头）", "toFull": "南湾港 客运码头", "pax": 6, "status": "已取消"}, {"id": "WZ202611070013", "t": "08:28:18", "acceptSec": 75.0, "pickupMin": 3.0, "driver": "卢献蜜", "car": "WZ-102", "from": "南湾街", "to": "五彩滩", "fromFull": "南湾街 海鲜市场", "toFull": "五彩滩 观景台", "pax": 3, "status": "已完成"}, {"id": "WZ202611070014", "t": "08:31:00", "acceptSec": 89.0, "pickupMin": 3.0, "driver": "孙雄伟", "car": "WZ-121", "from": "西角码头", "to": "圣母堂", "fromFull": "西角码头 落客区", "toFull": "圣母堂", "pax": 5, "status": "已完成"}, {"id": "WZ202611070015", "t": "08:33:05", "acceptSec": 69.0, "pickupMin": 3.0, "driver": "刘继超", "car": "WZ-127", "from": "西角码头", "to": "鳄鱼山景区", "fromFull": "西角码头 落客区", "toFull": "鳄鱼山景区 火山口", "pax": 4, "status": "已完成"}, {"id": "WZ202611070016", "t": "08:44:15", "acceptSec": 84.0, "pickupMin": 3.0, "driver": "周青青", "car": "WZ-114", "from": "海螺广场", "to": "石螺口海滩", "fromFull": "海螺广场", "toFull": "石螺口海滩", "pax": 7, "status": "已完成"}, {"id": "WZ202611070017", "t": "08:45:21", "acceptSec": 58.0, "pickupMin": 3.0, "driver": "吴昊江", "car": "WZ-111", "from": "南湾港", "to": "石螺口海滩", "fromFull": "南湾港 客运码头", "toFull": "石螺口海滩", "pax": 5, "status": "已完成"}, {"id": "WZ202611070018", "t": "08:47:37", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "红帆驿站", "to": "西角码头（客运码头）", "fromFull": "红帆驿站", "toFull": "西角码头（客运码头）", "pax": 1, "status": "已取消"}, {"id": "WZ202611070019", "t": "08:49:19", "acceptSec": 48.0, "pickupMin": 6.0, "driver": "刘扬", "car": "WZ-110", "from": "石螺口海滩", "to": "后背塘", "fromFull": "石螺口海滩", "toFull": "后背塘", "pax": 4, "status": "已完成"}, {"id": "WZ202611070020", "t": "08:51:03", "acceptSec": 72.0, "pickupMin": 2.0, "driver": "金洛林", "car": "WZ-104", "from": "西角码头（客运码头）", "to": "五彩滩", "fromFull": "西角码头（客运码头）", "toFull": "五彩滩 观景台", "pax": 7, "status": "已完成"}, {"id": "WZ202611070021", "t": "08:52:40", "acceptSec": 114.0, "pickupMin": 2.0, "driver": "余仁智", "car": "WZ-118", "from": "滴水丹屏", "to": "五彩滩", "fromFull": "滴水丹屏 观景台", "toFull": "五彩滩 观景台", "pax": 1, "status": "已完成"}, {"id": "WZ202611070022", "t": "08:53:09", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "南湾街", "to": "五彩滩", "fromFull": "南湾街 海鲜市场", "toFull": "五彩滩 海景民宿", "pax": 4, "status": "已取消"}, {"id": "WZ202611070023", "t": "08:53:10", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "石螺口海滩", "to": "海螺广场", "fromFull": "石螺口海滩", "toFull": "海螺广场", "pax": 5, "status": "已取消"}, {"id": "WZ202611070024", "t": "08:59:16", "acceptSec": 39.0, "pickupMin": 5.0, "driver": "朱娇娇", "car": "WZ-122", "from": "西角码头", "to": "石螺口", "fromFull": "西角码头 落客区", "toFull": "石螺口 海鲜排档", "pax": 1, "status": "已完成"}, {"id": "WZ202611070025", "t": "09:00:19", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "滴水丹屏", "to": "南湾港", "fromFull": "滴水丹屏 观景台", "toFull": "南湾港 客运码头", "pax": 2, "status": "已取消"}, {"id": "WZ202611070026", "t": "09:02:50", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "盛塘村", "to": "鳄鱼山景区", "fromFull": "盛塘村 农家客栈", "toFull": "鳄鱼山景区 火山口", "pax": 6, "status": "已取消"}, {"id": "WZ202611070027", "t": "09:03:07", "acceptSec": 89.0, "pickupMin": 3.0, "driver": "赵县平", "car": "WZ-123", "from": "南湾港", "to": "火山地质博物馆", "fromFull": "南湾港 客运码头", "toFull": "火山地质博物馆", "pax": 7, "status": "已完成"}, {"id": "WZ202611070028", "t": "09:03:19", "acceptSec": 53.0, "pickupMin": 6.0, "driver": "邹勇", "car": "WZ-117", "from": "西角码头（客运码头）", "to": "盛塘天主教堂", "fromFull": "西角码头（客运码头）", "toFull": "盛塘天主教堂", "pax": 7, "status": "已完成"}, {"id": "WZ202611070029", "t": "09:04:06", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "西角码头", "to": "西角码头（客运码头）", "fromFull": "西角码头 落客区", "toFull": "西角码头（客运码头）", "pax": 2, "status": "已取消"}, {"id": "WZ202611070030", "t": "09:04:16", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "滴水村", "to": "南湾街", "fromFull": "滴水村 民宿区", "toFull": "南湾街 海鲜市场", "pax": 5, "status": "已取消"}, {"id": "WZ202611070031", "t": "09:08:54", "acceptSec": 86.0, "pickupMin": 2.0, "driver": "吴昊江", "car": "WZ-111", "from": "石螺口海滩", "to": "大沙头", "fromFull": "石螺口海滩", "toFull": "大沙头", "pax": 2, "status": "已完成"}, {"id": "WZ202611070032", "t": "09:10:18", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "西角码头（客运码头）", "to": "圣母堂", "fromFull": "西角码头（客运码头）", "toFull": "圣母堂", "pax": 5, "status": "已取消"}, {"id": "WZ202611070033", "t": "09:13:18", "acceptSec": 99.0, "pickupMin": 6.0, "driver": "杨其静", "car": "WZ-129", "from": "西角码头（客运码头）", "to": "盛塘天主教堂", "fromFull": "西角码头（客运码头）", "toFull": "盛塘天主教堂", "pax": 3, "status": "已完成"}, {"id": "WZ202611070034", "t": "09:15:40", "acceptSec": 87.0, "pickupMin": 2.0, "driver": "周青青", "car": "WZ-114", "from": "石螺口海滩", "to": "蓝桥", "fromFull": "石螺口海滩", "toFull": "蓝桥", "pax": 7, "status": "已完成"}, {"id": "WZ202611070035", "t": "09:18:35", "acceptSec": 67.0, "pickupMin": 4.0, "driver": "张锋", "car": "WZ-130", "from": "鳄鱼山景区", "to": "圣母堂", "fromFull": "鳄鱼山景区 火山口", "toFull": "圣母堂", "pax": 3, "status": "已完成"}, {"id": "WZ202611070036", "t": "09:19:17", "acceptSec": 93.0, "pickupMin": 2.0, "driver": "孙雄伟", "car": "WZ-121", "from": "圣母堂", "to": "滴水丹屏", "fromFull": "圣母堂", "toFull": "滴水丹屏 观景台", "pax": 4, "status": "已完成"}, {"id": "WZ202611070037", "t": "09:25:09", "acceptSec": 46.0, "pickupMin": 2.0, "driver": "张红宇", "car": "WZ-103", "from": "石螺口", "to": "南湾运动公园", "fromFull": "石螺口 日落观景堤", "toFull": "南湾运动公园", "pax": 2, "status": "已完成"}, {"id": "WZ202611070038", "t": "09:25:56", "acceptSec": 71.0, "pickupMin": 2.0, "driver": "朱娇娇", "car": "WZ-122", "from": "石螺口海滩", "to": "上牛栏山", "fromFull": "石螺口海滩", "toFull": "上牛栏山", "pax": 1, "status": "已完成"}, {"id": "WZ202611070039", "t": "09:26:00", "acceptSec": 63.0, "pickupMin": 7.0, "driver": "杨晶红", "car": "WZ-112", "from": "西角码头（客运码头）", "to": "上牛栏山", "fromFull": "西角码头（客运码头）", "toFull": "上牛栏山", "pax": 2, "status": "已完成"}, {"id": "WZ202611070040", "t": "09:30:28", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "南湾运动公园", "to": "鳄鱼山景区", "fromFull": "南湾运动公园", "toFull": "鳄鱼山景区 火山口", "pax": 5, "status": "已取消"}, {"id": "WZ202611070041", "t": "09:30:55", "acceptSec": 43.0, "pickupMin": 7.0, "driver": "翟测试", "car": "WZ-124", "from": "西角码头（客运码头）", "to": "五彩滩", "fromFull": "西角码头（客运码头）", "toFull": "五彩滩 观景台", "pax": 1, "status": "已完成"}, {"id": "WZ202611070042", "t": "09:32:22", "acceptSec": 51.0, "pickupMin": 7.0, "driver": "钟永轩", "car": "WZ-108", "from": "西角码头（客运码头）", "to": "石螺口", "fromFull": "西角码头（客运码头）", "toFull": "石螺口 海景民宿群", "pax": 5, "status": "已完成"}, {"id": "WZ202611070043", "t": "09:35:42", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "南湾街", "to": "石螺口", "fromFull": "南湾街 海鲜市场", "toFull": "石螺口 海景民宿群", "pax": 4, "status": "已取消"}, {"id": "WZ202611070044", "t": "09:37:32", "acceptSec": 73.0, "pickupMin": 7.0, "driver": "陈纲", "car": "WZ-132", "from": "西角码头（客运码头）", "to": "南湾运动公园", "fromFull": "西角码头（客运码头）", "toFull": "南湾运动公园", "pax": 3, "status": "已完成"}, {"id": "WZ202611070045", "t": "09:37:37", "acceptSec": 38.0, "pickupMin": 7.0, "driver": "李世伟", "car": "WZ-120", "from": "斜阳岛码头", "to": "盛塘天主教堂", "fromFull": "斜阳岛码头", "toFull": "盛塘天主教堂", "pax": 3, "status": "已完成"}, {"id": "WZ202611070046", "t": "09:37:48", "acceptSec": 92.0, "pickupMin": 4.0, "driver": "刘扬", "car": "WZ-110", "from": "南湾", "to": "西角码头", "fromFull": "南湾 临港酒店", "toFull": "西角码头 落客区", "pax": 1, "status": "已完成"}, {"id": "WZ202611070047", "t": "09:38:17", "acceptSec": 32.0, "pickupMin": 4.0, "driver": "李景", "car": "WZ-126", "from": "南湾港", "to": "五彩滩", "fromFull": "南湾港 客运码头", "toFull": "五彩滩 海景民宿", "pax": 6, "status": "已完成"}, {"id": "WZ202611070048", "t": "09:38:43", "acceptSec": 32.0, "pickupMin": 9.0, "driver": "刘红君", "car": "WZ-116", "from": "西角码头", "to": "南湾街", "fromFull": "西角码头 落客区", "toFull": "南湾街 海鲜市场", "pax": 1, "status": "已完成"}, {"id": "WZ202611070049", "t": "09:38:49", "acceptSec": 88.0, "pickupMin": 2.0, "driver": "周青青", "car": "WZ-114", "from": "蓝桥", "to": "南湾", "fromFull": "蓝桥", "toFull": "南湾 临港酒店", "pax": 7, "status": "已完成"}, {"id": "WZ202611070050", "t": "09:39:40", "acceptSec": 58.0, "pickupMin": 9.0, "driver": "谢荣锋", "car": "WZ-128", "from": "西角码头", "to": "南湾运动公园", "fromFull": "西角码头 落客区", "toFull": "南湾运动公园", "pax": 2, "status": "已完成"}, {"id": "WZ202611070051", "t": "09:40:06", "acceptSec": 104.0, "pickupMin": 5.0, "driver": "陈小合", "car": "WZ-131", "from": "盛塘村", "to": "石螺口", "fromFull": "盛塘村 农家客栈", "toFull": "石螺口 海鲜排档", "pax": 4, "status": "已完成"}, {"id": "WZ202611070052", "t": "09:40:14", "acceptSec": 59.0, "pickupMin": 10.0, "driver": "胡瀚文", "car": "WZ-107", "from": "西角码头（客运码头）", "to": "滴水丹屏", "fromFull": "西角码头（客运码头）", "toFull": "滴水丹屏 观景台", "pax": 6, "status": "已完成"}, {"id": "WZ202611070053", "t": "09:40:19", "acceptSec": 82.0, "pickupMin": 10.0, "driver": "罗传霞", "car": "WZ-119", "from": "西角码头", "to": "五彩滩", "fromFull": "西角码头 落客区", "toFull": "五彩滩 渔家集市", "pax": 1, "status": "已完成"}, {"id": "WZ202611070054", "t": "09:41:12", "acceptSec": 68.0, "pickupMin": 2.0, "driver": "邹勇", "car": "WZ-117", "from": "盛塘天主教堂", "to": "苏牛角坑", "fromFull": "盛塘天主教堂", "toFull": "苏牛角坑", "pax": 3, "status": "已完成"}, {"id": "WZ202611070055", "t": "09:43:42", "acceptSec": 98.0, "pickupMin": 3.0, "driver": "杨晶红", "car": "WZ-112", "from": "西角码头", "to": "石螺口", "fromFull": "西角码头 落客区", "toFull": "石螺口 日落观景堤", "pax": 1, "status": "已完成"}, {"id": "WZ202611070056", "t": "09:44:09", "acceptSec": 56.0, "pickupMin": 3.0, "driver": "于海洋", "car": "WZ-105", "from": "南湾街", "to": "石螺口", "fromFull": "南湾街 海鲜市场", "toFull": "石螺口 日落观景堤", "pax": 2, "status": "已完成"}, {"id": "WZ202611070057", "t": "09:44:34", "acceptSec": 30.0, "pickupMin": 3.0, "driver": "刘晓云", "car": "WZ-101", "from": "南湾港", "to": "海螺广场", "fromFull": "南湾港 客运码头", "toFull": "海螺广场", "pax": 2, "status": "已完成"}, {"id": "WZ202611070058", "t": "09:46:42", "acceptSec": 73.0, "pickupMin": 6.0, "driver": "杨荣", "car": "WZ-113", "from": "石螺口", "to": "石螺口", "fromFull": "石螺口 海鲜排档", "toFull": "石螺口 日落观景堤", "pax": 5, "status": "已完成"}, {"id": "WZ202611070059", "t": "09:47:16", "acceptSec": 85.0, "pickupMin": 2.0, "driver": "陈义", "car": "WZ-109", "from": "鳄鱼山", "to": "西角码头（客运码头）", "fromFull": "鳄鱼山 灯塔", "toFull": "西角码头（客运码头）", "pax": 2, "status": "已完成"}, {"id": "WZ202611070060", "t": "09:47:37", "acceptSec": 32.0, "pickupMin": 6.0, "driver": "陈红", "car": "WZ-106", "from": "西角码头（客运码头）", "to": "南湾街", "fromFull": "西角码头（客运码头）", "toFull": "南湾街 海鲜市场", "pax": 6, "status": "已完成"}, {"id": "WZ202611070061", "t": "09:50:19", "acceptSec": 95.0, "pickupMin": 4.0, "driver": "钟永轩", "car": "WZ-108", "from": "西角码头（客运码头）", "to": "南湾街", "fromFull": "西角码头（客运码头）", "toFull": "南湾街 餐饮一条街", "pax": 4, "status": "已完成"}, {"id": "WZ202611070062", "t": "09:50:45", "acceptSec": 99.0, "pickupMin": 6.0, "driver": "张锋", "car": "WZ-130", "from": "西角码头", "to": "后背塘", "fromFull": "西角码头 落客区", "toFull": "后背塘", "pax": 4, "status": "已完成"}, {"id": "WZ202611070063", "t": "09:51:04", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "西角码头（客运码头）", "to": "盛塘村", "fromFull": "西角码头（客运码头）", "toFull": "盛塘村 农家客栈", "pax": 4, "status": "已取消"}, {"id": "WZ202611070064", "t": "09:53:26", "acceptSec": 124.0, "pickupMin": 4.0, "driver": "杨其静", "car": "WZ-129", "from": "北港村", "to": "蓝桥", "fromFull": "北港村", "toFull": "蓝桥", "pax": 5, "status": "已完成"}, {"id": "WZ202611070065", "t": "09:55:22", "acceptSec": 90.0, "pickupMin": 7.0, "driver": "罗卿卿", "car": "WZ-125", "from": "石螺口", "to": "滴水丹屏", "fromFull": "石螺口 海景民宿群", "toFull": "滴水丹屏 观景台", "pax": 2, "status": "已完成"}, {"id": "WZ202611070066", "t": "09:55:33", "acceptSec": 93.0, "pickupMin": 2.0, "driver": "刘扬", "car": "WZ-110", "from": "西角码头（客运码头）", "to": "西角码头", "fromFull": "西角码头（客运码头）", "toFull": "西角码头 落客区", "pax": 2, "status": "已完成"}, {"id": "WZ202611070067", "t": "09:59:05", "acceptSec": 45.0, "pickupMin": 3.0, "driver": "陈小合", "car": "WZ-131", "from": "西角码头", "to": "滴水丹屏", "fromFull": "西角码头 落客区", "toFull": "滴水丹屏 观景台", "pax": 3, "status": "已完成"}, {"id": "WZ202611070068", "t": "09:59:24", "acceptSec": 62.0, "pickupMin": 3.0, "driver": "张雷", "car": "WZ-115", "from": "南湾港", "to": "贝壳沙滩", "fromFull": "南湾港 客运码头", "toFull": "贝壳沙滩", "pax": 6, "status": "已完成"}, {"id": "WZ202611070069", "t": "10:00:58", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "大沙头", "to": "石螺口海滩", "fromFull": "大沙头", "toFull": "石螺口海滩", "pax": 4, "status": "已取消"}, {"id": "WZ202611070070", "t": "10:02:00", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "南湾港", "to": "石螺口海滩", "fromFull": "南湾港 客运码头", "toFull": "石螺口海滩", "pax": 3, "status": "已取消"}, {"id": "WZ202611070071", "t": "10:02:14", "acceptSec": 41.0, "pickupMin": 3.0, "driver": "陈纲", "car": "WZ-132", "from": "南湾运动公园", "to": "五彩滩", "fromFull": "南湾运动公园", "toFull": "五彩滩 渔家集市", "pax": 7, "status": "已完成"}, {"id": "WZ202611070072", "t": "10:02:33", "acceptSec": 73.0, "pickupMin": 7.0, "driver": "李世伟", "car": "WZ-120", "from": "斜阳岛码头", "to": "石螺口海滩", "fromFull": "斜阳岛码头", "toFull": "石螺口海滩", "pax": 6, "status": "已完成"}, {"id": "WZ202611070073", "t": "10:04:15", "acceptSec": 58.0, "pickupMin": 3.0, "driver": "谢荣锋", "car": "WZ-128", "from": "南湾运动公园", "to": "石螺口海滩", "fromFull": "南湾运动公园", "toFull": "石螺口海滩", "pax": 2, "status": "已完成"}, {"id": "WZ202611070074", "t": "10:04:21", "acceptSec": 119.0, "pickupMin": 5.0, "driver": "卢献蜜", "car": "WZ-102", "from": "北港村", "to": "下牛栏山", "fromFull": "北港村", "toFull": "下牛栏山", "pax": 3, "status": "已完成"}, {"id": "WZ202611070075", "t": "10:04:53", "acceptSec": 97.0, "pickupMin": 2.0, "driver": "于海洋", "car": "WZ-105", "from": "石螺口", "to": "石螺口海滩", "fromFull": "石螺口 海景民宿群", "toFull": "石螺口海滩", "pax": 1, "status": "已完成"}, {"id": "WZ202611070076", "t": "10:06:15", "acceptSec": 62.0, "pickupMin": 2.0, "driver": "陈义", "car": "WZ-109", "from": "西角码头（客运码头）", "to": "南湾运动公园", "fromFull": "西角码头（客运码头）", "toFull": "南湾运动公园", "pax": 1, "status": "已完成"}, {"id": "WZ202611070077", "t": "10:06:57", "acceptSec": 103.0, "pickupMin": 3.0, "driver": "朱娇娇", "car": "WZ-122", "from": "西角码头", "to": "滴水村", "fromFull": "西角码头 落客区", "toFull": "滴水村 民宿区", "pax": 5, "status": "已完成"}, {"id": "WZ202611070078", "t": "10:07:55", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "井仔村", "to": "石螺口海滩", "fromFull": "井仔村", "toFull": "石螺口海滩", "pax": 6, "status": "已取消"}, {"id": "WZ202611070079", "t": "10:09:35", "acceptSec": 38.0, "pickupMin": 3.0, "driver": "杨晶红", "car": "WZ-112", "from": "西角码头", "to": "滴水丹屏", "fromFull": "西角码头 落客区", "toFull": "滴水丹屏 观景台", "pax": 1, "status": "已完成"}, {"id": "WZ202611070080", "t": "10:09:57", "acceptSec": 47.0, "pickupMin": 4.0, "driver": "杨荣", "car": "WZ-113", "from": "西角码头（客运码头）", "to": "红帆驿站", "fromFull": "西角码头（客运码头）", "toFull": "红帆驿站", "pax": 5, "status": "已完成"}, {"id": "WZ202611070081", "t": "10:11:50", "acceptSec": 99.0, "pickupMin": 9.0, "driver": "胡瀚文", "car": "WZ-107", "from": "西角码头（客运码头）", "to": "鳄鱼山景区", "fromFull": "西角码头（客运码头）", "toFull": "鳄鱼山景区 火山口", "pax": 5, "status": "已完成"}, {"id": "WZ202611070082", "t": "10:11:58", "acceptSec": 98.0, "pickupMin": 7.0, "driver": "李景", "car": "WZ-126", "from": "下牛栏山", "to": "南湾运动公园", "fromFull": "下牛栏山", "toFull": "南湾运动公园", "pax": 1, "status": "已完成"}, {"id": "WZ202611070083", "t": "10:12:03", "acceptSec": 124.0, "pickupMin": 2.0, "driver": "邹勇", "car": "WZ-117", "from": "苏牛角坑", "to": "石螺口", "fromFull": "苏牛角坑", "toFull": "石螺口 海鲜排档", "pax": 7, "status": "已完成"}, {"id": "WZ202611070084", "t": "10:14:49", "acceptSec": 98.0, "pickupMin": 7.0, "driver": "刘红君", "car": "WZ-116", "from": "石螺口", "to": "火山地质博物馆", "fromFull": "石螺口 海景民宿群", "toFull": "火山地质博物馆", "pax": 5, "status": "已完成"}, {"id": "WZ202611070085", "t": "10:15:48", "acceptSec": 125.0, "pickupMin": 3.0, "driver": "赵县平", "car": "WZ-123", "from": "滴水村", "to": "蓝桥", "fromFull": "滴水村 民宿区", "toFull": "蓝桥", "pax": 6, "status": "已完成"}, {"id": "WZ202611070086", "t": "10:15:57", "acceptSec": 92.0, "pickupMin": 3.0, "driver": "罗传霞", "car": "WZ-119", "from": "五彩滩", "to": "南湾运动公园", "fromFull": "五彩滩 停车场", "toFull": "南湾运动公园", "pax": 2, "status": "已完成"}, {"id": "WZ202611070087", "t": "10:18:23", "acceptSec": 30.0, "pickupMin": 3.0, "driver": "杨其静", "car": "WZ-129", "from": "西角码头（客运码头）", "to": "东安村", "fromFull": "西角码头（客运码头）", "toFull": "东安村", "pax": 2, "status": "已完成"}, {"id": "WZ202611070088", "t": "10:18:46", "acceptSec": 114.0, "pickupMin": 8.0, "driver": "刘继超", "car": "WZ-127", "from": "石螺口海滩", "to": "五彩滩", "fromFull": "石螺口海滩", "toFull": "五彩滩 观景台", "pax": 5, "status": "已完成"}, {"id": "WZ202611070089", "t": "10:19:17", "acceptSec": 65.0, "pickupMin": 3.0, "driver": "张雷", "car": "WZ-115", "from": "贝壳沙滩", "to": "幕崖", "fromFull": "贝壳沙滩", "toFull": "幕崖", "pax": 1, "status": "已完成"}, {"id": "WZ202611070090", "t": "10:19:32", "acceptSec": 56.0, "pickupMin": 3.0, "driver": "李世伟", "car": "WZ-120", "from": "西角码头", "to": "滴水村", "fromFull": "西角码头 落客区", "toFull": "滴水村 民宿区", "pax": 3, "status": "已完成"}, {"id": "WZ202611070091", "t": "10:20:22", "acceptSec": 98.0, "pickupMin": 3.0, "driver": "孙雄伟", "car": "WZ-121", "from": "鳄鱼山景区", "to": "海螺广场", "fromFull": "鳄鱼山景区 火山口", "toFull": "海螺广场", "pax": 1, "status": "已完成"}, {"id": "WZ202611070092", "t": "10:21:11", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "蓝桥", "to": "竹蔗寮", "fromFull": "蓝桥", "toFull": "竹蔗寮", "pax": 5, "status": "已取消"}, {"id": "WZ202611070093", "t": "10:21:55", "acceptSec": 118.0, "pickupMin": 2.0, "driver": "罗卿卿", "car": "WZ-125", "from": "滴水村", "to": "滴水丹屏", "fromFull": "滴水村 民宿区", "toFull": "滴水丹屏 观景台", "pax": 4, "status": "已完成"}, {"id": "WZ202611070094", "t": "10:21:57", "acceptSec": 116.0, "pickupMin": 7.0, "driver": "余仁智", "car": "WZ-118", "from": "苏牛角坑", "to": "鳄鱼山景区", "fromFull": "苏牛角坑", "toFull": "鳄鱼山景区 火山口", "pax": 7, "status": "已完成"}, {"id": "WZ202611070095", "t": "10:23:16", "acceptSec": 65.0, "pickupMin": 3.0, "driver": "陈小合", "car": "WZ-131", "from": "火山地质博物馆", "to": "南湾运动公园", "fromFull": "火山地质博物馆", "toFull": "南湾运动公园", "pax": 5, "status": "已完成"}, {"id": "WZ202611070096", "t": "10:23:49", "acceptSec": 86.0, "pickupMin": 4.0, "driver": "谢荣锋", "car": "WZ-128", "from": "西角码头（客运码头）", "to": "幕崖", "fromFull": "西角码头（客运码头）", "toFull": "幕崖", "pax": 2, "status": "已完成"}, {"id": "WZ202611070097", "t": "10:26:56", "acceptSec": 46.0, "pickupMin": 4.0, "driver": "卢献蜜", "car": "WZ-102", "from": "石螺口海滩", "to": "滴水村", "fromFull": "石螺口海滩", "toFull": "滴水村 民宿区", "pax": 4, "status": "已完成"}, {"id": "WZ202611070098", "t": "10:27:43", "acceptSec": 75.0, "pickupMin": 3.0, "driver": "张红宇", "car": "WZ-103", "from": "南湾港", "to": "南湾街", "fromFull": "南湾港 客运码头", "toFull": "南湾街 餐饮一条街", "pax": 4, "status": "已完成"}, {"id": "WZ202611070099", "t": "10:27:53", "acceptSec": 104.0, "pickupMin": 9.0, "driver": "翟测试", "car": "WZ-124", "from": "石螺口", "to": "幕崖", "fromFull": "石螺口 海鲜排档", "toFull": "幕崖", "pax": 3, "status": "已完成"}, {"id": "WZ202611070100", "t": "10:29:40", "acceptSec": 88.0, "pickupMin": 2.0, "driver": "朱娇娇", "car": "WZ-122", "from": "滴水村", "to": "红帆驿站", "fromFull": "滴水村 民宿区", "toFull": "红帆驿站", "pax": 1, "status": "已完成"}, {"id": "WZ202611070101", "t": "10:30:08", "acceptSec": 84.0, "pickupMin": 2.0, "driver": "杨晶红", "car": "WZ-112", "from": "滴水丹屏", "to": "五彩滩", "fromFull": "滴水丹屏 观景台", "toFull": "五彩滩 观景台", "pax": 1, "status": "已完成"}, {"id": "WZ202611070102", "t": "10:30:15", "acceptSec": 39.0, "pickupMin": 2.0, "driver": "刘扬", "car": "WZ-110", "from": "西角码头（客运码头）", "to": "盛塘村", "fromFull": "西角码头（客运码头）", "toFull": "盛塘村 农家客栈", "pax": 2, "status": "已完成"}, {"id": "WZ202611070103", "t": "10:30:24", "acceptSec": 70.0, "pickupMin": 3.0, "driver": "邹勇", "car": "WZ-117", "from": "西角码头（客运码头）", "to": "南湾", "fromFull": "西角码头（客运码头）", "toFull": "南湾 临港酒店", "pax": 1, "status": "已完成"}, {"id": "WZ202611070104", "t": "10:34:20", "acceptSec": 99.0, "pickupMin": 3.0, "driver": "于海洋", "car": "WZ-105", "from": "西角码头", "to": "西角码头（客运码头）", "fromFull": "西角码头 落客区", "toFull": "西角码头（客运码头）", "pax": 2, "status": "已完成"}, {"id": "WZ202611070105", "t": "10:34:22", "acceptSec": 38.0, "pickupMin": 3.0, "driver": "赵县平", "car": "WZ-123", "from": "西角码头（客运码头）", "to": "石螺口", "fromFull": "西角码头（客运码头）", "toFull": "石螺口 海鲜排档", "pax": 2, "status": "已完成"}, {"id": "WZ202611070106", "t": "10:35:08", "acceptSec": 30.0, "pickupMin": 3.0, "driver": "罗传霞", "car": "WZ-119", "from": "南湾运动公园", "to": "圣母堂", "fromFull": "南湾运动公园", "toFull": "圣母堂", "pax": 3, "status": "已完成"}, {"id": "WZ202611070107", "t": "10:36:19", "acceptSec": 95.0, "pickupMin": 3.0, "driver": "金洛林", "car": "WZ-104", "from": "五彩滩", "to": "鳄鱼山景区", "fromFull": "五彩滩 观景台", "toFull": "鳄鱼山景区 火山口", "pax": 1, "status": "已完成"}, {"id": "WZ202611070108", "t": "10:36:19", "acceptSec": 77.0, "pickupMin": 8.0, "driver": "吴昊江", "car": "WZ-111", "from": "西角码头（客运码头）", "to": "盛塘天主教堂", "fromFull": "西角码头（客运码头）", "toFull": "盛塘天主教堂", "pax": 7, "status": "已完成"}, {"id": "WZ202611070109", "t": "10:36:32", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "五彩滩", "to": "五彩滩", "fromFull": "五彩滩 渔家集市", "toFull": "五彩滩 停车场", "pax": 7, "status": "已取消"}, {"id": "WZ202611070110", "t": "10:36:33", "acceptSec": 96.0, "pickupMin": 2.0, "driver": "张雷", "car": "WZ-115", "from": "西角码头", "to": "南湾港", "fromFull": "西角码头 落客区", "toFull": "南湾港 客运码头", "pax": 3, "status": "已完成"}, {"id": "WZ202611070111", "t": "10:37:25", "acceptSec": 91.0, "pickupMin": 3.0, "driver": "谢荣锋", "car": "WZ-128", "from": "西角码头（客运码头）", "to": "贝壳沙滩", "fromFull": "西角码头（客运码头）", "toFull": "贝壳沙滩", "pax": 7, "status": "已完成"}, {"id": "WZ202611070112", "t": "10:37:58", "acceptSec": 103.0, "pickupMin": 8.0, "driver": "张锋", "car": "WZ-130", "from": "西角码头（客运码头）", "to": "五彩滩", "fromFull": "西角码头（客运码头）", "toFull": "五彩滩 海景民宿", "pax": 7, "status": "已完成"}, {"id": "WZ202611070113", "t": "10:40:11", "acceptSec": 84.0, "pickupMin": 9.0, "driver": "陈纲", "car": "WZ-132", "from": "西角码头", "to": "贝壳沙滩", "fromFull": "西角码头 落客区", "toFull": "贝壳沙滩", "pax": 5, "status": "已完成"}, {"id": "WZ202611070114", "t": "10:43:23", "acceptSec": 84.0, "pickupMin": 3.0, "driver": "李景", "car": "WZ-126", "from": "南湾港", "to": "盛塘村", "fromFull": "南湾港 客运码头", "toFull": "盛塘村 农家客栈", "pax": 6, "status": "已完成"}, {"id": "WZ202611070115", "t": "10:43:33", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "西角码头（客运码头）", "to": "盛塘天主教堂", "fromFull": "西角码头（客运码头）", "toFull": "盛塘天主教堂", "pax": 7, "status": "已取消"}, {"id": "WZ202611070116", "t": "10:44:32", "acceptSec": 33.0, "pickupMin": 9.0, "driver": "刘继超", "car": "WZ-127", "from": "西角码头（客运码头）", "to": "石螺口海滩", "fromFull": "西角码头（客运码头）", "toFull": "石螺口海滩", "pax": 3, "status": "已完成"}, {"id": "WZ202611070117", "t": "10:45:35", "acceptSec": 51.0, "pickupMin": 9.0, "driver": "刘红君", "car": "WZ-116", "from": "西角码头", "to": "滴水丹屏", "fromFull": "西角码头 落客区", "toFull": "滴水丹屏 观景台", "pax": 7, "status": "已完成"}, {"id": "WZ202611070118", "t": "10:45:48", "acceptSec": 58.0, "pickupMin": 3.0, "driver": "翟测试", "car": "WZ-124", "from": "西角码头（客运码头）", "to": "红帆驿站", "fromFull": "西角码头（客运码头）", "toFull": "红帆驿站", "pax": 6, "status": "已完成"}, {"id": "WZ202611070119", "t": "10:47:30", "acceptSec": 51.0, "pickupMin": 3.0, "driver": "赵县平", "car": "WZ-123", "from": "西角码头（客运码头）", "to": "北港村", "fromFull": "西角码头（客运码头）", "toFull": "北港村", "pax": 3, "status": "已完成"}, {"id": "WZ202611070120", "t": "10:49:34", "acceptSec": 64.0, "pickupMin": 2.0, "driver": "于海洋", "car": "WZ-105", "from": "西角码头（客运码头）", "to": "海螺广场", "fromFull": "西角码头（客运码头）", "toFull": "海螺广场", "pax": 7, "status": "已完成"}, {"id": "WZ202611070121", "t": "10:50:20", "acceptSec": 67.0, "pickupMin": 10.0, "driver": "钟永轩", "car": "WZ-108", "from": "西角码头", "to": "南湾街", "fromFull": "西角码头 落客区", "toFull": "南湾街 海鲜市场", "pax": 1, "status": "已完成"}, {"id": "WZ202611070122", "t": "10:50:34", "acceptSec": 30.0, "pickupMin": 10.0, "driver": "陈红", "car": "WZ-106", "from": "西角码头（客运码头）", "to": "海螺广场", "fromFull": "西角码头（客运码头）", "toFull": "海螺广场", "pax": 4, "status": "已完成"}, {"id": "WZ202611070123", "t": "10:51:39", "acceptSec": 125.0, "pickupMin": 2.0, "driver": "刘扬", "car": "WZ-110", "from": "盛塘村", "to": "鳄鱼山景区", "fromFull": "盛塘村 农家客栈", "toFull": "鳄鱼山景区 火山口", "pax": 1, "status": "已完成"}, {"id": "WZ202611070124", "t": "10:53:36", "acceptSec": 98.0, "pickupMin": 10.0, "driver": "胡瀚文", "car": "WZ-107", "from": "西角码头（客运码头）", "to": "南湾街", "fromFull": "西角码头（客运码头）", "toFull": "南湾街 餐饮一条街", "pax": 2, "status": "已完成"}, {"id": "WZ202611070125", "t": "10:53:49", "acceptSec": 44.0, "pickupMin": 10.0, "driver": "刘晓云", "car": "WZ-101", "from": "西角码头（客运码头）", "to": "石螺口海滩", "fromFull": "西角码头（客运码头）", "toFull": "石螺口海滩", "pax": 5, "status": "已完成"}, {"id": "WZ202611070126", "t": "10:53:58", "acceptSec": 52.0, "pickupMin": 3.0, "driver": "陈义", "car": "WZ-109", "from": "南湾港", "to": "石螺口", "fromFull": "南湾港 客运码头", "toFull": "石螺口 日落观景堤", "pax": 1, "status": "已完成"}, {"id": "WZ202611070127", "t": "10:55:02", "acceptSec": 56.0, "pickupMin": 3.0, "driver": "陈小合", "car": "WZ-131", "from": "南湾街", "to": "南湾运动公园", "fromFull": "南湾街 海鲜市场", "toFull": "南湾运动公园", "pax": 2, "status": "已完成"}, {"id": "WZ202611070128", "t": "10:56:11", "acceptSec": 75.0, "pickupMin": 4.0, "driver": "杨其静", "car": "WZ-129", "from": "五彩滩", "to": "南湾街", "fromFull": "五彩滩 观景台", "toFull": "南湾街 海鲜市场", "pax": 4, "status": "已完成"}, {"id": "WZ202611070129", "t": "10:56:52", "acceptSec": 39.0, "pickupMin": 6.0, "driver": "罗传霞", "car": "WZ-119", "from": "西角码头（客运码头）", "to": "幕崖", "fromFull": "西角码头（客运码头）", "toFull": "幕崖", "pax": 3, "status": "已完成"}, {"id": "WZ202611070130", "t": "10:57:59", "acceptSec": 72.0, "pickupMin": 8.0, "driver": "余仁智", "car": "WZ-118", "from": "石螺口海滩", "to": "南湾港", "fromFull": "石螺口海滩", "toFull": "南湾港 客运码头", "pax": 1, "status": "已完成"}, {"id": "WZ202611070131", "t": "10:58:32", "acceptSec": 99.0, "pickupMin": 7.0, "driver": "吴昊江", "car": "WZ-111", "from": "西角村", "to": "五彩滩", "fromFull": "西角村", "toFull": "五彩滩 观景台", "pax": 1, "status": "已完成"}, {"id": "WZ202611070132", "t": "11:03:09", "acceptSec": 103.0, "pickupMin": 3.0, "driver": "刘继超", "car": "WZ-127", "from": "上牛栏山", "to": "五彩滩", "fromFull": "上牛栏山", "toFull": "五彩滩 观景台", "pax": 1, "status": "已完成"}, {"id": "WZ202611070133", "t": "11:04:12", "acceptSec": 97.0, "pickupMin": 7.0, "driver": "孙雄伟", "car": "WZ-121", "from": "贝壳沙滩", "to": "五彩滩", "fromFull": "贝壳沙滩", "toFull": "五彩滩 观景台", "pax": 7, "status": "已完成"}, {"id": "WZ202611070134", "t": "11:08:46", "acceptSec": 125.0, "pickupMin": 2.0, "driver": "刘红君", "car": "WZ-116", "from": "滴水丹屏", "to": "南湾街", "fromFull": "滴水丹屏 观景台", "toFull": "南湾街 海鲜市场", "pax": 4, "status": "已完成"}, {"id": "WZ202611070135", "t": "11:09:50", "acceptSec": 50.0, "pickupMin": 3.0, "driver": "张锋", "car": "WZ-130", "from": "五彩滩", "to": "盛塘天主教堂", "fromFull": "五彩滩 停车场", "toFull": "盛塘天主教堂", "pax": 6, "status": "已完成"}, {"id": "WZ202611070136", "t": "11:10:02", "acceptSec": 122.0, "pickupMin": 7.0, "driver": "李景", "car": "WZ-126", "from": "五彩滩", "to": "红帆驿站", "fromFull": "五彩滩 停车场", "toFull": "红帆驿站", "pax": 4, "status": "已完成"}, {"id": "WZ202611070137", "t": "11:10:50", "acceptSec": 81.0, "pickupMin": 3.0, "driver": "杨晶红", "car": "WZ-112", "from": "五彩滩", "to": "南湾街", "fromFull": "五彩滩 观景台", "toFull": "南湾街 海鲜市场", "pax": 4, "status": "已完成"}, {"id": "WZ202611070138", "t": "11:12:02", "acceptSec": 78.0, "pickupMin": 2.0, "driver": "陈义", "car": "WZ-109", "from": "石螺口海滩", "to": "石螺口", "fromFull": "石螺口海滩", "toFull": "石螺口 海景民宿群", "pax": 1, "status": "已完成"}, {"id": "WZ202611070139", "t": "11:14:48", "acceptSec": 102.0, "pickupMin": 2.0, "driver": "赵县平", "car": "WZ-123", "from": "北港村", "to": "石螺口", "fromFull": "北港村", "toFull": "石螺口 海鲜排档", "pax": 5, "status": "已完成"}, {"id": "WZ202611070140", "t": "11:15:03", "acceptSec": 63.0, "pickupMin": 2.0, "driver": "刘晓云", "car": "WZ-101", "from": "幕崖", "to": "西角码头", "fromFull": "幕崖", "toFull": "西角码头 落客区", "pax": 4, "status": "已完成"}, {"id": "WZ202611070141", "t": "11:15:46", "acceptSec": 74.0, "pickupMin": 2.0, "driver": "金洛林", "car": "WZ-104", "from": "鳄鱼山景区", "to": "石螺口", "fromFull": "鳄鱼山景区 火山口", "toFull": "石螺口 日落观景堤", "pax": 3, "status": "已完成"}, {"id": "WZ202611070142", "t": "11:16:46", "acceptSec": 66.0, "pickupMin": 11.0, "driver": "陈纲", "car": "WZ-132", "from": "东安村", "to": "南湾街", "fromFull": "东安村", "toFull": "南湾街 餐饮一条街", "pax": 5, "status": "已完成"}, {"id": "WZ202611070143", "t": "11:19:31", "acceptSec": 56.0, "pickupMin": 3.0, "driver": "钟永轩", "car": "WZ-108", "from": "南湾运动公园", "to": "南湾街", "fromFull": "南湾运动公园", "toFull": "南湾街 餐饮一条街", "pax": 7, "status": "已完成"}, {"id": "WZ202611070144", "t": "11:19:38", "acceptSec": 120.0, "pickupMin": 7.0, "driver": "罗传霞", "car": "WZ-119", "from": "圣母堂", "to": "五彩滩", "fromFull": "圣母堂", "toFull": "五彩滩 停车场", "pax": 3, "status": "已完成"}, {"id": "WZ202611070145", "t": "11:20:33", "acceptSec": 62.0, "pickupMin": 3.0, "driver": "张红宇", "car": "WZ-103", "from": "南湾街", "to": "盛塘天主教堂", "fromFull": "南湾街 餐饮一条街", "toFull": "盛塘天主教堂", "pax": 3, "status": "已完成"}, {"id": "WZ202611070146", "t": "11:21:49", "acceptSec": 101.0, "pickupMin": 7.0, "driver": "杨荣", "car": "WZ-113", "from": "石螺口", "to": "石螺口", "fromFull": "石螺口 海景民宿群", "toFull": "石螺口 日落观景堤", "pax": 3, "status": "已完成"}, {"id": "WZ202611070147", "t": "11:22:28", "acceptSec": 61.0, "pickupMin": 2.0, "driver": "罗卿卿", "car": "WZ-125", "from": "滴水丹屏", "to": "五彩滩", "fromFull": "滴水丹屏 观景台", "toFull": "五彩滩 渔家集市", "pax": 1, "status": "已完成"}, {"id": "WZ202611070148", "t": "11:22:54", "acceptSec": 106.0, "pickupMin": 9.0, "driver": "翟测试", "car": "WZ-124", "from": "白沙寮村", "to": "南湾街", "fromFull": "白沙寮村", "toFull": "南湾街 餐饮一条街", "pax": 6, "status": "已完成"}, {"id": "WZ202611070149", "t": "11:22:55", "acceptSec": 30.0, "pickupMin": 3.0, "driver": "周青青", "car": "WZ-114", "from": "南湾", "to": "石螺口海滩", "fromFull": "南湾 临港酒店", "toFull": "石螺口海滩", "pax": 5, "status": "已完成"}, {"id": "WZ202611070150", "t": "11:23:13", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "西角码头（客运码头）", "to": "南湾运动公园", "fromFull": "西角码头（客运码头）", "toFull": "南湾运动公园", "pax": 3, "status": "已取消"}, {"id": "WZ202611070151", "t": "11:24:25", "acceptSec": 114.0, "pickupMin": 3.0, "driver": "吴昊江", "car": "WZ-111", "from": "五彩滩", "to": "石螺口", "fromFull": "五彩滩 渔家集市", "toFull": "石螺口 海景民宿群", "pax": 6, "status": "已完成"}, {"id": "WZ202611070152", "t": "11:24:26", "acceptSec": 88.0, "pickupMin": 2.0, "driver": "卢献蜜", "car": "WZ-102", "from": "滴水村", "to": "火山地质博物馆", "fromFull": "滴水村 民宿区", "toFull": "火山地质博物馆", "pax": 2, "status": "已完成"}, {"id": "WZ202611070153", "t": "11:24:58", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "石螺口", "to": "南湾街", "fromFull": "石螺口 海鲜排档", "toFull": "南湾街 餐饮一条街", "pax": 1, "status": "已取消"}, {"id": "WZ202611070154", "t": "11:25:07", "acceptSec": 85.0, "pickupMin": 3.0, "driver": "胡瀚文", "car": "WZ-107", "from": "南湾街", "to": "石螺口海滩", "fromFull": "南湾街 海鲜市场", "toFull": "石螺口海滩", "pax": 1, "status": "已完成"}, {"id": "WZ202611070155", "t": "11:25:28", "acceptSec": 67.0, "pickupMin": 3.0, "driver": "余仁智", "car": "WZ-118", "from": "南湾港", "to": "南湾街", "fromFull": "南湾港 客运码头", "toFull": "南湾街 餐饮一条街", "pax": 4, "status": "已完成"}, {"id": "WZ202611070156", "t": "11:27:04", "acceptSec": 62.0, "pickupMin": 2.0, "driver": "李世伟", "car": "WZ-120", "from": "滴水村", "to": "南湾街", "fromFull": "滴水村 民宿区", "toFull": "南湾街 海鲜市场", "pax": 7, "status": "已完成"}, {"id": "WZ202611070157", "t": "11:31:28", "acceptSec": 111.0, "pickupMin": 3.0, "driver": "孙雄伟", "car": "WZ-121", "from": "五彩滩", "to": "石螺口", "fromFull": "五彩滩 渔家集市", "toFull": "石螺口 海鲜排档", "pax": 5, "status": "已完成"}, {"id": "WZ202611070158", "t": "11:36:34", "acceptSec": 122.0, "pickupMin": 4.0, "driver": "刘继超", "car": "WZ-127", "from": "东安村", "to": "滴水丹屏", "fromFull": "东安村", "toFull": "滴水丹屏 观景台", "pax": 7, "status": "已完成"}, {"id": "WZ202611070159", "t": "11:41:11", "acceptSec": 108.0, "pickupMin": 7.0, "driver": "张红宇", "car": "WZ-103", "from": "五彩滩", "to": "西角码头", "fromFull": "五彩滩 渔家集市", "toFull": "西角码头 落客区", "pax": 3, "status": "已完成"}, {"id": "WZ202611070160", "t": "11:41:54", "acceptSec": 54.0, "pickupMin": 2.0, "driver": "胡瀚文", "car": "WZ-107", "from": "石螺口", "to": "西角码头", "fromFull": "石螺口 海景民宿群", "toFull": "西角码头 落客区", "pax": 7, "status": "已完成"}, {"id": "WZ202611070161", "t": "11:43:21", "acceptSec": 94.0, "pickupMin": 3.0, "driver": "卢献蜜", "car": "WZ-102", "from": "滴水村", "to": "南湾街", "fromFull": "滴水村 民宿区", "toFull": "南湾街 海鲜市场", "pax": 3, "status": "已完成"}, {"id": "WZ202611070162", "t": "11:44:23", "acceptSec": 71.0, "pickupMin": 2.0, "driver": "刘晓云", "car": "WZ-101", "from": "西角码头", "to": "南湾", "fromFull": "西角码头 落客区", "toFull": "南湾 临港酒店", "pax": 1, "status": "已完成"}, {"id": "WZ202611070163", "t": "11:47:14", "acceptSec": 58.0, "pickupMin": 9.0, "driver": "陈红", "car": "WZ-106", "from": "滴水丹屏", "to": "南湾街", "fromFull": "滴水丹屏 观景台", "toFull": "南湾街 海鲜市场", "pax": 4, "status": "已完成"}, {"id": "WZ202611070164", "t": "11:48:36", "acceptSec": 55.0, "pickupMin": 3.0, "driver": "刘红君", "car": "WZ-116", "from": "南湾街", "to": "后背塘", "fromFull": "南湾街 海鲜市场", "toFull": "后背塘", "pax": 4, "status": "已完成"}, {"id": "WZ202611070165", "t": "11:51:25", "acceptSec": 93.0, "pickupMin": 3.0, "driver": "余仁智", "car": "WZ-118", "from": "南湾街", "to": "井仔村", "fromFull": "南湾街 餐饮一条街", "toFull": "井仔村", "pax": 2, "status": "已完成"}, {"id": "WZ202611070166", "t": "11:51:28", "acceptSec": 68.0, "pickupMin": 3.0, "driver": "钟永轩", "car": "WZ-108", "from": "南湾街", "to": "鳄鱼山景区", "fromFull": "南湾街 餐饮一条街", "toFull": "鳄鱼山景区 火山口", "pax": 5, "status": "已完成"}, {"id": "WZ202611070167", "t": "11:51:30", "acceptSec": 122.0, "pickupMin": 7.0, "driver": "金洛林", "car": "WZ-104", "from": "滴水丹屏", "to": "石螺口海滩", "fromFull": "滴水丹屏 观景台", "toFull": "石螺口海滩", "pax": 5, "status": "已完成"}, {"id": "WZ202611070168", "t": "11:55:34", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "盛塘村", "to": "滴水村", "fromFull": "盛塘村 农家客栈", "toFull": "滴水村 民宿区", "pax": 2, "status": "已取消"}, {"id": "WZ202611070169", "t": "11:58:17", "acceptSec": 54.0, "pickupMin": 2.0, "driver": "张锋", "car": "WZ-130", "from": "盛塘天主教堂", "to": "南湾街", "fromFull": "盛塘天主教堂", "toFull": "南湾街 海鲜市场", "pax": 6, "status": "已完成"}, {"id": "WZ202611070170", "t": "11:59:39", "acceptSec": 69.0, "pickupMin": 2.0, "driver": "刘扬", "car": "WZ-110", "from": "火山地质博物馆", "to": "五彩滩", "fromFull": "火山地质博物馆", "toFull": "五彩滩 海景民宿", "pax": 7, "status": "已完成"}, {"id": "WZ202611070171", "t": "12:00:05", "acceptSec": 75.0, "pickupMin": 3.0, "driver": "罗卿卿", "car": "WZ-125", "from": "五彩滩", "to": "东安村", "fromFull": "五彩滩 渔家集市", "toFull": "东安村", "pax": 6, "status": "已完成"}, {"id": "WZ202611070172", "t": "12:01:10", "acceptSec": 45.0, "pickupMin": 2.0, "driver": "周青青", "car": "WZ-114", "from": "石螺口", "to": "南湾街", "fromFull": "石螺口 海鲜排档", "toFull": "南湾街 海鲜市场", "pax": 1, "status": "已完成"}, {"id": "WZ202611070173", "t": "12:07:07", "acceptSec": 49.0, "pickupMin": 2.0, "driver": "杨荣", "car": "WZ-113", "from": "石螺口", "to": "南湾街", "fromFull": "石螺口 海景民宿群", "toFull": "南湾街 海鲜市场", "pax": 6, "status": "已完成"}, {"id": "WZ202611070174", "t": "12:07:59", "acceptSec": 110.0, "pickupMin": 2.0, "driver": "孙雄伟", "car": "WZ-121", "from": "石螺口", "to": "贝壳沙滩", "fromFull": "石螺口 海鲜排档", "toFull": "贝壳沙滩", "pax": 1, "status": "已完成"}, {"id": "WZ202611070175", "t": "12:19:16", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "石螺口", "to": "五彩滩", "fromFull": "石螺口 海鲜排档", "toFull": "五彩滩 停车场", "pax": 2, "status": "已取消"}, {"id": "WZ202611070176", "t": "12:19:55", "acceptSec": 94.0, "pickupMin": 6.0, "driver": "张红宇", "car": "WZ-103", "from": "圣母堂", "to": "五彩滩", "fromFull": "圣母堂", "toFull": "五彩滩 观景台", "pax": 2, "status": "已完成"}, {"id": "WZ202611070177", "t": "12:22:05", "acceptSec": 94.0, "pickupMin": 2.0, "driver": "刘继超", "car": "WZ-127", "from": "滴水丹屏", "to": "南湾街", "fromFull": "滴水丹屏 观景台", "toFull": "南湾街 餐饮一条街", "pax": 3, "status": "已完成"}, {"id": "WZ202611070178", "t": "12:23:55", "acceptSec": 79.0, "pickupMin": 5.0, "driver": "余仁智", "car": "WZ-118", "from": "盛塘天主教堂", "to": "贝壳沙滩", "fromFull": "盛塘天主教堂", "toFull": "贝壳沙滩", "pax": 3, "status": "已完成"}, {"id": "WZ202611070179", "t": "12:24:43", "acceptSec": 94.0, "pickupMin": 3.0, "driver": "陈小合", "car": "WZ-131", "from": "南湾运动公园", "to": "石螺口", "fromFull": "南湾运动公园", "toFull": "石螺口 海鲜排档", "pax": 4, "status": "已完成"}, {"id": "WZ202611070180", "t": "12:29:22", "acceptSec": 96.0, "pickupMin": 3.0, "driver": "罗传霞", "car": "WZ-119", "from": "五彩滩", "to": "苏牛角坑", "fromFull": "五彩滩 观景台", "toFull": "苏牛角坑", "pax": 4, "status": "已完成"}, {"id": "WZ202611070181", "t": "12:30:49", "acceptSec": 81.0, "pickupMin": 2.0, "driver": "金洛林", "car": "WZ-104", "from": "石螺口", "to": "五彩滩", "fromFull": "石螺口 日落观景堤", "toFull": "五彩滩 观景台", "pax": 5, "status": "已完成"}, {"id": "WZ202611070182", "t": "12:32:07", "acceptSec": 79.0, "pickupMin": 2.0, "driver": "胡瀚文", "car": "WZ-107", "from": "西角码头", "to": "南湾街", "fromFull": "西角码头 落客区", "toFull": "南湾街 餐饮一条街", "pax": 5, "status": "已完成"}, {"id": "WZ202611070183", "t": "12:33:47", "acceptSec": 50.0, "pickupMin": 3.0, "driver": "陈红", "car": "WZ-106", "from": "南湾运动公园", "to": "南湾街", "fromFull": "南湾运动公园", "toFull": "南湾街 海鲜市场", "pax": 2, "status": "已完成"}, {"id": "WZ202611070184", "t": "12:34:25", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "南湾街", "to": "五彩滩", "fromFull": "南湾街 餐饮一条街", "toFull": "五彩滩 观景台", "pax": 2, "status": "已取消"}, {"id": "WZ202611070185", "t": "12:38:34", "acceptSec": 68.0, "pickupMin": 3.0, "driver": "李世伟", "car": "WZ-120", "from": "南湾运动公园", "to": "北港村", "fromFull": "南湾运动公园", "toFull": "北港村", "pax": 1, "status": "已完成"}, {"id": "WZ202611070186", "t": "12:38:37", "acceptSec": 98.0, "pickupMin": 3.0, "driver": "赵县平", "car": "WZ-123", "from": "西角码头（客运码头）", "to": "五彩滩", "fromFull": "西角码头（客运码头）", "toFull": "五彩滩 渔家集市", "pax": 3, "status": "已完成"}, {"id": "WZ202611070187", "t": "12:43:45", "acceptSec": 69.0, "pickupMin": 3.0, "driver": "陈小合", "car": "WZ-131", "from": "西角码头（客运码头）", "to": "五彩滩", "fromFull": "西角码头（客运码头）", "toFull": "五彩滩 停车场", "pax": 4, "status": "已完成"}, {"id": "WZ202611070188", "t": "12:44:42", "acceptSec": 75.0, "pickupMin": 2.0, "driver": "钟永轩", "car": "WZ-108", "from": "鳄鱼山景区", "to": "南湾", "fromFull": "鳄鱼山景区 火山口", "toFull": "南湾 临港酒店", "pax": 4, "status": "已完成"}, {"id": "WZ202611070189", "t": "12:47:55", "acceptSec": 53.0, "pickupMin": 5.0, "driver": "罗卿卿", "car": "WZ-125", "from": "五彩滩", "to": "石螺口", "fromFull": "五彩滩 停车场", "toFull": "石螺口 海鲜排档", "pax": 3, "status": "已完成"}, {"id": "WZ202611070190", "t": "12:48:48", "acceptSec": 68.0, "pickupMin": 8.0, "driver": "朱娇娇", "car": "WZ-122", "from": "滴水村", "to": "南湾街", "fromFull": "滴水村 民宿区", "toFull": "南湾街 餐饮一条街", "pax": 1, "status": "已完成"}, {"id": "WZ202611070191", "t": "12:51:45", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "滴水村", "to": "西角码头（客运码头）", "fromFull": "滴水村 民宿区", "toFull": "西角码头（客运码头）", "pax": 4, "status": "已取消"}, {"id": "WZ202611070192", "t": "12:51:49", "acceptSec": 72.0, "pickupMin": 2.0, "driver": "陈义", "car": "WZ-109", "from": "石螺口", "to": "南湾街", "fromFull": "石螺口 海鲜排档", "toFull": "南湾街 海鲜市场", "pax": 6, "status": "已完成"}, {"id": "WZ202611070193", "t": "12:54:01", "acceptSec": 119.0, "pickupMin": 8.0, "driver": "李景", "car": "WZ-126", "from": "鳄鱼山", "to": "五彩滩", "fromFull": "鳄鱼山 灯塔", "toFull": "五彩滩 观景台", "pax": 5, "status": "已完成"}, {"id": "WZ202611070194", "t": "12:55:54", "acceptSec": 59.0, "pickupMin": 10.0, "driver": "谢荣锋", "car": "WZ-128", "from": "五彩滩", "to": "西角码头（客运码头）", "fromFull": "五彩滩 渔家集市", "toFull": "西角码头（客运码头）", "pax": 1, "status": "已完成"}, {"id": "WZ202611070195", "t": "12:59:36", "acceptSec": 89.0, "pickupMin": 3.0, "driver": "翟测试", "car": "WZ-124", "from": "南湾街", "to": "石螺口", "fromFull": "南湾街 餐饮一条街", "toFull": "石螺口 海鲜排档", "pax": 2, "status": "已完成"}, {"id": "WZ202611070196", "t": "13:02:06", "acceptSec": 141.0, "pickupMin": 8.0, "driver": "陈纲", "car": "WZ-132", "from": "井仔村", "to": "西角码头（客运码头）", "fromFull": "井仔村", "toFull": "西角码头（客运码头）", "pax": 5, "status": "已完成"}, {"id": "WZ202611070197", "t": "13:03:16", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "南湾运动公园", "to": "后背塘", "fromFull": "南湾运动公园", "toFull": "后背塘", "pax": 4, "status": "已取消"}, {"id": "WZ202611070198", "t": "13:03:17", "acceptSec": 59.0, "pickupMin": 8.0, "driver": "邹勇", "car": "WZ-117", "from": "鳄鱼山景区", "to": "公山村", "fromFull": "鳄鱼山景区 火山口", "toFull": "公山村", "pax": 6, "status": "已完成"}, {"id": "WZ202611070199", "t": "13:06:49", "acceptSec": 53.0, "pickupMin": 7.0, "driver": "李世伟", "car": "WZ-120", "from": "东安村", "to": "西角村", "fromFull": "东安村", "toFull": "西角村", "pax": 6, "status": "已完成"}, {"id": "WZ202611070200", "t": "13:07:54", "acceptSec": 54.0, "pickupMin": 5.0, "driver": "张红宇", "car": "WZ-103", "from": "北港村", "to": "西角码头", "fromFull": "北港村", "toFull": "西角码头 落客区", "pax": 6, "status": "已完成"}, {"id": "WZ202611070201", "t": "13:08:05", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "东安村", "to": "南湾街", "fromFull": "东安村", "toFull": "南湾街 餐饮一条街", "pax": 5, "status": "已取消"}, {"id": "WZ202611070202", "t": "13:09:43", "acceptSec": 69.0, "pickupMin": 5.0, "driver": "金洛林", "car": "WZ-104", "from": "北港村", "to": "石螺口", "fromFull": "北港村", "toFull": "石螺口 海鲜排档", "pax": 1, "status": "已完成"}, {"id": "WZ202611070203", "t": "13:09:50", "acceptSec": 60.0, "pickupMin": 3.0, "driver": "杨其静", "car": "WZ-129", "from": "南湾街", "to": "南湾街", "fromFull": "南湾街 海鲜市场", "toFull": "南湾街 餐饮一条街", "pax": 5, "status": "已完成"}, {"id": "WZ202611070204", "t": "13:09:55", "acceptSec": 100.0, "pickupMin": 7.0, "driver": "于海洋", "car": "WZ-105", "from": "贝壳沙滩", "to": "石螺口海滩", "fromFull": "贝壳沙滩", "toFull": "石螺口海滩", "pax": 5, "status": "已完成"}, {"id": "WZ202611070205", "t": "13:11:03", "acceptSec": 30.0, "pickupMin": 3.0, "driver": "张雷", "car": "WZ-115", "from": "南湾运动公园", "to": "五彩滩", "fromFull": "南湾运动公园", "toFull": "五彩滩 停车场", "pax": 5, "status": "已完成"}, {"id": "WZ202611070206", "t": "13:11:09", "acceptSec": 78.0, "pickupMin": 3.0, "driver": "余仁智", "car": "WZ-118", "from": "贝壳沙滩", "to": "南湾", "fromFull": "贝壳沙滩", "toFull": "南湾 临港酒店", "pax": 3, "status": "已完成"}, {"id": "WZ202611070207", "t": "13:12:22", "acceptSec": 90.0, "pickupMin": 3.0, "driver": "吴昊江", "car": "WZ-111", "from": "西角码头", "to": "西角村", "fromFull": "西角码头 落客区", "toFull": "西角村", "pax": 2, "status": "已完成"}, {"id": "WZ202611070208", "t": "13:12:48", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "鳄鱼山", "to": "五彩滩", "fromFull": "鳄鱼山 灯塔", "toFull": "五彩滩 海景民宿", "pax": 5, "status": "已取消"}, {"id": "WZ202611070209", "t": "13:16:31", "acceptSec": 56.0, "pickupMin": 3.0, "driver": "陈小合", "car": "WZ-131", "from": "五彩滩", "to": "盛塘天主教堂", "fromFull": "五彩滩 停车场", "toFull": "盛塘天主教堂", "pax": 6, "status": "已完成"}, {"id": "WZ202611070210", "t": "13:18:45", "acceptSec": 78.0, "pickupMin": 3.0, "driver": "翟测试", "car": "WZ-124", "from": "上牛栏山", "to": "海螺广场", "fromFull": "上牛栏山", "toFull": "海螺广场", "pax": 5, "status": "已完成"}, {"id": "WZ202611070211", "t": "13:19:59", "acceptSec": 120.0, "pickupMin": 6.0, "driver": "谢荣锋", "car": "WZ-128", "from": "盛塘村", "to": "南湾", "fromFull": "盛塘村 农家客栈", "toFull": "南湾 临港酒店", "pax": 3, "status": "已完成"}, {"id": "WZ202611070212", "t": "13:20:58", "acceptSec": 75.0, "pickupMin": 6.0, "driver": "赵县平", "car": "WZ-123", "from": "盛塘村", "to": "海螺广场", "fromFull": "盛塘村 农家客栈", "toFull": "海螺广场", "pax": 2, "status": "已完成"}, {"id": "WZ202611070213", "t": "13:22:10", "acceptSec": 124.0, "pickupMin": 5.0, "driver": "邹勇", "car": "WZ-117", "from": "滴水村", "to": "五彩滩", "fromFull": "滴水村 民宿区", "toFull": "五彩滩 停车场", "pax": 1, "status": "已完成"}, {"id": "WZ202611070214", "t": "13:24:48", "acceptSec": 89.0, "pickupMin": 5.0, "driver": "刘晓云", "car": "WZ-101", "from": "苏牛角坑", "to": "南湾街", "fromFull": "苏牛角坑", "toFull": "南湾街 海鲜市场", "pax": 5, "status": "已完成"}, {"id": "WZ202611070215", "t": "13:26:53", "acceptSec": 86.0, "pickupMin": 6.0, "driver": "陈纲", "car": "WZ-132", "from": "圣母堂", "to": "后背塘", "fromFull": "圣母堂", "toFull": "后背塘", "pax": 3, "status": "已完成"}, {"id": "WZ202611070216", "t": "13:27:54", "acceptSec": 61.0, "pickupMin": 3.0, "driver": "卢献蜜", "car": "WZ-102", "from": "南湾街", "to": "北港村", "fromFull": "南湾街 海鲜市场", "toFull": "北港村", "pax": 6, "status": "已完成"}, {"id": "WZ202611070217", "t": "13:28:15", "acceptSec": 72.0, "pickupMin": 7.0, "driver": "刘红君", "car": "WZ-116", "from": "鳄鱼山", "to": "东安村", "fromFull": "鳄鱼山 灯塔", "toFull": "东安村", "pax": 2, "status": "已完成"}, {"id": "WZ202611070218", "t": "13:29:55", "acceptSec": 121.0, "pickupMin": 5.0, "driver": "张雷", "car": "WZ-115", "from": "盛塘天主教堂", "to": "五彩滩", "fromFull": "盛塘天主教堂", "toFull": "五彩滩 观景台", "pax": 4, "status": "已完成"}, {"id": "WZ202611070219", "t": "13:32:50", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "盛塘村", "to": "南湾运动公园", "fromFull": "盛塘村 农家客栈", "toFull": "南湾运动公园", "pax": 6, "status": "已取消"}, {"id": "WZ202611070220", "t": "13:35:46", "acceptSec": 102.0, "pickupMin": 3.0, "driver": "吴昊江", "car": "WZ-111", "from": "西角码头", "to": "贝壳沙滩", "fromFull": "西角码头 落客区", "toFull": "贝壳沙滩", "pax": 2, "status": "已完成"}, {"id": "WZ202611070221", "t": "13:36:30", "acceptSec": 68.0, "pickupMin": 2.0, "driver": "于海洋", "car": "WZ-105", "from": "石螺口海滩", "to": "南湾运动公园", "fromFull": "石螺口海滩", "toFull": "南湾运动公园", "pax": 5, "status": "已完成"}, {"id": "WZ202611070222", "t": "13:37:32", "acceptSec": 84.0, "pickupMin": 3.0, "driver": "李世伟", "car": "WZ-120", "from": "西角码头", "to": "盛塘村", "fromFull": "西角码头 落客区", "toFull": "盛塘村 农家客栈", "pax": 4, "status": "已完成"}, {"id": "WZ202611070223", "t": "13:39:55", "acceptSec": 125.0, "pickupMin": 9.0, "driver": "陈红", "car": "WZ-106", "from": "滴水村", "to": "牛角坑", "fromFull": "滴水村 民宿区", "toFull": "牛角坑", "pax": 2, "status": "已完成"}, {"id": "WZ202611070224", "t": "13:42:58", "acceptSec": 75.0, "pickupMin": 2.0, "driver": "罗卿卿", "car": "WZ-125", "from": "幕崖", "to": "南湾街", "fromFull": "幕崖", "toFull": "南湾街 海鲜市场", "pax": 1, "status": "已完成"}, {"id": "WZ202611070225", "t": "13:43:49", "acceptSec": 82.0, "pickupMin": 9.0, "driver": "李景", "car": "WZ-126", "from": "西角码头（客运码头）", "to": "石螺口", "fromFull": "西角码头（客运码头）", "toFull": "石螺口 海景民宿群", "pax": 5, "status": "已完成"}, {"id": "WZ202611070226", "t": "13:46:54", "acceptSec": 79.0, "pickupMin": 3.0, "driver": "刘扬", "car": "WZ-110", "from": "五彩滩", "to": "井仔村", "fromFull": "五彩滩 渔家集市", "toFull": "井仔村", "pax": 1, "status": "已完成"}, {"id": "WZ202611070227", "t": "13:49:26", "acceptSec": 34.0, "pickupMin": 9.0, "driver": "杨晶红", "car": "WZ-112", "from": "西角码头", "to": "石螺口海滩", "fromFull": "西角码头 落客区", "toFull": "石螺口海滩", "pax": 5, "status": "已完成"}, {"id": "WZ202611070228", "t": "13:49:40", "acceptSec": 126.0, "pickupMin": 9.0, "driver": "周青青", "car": "WZ-114", "from": "滴水丹屏", "to": "盛塘天主教堂", "fromFull": "滴水丹屏 观景台", "toFull": "盛塘天主教堂", "pax": 4, "status": "已完成"}, {"id": "WZ202611070229", "t": "13:49:49", "acceptSec": 83.0, "pickupMin": 10.0, "driver": "杨荣", "car": "WZ-113", "from": "斜阳岛码头", "to": "石螺口", "fromFull": "斜阳岛码头", "toFull": "石螺口 日落观景堤", "pax": 3, "status": "已完成"}, {"id": "WZ202611070230", "t": "13:49:53", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "石螺口", "to": "南湾街", "fromFull": "石螺口 日落观景堤", "toFull": "南湾街 餐饮一条街", "pax": 2, "status": "已取消"}, {"id": "WZ202611070231", "t": "13:50:51", "acceptSec": 78.0, "pickupMin": 3.0, "driver": "邹勇", "car": "WZ-117", "from": "五彩滩", "to": "火山地质博物馆", "fromFull": "五彩滩 海景民宿", "toFull": "火山地质博物馆", "pax": 1, "status": "已完成"}, {"id": "WZ202611070232", "t": "13:51:24", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "南湾运动公园", "to": "北港村", "fromFull": "南湾运动公园", "toFull": "北港村", "pax": 6, "status": "已取消"}, {"id": "WZ202611070233", "t": "13:53:38", "acceptSec": 141.0, "pickupMin": 8.0, "driver": "朱娇娇", "car": "WZ-122", "from": "上牛栏山", "to": "滴水丹屏", "fromFull": "上牛栏山", "toFull": "滴水丹屏 观景台", "pax": 1, "status": "已完成"}, {"id": "WZ202611070234", "t": "13:56:38", "acceptSec": 91.0, "pickupMin": 9.0, "driver": "张锋", "car": "WZ-130", "from": "西角码头", "to": "西角码头（客运码头）", "fromFull": "西角码头 落客区", "toFull": "西角码头（客运码头）", "pax": 7, "status": "已完成"}, {"id": "WZ202611070235", "t": "13:58:02", "acceptSec": 70.0, "pickupMin": 7.0, "driver": "杨其静", "car": "WZ-129", "from": "石螺口", "to": "火山地质博物馆", "fromFull": "石螺口 海景民宿群", "toFull": "火山地质博物馆", "pax": 1, "status": "已完成"}, {"id": "WZ202611070236", "t": "13:58:38", "acceptSec": 57.0, "pickupMin": 2.0, "driver": "张红宇", "car": "WZ-103", "from": "斜阳岛码头", "to": "南湾运动公园", "fromFull": "斜阳岛码头", "toFull": "南湾运动公园", "pax": 4, "status": "已完成"}, {"id": "WZ202611070237", "t": "13:59:08", "acceptSec": 58.0, "pickupMin": 4.0, "driver": "胡瀚文", "car": "WZ-107", "from": "南湾港", "to": "五彩滩", "fromFull": "南湾港 客运码头", "toFull": "五彩滩 海景民宿", "pax": 6, "status": "已完成"}, {"id": "WZ202611070238", "t": "13:59:32", "acceptSec": 123.0, "pickupMin": 6.0, "driver": "卢献蜜", "car": "WZ-102", "from": "圣母堂", "to": "大沙头", "fromFull": "圣母堂", "toFull": "大沙头", "pax": 1, "status": "已完成"}, {"id": "WZ202611070239", "t": "14:01:13", "acceptSec": 91.0, "pickupMin": 2.0, "driver": "陈小合", "car": "WZ-131", "from": "盛塘天主教堂", "to": "火山地质博物馆", "fromFull": "盛塘天主教堂", "toFull": "火山地质博物馆", "pax": 2, "status": "已完成"}, {"id": "WZ202611070240", "t": "14:01:26", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "盛塘村", "to": "五彩滩", "fromFull": "盛塘村 农家客栈", "toFull": "五彩滩 观景台", "pax": 5, "status": "已取消"}, {"id": "WZ202611070241", "t": "14:01:30", "acceptSec": 112.0, "pickupMin": 3.0, "driver": "孙雄伟", "car": "WZ-121", "from": "贝壳沙滩", "to": "石螺口", "fromFull": "贝壳沙滩", "toFull": "石螺口 海景民宿群", "pax": 1, "status": "已完成"}, {"id": "WZ202611070242", "t": "14:01:37", "acceptSec": 68.0, "pickupMin": 5.0, "driver": "刘红君", "car": "WZ-116", "from": "北港村", "to": "盛塘村", "fromFull": "北港村", "toFull": "盛塘村 农家客栈", "pax": 1, "status": "已完成"}, {"id": "WZ202611070243", "t": "14:02:22", "acceptSec": 93.0, "pickupMin": 5.0, "driver": "张雷", "car": "WZ-115", "from": "盛塘天主教堂", "to": "石螺口", "fromFull": "盛塘天主教堂", "toFull": "石螺口 海鲜排档", "pax": 1, "status": "已完成"}, {"id": "WZ202611070244", "t": "14:02:34", "acceptSec": 38.0, "pickupMin": 3.0, "driver": "刘晓云", "car": "WZ-101", "from": "南湾运动公园", "to": "石螺口海滩", "fromFull": "南湾运动公园", "toFull": "石螺口海滩", "pax": 2, "status": "已完成"}, {"id": "WZ202611070245", "t": "14:05:34", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "南湾街", "to": "石螺口", "fromFull": "南湾街 餐饮一条街", "toFull": "石螺口 海景民宿群", "pax": 3, "status": "已取消"}, {"id": "WZ202611070246", "t": "14:07:33", "acceptSec": 52.0, "pickupMin": 2.0, "driver": "李景", "car": "WZ-126", "from": "幕崖", "to": "南湾街", "fromFull": "幕崖", "toFull": "南湾街 海鲜市场", "pax": 7, "status": "已完成"}, {"id": "WZ202611070247", "t": "14:10:16", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "石螺口", "to": "沟门村", "fromFull": "石螺口 海景民宿群", "toFull": "沟门村", "pax": 1, "status": "已取消"}, {"id": "WZ202611070248", "t": "14:11:47", "acceptSec": 39.0, "pickupMin": 4.0, "driver": "杨晶红", "car": "WZ-112", "from": "西角码头（客运码头）", "to": "鳄鱼山景区", "fromFull": "西角码头（客运码头）", "toFull": "鳄鱼山景区 火山口", "pax": 3, "status": "已完成"}, {"id": "WZ202611070249", "t": "14:14:16", "acceptSec": 73.0, "pickupMin": 2.0, "driver": "李世伟", "car": "WZ-120", "from": "盛塘村", "to": "南湾", "fromFull": "盛塘村 农家客栈", "toFull": "南湾 临港酒店", "pax": 4, "status": "已完成"}, {"id": "WZ202611070250", "t": "14:16:23", "acceptSec": 59.0, "pickupMin": 3.0, "driver": "翟测试", "car": "WZ-124", "from": "海螺广场", "to": "南湾街", "fromFull": "海螺广场", "toFull": "南湾街 海鲜市场", "pax": 2, "status": "已完成"}, {"id": "WZ202611070251", "t": "14:16:39", "acceptSec": 40.0, "pickupMin": 3.0, "driver": "钟永轩", "car": "WZ-108", "from": "红帆驿站", "to": "石螺口", "fromFull": "红帆驿站", "toFull": "石螺口 海景民宿群", "pax": 1, "status": "已完成"}, {"id": "WZ202611070252", "t": "14:17:43", "acceptSec": 41.0, "pickupMin": 2.0, "driver": "杨荣", "car": "WZ-113", "from": "石螺口海滩", "to": "南湾街", "fromFull": "石螺口海滩", "toFull": "南湾街 海鲜市场", "pax": 3, "status": "已完成"}, {"id": "WZ202611070253", "t": "14:20:04", "acceptSec": 77.0, "pickupMin": 3.0, "driver": "刘继超", "car": "WZ-127", "from": "南湾街", "to": "斜阳岛码头", "fromFull": "南湾街 餐饮一条街", "toFull": "斜阳岛码头", "pax": 5, "status": "已完成"}, {"id": "WZ202611070254", "t": "14:21:22", "acceptSec": 30.0, "pickupMin": 3.0, "driver": "谢荣锋", "car": "WZ-128", "from": "南湾", "to": "盛塘村", "fromFull": "南湾 临港酒店", "toFull": "盛塘村 农家客栈", "pax": 1, "status": "已完成"}, {"id": "WZ202611070255", "t": "14:22:05", "acceptSec": 71.0, "pickupMin": 7.0, "driver": "周青青", "car": "WZ-114", "from": "五彩滩", "to": "南湾街", "fromFull": "五彩滩 观景台", "toFull": "南湾街 餐饮一条街", "pax": 7, "status": "已完成"}, {"id": "WZ202611070256", "t": "14:22:28", "acceptSec": 87.0, "pickupMin": 3.0, "driver": "胡瀚文", "car": "WZ-107", "from": "五彩滩", "to": "石螺口海滩", "fromFull": "五彩滩 停车场", "toFull": "石螺口海滩", "pax": 3, "status": "已完成"}, {"id": "WZ202611070257", "t": "14:24:51", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "圣母堂", "to": "南湾运动公园", "fromFull": "圣母堂", "toFull": "南湾运动公园", "pax": 6, "status": "已取消"}, {"id": "WZ202611070258", "t": "14:26:56", "acceptSec": 57.0, "pickupMin": 10.0, "driver": "罗传霞", "car": "WZ-119", "from": "东安村", "to": "盛塘天主教堂", "fromFull": "东安村", "toFull": "盛塘天主教堂", "pax": 6, "status": "已完成"}, {"id": "WZ202611070259", "t": "14:27:06", "acceptSec": 70.0, "pickupMin": 2.0, "driver": "刘红君", "car": "WZ-116", "from": "盛塘村", "to": "白沙寮村", "fromFull": "盛塘村 农家客栈", "toFull": "白沙寮村", "pax": 3, "status": "已完成"}, {"id": "WZ202611070260", "t": "14:27:11", "acceptSec": 48.0, "pickupMin": 2.0, "driver": "张锋", "car": "WZ-130", "from": "西角码头", "to": "上牛栏山", "fromFull": "西角码头 落客区", "toFull": "上牛栏山", "pax": 1, "status": "已完成"}, {"id": "WZ202611070261", "t": "14:29:18", "acceptSec": 94.0, "pickupMin": 5.0, "driver": "卢献蜜", "car": "WZ-102", "from": "五彩滩", "to": "石螺口海滩", "fromFull": "五彩滩 观景台", "toFull": "石螺口海滩", "pax": 3, "status": "已完成"}, {"id": "WZ202611070262", "t": "14:29:24", "acceptSec": 84.0, "pickupMin": 8.0, "driver": "陈红", "car": "WZ-106", "from": "盛塘村", "to": "南湾街", "fromFull": "盛塘村 农家客栈", "toFull": "南湾街 海鲜市场", "pax": 3, "status": "已完成"}, {"id": "WZ202611070263", "t": "14:32:18", "acceptSec": 128.0, "pickupMin": 2.0, "driver": "杨其静", "car": "WZ-129", "from": "鳄鱼山景区", "to": "西角码头", "fromFull": "鳄鱼山景区 火山口", "toFull": "西角码头 落客区", "pax": 5, "status": "已完成"}, {"id": "WZ202611070264", "t": "14:33:30", "acceptSec": 94.0, "pickupMin": 3.0, "driver": "陈义", "car": "WZ-109", "from": "南湾运动公园", "to": "西角码头", "fromFull": "南湾运动公园", "toFull": "西角码头 落客区", "pax": 5, "status": "已完成"}, {"id": "WZ202611070265", "t": "14:34:31", "acceptSec": 85.0, "pickupMin": 5.0, "driver": "陈纲", "car": "WZ-132", "from": "南湾港", "to": "五彩滩", "fromFull": "南湾港 客运码头", "toFull": "五彩滩 渔家集市", "pax": 1, "status": "已完成"}, {"id": "WZ202611070266", "t": "14:34:41", "acceptSec": 105.0, "pickupMin": 3.0, "driver": "吴昊江", "car": "WZ-111", "from": "贝壳沙滩", "to": "大沙头", "fromFull": "贝壳沙滩", "toFull": "大沙头", "pax": 1, "status": "已完成"}, {"id": "WZ202611070267", "t": "14:34:43", "acceptSec": 119.0, "pickupMin": 7.0, "driver": "赵县平", "car": "WZ-123", "from": "贝壳沙滩", "to": "南湾街", "fromFull": "贝壳沙滩", "toFull": "南湾街 海鲜市场", "pax": 2, "status": "已完成"}, {"id": "WZ202611070268", "t": "14:35:30", "acceptSec": 126.0, "pickupMin": 2.0, "driver": "朱娇娇", "car": "WZ-122", "from": "滴水丹屏", "to": "鳄鱼山", "fromFull": "滴水丹屏 观景台", "toFull": "鳄鱼山 灯塔", "pax": 6, "status": "已完成"}, {"id": "WZ202611070269", "t": "14:35:32", "acceptSec": 95.0, "pickupMin": 2.0, "driver": "金洛林", "car": "WZ-104", "from": "石螺口", "to": "南湾运动公园", "fromFull": "石螺口 海鲜排档", "toFull": "南湾运动公园", "pax": 4, "status": "已完成"}, {"id": "WZ202611070270", "t": "14:35:57", "acceptSec": 30.0, "pickupMin": 3.0, "driver": "杨荣", "car": "WZ-113", "from": "南湾街", "to": "盛塘村", "fromFull": "南湾街 海鲜市场", "toFull": "盛塘村 农家客栈", "pax": 1, "status": "已完成"}, {"id": "WZ202611070271", "t": "14:36:33", "acceptSec": 85.0, "pickupMin": 6.0, "driver": "刘扬", "car": "WZ-110", "from": "五彩滩", "to": "滴水村", "fromFull": "五彩滩 渔家集市", "toFull": "滴水村 民宿区", "pax": 6, "status": "已完成"}, {"id": "WZ202611070272", "t": "14:38:03", "acceptSec": 80.0, "pickupMin": 4.0, "driver": "张锋", "car": "WZ-130", "from": "井仔村", "to": "五彩滩", "fromFull": "井仔村", "toFull": "五彩滩 观景台", "pax": 2, "status": "已完成"}, {"id": "WZ202611070273", "t": "14:39:33", "acceptSec": 34.0, "pickupMin": 2.0, "driver": "刘继超", "car": "WZ-127", "from": "西角码头（客运码头）", "to": "石螺口", "fromFull": "西角码头（客运码头）", "toFull": "石螺口 海鲜排档", "pax": 7, "status": "已完成"}, {"id": "WZ202611070274", "t": "14:44:21", "acceptSec": 62.0, "pickupMin": 3.0, "driver": "张雷", "car": "WZ-115", "from": "西角码头（客运码头）", "to": "石螺口", "fromFull": "西角码头（客运码头）", "toFull": "石螺口 海景民宿群", "pax": 1, "status": "已完成"}, {"id": "WZ202611070275", "t": "14:45:26", "acceptSec": 95.0, "pickupMin": 2.0, "driver": "刘晓云", "car": "WZ-101", "from": "幕崖", "to": "鳄鱼山景区", "fromFull": "幕崖", "toFull": "鳄鱼山景区 火山口", "pax": 6, "status": "已完成"}, {"id": "WZ202611070276", "t": "14:46:02", "acceptSec": 127.0, "pickupMin": 3.0, "driver": "邹勇", "car": "WZ-117", "from": "滴水村", "to": "沟门村", "fromFull": "滴水村 民宿区", "toFull": "沟门村", "pax": 7, "status": "已完成"}, {"id": "WZ202611070277", "t": "14:46:37", "acceptSec": 57.0, "pickupMin": 2.0, "driver": "钟永轩", "car": "WZ-108", "from": "石螺口海滩", "to": "石螺口", "fromFull": "石螺口海滩", "toFull": "石螺口 海景民宿群", "pax": 5, "status": "已完成"}, {"id": "WZ202611070278", "t": "14:46:58", "acceptSec": 110.0, "pickupMin": 3.0, "driver": "朱娇娇", "car": "WZ-122", "from": "滴水村", "to": "幕崖", "fromFull": "滴水村 民宿区", "toFull": "幕崖", "pax": 6, "status": "已完成"}, {"id": "WZ202611070279", "t": "14:49:00", "acceptSec": 64.0, "pickupMin": 2.0, "driver": "孙雄伟", "car": "WZ-121", "from": "石螺口", "to": "北港村", "fromFull": "石螺口 海景民宿群", "toFull": "北港村", "pax": 2, "status": "已完成"}, {"id": "WZ202611070280", "t": "14:51:00", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "西角码头（客运码头）", "to": "石螺口", "fromFull": "西角码头（客运码头）", "toFull": "石螺口 日落观景堤", "pax": 1, "status": "已取消"}, {"id": "WZ202611070281", "t": "14:54:31", "acceptSec": 30.0, "pickupMin": 3.0, "driver": "周青青", "car": "WZ-114", "from": "南湾街", "to": "南湾运动公园", "fromFull": "南湾街 餐饮一条街", "toFull": "南湾运动公园", "pax": 1, "status": "已完成"}, {"id": "WZ202611070282", "t": "14:54:48", "acceptSec": 83.0, "pickupMin": 3.0, "driver": "杨晶红", "car": "WZ-112", "from": "滴水丹屏", "to": "南湾街", "fromFull": "滴水丹屏 观景台", "toFull": "南湾街 餐饮一条街", "pax": 4, "status": "已完成"}, {"id": "WZ202611070283", "t": "14:55:05", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "贝壳沙滩", "to": "滴水村", "fromFull": "贝壳沙滩", "toFull": "滴水村 民宿区", "pax": 1, "status": "已取消"}, {"id": "WZ202611070284", "t": "14:55:24", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "南湾街", "to": "沟门村", "fromFull": "南湾街 餐饮一条街", "toFull": "沟门村", "pax": 3, "status": "已取消"}, {"id": "WZ202611070285", "t": "14:55:43", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "滴水丹屏", "to": "西角码头（客运码头）", "fromFull": "滴水丹屏 观景台", "toFull": "西角码头（客运码头）", "pax": 5, "status": "已取消"}, {"id": "WZ202611070286", "t": "14:58:49", "acceptSec": 68.0, "pickupMin": 3.0, "driver": "陈义", "car": "WZ-109", "from": "石螺口海滩", "to": "石螺口", "fromFull": "石螺口海滩", "toFull": "石螺口 日落观景堤", "pax": 2, "status": "已完成"}, {"id": "WZ202611070287", "t": "14:58:56", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "南湾街", "to": "斜阳岛码头", "fromFull": "南湾街 海鲜市场", "toFull": "斜阳岛码头", "pax": 6, "status": "已取消"}, {"id": "WZ202611070288", "t": "15:01:56", "acceptSec": 100.0, "pickupMin": 2.0, "driver": "卢献蜜", "car": "WZ-102", "from": "石螺口海滩", "to": "牛角坑", "fromFull": "石螺口海滩", "toFull": "牛角坑", "pax": 1, "status": "已完成"}, {"id": "WZ202611070289", "t": "15:02:13", "acceptSec": 115.0, "pickupMin": 2.0, "driver": "张雷", "car": "WZ-115", "from": "石螺口", "to": "滴水村", "fromFull": "石螺口 海景民宿群", "toFull": "滴水村 民宿区", "pax": 4, "status": "已完成"}, {"id": "WZ202611070290", "t": "15:02:27", "acceptSec": 62.0, "pickupMin": 3.0, "driver": "杨其静", "car": "WZ-129", "from": "石螺口", "to": "北港村", "fromFull": "石螺口 日落观景堤", "toFull": "北港村", "pax": 6, "status": "已完成"}, {"id": "WZ202611070291", "t": "15:02:56", "acceptSec": 70.0, "pickupMin": 2.0, "driver": "钟永轩", "car": "WZ-108", "from": "石螺口", "to": "滴水村", "fromFull": "石螺口 海景民宿群", "toFull": "滴水村 民宿区", "pax": 5, "status": "已完成"}, {"id": "WZ202611070292", "t": "15:04:42", "acceptSec": 59.0, "pickupMin": 6.0, "driver": "谢荣锋", "car": "WZ-128", "from": "西角码头（客运码头）", "to": "五彩滩", "fromFull": "西角码头（客运码头）", "toFull": "五彩滩 观景台", "pax": 1, "status": "已完成"}, {"id": "WZ202611070293", "t": "15:09:24", "acceptSec": 99.0, "pickupMin": 3.0, "driver": "罗传霞", "car": "WZ-119", "from": "圣母堂", "to": "五彩滩", "fromFull": "圣母堂", "toFull": "五彩滩 观景台", "pax": 5, "status": "已完成"}, {"id": "WZ202611070294", "t": "15:10:44", "acceptSec": 63.0, "pickupMin": 3.0, "driver": "陈纲", "car": "WZ-132", "from": "五彩滩", "to": "盛塘天主教堂", "fromFull": "五彩滩 观景台", "toFull": "盛塘天主教堂", "pax": 4, "status": "已完成"}, {"id": "WZ202611070295", "t": "15:10:52", "acceptSec": 93.0, "pickupMin": 3.0, "driver": "张锋", "car": "WZ-130", "from": "五彩滩", "to": "南湾港", "fromFull": "五彩滩 停车场", "toFull": "南湾港 客运码头", "pax": 2, "status": "已完成"}, {"id": "WZ202611070296", "t": "15:11:23", "acceptSec": 79.0, "pickupMin": 8.0, "driver": "于海洋", "car": "WZ-105", "from": "贝壳沙滩", "to": "井仔村", "fromFull": "贝壳沙滩", "toFull": "井仔村", "pax": 3, "status": "已完成"}, {"id": "WZ202611070297", "t": "15:13:19", "acceptSec": 93.0, "pickupMin": 3.0, "driver": "陈红", "car": "WZ-106", "from": "南湾街", "to": "盛塘村", "fromFull": "南湾街 海鲜市场", "toFull": "盛塘村 农家客栈", "pax": 7, "status": "已完成"}, {"id": "WZ202611070298", "t": "15:13:32", "acceptSec": 116.0, "pickupMin": 4.0, "driver": "吴昊江", "car": "WZ-111", "from": "五彩滩", "to": "石螺口海滩", "fromFull": "五彩滩 停车场", "toFull": "石螺口海滩", "pax": 4, "status": "已完成"}, {"id": "WZ202611070299", "t": "15:14:36", "acceptSec": 78.0, "pickupMin": 2.0, "driver": "刘继超", "car": "WZ-127", "from": "石螺口", "to": "西角码头（客运码头）", "fromFull": "石螺口 海景民宿群", "toFull": "西角码头（客运码头）", "pax": 3, "status": "已完成"}, {"id": "WZ202611070300", "t": "15:16:57", "acceptSec": 104.0, "pickupMin": 6.0, "driver": "邹勇", "car": "WZ-117", "from": "五彩滩", "to": "海螺广场", "fromFull": "五彩滩 海景民宿", "toFull": "海螺广场", "pax": 3, "status": "已完成"}, {"id": "WZ202611070301", "t": "15:18:56", "acceptSec": 120.0, "pickupMin": 2.0, "driver": "陈小合", "car": "WZ-131", "from": "火山地质博物馆", "to": "南湾", "fromFull": "火山地质博物馆", "toFull": "南湾 临港酒店", "pax": 2, "status": "已完成"}, {"id": "WZ202611070302", "t": "15:19:21", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "西角码头（客运码头）", "to": "南湾街", "fromFull": "西角码头（客运码头）", "toFull": "南湾街 餐饮一条街", "pax": 3, "status": "已取消"}, {"id": "WZ202611070303", "t": "15:22:13", "acceptSec": 79.0, "pickupMin": 3.0, "driver": "朱娇娇", "car": "WZ-122", "from": "西角码头（客运码头）", "to": "滴水村", "fromFull": "西角码头（客运码头）", "toFull": "滴水村 民宿区", "pax": 4, "status": "已完成"}, {"id": "WZ202611070304", "t": "15:23:33", "acceptSec": 71.0, "pickupMin": 3.0, "driver": "翟测试", "car": "WZ-124", "from": "南湾运动公园", "to": "石螺口", "fromFull": "南湾运动公园", "toFull": "石螺口 海景民宿群", "pax": 2, "status": "已完成"}, {"id": "WZ202611070305", "t": "15:23:48", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "火山地质博物馆", "to": "西角码头（客运码头）", "fromFull": "火山地质博物馆", "toFull": "西角码头（客运码头）", "pax": 2, "status": "已取消"}, {"id": "WZ202611070306", "t": "15:24:04", "acceptSec": 114.0, "pickupMin": 2.0, "driver": "刘扬", "car": "WZ-110", "from": "滴水丹屏", "to": "南湾", "fromFull": "滴水丹屏 观景台", "toFull": "南湾 临港酒店", "pax": 4, "status": "已完成"}, {"id": "WZ202611070307", "t": "15:24:59", "acceptSec": 128.0, "pickupMin": 3.0, "driver": "刘晓云", "car": "WZ-101", "from": "滴水丹屏", "to": "滴水村", "fromFull": "滴水丹屏 观景台", "toFull": "滴水村 民宿区", "pax": 2, "status": "已完成"}, {"id": "WZ202611070308", "t": "15:26:12", "acceptSec": 119.0, "pickupMin": 8.0, "driver": "余仁智", "car": "WZ-118", "from": "滴水丹屏", "to": "南湾港", "fromFull": "滴水丹屏 观景台", "toFull": "南湾港 客运码头", "pax": 1, "status": "已完成"}, {"id": "WZ202611070309", "t": "15:26:13", "acceptSec": 69.0, "pickupMin": 4.0, "driver": "胡瀚文", "car": "WZ-107", "from": "西角码头（客运码头）", "to": "西角码头", "fromFull": "西角码头（客运码头）", "toFull": "西角码头 落客区", "pax": 7, "status": "已完成"}, {"id": "WZ202611070310", "t": "15:27:02", "acceptSec": 76.0, "pickupMin": 4.0, "driver": "陈义", "car": "WZ-109", "from": "西角码头（客运码头）", "to": "西角码头", "fromFull": "西角码头（客运码头）", "toFull": "西角码头 落客区", "pax": 4, "status": "已完成"}, {"id": "WZ202611070311", "t": "15:29:42", "acceptSec": 35.0, "pickupMin": 3.0, "driver": "罗卿卿", "car": "WZ-125", "from": "海螺广场", "to": "五彩滩", "fromFull": "海螺广场", "toFull": "五彩滩 海景民宿", "pax": 2, "status": "已完成"}, {"id": "WZ202611070312", "t": "15:32:07", "acceptSec": 60.0, "pickupMin": 9.0, "driver": "李景", "car": "WZ-126", "from": "滴水村", "to": "鳄鱼山景区", "fromFull": "滴水村 民宿区", "toFull": "鳄鱼山景区 火山口", "pax": 5, "status": "已完成"}, {"id": "WZ202611070313", "t": "15:33:40", "acceptSec": 59.0, "pickupMin": 4.0, "driver": "刘红君", "car": "WZ-116", "from": "西角码头（客运码头）", "to": "石螺口", "fromFull": "西角码头（客运码头）", "toFull": "石螺口 海景民宿群", "pax": 5, "status": "已完成"}, {"id": "WZ202611070314", "t": "15:41:37", "acceptSec": 92.0, "pickupMin": 2.0, "driver": "翟测试", "car": "WZ-124", "from": "石螺口海滩", "to": "石螺口", "fromFull": "石螺口海滩", "toFull": "石螺口 海景民宿群", "pax": 1, "status": "已完成"}, {"id": "WZ202611070315", "t": "15:42:26", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "苏牛角坑", "to": "石螺口海滩", "fromFull": "苏牛角坑", "toFull": "石螺口海滩", "pax": 1, "status": "已取消"}, {"id": "WZ202611070316", "t": "15:49:13", "acceptSec": 36.0, "pickupMin": 2.0, "driver": "刘继超", "car": "WZ-127", "from": "西角码头（客运码头）", "to": "后背塘", "fromFull": "西角码头（客运码头）", "toFull": "后背塘", "pax": 2, "status": "已完成"}, {"id": "WZ202611070317", "t": "15:49:27", "acceptSec": 75.0, "pickupMin": 3.0, "driver": "罗卿卿", "car": "WZ-125", "from": "五彩滩", "to": "南湾港", "fromFull": "五彩滩 海景民宿", "toFull": "南湾港 客运码头", "pax": 4, "status": "已完成"}, {"id": "WZ202611070318", "t": "15:50:13", "acceptSec": 89.0, "pickupMin": 7.0, "driver": "于海洋", "car": "WZ-105", "from": "蓝桥", "to": "滴水丹屏", "fromFull": "蓝桥", "toFull": "滴水丹屏 观景台", "pax": 6, "status": "已完成"}, {"id": "WZ202611070319", "t": "15:53:05", "acceptSec": 66.0, "pickupMin": 2.0, "driver": "刘红君", "car": "WZ-116", "from": "石螺口", "to": "南湾", "fromFull": "石螺口 海景民宿群", "toFull": "南湾 临港酒店", "pax": 4, "status": "已完成"}, {"id": "WZ202611070320", "t": "15:53:54", "acceptSec": 65.0, "pickupMin": 2.0, "driver": "孙雄伟", "car": "WZ-121", "from": "北港村", "to": "南湾", "fromFull": "北港村", "toFull": "南湾 临港酒店", "pax": 4, "status": "已完成"}, {"id": "WZ202611070321", "t": "15:57:00", "acceptSec": 94.0, "pickupMin": 2.0, "driver": "杨其静", "car": "WZ-129", "from": "北港村", "to": "鳄鱼山景区", "fromFull": "北港村", "toFull": "鳄鱼山景区 火山口", "pax": 6, "status": "已完成"}, {"id": "WZ202611070322", "t": "15:57:22", "acceptSec": 126.0, "pickupMin": 2.0, "driver": "陈纲", "car": "WZ-132", "from": "盛塘天主教堂", "to": "盛塘村", "fromFull": "盛塘天主教堂", "toFull": "盛塘村 农家客栈", "pax": 1, "status": "已完成"}, {"id": "WZ202611070323", "t": "15:59:31", "acceptSec": 65.0, "pickupMin": 2.0, "driver": "吴昊江", "car": "WZ-111", "from": "石螺口海滩", "to": "西角码头（客运码头）", "fromFull": "石螺口海滩", "toFull": "西角码头（客运码头）", "pax": 2, "status": "已完成"}, {"id": "WZ202611070324", "t": "16:00:17", "acceptSec": 103.0, "pickupMin": 5.0, "driver": "李世伟", "car": "WZ-120", "from": "苏牛角坑", "to": "竹蔗寮", "fromFull": "苏牛角坑", "toFull": "竹蔗寮", "pax": 3, "status": "已完成"}, {"id": "WZ202611070325", "t": "16:02:10", "acceptSec": 96.0, "pickupMin": 2.0, "driver": "陈红", "car": "WZ-106", "from": "盛塘天主教堂", "to": "滴水村", "fromFull": "盛塘天主教堂", "toFull": "滴水村 民宿区", "pax": 6, "status": "已完成"}, {"id": "WZ202611070326", "t": "16:02:19", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "盛塘村", "to": "南湾", "fromFull": "盛塘村 农家客栈", "toFull": "南湾 临港酒店", "pax": 2, "status": "已取消"}, {"id": "WZ202611070327", "t": "16:07:43", "acceptSec": 40.0, "pickupMin": 3.0, "driver": "杨晶红", "car": "WZ-112", "from": "南湾街", "to": "西角码头（客运码头）", "fromFull": "南湾街 餐饮一条街", "toFull": "西角码头（客运码头）", "pax": 2, "status": "已完成"}, {"id": "WZ202611070328", "t": "16:08:28", "acceptSec": 65.0, "pickupMin": 6.0, "driver": "杨荣", "car": "WZ-113", "from": "西角村", "to": "西角码头（客运码头）", "fromFull": "西角村", "toFull": "西角码头（客运码头）", "pax": 6, "status": "已完成"}, {"id": "WZ202611070329", "t": "16:12:08", "acceptSec": 97.0, "pickupMin": 5.0, "driver": "罗传霞", "car": "WZ-119", "from": "盛塘天主教堂", "to": "西角码头（客运码头）", "fromFull": "盛塘天主教堂", "toFull": "西角码头（客运码头）", "pax": 1, "status": "已完成"}, {"id": "WZ202611070330", "t": "16:13:07", "acceptSec": 100.0, "pickupMin": 4.0, "driver": "李景", "car": "WZ-126", "from": "滴水村", "to": "盛塘天主教堂", "fromFull": "滴水村 民宿区", "toFull": "盛塘天主教堂", "pax": 4, "status": "已完成"}, {"id": "WZ202611070331", "t": "16:14:45", "acceptSec": 35.0, "pickupMin": 3.0, "driver": "赵县平", "car": "WZ-123", "from": "南湾街", "to": "贝壳沙滩", "fromFull": "南湾街 海鲜市场", "toFull": "贝壳沙滩", "pax": 4, "status": "已完成"}, {"id": "WZ202611070332", "t": "16:16:11", "acceptSec": 35.0, "pickupMin": 2.0, "driver": "胡瀚文", "car": "WZ-107", "from": "西角码头（客运码头）", "to": "南湾运动公园", "fromFull": "西角码头（客运码头）", "toFull": "南湾运动公园", "pax": 6, "status": "已完成"}, {"id": "WZ202611070333", "t": "16:17:56", "acceptSec": 30.0, "pickupMin": 3.0, "driver": "张红宇", "car": "WZ-103", "from": "南湾街", "to": "南湾街", "fromFull": "南湾街 餐饮一条街", "toFull": "南湾街 海鲜市场", "pax": 6, "status": "已完成"}, {"id": "WZ202611070334", "t": "16:18:18", "acceptSec": 106.0, "pickupMin": 7.0, "driver": "余仁智", "car": "WZ-118", "from": "贝壳沙滩", "to": "火山地质博物馆", "fromFull": "贝壳沙滩", "toFull": "火山地质博物馆", "pax": 6, "status": "已完成"}, {"id": "WZ202611070335", "t": "16:19:20", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "滴水村", "to": "盛塘天主教堂", "fromFull": "滴水村 民宿区", "toFull": "盛塘天主教堂", "pax": 7, "status": "待接单"}, {"id": "WZ202611070336", "t": "16:21:01", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "石螺口海滩", "to": "海螺广场", "fromFull": "石螺口海滩", "toFull": "海螺广场", "pax": 2, "status": "待接单"}, {"id": "WZ202611070337", "t": "16:21:07", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "圣母堂", "to": "石盘河", "fromFull": "圣母堂", "toFull": "石盘河", "pax": 4, "status": "待接单"}, {"id": "WZ202611070338", "t": "16:22:49", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "滴水村", "to": "斜阳岛码头", "fromFull": "滴水村 民宿区", "toFull": "斜阳岛码头", "pax": 4, "status": "待接单"}, {"id": "WZ202611070339", "t": "16:23:25", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "石螺口海滩", "to": "南湾街", "fromFull": "石螺口海滩", "toFull": "南湾街 餐饮一条街", "pax": 1, "status": "待接单"}, {"id": "WZ202611070340", "t": "16:25:04", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "公山村", "to": "滴水村", "fromFull": "公山村", "toFull": "滴水村 民宿区", "pax": 1, "status": "待接单"}, {"id": "WZ202611070341", "t": "16:25:16", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "海螺广场", "to": "西角码头（客运码头）", "fromFull": "海螺广场", "toFull": "西角码头（客运码头）", "pax": 4, "status": "待接单"}, {"id": "WZ202611070342", "t": "16:26:55", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "五彩滩", "to": "贝壳沙滩", "fromFull": "五彩滩 观景台", "toFull": "贝壳沙滩", "pax": 4, "status": "待接单"}, {"id": "WZ202611070343", "t": "16:27:18", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "大沙头", "to": "石螺口", "fromFull": "大沙头", "toFull": "石螺口 海景民宿群", "pax": 5, "status": "待接单"}, {"id": "WZ202611070344", "t": "16:29:56", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "五彩滩", "to": "石螺口", "fromFull": "五彩滩 停车场", "toFull": "石螺口 海景民宿群", "pax": 7, "status": "待接单"}, {"id": "WZ202611070345", "t": "16:30:14", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "东安村", "to": "石螺口", "fromFull": "东安村", "toFull": "石螺口 海鲜排档", "pax": 1, "status": "待接单"}, {"id": "WZ202611070346", "t": "16:31:30", "acceptSec": 0, "pickupMin": 0, "driver": "—", "car": "—", "from": "盛塘天主教堂", "to": "石螺口海滩", "fromFull": "盛塘天主教堂", "toFull": "石螺口海滩", "pax": 4, "status": "待接单"}, {"id": "WZ202611070347", "t": "16:31:32", "acceptSec": 108.0, "pickupMin": 2.0, "driver": "杨其静", "car": "WZ-129", "from": "鳄鱼山景区", "to": "南湾街", "fromFull": "鳄鱼山景区 火山口", "toFull": "南湾街 餐饮一条街", "pax": 5, "status": "服务中"}, {"id": "WZ202611070348", "t": "16:32:10", "acceptSec": 64.0, "pickupMin": 5.0, "driver": "谢荣锋", "car": "WZ-128", "from": "盛塘天主教堂", "to": "斜阳岛码头", "fromFull": "盛塘天主教堂", "toFull": "斜阳岛码头", "pax": 2, "status": "服务中"}, {"id": "WZ202611070349", "t": "16:33:04", "acceptSec": 125.0, "pickupMin": 8.0, "driver": "陈纲", "car": "WZ-132", "from": "东安村", "to": "西角码头（客运码头）", "fromFull": "东安村", "toFull": "西角码头（客运码头）", "pax": 2, "status": "服务中"}, {"id": "WZ202611070350", "t": "16:33:09", "acceptSec": 82.0, "pickupMin": 2.0, "driver": "杨晶红", "car": "WZ-112", "from": "西角码头（客运码头）", "to": "北港村", "fromFull": "西角码头（客运码头）", "toFull": "北港村", "pax": 4, "status": "服务中"}, {"id": "WZ202611070351", "t": "16:35:42", "acceptSec": 95.0, "pickupMin": 2.0, "driver": "刘晓云", "car": "WZ-101", "from": "滴水村", "to": "南湾街", "fromFull": "滴水村 民宿区", "toFull": "南湾街 海鲜市场", "pax": 5, "status": "服务中"}, {"id": "WZ202611070352", "t": "16:37:47", "acceptSec": 108.0, "pickupMin": 2.0, "driver": "李景", "car": "WZ-126", "from": "盛塘天主教堂", "to": "西角码头（客运码头）", "fromFull": "盛塘天主教堂", "toFull": "西角码头（客运码头）", "pax": 4, "status": "服务中"}, {"id": "WZ202611070353", "t": "16:38:55", "acceptSec": 83.0, "pickupMin": 2.0, "driver": "陈红", "car": "WZ-106", "from": "滴水村", "to": "南湾街", "fromFull": "滴水村 民宿区", "toFull": "南湾街 海鲜市场", "pax": 6, "status": "服务中"}, {"id": "WZ202611070354", "t": "16:43:20", "acceptSec": 59.0, "pickupMin": 3.0, "driver": "金洛林", "car": "WZ-104", "from": "南湾街", "to": "五彩滩", "fromFull": "南湾街 海鲜市场", "toFull": "五彩滩 观景台", "pax": 2, "status": "服务中"}, {"id": "WZ202611070355", "t": "16:45:26", "acceptSec": 112.0, "pickupMin": 2.0, "driver": "翟测试", "car": "WZ-124", "from": "石螺口海滩", "to": "南湾运动公园", "fromFull": "石螺口海滩", "toFull": "南湾运动公园", "pax": 5, "status": "服务中"}, {"id": "WZ202611070356", "t": "16:46:25", "acceptSec": 68.0, "pickupMin": 4.0, "driver": "周青青", "car": "WZ-114", "from": "南湾", "to": "石螺口", "fromFull": "南湾 临港酒店", "toFull": "石螺口 海景民宿群", "pax": 1, "status": "服务中"}, {"id": "WZ202611070357", "t": "16:51:01", "acceptSec": 79.0, "pickupMin": 7.0, "driver": "杨荣", "car": "WZ-113", "from": "盛塘天主教堂", "to": "斜阳岛码头", "fromFull": "盛塘天主教堂", "toFull": "斜阳岛码头", "pax": 3, "status": "服务中"}, {"id": "WZ202611070358", "t": "16:52:20", "acceptSec": 78.0, "pickupMin": 3.0, "driver": "谢荣锋", "car": "WZ-128", "from": "石螺口海滩", "to": "西角码头（客运码头）", "fromFull": "石螺口海滩", "toFull": "西角码头（客运码头）", "pax": 1, "status": "服务中"}, {"id": "WZ202611070359", "t": "16:52:45", "acceptSec": 72.0, "pickupMin": 0, "driver": "李世伟", "car": "WZ-120", "from": "五彩滩", "to": "南湾街", "fromFull": "五彩滩 观景台", "toFull": "南湾街 餐饮一条街", "pax": 4, "status": "服务中"}, {"id": "WZ202611070360", "t": "16:54:43", "acceptSec": 81.0, "pickupMin": 0, "driver": "卢献蜜", "car": "WZ-102", "from": "井仔村", "to": "北港村", "fromFull": "井仔村", "toFull": "北港村", "pax": 6, "status": "服务中"}, {"id": "WZ202611070361", "t": "16:55:59", "acceptSec": 94.0, "pickupMin": 2.0, "driver": "陈义", "car": "WZ-109", "from": "幕崖", "to": "西角码头（客运码头）", "fromFull": "幕崖", "toFull": "西角码头（客运码头）", "pax": 6, "status": "服务中"}, {"id": "WZ202611070362", "t": "16:57:48", "acceptSec": 67.0, "pickupMin": 0, "driver": "钟永轩", "car": "WZ-108", "from": "滴水村", "to": "五彩滩", "fromFull": "滴水村 民宿区", "toFull": "五彩滩 观景台", "pax": 2, "status": "服务中"}, {"id": "WZ202611070363", "t": "16:59:40", "acceptSec": 30.0, "pickupMin": 0, "driver": "邹勇", "car": "WZ-117", "from": "南湾街", "to": "西角码头（客运码头）", "fromFull": "南湾街 餐饮一条街", "toFull": "西角码头（客运码头）", "pax": 2, "status": "服务中"}];
+const allSnapshots = [{"t": "08:29:59", "southBay": 8, "westPort": 2, "crocPark": 2, "eastBeach": 4, "church": 5, "shiluokou": 5, "others": 6, "total": 32, "serving": 5, "idle": 27, "charging": 0}, {"t": "09:00:00", "southBay": 6, "westPort": 0, "crocPark": 5, "eastBeach": 5, "church": 7, "shiluokou": 4, "others": 5, "total": 32, "serving": 5, "idle": 27, "charging": 0}, {"t": "09:30:00", "southBay": 6, "westPort": 1, "crocPark": 4, "eastBeach": 7, "church": 6, "shiluokou": 4, "others": 4, "total": 32, "serving": 5, "idle": 27, "charging": 0}, {"t": "09:59:59", "southBay": 7, "westPort": 2, "crocPark": 4, "eastBeach": 7, "church": 2, "shiluokou": 7, "others": 3, "total": 32, "serving": 12, "idle": 20, "charging": 0}, {"t": "10:30:00", "southBay": 9, "westPort": 2, "crocPark": 5, "eastBeach": 4, "church": 1, "shiluokou": 6, "others": 5, "total": 32, "serving": 13, "idle": 19, "charging": 0}, {"t": "11:00:00", "southBay": 10, "westPort": 1, "crocPark": 6, "eastBeach": 4, "church": 3, "shiluokou": 4, "others": 4, "total": 32, "serving": 11, "idle": 21, "charging": 0}, {"t": "11:29:59", "southBay": 13, "westPort": 1, "crocPark": 3, "eastBeach": 5, "church": 2, "shiluokou": 3, "others": 5, "total": 32, "serving": 14, "idle": 18, "charging": 0}, {"t": "12:00:00", "southBay": 15, "westPort": 1, "crocPark": 3, "eastBeach": 3, "church": 1, "shiluokou": 6, "others": 3, "total": 32, "serving": 7, "idle": 25, "charging": 0}, {"t": "12:30:00", "southBay": 18, "westPort": 1, "crocPark": 1, "eastBeach": 5, "church": 2, "shiluokou": 4, "others": 1, "total": 32, "serving": 3, "idle": 29, "charging": 0}, {"t": "12:59:59", "southBay": 17, "westPort": 0, "crocPark": 2, "eastBeach": 8, "church": 1, "shiluokou": 1, "others": 3, "total": 32, "serving": 5, "idle": 27, "charging": 0}, {"t": "13:30:00", "southBay": 14, "westPort": 4, "crocPark": 1, "eastBeach": 4, "church": 3, "shiluokou": 2, "others": 4, "total": 32, "serving": 8, "idle": 24, "charging": 0}, {"t": "14:00:00", "southBay": 14, "westPort": 2, "crocPark": 1, "eastBeach": 4, "church": 3, "shiluokou": 3, "others": 5, "total": 32, "serving": 6, "idle": 26, "charging": 0}, {"t": "14:29:59", "southBay": 10, "westPort": 1, "crocPark": 5, "eastBeach": 4, "church": 1, "shiluokou": 5, "others": 6, "total": 32, "serving": 7, "idle": 25, "charging": 0}, {"t": "15:00:00", "southBay": 11, "westPort": 2, "crocPark": 3, "eastBeach": 3, "church": 3, "shiluokou": 7, "others": 3, "total": 32, "serving": 7, "idle": 25, "charging": 0}, {"t": "15:30:00", "southBay": 12, "westPort": 2, "crocPark": 4, "eastBeach": 2, "church": 4, "shiluokou": 2, "others": 6, "total": 32, "serving": 9, "idle": 23, "charging": 0}, {"t": "15:59:59", "southBay": 11, "westPort": 2, "crocPark": 5, "eastBeach": 3, "church": 4, "shiluokou": 5, "others": 2, "total": 32, "serving": 5, "idle": 27, "charging": 0}, {"t": "16:30:00", "southBay": 12, "westPort": 5, "crocPark": 7, "eastBeach": 3, "church": 1, "shiluokou": 1, "others": 3, "total": 32, "serving": 5, "idle": 27, "charging": 0}, {"t": "17:00:00", "southBay": 14, "westPort": 4, "crocPark": 5, "eastBeach": 3, "church": 2, "shiluokou": 3, "others": 1, "total": 32, "serving": 6, "idle": 26, "charging": 0}, {"t": "17:29:59", "southBay": 14, "westPort": 7, "crocPark": 3, "eastBeach": 4, "church": 2, "shiluokou": 2, "others": 0, "total": 32, "serving": 0, "idle": 30, "charging": 2}, {"t": "18:00:00", "southBay": 14, "westPort": 7, "crocPark": 3, "eastBeach": 6, "church": 1, "shiluokou": 1, "others": 0, "total": 32, "serving": 0, "idle": 32, "charging": 0}, {"t": "18:30:00", "southBay": 14, "westPort": 7, "crocPark": 3, "eastBeach": 6, "church": 1, "shiluokou": 1, "others": 0, "total": 32, "serving": 0, "idle": 32, "charging": 0}, {"t": "18:59:59", "southBay": 14, "westPort": 7, "crocPark": 3, "eastBeach": 6, "church": 1, "shiluokou": 1, "others": 0, "total": 32, "serving": 0, "idle": 32, "charging": 0}, {"t": "19:30:00", "southBay": 14, "westPort": 7, "crocPark": 3, "eastBeach": 6, "church": 1, "shiluokou": 1, "others": 0, "total": 32, "serving": 0, "idle": 32, "charging": 0}, {"t": "20:00:00", "southBay": 14, "westPort": 7, "crocPark": 3, "eastBeach": 6, "church": 1, "shiluokou": 1, "others": 0, "total": 32, "serving": 0, "idle": 32, "charging": 0}, {"t": "20:29:59", "southBay": 11, "westPort": 6, "crocPark": 2, "eastBeach": 6, "church": 0, "shiluokou": 2, "others": 5, "total": 32, "serving": 0, "idle": 28, "charging": 4}, {"t": "21:00:00", "southBay": 11, "westPort": 5, "crocPark": 2, "eastBeach": 6, "church": 3, "shiluokou": 2, "others": 3, "total": 32, "serving": 0, "idle": 30, "charging": 2}, {"t": "21:30:00", "southBay": 7, "westPort": 3, "crocPark": 3, "eastBeach": 5, "church": 4, "shiluokou": 3, "others": 7, "total": 32, "serving": 0, "idle": 26, "charging": 6}, {"t": "21:59:59", "southBay": 5, "westPort": 5, "crocPark": 3, "eastBeach": 5, "church": 6, "shiluokou": 3, "others": 5, "total": 32, "serving": 0, "idle": 32, "charging": 0}];
+
+/* 6 起业务预警事件定义（带精确触发时间） */
+const warningIncidents = [
+  {
+    id: 'EV202611070001',
+    exactTime: '10:20:00',
+    time: '10:20',
+    type: 'warn',
+    tag: '预警',
+    title: '船舶 10:50 分到港，客流上升',
+    content: '监测到「北海—涠洲」客轮预计 10:50 到港，客流持续增加，西角码头现有候车运力需提前储备调度。',
+    location: '西角码头',
+    placeId: 'port',
+    car: '—',
+    action: '通知调度，增派车辆',
+    status: '已处理'
+  },
+  {
+    id: 'EV202611070002',
+    exactTime: '10:58:00',
+    time: '10:58',
+    type: 'warn',
+    tag: '预警',
+    title: '南湾海鲜市场多辆车速偏低，拥堵预警',
+    content: '南湾海鲜市场周边路段人车密集，多辆观光车实时平均时速降至 15km/h，触发缓行拥堵预警。',
+    location: '南湾海鲜市场',
+    placeId: 'bay',
+    car: 'WZ-103等',
+    action: '通知司机注意绕行',
+    status: '已处理'
+  },
+  {
+    id: 'EV202611070003',
+    exactTime: '11:20:00',
+    time: '11:20',
+    type: 'warn',
+    tag: '预警',
+    title: '船舶 11:50 分到港，客流上升',
+    content: '监测到「北海—涠洲」航线班次预计 11:50 到港，进岛旅客增多，出港换乘运力需调度增援。',
+    location: '西角码头',
+    placeId: 'port',
+    car: '—',
+    action: '通知调度，增派车辆',
+    status: '已处理'
+  },
+  {
+    id: 'EV202611070004',
+    exactTime: '12:30:00',
+    time: '12:30',
+    type: 'warn',
+    tag: '预警',
+    title: '涠洲岛仙人掌基地路段施工，请绕行',
+    content: '涠洲岛仙人掌基地周边路段开展路面施工作业，通行效率降低，请过往观光车提前绕行。',
+    location: '仙人掌基地路段',
+    placeId: 'east',
+    car: '—',
+    action: '通知司机注意绕行',
+    status: '已处理'
+  },
+  {
+    id: 'EV202611070005',
+    exactTime: '13:20:00',
+    time: '13:20',
+    type: 'warn',
+    tag: '预警',
+    title: '船舶 13:50 分到港，客流上升',
+    content: '监测到「北海—涠洲」午间航线 13:50 班次到港，码头接驳换乘客流上升，现有候车运力需调派增补。',
+    location: '西角码头',
+    placeId: 'port',
+    car: '—',
+    action: '通知调度，增派车辆',
+    status: '未处理'
+  },
+  {
+    id: 'EV202611070006',
+    exactTime: '15:00:00',
+    time: '15:00',
+    type: 'warn',
+    tag: '预警',
+    title: '船舶 15:30 分到港，客流上升',
+    content: '监测到「北海—涠洲」航线 15:30 班次到港，出港客流明显上升，调度中心需增派车辆前往接驳。',
+    location: '西角码头',
+    placeId: 'port',
+    car: '—',
+    action: '通知调度，增派车辆',
+    status: '未处理'
+  }
+];
+
+/* 32 辆运营车辆轮播数据 */
+const carouselVehicles = [
+  // Page 1
+  [
+    { id: 'WZ-101', driver: '刘晓云', from: '滴水村', to: '南湾街', pax: '5人', bat: 92 },
+    { id: 'WZ-102', driver: '卢献蜜', from: '井仔村', to: '北港村', pax: '6人', bat: 88 },
+    { id: 'WZ-103', driver: '张红宇', from: '南湾街', to: '南湾街', pax: '6人', bat: 74 },
+    { id: 'WZ-104', driver: '金洛林', from: '南湾街', to: '五彩滩', pax: '2人', bat: 63 },
+    { id: 'WZ-105', driver: '于海洋', from: '蓝桥', to: '滴水丹屏', pax: '6人', bat: 85 }
+  ],
+  // Page 2
+  [
+    { id: 'WZ-106', driver: '陈红', from: '滴水村', to: '南湾街', pax: '6人', bat: 78 },
+    { id: 'WZ-107', driver: '胡瀚文', from: '西角码头', to: '南湾运动公园', pax: '6人', bat: 90 },
+    { id: 'WZ-108', driver: '钟永轩', from: '滴水村', to: '五彩滩', pax: '2人', bat: 68 },
+    { id: 'WZ-109', driver: '陈义', from: '幕崖', to: '西角码头', pax: '6人', bat: 82 },
+    { id: 'WZ-110', driver: '刘扬', from: '滴水丹屏', to: '南湾', pax: '4人', bat: 75 }
+  ],
+  // Page 3
+  [
+    { id: 'WZ-111', driver: '吴昊江', from: '石螺口海滩', to: '西角码头', pax: '2人', bat: 94 },
+    { id: 'WZ-112', driver: '杨晶红', from: '西角码头', to: '北港村', pax: '4人', bat: 71 },
+    { id: 'WZ-113', driver: '杨荣', from: '盛塘天主教堂', to: '斜阳岛码头', pax: '3人', bat: 86 },
+    { id: 'WZ-114', driver: '周青青', from: '南湾', to: '石螺口', pax: '1人', bat: 65 },
+    { id: 'WZ-115', driver: '张雷', from: '石螺口', to: '滴水村', pax: '4人', bat: 80 }
+  ],
+  // Page 4
+  [
+    { id: 'WZ-116', driver: '刘红君', from: '石螺口', to: '南湾', pax: '4人', bat: 77 },
+    { id: 'WZ-117', driver: '邹勇', from: '南湾街', to: '西角码头', pax: '2人', bat: 89 },
+    { id: 'WZ-118', driver: '余仁智', from: '贝壳沙滩', to: '地质博物馆', pax: '6人', bat: 59 },
+    { id: 'WZ-119', driver: '罗传霞', from: '盛塘天主教堂', to: '西角码头', pax: '1人', bat: 83 },
+    { id: 'WZ-120', driver: '李世伟', from: '五彩滩', to: '南湾街', pax: '4人', bat: 91 }
+  ],
+  // Page 5
+  [
+    { id: 'WZ-121', driver: '孙雄伟', from: '北港村', to: '南湾', pax: '4人', bat: 66 },
+    { id: 'WZ-122', driver: '朱娇娇', from: '西角码头', to: '滴水村', pax: '4人', bat: 79 },
+    { id: 'WZ-123', driver: '赵县平', from: '南湾街', to: '贝壳沙滩', pax: '4人', bat: 84 },
+    { id: 'WZ-124', driver: '翟测试', from: '石螺口海滩', to: '南湾运动公园', pax: '5人', bat: 72 },
+    { id: 'WZ-125', driver: '罗卿卿', from: '五彩滩', to: '南湾港', pax: '4人', bat: 88 }
+  ],
+  // Page 6
+  [
+    { id: 'WZ-126', driver: '李景', from: '盛塘天主教堂', to: '西角码头', pax: '4人', bat: 69 },
+    { id: 'WZ-127', driver: '刘继超', from: '西角码头', to: '后背塘', pax: '2人', bat: 85 },
+    { id: 'WZ-128', driver: '谢荣锋', from: '石螺口海滩', to: '西角码头', pax: '1人', bat: 62 },
+    { id: 'WZ-129', driver: '杨其静', from: '鳄鱼山景区', to: '南湾街', pax: '5人', bat: 93 },
+    { id: 'WZ-130', driver: '张锋', from: '五彩滩', to: '南湾港', pax: '2人', bat: 76 }
+  ],
+  // Page 7
+  [
+    { id: 'WZ-131', driver: '陈小合', from: '地质博物馆', to: '南湾', pax: '2人', bat: 81 },
+    { id: 'WZ-132', driver: '陈纲', from: '东安村', to: '西角码头', pax: '2人', bat: 87 }
+  ]
+];
+
+/* 核心时序动态计算 */
+function getDynamicState() {
+  const curT = typeof getEffectiveTimeStr === 'function' ? getEffectiveTimeStr() : '23:59:59';
+  const isAll = (typeof currentTimelineMode !== 'undefined' && currentTimelineMode === 'all');
+
+  const activeOrders = (isAll || curT >= '17:00:00') ? allOrders : allOrders.filter(o => o.t <= curT);
+  const totalOrders = activeOrders.length;
+  const doneOrders = activeOrders.filter(o => o.status === '已完成').length;
+  const cancelOrders = activeOrders.filter(o => o.status === '已取消').length;
+  const servingOrders = activeOrders.filter(o => o.status === '服务中').length;
+  const pendingOrders = activeOrders.filter(o => o.status === '待接单').length;
+
+  const totalPax = activeOrders.reduce((acc, o) => acc + o.pax, 0);
+
+  const waitTimes = activeOrders.filter(o => o.pickupMin > 0).map(o => o.pickupMin);
+  const avgWait = waitTimes.length ? (waitTimes.reduce((a, b) => a + b, 0) / waitTimes.length).toFixed(1) : '4.0';
+  const responseRate = totalOrders ? (((doneOrders + servingOrders) / totalOrders) * 100).toFixed(1) : '84.3';
+  const cancelRate = totalOrders ? ((cancelOrders / totalOrders) * 100).toFixed(1) : '12.4';
+  const within2m = activeOrders.filter(o => o.acceptSec > 0 && o.acceptSec <= 120).length;
+  const within1m = activeOrders.filter(o => o.acceptSec > 0 && o.acceptSec <= 60).length;
+  const rate2m = totalOrders ? ((within2m / totalOrders) * 100).toFixed(1) : '78.2';
+  const rate1m = totalOrders ? ((within1m / totalOrders) * 100).toFixed(1) : '22.9';
+
+  let snap = allSnapshots[allSnapshots.length - 1];
+  if (!isAll && curT < '17:00:00') {
+    for (let i = allSnapshots.length - 1; i >= 0; i--) {
+      if (allSnapshots[i].t <= curT) {
+        snap = allSnapshots[i];
+        break;
+      }
+    }
+  }
+
+  const areaItems = [
+    { name: '南湾运动公园', count: snap.southBay, color: '#f59e0b' },
+    { name: '西角码头', count: snap.westPort, color: '#10b981' },
+    { name: '鳄鱼山景区', count: snap.crocPark, color: '#00d8ff' },
+    { name: '五彩滩景区', count: snap.eastBeach, color: '#38bdf8' },
+    { name: '石螺口景区', count: snap.shiluokou, color: '#38bdf8' },
+    { name: '天主教堂', count: snap.church, color: '#38bdf8' },
+    { name: '其他', count: snap.others, color: '#38bdf8' }
+  ].sort((a, b) => b.count - a.count);
+
+  const maxAreaCount = Math.max(1, ...areaItems.map(a => a.count));
+  areaItems.forEach(a => a.pct = Math.round((a.count / maxAreaCount) * 100));
+
+  /* 根据用户要求：在特定时间点之前先不展示，到了特定时间点之后才会新增出这一条数据 */
+  const activeIncidents = (isAll || curT >= '17:00:00')
+    ? warningIncidents
+    : warningIncidents.filter(i => i.exactTime <= curT);
+
+  return {
+    curT,
+    isAll,
+    totalOrders,
+    doneOrders,
+    cancelOrders,
+    servingOrders,
+    pendingOrders,
+    totalPax,
+    avgWait,
+    responseRate,
+    cancelRate,
+    rate2m,
+    rate1m,
+    snap,
+    areaItems,
+    activeIncidents
+  };
+}
+
+function getActiveIncidentCount() {
+  return getDynamicState().activeIncidents.length;
+}
+
+function getLatestIncidentTitle() {
+  const act = getDynamicState().activeIncidents;
+  return act.length ? act[act.length - 1].title : '';
+}
+
 function panelHeader(name, badge = '', icon = '') {
   const icoHtml = icon ? ico(icon) : '';
   return `<div class="panel-head"><h3 class="panel-title">${icoHtml}${name}</h3>${badge}</div>`;
 }
 
 /* --------------------------------------------------------------------------
-   左侧模块 1A: 未来客流预测 (基于船票预售 - 柱状图)
+   左侧模块 1A: 未来客流预测
    -------------------------------------------------------------------------- */
 function forecastFlowPanel() {
   const badge = `<span class="tag-badge">基于船票预售</span>`;
@@ -33,9 +265,10 @@ function forecastFlowPanel() {
 }
 
 /* --------------------------------------------------------------------------
-   左侧模块 1B: 全岛出行总览 (客流大指标 + 4格天气海况)
+   左侧模块 1B: 全岛出行总览 (动态关联当前时段运送客流与单量)
    -------------------------------------------------------------------------- */
 function islandOverviewPanel(period = '今日') {
+  const dyn = getDynamicState();
   const badge = `<button class="tag-badge" data-action="period">${period}</button>`;
   return `<section class="panel panel-overview">
     ${panelHeader('全岛出行总览', badge)}
@@ -47,9 +280,9 @@ function islandOverviewPanel(period = '今日') {
       </div>
       <div class="metric-card">
         <span class="m-lbl">今日运送客流</span>
-        <div class="m-val"><strong>1,320</strong><small>人次</small></div>
+        <div class="m-val"><strong>${dyn.totalPax.toLocaleString()}</strong><small>人次</small></div>
         <div class="m-badges">
-          <span class="badge-pill">363 单</span>
+          <span class="badge-pill">${dyn.totalOrders} 单</span>
           <span class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>10%</b></span>
         </div>
       </div>
@@ -80,7 +313,7 @@ function islandOverviewPanel(period = '今日') {
 }
 
 /* --------------------------------------------------------------------------
-   左侧模块 2A: 订单趋势 (平滑折线图 - 06:00-22:00 每两小时)
+   左侧模块 2A: 订单趋势 (06:00-22:00 分段时序)
    -------------------------------------------------------------------------- */
 let orderTrendPeriod = '今日';
 
@@ -95,6 +328,7 @@ function setOrderTrendPeriod(p) {
 }
 
 function orderTrendPanel(period = orderTrendPeriod) {
+  const dyn = getDynamicState();
   const badge = `
     <div class="trend-tabs">
       <button class="tag-badge ${period === '今日' ? 'active' : ''}" data-action="setOrderTrend" data-trend-period="今日">今日</button>
@@ -132,20 +366,24 @@ function orderTrendPanel(period = orderTrendPeriod) {
     return { x, y, v: p.v, t: p.t };
   });
 
-  let pathD = `M ${coords[0].x} ${coords[0].y}`;
+  let lineD = `M ${coords[0].x} ${coords[0].y}`;
   for (let i = 0; i < coords.length - 1; i++) {
-    const p0 = coords[i];
-    const p1 = coords[i + 1];
-    const mx = (p0.x + p1.x) / 2;
-    pathD += ` C ${mx} ${p0.y}, ${mx} ${p1.y}, ${p1.x} ${p1.y}`;
+    const c1x = coords[i].x + (coords[i + 1].x - coords[i].x) / 2;
+    const c1y = coords[i].y;
+    const c2x = c1x;
+    const c2y = coords[i + 1].y;
+    lineD += ` C ${c1x} ${c1y}, ${c2x} ${c2y}, ${coords[i + 1].x} ${coords[i + 1].y}`;
   }
-  const areaD = `${pathD} L ${coords[coords.length - 1].x} 122 L ${coords[0].x} 122 Z`;
+  const areaD = `${lineD} L ${coords[coords.length - 1].x} 118 L ${coords[0].x} 118 Z`;
 
-  const circles = coords.map(c => `
-    <circle cx="${c.x}" cy="${c.y}" r="3.5" class="trend-pt" filter="drop-shadow(0 0 5px #00d8ff)"/>
+  const dots = coords.map(c => `
+    <circle cx="${c.x}" cy="${c.y}" r="3.5" class="trend-dot"></circle>
+    <circle cx="${c.x}" cy="${c.y}" r="1.5" class="trend-dot-core"></circle>
   `).join('');
 
-  const xLabels = points.map(p => `<span>${p.t}</span>`).join('');
+  const labels = coords.map(c => `
+    <text x="${c.x}" y="125" class="trend-x-lbl" text-anchor="middle">${c.t}</text>
+  `).join('');
 
   return `<section class="panel panel-order-trend">
     ${panelHeader('订单趋势', badge)}
@@ -156,70 +394,75 @@ function orderTrendPanel(period = orderTrendPeriod) {
     <div class="trend-svg-wrap">
       <svg viewBox="0 0 500 128" preserveAspectRatio="none">
         <defs>
-          <linearGradient id="orderTrendAreaGrad" x1="0" y1="0" x2="0" y2="1">
-            <stop offset="0%" stop-color="#00d8ff" stop-opacity="0.38"/>
-            <stop offset="100%" stop-color="#00d8ff" stop-opacity="0.01"/>
+          <linearGradient id="trendAreaGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#00d8ff" stop-opacity="0.32" />
+            <stop offset="100%" stop-color="#00d8ff" stop-opacity="0.0" />
           </linearGradient>
         </defs>
-        <line x1="24" y1="22" x2="476" y2="22" stroke="rgba(125,185,245,0.12)" stroke-dasharray="3,3"/>
-        <line x1="24" y1="66" x2="476" y2="66" stroke="rgba(125,185,245,0.12)" stroke-dasharray="3,3"/>
-        <line x1="24" y1="110" x2="476" y2="110" stroke="rgba(125,185,245,0.16)"/>
-        <path d="${areaD}" fill="url(#orderTrendAreaGrad)"/>
-        <path d="${pathD}" fill="none" stroke="#00d8ff" stroke-width="2.6" stroke-linecap="round"/>
-        ${circles}
+        <path d="${areaD}" fill="url(#trendAreaGrad)" />
+        <path d="${lineD}" fill="none" stroke="#00d8ff" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" />
+        ${dots}
+        ${labels}
       </svg>
-      <div class="trend-axis-x">${xLabels}</div>
     </div>
   </section>`;
 }
 
 /* --------------------------------------------------------------------------
-   左侧模块 2B: 运营监控 (GMV + 客单价 + 订单状态格)
+   左侧模块 2B: 运营监控 (动态时序 GMV + 订单状态格与进度条)
    -------------------------------------------------------------------------- */
 function operationsMonitorPanel() {
-  const badge = `<span class="tag-badge">订单总数 363</span>`;
+  const dyn = getDynamicState();
+  const badge = `<span class="tag-badge">订单总数 ${dyn.totalOrders}</span>`;
+  const gmv = dyn.totalOrders * 36;
+  const tot = Math.max(1, dyn.totalOrders);
+  const cancelPct = ((dyn.cancelOrders / tot) * 100).toFixed(1);
+  const donePct = ((dyn.doneOrders / tot) * 100).toFixed(1);
+  const servingPct = ((dyn.servingOrders / tot) * 100).toFixed(1);
+  const pendingPct = ((dyn.pendingOrders / tot) * 100).toFixed(1);
+
   return `<section class="panel panel-ops">
     ${panelHeader('运营监控', badge)}
     <div class="gmv-dual">
       <div class="gmv-left">
         <span class="m-lbl">今日营收 <small>GMV</small></span>
-        <div class="gmv-val">¥13,068</div>
+        <div class="gmv-val">¥${gmv.toLocaleString()}</div>
         <div class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>10%</b></div>
       </div>
       <div class="arpu-card">
-        <div class="arpu-val">¥36</div>
-        <div class="arpu-lbl">客单价</div>
+        <span class="arpu-lbl">客单价</span>
+        <strong class="arpu-val font-num">¥36</strong>
       </div>
     </div>
     <div class="order-grid">
       <div class="order-box box-cancel">
-        <strong class="font-num num-cancel">45</strong>
+        <strong class="font-num num-cancel">${dyn.cancelOrders}</strong>
         <small>已取消</small>
       </div>
       <div class="order-box box-done">
-        <strong class="font-num num-done">289</strong>
+        <strong class="font-num num-done">${dyn.doneOrders}</strong>
         <small>已完成</small>
       </div>
       <div class="order-box box-serving">
-        <strong class="font-num num-serving">17</strong>
+        <strong class="font-num num-serving">${dyn.servingOrders}</strong>
         <small>服务中</small>
       </div>
       <div class="order-box box-pending">
-        <strong class="font-num num-pending">12</strong>
+        <strong class="font-num num-pending">${dyn.pendingOrders}</strong>
         <small>待接单</small>
       </div>
     </div>
-    <div class="order-progress-strip" title="订单状态比例分布: 已完成 289单 (79.6%) / 已取消 45单 (12.4%) / 服务中 17单 (4.7%) / 待接单 12单 (3.3%)">
-      <span class="seg cancel" style="width: 12.4%;" title="已取消: 45单 (12.4%)"></span>
-      <span class="seg done" style="width: 79.6%;" title="已完成: 289单 (79.6%)"></span>
-      <span class="seg serving" style="width: 4.7%;" title="服务中: 17单 (4.7%)"></span>
-      <span class="seg pending" style="width: 3.3%;" title="待接单: 12单 (3.3%)"></span>
+    <div class="order-progress-strip" title="订单状态比例: 已完成 ${dyn.doneOrders}单 (${donePct}%) / 已取消 ${dyn.cancelOrders}单 (${cancelPct}%) / 服务中 ${dyn.servingOrders}单 (${servingPct}%) / 待接单 ${dyn.pendingOrders}单 (${pendingPct}%)">
+      <span class="seg cancel" style="width: ${cancelPct}%;"></span>
+      <span class="seg done" style="width: ${donePct}%;"></span>
+      <span class="seg serving" style="width: ${servingPct}%;"></span>
+      <span class="seg pending" style="width: ${pendingPct}%;"></span>
     </div>
   </section>`;
 }
 
 /* --------------------------------------------------------------------------
-   左侧模块 3: 服务监控 (5个指标 + 左:车辆区域分布 + 右:出发地/目的地)
+   左侧模块 3: 服务监控 (动态指标 + 实时车辆区域分布 + 排队候车/在途订单)
    -------------------------------------------------------------------------- */
 const queueOrderDetails = [
   {
@@ -326,31 +569,11 @@ const queueOrderDetails = [
       { name: '司机出发时间', time: '16:37' },
       { name: '司机接到乘客时间', time: '16:38' }
     ]
-  },
-  {
-    id: 'WZ202611070352',
-    status: '服务中',
-    passengerPhone: '1368****4427',
-    useTime: '今日 16:37',
-    driver: '李景 (WZ-126)',
-    driverPhone: '1587****6618',
-    from: '盛塘天主教堂',
-    to: '西角码头',
-    route: '盛塘天主教堂 → 西角码头（客运码头）',
-    pax: '4 / 7 人',
-    paxCount: '4 人',
-    price: '¥42.00',
-    wait: '02:00',
-    timeline: [
-      { name: '叫车时间', time: '16:37' },
-      { name: '司机接单时间', time: '16:38' },
-      { name: '司机出发时间', time: '16:39' },
-      { name: '司机接到乘客时间', time: '16:40' }
-    ]
   }
 ];
 
 function serviceMonitorPanel() {
+  const dyn = getDynamicState();
   const badge = `<span class="tag-badge mint-tag"><i class="live-dot"></i>实时</span>`;
   const rows = queueOrderDetails.slice(0, 5).map((q, idx) => `
     <div class="queue-row" data-action="openOrder" data-queue-idx="${idx}" role="button" tabindex="0" title="点击查看车辆订单详情">
@@ -365,17 +588,7 @@ function serviceMonitorPanel() {
     </div>
   `).join('');
 
-  const areaDistItems = [
-    { name: '南湾运动公园', count: 12, pct: 100, color: '#f59e0b' },
-    { name: '西角码头', count: 5, pct: 42, color: '#10b981' },
-    { name: '鳄鱼山景区', count: 5, pct: 42, color: '#00d8ff' },
-    { name: '五彩滩景区', count: 4, pct: 33, color: '#38bdf8' },
-    { name: '石螺口景区', count: 3, pct: 25, color: '#38bdf8' },
-    { name: '天主教堂', count: 2, pct: 17, color: '#38bdf8' },
-    { name: '其他', count: 1, pct: 8, color: '#38bdf8' }
-  ];
-
-  const distRows = areaDistItems.map(item => `
+  const distRows = dyn.areaItems.map(item => `
     <div class="dist-row">
       <span class="dist-name">${item.name}</span>
       <div class="dist-bar"><i style="width: ${item.pct}%; background: ${item.color};"></i></div>
@@ -388,23 +601,23 @@ function serviceMonitorPanel() {
     <!-- 顶部 5 个业务指标 -->
     <div class="svc-5grid">
       <div class="svc-box">
-        <div class="svc-num"><strong>4</strong><small>分钟</small></div>
+        <div class="svc-num"><strong>${Math.round(dyn.avgWait)}</strong><small>分钟</small></div>
         <div class="svc-lbl">平均等待时长</div>
       </div>
       <div class="svc-box">
-        <div class="svc-num"><strong>84.3</strong><small>%</small></div>
+        <div class="svc-num"><strong>${dyn.responseRate}</strong><small>%</small></div>
         <div class="svc-lbl">应答率</div>
       </div>
       <div class="svc-box">
-        <div class="svc-num"><strong>12.4</strong><small>%</small></div>
+        <div class="svc-num"><strong>${dyn.cancelRate}</strong><small>%</small></div>
         <div class="svc-lbl">取消率</div>
       </div>
       <div class="svc-box">
-        <div class="svc-num"><strong>78.2</strong><small>%</small></div>
+        <div class="svc-num"><strong>${dyn.rate2m}</strong><small>%</small></div>
         <div class="svc-lbl">2分钟内接单率</div>
       </div>
       <div class="svc-box">
-        <div class="svc-num"><strong>22.9</strong><small>%</small></div>
+        <div class="svc-num"><strong>${dyn.rate1m}</strong><small>%</small></div>
         <div class="svc-lbl">1分钟内接单率</div>
       </div>
     </div>
@@ -414,7 +627,7 @@ function serviceMonitorPanel() {
       <div class="svc-dist-col">
         <div class="svc-sub-head">
           <span class="ssh-title">车辆区域分布 (实时)</span>
-          <span class="ssh-meta">在线 <b>32</b> 辆 · 按数量排序</span>
+          <span class="ssh-meta">在线 <b>${dyn.snap.total}</b> 辆 · 按数量排序</span>
         </div>
         <div class="area-dist-list">${distRows}</div>
       </div>
@@ -431,34 +644,40 @@ function serviceMonitorPanel() {
 }
 
 /* --------------------------------------------------------------------------
-   右侧模块 1: 运力总览
+   右侧模块 1: 运力总览 (动态结合 Sheet5 分时车辆状态)
    -------------------------------------------------------------------------- */
 function capacityOverviewPanel() {
+  const dyn = getDynamicState();
   const badge = `<span class="tag-badge mint-tag"><i class="live-dot"></i>实时</span>`;
+  const tot = dyn.snap.total || 32;
+  const runPct = ((dyn.snap.serving / tot) * 100).toFixed(1);
+  const idlePct = ((dyn.snap.idle / tot) * 100).toFixed(1);
+  const servPct = (100 - runPct - idlePct).toFixed(1);
+
   return `<section class="panel panel-capacity">
     ${panelHeader('运力总览', badge)}
     <div class="cap-grid">
       <div class="cap-box total">
-        <strong class="cap-num font-num">32</strong>
+        <strong class="cap-num font-num">${tot}</strong>
         <small>车辆总数</small>
       </div>
       <div class="cap-box running">
-        <strong class="cap-num font-num">20</strong>
+        <strong class="cap-num font-num">${dyn.snap.serving}</strong>
         <small>运营中</small>
       </div>
       <div class="cap-box idle">
-        <strong class="cap-num font-num">6</strong>
+        <strong class="cap-num font-num">${dyn.snap.idle}</strong>
         <small>空驶</small>
       </div>
       <div class="cap-box service">
-        <strong class="cap-num font-num">6</strong>
+        <strong class="cap-num font-num">${dyn.snap.charging}</strong>
         <small>充电/维修</small>
       </div>
     </div>
-    <div class="cap-dist-bar" title="运力分布: 运营 20 / 空驶 6 / 充维 6">
-      <span class="seg-run" style="width: 62.5%;"></span>
-      <span class="seg-idle" style="width: 18.75%;"></span>
-      <span class="seg-serv" style="width: 18.75%;"></span>
+    <div class="cap-dist-bar" title="运力分布: 运营 ${dyn.snap.serving} / 空驶 ${dyn.snap.idle} / 充维 ${dyn.snap.charging}">
+      <span class="seg-run" style="width: ${runPct}%;"></span>
+      <span class="seg-idle" style="width: ${idlePct}%;"></span>
+      <span class="seg-serv" style="width: ${servPct}%;"></span>
     </div>
     <div class="cap-metrics-dual">
       <div class="cap-chip">
@@ -474,7 +693,7 @@ function capacityOverviewPanel() {
 }
 
 /* --------------------------------------------------------------------------
-   右侧模块 2: 驾驶监控 (驾驶行为 + ADAS 统计，带今日预警 59 起)
+   右侧模块 2: 驾驶监控 (驾驶行为 + ADAS 统计)
    -------------------------------------------------------------------------- */
 function vehicleBehaviorAndAdasPanel() {
   const adasLeft = [
@@ -523,7 +742,7 @@ function vehicleBehaviorAndAdasPanel() {
         </div>
       </div>
 
-      <!-- 右列: ADAS 统计 (10项，每列5项撑满) -->
+      <!-- 右列: ADAS 统计 (10项) -->
       <div class="adas-side">
         <div class="veh-sec-title">
           <div class="vst-left">${ico('dish')} <span>ADAS 统计</span></div>
@@ -539,64 +758,8 @@ function vehicleBehaviorAndAdasPanel() {
 }
 
 /* --------------------------------------------------------------------------
-   右侧模块 3A: 车辆监控 (可轮播车辆列表卡片)
+   右侧模块 3A: 车辆监控 (可轮播车辆列表卡片，32辆车分7页)
    -------------------------------------------------------------------------- */
-const carouselVehicles = [
-  // Page 1
-  [
-    { id: 'WZ-101', driver: '刘晓云', from: '滴水村', to: '南湾街', pax: '5人', bat: 92 },
-    { id: 'WZ-102', driver: '卢献蜜', from: '井仔村', to: '北港村', pax: '6人', bat: 88 },
-    { id: 'WZ-103', driver: '张红宇', from: '南湾街', to: '南湾街', pax: '6人', bat: 74 },
-    { id: 'WZ-104', driver: '金洛林', from: '南湾街', to: '五彩滩', pax: '2人', bat: 63 },
-    { id: 'WZ-105', driver: '于海洋', from: '蓝桥', to: '滴水丹屏', pax: '6人', bat: 85 }
-  ],
-  // Page 2
-  [
-    { id: 'WZ-106', driver: '陈红', from: '滴水村', to: '南湾街', pax: '6人', bat: 78 },
-    { id: 'WZ-107', driver: '胡瀚文', from: '西角码头', to: '南湾运动公园', pax: '6人', bat: 90 },
-    { id: 'WZ-108', driver: '钟永轩', from: '滴水村', to: '五彩滩', pax: '2人', bat: 68 },
-    { id: 'WZ-109', driver: '陈义', from: '幕崖', to: '西角码头', pax: '6人', bat: 82 },
-    { id: 'WZ-110', driver: '刘扬', from: '滴水丹屏', to: '南湾', pax: '4人', bat: 75 }
-  ],
-  // Page 3
-  [
-    { id: 'WZ-111', driver: '吴昊江', from: '石螺口海滩', to: '西角码头', pax: '2人', bat: 94 },
-    { id: 'WZ-112', driver: '杨晶红', from: '西角码头', to: '北港村', pax: '4人', bat: 71 },
-    { id: 'WZ-113', driver: '杨荣', from: '盛塘天主教堂', to: '斜阳岛码头', pax: '3人', bat: 86 },
-    { id: 'WZ-114', driver: '周青青', from: '南湾', to: '石螺口', pax: '1人', bat: 65 },
-    { id: 'WZ-115', driver: '张雷', from: '石螺口', to: '滴水村', pax: '4人', bat: 80 }
-  ],
-  // Page 4
-  [
-    { id: 'WZ-116', driver: '刘红君', from: '石螺口', to: '南湾', pax: '4人', bat: 77 },
-    { id: 'WZ-117', driver: '邹勇', from: '南湾街', to: '西角码头', pax: '2人', bat: 89 },
-    { id: 'WZ-118', driver: '余仁智', from: '贝壳沙滩', to: '地质博物馆', pax: '6人', bat: 59 },
-    { id: 'WZ-119', driver: '罗传霞', from: '盛塘天主教堂', to: '西角码头', pax: '1人', bat: 83 },
-    { id: 'WZ-120', driver: '李世伟', from: '五彩滩', to: '南湾街', pax: '4人', bat: 91 }
-  ],
-  // Page 5
-  [
-    { id: 'WZ-121', driver: '孙雄伟', from: '北港村', to: '南湾', pax: '4人', bat: 66 },
-    { id: 'WZ-122', driver: '朱娇娇', from: '西角码头', to: '滴水村', pax: '4人', bat: 79 },
-    { id: 'WZ-123', driver: '赵县平', from: '南湾街', to: '贝壳沙滩', pax: '4人', bat: 84 },
-    { id: 'WZ-124', driver: '翟测试', from: '石螺口海滩', to: '南湾运动公园', pax: '5人', bat: 72 },
-    { id: 'WZ-125', driver: '罗卿卿', from: '五彩滩', to: '南湾港', pax: '4人', bat: 88 }
-  ],
-  // Page 6
-  [
-    { id: 'WZ-126', driver: '李景', from: '盛塘天主教堂', to: '西角码头', pax: '4人', bat: 69 },
-    { id: 'WZ-127', driver: '刘继超', from: '西角码头', to: '后背塘', pax: '2人', bat: 85 },
-    { id: 'WZ-128', driver: '谢荣锋', from: '石螺口海滩', to: '西角码头', pax: '1人', bat: 62 },
-    { id: 'WZ-129', driver: '杨其静', from: '鳄鱼山景区', to: '南湾街', pax: '5人', bat: 93 },
-    { id: 'WZ-130', driver: '张锋', from: '五彩滩', to: '南湾港', pax: '2人', bat: 76 }
-  ],
-  // Page 7
-  [
-    { id: 'WZ-131', driver: '陈小合', from: '地质博物馆', to: '南湾', pax: '2人', bat: 81 },
-    { id: 'WZ-132', driver: '陈纲', from: '东安村', to: '西角码头', pax: '2人', bat: 87 }
-  ]
-];
-
 let currentVehPage = 0;
 let vehCarouselTimer = null;
 
@@ -669,91 +832,45 @@ function vehicleRosterCarouselPanel() {
 }
 
 /* --------------------------------------------------------------------------
-   右侧模块 3B: 事件监控 (异常/预警/已处理 + 告警处置卡片及状态管理)
+   右侧模块 3B: 事件监控 (按精确时间点动态触发新增，时间点前不展示)
    -------------------------------------------------------------------------- */
-const incidentStore = [
-  {
-    id: 'EV202611070006',
-    time: '15:00',
-    type: 'warn',
-    tag: '预警',
-    title: '船舶 15:30 分到港，客流上升',
-    content: '监测到「北海—涠洲」航线 15:30 班次即将到港，预计客流大幅上升，西角码头候车运力需提前储备。',
-    location: '西角码头',
-    car: '—',
-    action: '通知调度，增派车辆',
-    status: '未处理'
-  },
-  {
-    id: 'EV202611070005',
-    time: '13:20',
-    type: 'warn',
-    tag: '预警',
-    title: '船舶 13:50 分到港，客流上升',
-    content: '监测到「北海—涠洲」航线 13:50 班次即将到港，预计客流上升，西角码头候车运力需调度补充。',
-    location: '西角码头',
-    car: '—',
-    action: '通知调度，增派车辆',
-    status: '未处理'
-  },
-  {
-    id: 'EV202611070004',
-    time: '12:30',
-    type: 'warn',
-    tag: '预警',
-    title: '涠洲岛仙人掌基地路段施工，请绕行',
-    content: '涠洲岛仙人掌基地周边路段施工，通行效率受阻，存在缓行拥堵风险。',
-    location: '仙人掌基地路段',
-    car: '—',
-    action: '通知司机注意绕行',
-    status: '已处理'
-  },
-  {
-    id: 'EV202611070003',
-    time: '11:20',
-    type: 'warn',
-    tag: '预警',
-    title: '船舶 11:50 分到港，客流上升',
-    content: '监测到「北海—涠洲」航线 11:50 班次到港，西角码头客流集中上升，调度增派车辆接驳。',
-    location: '西角码头',
-    car: '—',
-    action: '通知调度，增派车辆',
-    status: '已处理'
-  },
-  {
-    id: 'EV202611070002',
-    time: '10:58',
-    type: 'warn',
-    tag: '预警',
-    title: '南湾海鲜市场多辆车速偏低，拥堵预警',
-    content: '南湾海鲜市场路段多辆观光车实时车速偏低，道路拥挤，建议周边车辆绕行。',
-    location: '南湾海鲜市场',
-    car: 'WZ-103等',
-    action: '通知司机注意绕行',
-    status: '已处理'
-  },
-  {
-    id: 'EV202611070001',
-    time: '10:20',
-    type: 'warn',
-    tag: '预警',
-    title: '船舶 10:50 分到港，客流上升',
-    content: '监测到「北海—涠洲」航线 10:50 班次到港，客流显著上升，调度已增派接运车辆。',
-    location: '西角码头',
-    car: '—',
-    action: '通知调度，增派车辆',
-    status: '已处理'
-  }
-];
-
 function incidentMonitorPanel(handled = new Set()) {
-  const badge = `<span class="tag-badge">今日 6 起 · 待办 2 起</span>`;
-  
-  const unhandledWarn = incidentStore.filter(i => i.type === 'warn' && i.status !== '已处理').length;
-  const unhandledErr = incidentStore.filter(i => i.type === 'err' && i.status !== '已处理').length;
-  const okTotal = incidentStore.filter(i => i.status === '已处理').length;
+  const dyn = getDynamicState();
+  const active = dyn.activeIncidents;
+  const totalCount = active.length;
 
-  const displayCards = incidentStore.slice(0, 2);
+  if (totalCount === 0) {
+    const badge = `<span class="tag-badge">今日 0 起预警</span>`;
+    return `<section class="panel panel-incidents">
+      ${panelHeader('事件监控', badge)}
+      <div class="inc-stats-row">
+        <div class="inc-stat-box err">
+          <strong class="font-num">0</strong>
+          <small>异常</small>
+        </div>
+        <div class="inc-stat-box warn">
+          <strong class="font-num">0</strong>
+          <small>预警</small>
+        </div>
+        <div class="inc-stat-box ok">
+          <strong class="font-num">0</strong>
+          <small>已处理</small>
+        </div>
+      </div>
+      <div class="incident-empty">
+        <div class="ie-text">当前时间（${dyn.curT.slice(0, 5)}）前暂无新增预警</div>
+        <small class="ie-sub">下一预警将于 10:20 自动接入</small>
+      </div>
+    </section>`;
+  }
+
+  const unhandledWarn = active.filter(i => i.type === 'warn' && i.status !== '已处理').length;
+  const unhandledErr = active.filter(i => i.type === 'err' && i.status !== '已处理').length;
+  const okTotal = active.filter(i => i.status === '已处理').length;
+  const badge = `<span class="tag-badge">今日 ${totalCount} 起 · 待办 ${unhandledWarn + unhandledErr} 起</span>`;
+
+  // 展示最新 2 条预警卡片
+  const displayCards = active.slice().reverse().slice(0, 2);
   const cards = displayCards.map(item => `
     <div class="inc-v2-card ${item.type} ${item.status === '已处理' ? 'is-handled' : ''}" data-action="openIncident" data-inc-id="${item.id}" role="button" tabindex="0" title="点击查看事件详情">
       <div class="inc-v2-header">
@@ -854,7 +971,7 @@ function openOrderModal(idx) {
 }
 
 function openIncidentModal(id) {
-  const item = incidentStore.find(i => i.id === id) || incidentStore[0];
+  const item = warningIncidents.find(i => i.id === id) || warningIncidents[0];
   const modal = document.getElementById('incident-modal') || document.getElementById('event-modal');
   if (!modal) return;
   const isHandled = item.status === '已处理';
@@ -922,7 +1039,7 @@ function closeModal(target) {
 }
 
 function resolveIncident(id) {
-  const item = incidentStore.find(i => i.id === id);
+  const item = warningIncidents.find(i => i.id === id);
   if (item && item.status !== '已处理') {
     item.status = '已处理';
     closeModal();
@@ -932,13 +1049,13 @@ function resolveIncident(id) {
       renderPanels('overview');
     }
     if (typeof toast === 'function') {
-      toast(`事件 ${item.id} 已标记为已处理`);
+      toast(`预警 ${item.id} 已标记为已处理`);
     }
   }
 }
 
 /* --------------------------------------------------------------------------
-   保留原有线路监管与事件中心模式辅助视图
+   保留原有线路监管与事件中心辅助视图
    -------------------------------------------------------------------------- */
 function routePanels(selectedLine) {
   const active = lines[selectedLine] || lines[0];
@@ -951,22 +1068,36 @@ function routePanels(selectedLine) {
     <section class="panel route-detail" style="--c:${active.color}">${panelHeader(active.name,`<span class="line-code">${active.id}</span>`)}
     <div class="klabel">今日运送客流</div><div class="total-num">${active.people.toLocaleString('en-US')}<small>人次</small></div>
     <div class="route-stats"><span><b>${active.vehicles}</b> 辆在运</span><span>每 <b>${active.headway}</b> 分钟一班</span></div>
-    <div class="stop-list">${stops}</div></section>`;
+    <div class="route-stops">${stops}</div></section>`;
+}
+
+function trafficEventsPanel(handled) {
+  const dyn = getDynamicState();
+  const list = dyn.activeIncidents.map(e=>{
+    const isHandled = e.status === '已处理' || handled.has(e.id);
+    return `<div class="event-row${isHandled?' done':''}" data-event="${e.id}">
+      <div class="event-symbol ${e.type==='err'?'err':'amber'}">${ico(e.type==='err'?'alert':'traffic')}</div>
+      <div class="event-text"><div class="between"><strong>${e.title}</strong><small>${e.time}</small></div><p>${e.content}</p></div>
+      <button class="event-go" data-action="openIncident" data-inc-id="${e.id}" title="查看事件详情">${isHandled?'已处置':'去处置'}</button>
+    </div>`;
+  }).join('');
+  return `<section class="panel events">${panelHeader('交通预警事件',`<span class="tag-badge">${dyn.activeIncidents.length} 起接入</span>`)}<div class="event-list">${list || '<div class="incident-empty">暂无预警事件</div>'}</div></section>`;
 }
 
 function eventModePanels(handled) {
-  const total = events.length;
-  const closed = events.filter(e=>handled.has(e.id));
+  const dyn = getDynamicState();
+  const total = dyn.activeIncidents.length;
+  const closed = dyn.activeIncidents.filter(e=>e.status === '已处理' || handled.has(e.id));
   const open = total - closed.length;
-  const pct = Math.round(100 * closed.length / total);
+  const pct = total ? Math.round(100 * closed.length / total) : 100;
   const progress = `<section class="panel event-overview">${panelHeader('事件概况','<span class="tag-badge">今日</span>')}<div class="event-metrics"><div><strong>${open}</strong><small>待处置</small></div><div><strong>${closed.length}</strong><small>已处置</small></div><div><strong>${total}</strong><small>事件总数</small></div></div><div class="closure"><span>处置完成率</span><b>${pct}%</b></div><div class="closure-bar"><i style="width:${pct}%"></i></div></section>`;
   return [progress + operationsMonitorPanel(), capacityOverviewPanel() + incidentMonitorPanel(handled)];
 }
 
 /* --------------------------------------------------------------------------
-   主渲染导出: 左右翼复合横向平行结构
+   主渲染导出
    -------------------------------------------------------------------------- */
-function renderPanels(mode, period = '今日', selectedLine = 0, handled = new Set(events.filter(e=>e.done).map(e=>e.id))) {
+function renderPanels(mode, period = '今日', selectedLine = 0, handled = new Set()) {
   let leftHtml = '';
   let rightHtml = '';
 
@@ -978,11 +1109,6 @@ function renderPanels(mode, period = '今日', selectedLine = 0, handled = new S
     leftHtml = pair[0];
     rightHtml = pair[1];
   } else {
-    // 默认综合监控大屏模式:
-    // 左翼:
-    // 1行: 未来客流预测 (左) + 全岛出行总览 (右)
-    // 2行: 订单趋势 (左) + 运营监控 (右)
-    // 3行: 服务监控 (全宽复合: 5个指标 + 左:车辆区域分布 + 右:排队候车)
     leftHtml = `
       <div class="panel-row-dual">
         ${forecastFlowPanel()}
@@ -995,10 +1121,6 @@ function renderPanels(mode, period = '今日', selectedLine = 0, handled = new S
       ${serviceMonitorPanel()}
     `;
 
-    // 右翼:
-    // 1行: 运力总览 (全宽)
-    // 2行: 车辆监控 (驾驶行为 + ADAS统计)
-    // 3行: 车辆监控(可轮播列表) (左) + 事件监控 (右)
     rightHtml = `
       ${capacityOverviewPanel()}
       ${vehicleBehaviorAndAdasPanel()}
@@ -1014,6 +1136,5 @@ function renderPanels(mode, period = '今日', selectedLine = 0, handled = new S
   if (leftEl) leftEl.innerHTML = leftHtml;
   if (rightEl) rightEl.innerHTML = rightHtml;
 
-  // 启动车辆轮播
   startVehCarousel();
 }

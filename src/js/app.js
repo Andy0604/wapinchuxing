@@ -77,6 +77,7 @@ async function toggleFullscreen(){
 }
 function onAction(a, d = {}){
   switch(a){
+    case 'setTimeline': setTimelineMode(d.time); break;
     case 'openOrder': openOrderModal(Number(d.queueIdx || 0)); break;
     case 'openIncident': openIncidentModal(d.incId); break;
     case 'setOrderTrend': setOrderTrendPeriod(d.trendPeriod); break;
@@ -106,7 +107,52 @@ function onAction(a, d = {}){
     case 'busRoute':if(state.bus){const v=runs.find(v=>v.id===state.bus);if(v)setLine(v.line)}break;
   }
 }
-function setClock(){const now=new Date(),z='Asia/Shanghai';byId('clock').textContent=now.toLocaleTimeString('en-GB',{timeZone:z,hour12:false});byId('date').textContent=now.toLocaleDateString('sv-SE',{timeZone:z}).replaceAll('-','.')+'  '+now.toLocaleDateString('zh-CN',{timeZone:z,weekday:'short'})}
+let currentTimelineMode = 'live';
+let lastIncidentCount = -1;
+
+function setTimelineMode(t) {
+  currentTimelineMode = t;
+  document.querySelectorAll('.tb-btn').forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.time === t);
+  });
+  setClock();
+  if (typeof updatePanels === 'function') updatePanels();
+  const label = t === 'live' ? '实时监控' : (t === 'all' ? '全天汇总数据' : t.slice(0, 5) + ' 监控快照');
+  toast(`已切换至: ${label}`);
+}
+
+function getEffectiveTimeStr() {
+  if (currentTimelineMode && currentTimelineMode !== 'live' && currentTimelineMode !== 'all') {
+    return currentTimelineMode;
+  }
+  if (currentTimelineMode === 'all') {
+    return '23:59:59';
+  }
+  const now = new Date(), z = 'Asia/Shanghai';
+  return now.toLocaleTimeString('en-GB', { timeZone: z, hour12: false });
+}
+
+function setClock(){
+  const now=new Date(),z='Asia/Shanghai';
+  if (currentTimelineMode === 'live' || currentTimelineMode === 'all') {
+    byId('clock').textContent=now.toLocaleTimeString('en-GB',{timeZone:z,hour12:false});
+  } else {
+    byId('clock').textContent=currentTimelineMode;
+  }
+  byId('date').textContent=now.toLocaleDateString('sv-SE',{timeZone:z}).replaceAll('-','.')+'  '+now.toLocaleDateString('zh-CN',{timeZone:z,weekday:'short'});
+
+  // 实时模式下若到达特定时间点新增了预警事件，自动动态刷新并弹出播报提醒
+  if (currentTimelineMode === 'live' && typeof getActiveIncidentCount === 'function') {
+    const count = getActiveIncidentCount();
+    if (lastIncidentCount >= 0 && count > lastIncidentCount) {
+      if (typeof updatePanels === 'function') updatePanels();
+      if (typeof getLatestIncidentTitle === 'function') {
+        toast(`📢 实时预警：${getLatestIncidentTitle()}`);
+      }
+    }
+    lastIncidentCount = count;
+  }
+}
 function updateScreenScale(){
   const isGiant = window.innerWidth >= 3600 || (window.innerWidth >= 2400 && window.innerWidth / window.innerHeight >= 2.5);
   document.documentElement.classList.toggle('giant-screen', isGiant);

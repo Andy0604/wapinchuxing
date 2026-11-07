@@ -1809,3 +1809,59 @@
   border-color: #315886;
   box-shadow: none;
 }
+
+/* 顶部时序模拟控制条 */
+.timeline-bar {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(9, 25, 45, 0.75);
+  border: 1px solid rgba(56, 189, 248, 0.3);
+  border-radius: 18px;
+  padding: 3px 6px;
+  backdrop-filter: blur(8px);
+}
+.tb-btn {
+  background: transparent;
+  border: none;
+  color: #8da4bc;
+  font-size: 12px;
+  font-weight: 500;
+  padding: 3px 9px;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+}
+.tb-btn:hover {
+  color: #e0f2fe;
+  background: rgba(56, 189, 248, 0.15);
+}
+.tb-btn.active {
+  color: #fff;
+  background: rgba(56, 189, 248, 0.35);
+  box-shadow: 0 0 10px rgba(56, 189, 248, 0.5);
+  font-weight: 600;
+}
+
+/* 事件空状态（未到特定时间点前展示） */
+.incident-empty {
+  padding: 22px 14px;
+  text-align: center;
+  color: #64748b;
+  border: 1px dashed rgba(100, 116, 139, 0.35);
+  border-radius: 8px;
+  margin-top: 6px;
+  background: rgba(10, 24, 42, 0.4);
+}
+.incident-empty .ie-text {
+  font-size: 13.5px;
+  color: #94a3b8;
+  font-weight: 500;
+}
+.incident-empty .ie-sub {
+  display: block;
+  font-size: 11px;
+  color: #475569;
+  margin-top: 4px;
+}
