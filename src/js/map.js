@@ -5,13 +5,13 @@ const routeIds=['loop','shuttle','east'];
 const state={mode:'overview',period:'今日',line:0,view3:true,place:null,event:null,bus:null,follow:false,tour:false,tourStep:0, layers:{places:true,cars:true,roads:true,buildings:true}};
 const handled=new Set(events.filter(e=>e.done).map(e=>e.id));
 try{for(const id of JSON.parse(localStorage.getItem('wz-demo-events-v1')||'[]'))if(events.some(e=>e.id===id))handled.add(id)}catch{}
-const camera={x:450,y:355,z:1.18,angle:0,tilt:.86};
+const camera={x:450,y:360,z:1.45,angle:0,tilt:.86};
 let tourStart=0,tourYaw=0;
 let target={...camera},dirty=true,lastTimestamp=0,tourTimer=0,toastTimer=0,hasCity=false;
 const motionReduced=window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 const markerEls={},runs=[],routeSamples=[],tourOrder=['port','lanqiao','church','shell','east','bay','sports','park','beach'];
 function project(x,y){const a=camera.angle*Math.PI/180,c=Math.cos(a),s=Math.sin(a);return [450+camera.z*((x-camera.x)*c-(y-camera.y)*s),370+camera.z*camera.tilt*((x-camera.x)*s+(y-camera.y)*c)]}
-function home(){target={x:450,y:355,z:1.18,angle:0,tilt:state.view3?.86:1};dirty=true}
+function home(){target={x:450,y:360,z:1.45,angle:0,tilt:state.view3?.86:1};dirty=true}
 function makeMap(){
   const orbits=[260,335,420,505].map((r,i)=>'<circle cx="450" cy="355" r="'+r+'" fill="none" stroke="#6195a5" stroke-opacity="'+(i===3?.14:.16)+'" stroke-width=".8" stroke-dasharray="'+(i%2?'3 8':'110 3 1 3')+'"/>').join('');
   const ticks=Array.from({length:120},(_,i)=>'<path transform="rotate('+i*3+' 450 355)" d="M450 -65v'+(i%5?4:9)+'" stroke="#4c8093" opacity="'+(i%5?.3:.6)+'"/>').join('');
