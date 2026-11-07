@@ -653,7 +653,7 @@
 .queue-header-row {
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   color: #92b4d6;
   margin-bottom: 6px;
@@ -669,7 +669,7 @@
 .q-hdr-cell {
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   color: #92b4d6;
   padding: 0 4px;
@@ -920,7 +920,7 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 13.5px;
+  font-size: 17px;
   font-weight: 600;
   color: #e2f1ff;
   margin-bottom: 7px;
@@ -931,23 +931,23 @@
   gap: 6px;
 }
 .vst-left svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   color: #38bdf8;
 }
 .adas-badge {
   background: rgba(10, 36, 68, 0.7);
   border: 1px solid rgba(56, 189, 248, 0.4);
   color: #38bdf8;
-  font-size: 11.5px;
-  padding: 2px 8px;
-  border-radius: 10px;
+  font-size: 13.5px;
+  padding: 3px 10px;
+  border-radius: 12px;
 }
 .behavior-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(5, 1fr);
-  gap: 5px;
+  gap: 6px;
   flex: 1;
 }
 .b-item {
@@ -955,8 +955,8 @@
   align-items: center;
   background: rgba(12, 32, 64, 0.65);
   border: 1px solid rgba(85, 160, 240, 0.18);
-  border-radius: 4px;
-  padding: 4.5px 7px;
+  border-radius: 5px;
+  padding: 5px 9px;
   transition: all 0.15s;
 }
 .b-item:hover {
@@ -967,10 +967,10 @@
   grid-column: 1 / -1;
 }
 .b-dot {
-  width: 6px;
-  height: 6px;
+  width: 7.5px;
+  height: 7.5px;
   border-radius: 50%;
-  margin-right: 6px;
+  margin-right: 7px;
   flex-shrink: 0;
 }
 .b-dot.blue { background: #38bdf8; box-shadow: 0 0 5px rgba(56, 189, 248, 0.7); }
@@ -978,7 +978,7 @@
 .b-dot.red { background: #ff5e6a; box-shadow: 0 0 5px rgba(255, 94, 106, 0.7); }
 .b-name {
   color: #a4c4e2;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
@@ -986,7 +986,7 @@
   flex: 1;
 }
 .b-val {
-  font: 700 14px/1 var(--num);
+  font: 700 18px/1 var(--num);
   margin-left: 4px;
 }
 .b-val.zero { color: #5d7d9e; }
@@ -1082,8 +1082,8 @@
   align-items: center;
   background: rgba(12, 32, 64, 0.65);
   border: 1px solid rgba(85, 160, 240, 0.18);
-  border-radius: 4px;
-  padding: 4.5px 7px;
+  border-radius: 5px;
+  padding: 5px 9px;
   transition: background 0.15s, border-color 0.15s;
 }
 .adas-item:hover {
@@ -1091,16 +1091,16 @@
   border-color: rgba(125, 195, 255, 0.35);
 }
 .adas-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 1.5px;
+  width: 7.5px;
+  height: 7.5px;
+  border-radius: 2px;
   background: var(--c);
-  margin-right: 6px;
+  margin-right: 7px;
   flex-shrink: 0;
 }
 .adas-name {
   color: #a4c4e2;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
@@ -1108,7 +1108,7 @@
   flex: 1;
 }
 .adas-val {
-  font: 700 15px/1 var(--num);
+  font: 700 18px/1 var(--num);
   margin-left: 5px;
   min-width: 16px;
   text-align: right;

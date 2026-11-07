@@ -102,11 +102,15 @@
   .cap-box small { font-size: 14px; }
   .cap-chip-lbl { font-size: 14px; }
   .cap-chip-val { font-size: 17px; }
-  .alert-lbl { font-size: 15.5px; }
+  .veh-sec-title { font-size: 19px; }
+  .adas-badge { font-size: 14px; }
+  .b-name { font-size: 17px; }
+  .b-val { font-size: 21px; }
+  .alert-lbl { font-size: 16px; }
   .alert-val { font-size: 26px; }
-  .adas-header { font-size: 15px; }
-  .adas-name { font-size: 14px; }
-  .adas-val { font-size: 17px; }
+  .adas-header { font-size: 16px; }
+  .adas-name { font-size: 17px; }
+  .adas-val { font-size: 21px; }
   .inc-stat-box strong { font-size: 30px; }
   .inc-stat-box small { font-size: 14px; }
   .inc-v2-time { font-size: 14px; }
@@ -528,36 +532,64 @@
   .adas-section {
     gap: 5px;
   }
-  .adas-header {
-    font-size: 14.5px;
-    gap: 8px;
-    margin-bottom: 2px;
+  /* Right Module 2: Driving Monitor (Behavior + ADAS) */
+  .panel-veh-behavior-adas {
+    flex: 1.25;
   }
-  .adas-header .icon {
-    width: 17px;
-    height: 17px;
+  .veh-split-grid {
+    gap: 14px;
+  }
+  .veh-sec-title {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+  .vst-left svg {
+    width: 20px;
+    height: 20px;
+  }
+  .adas-badge {
+    font-size: 15px;
+    padding: 4px 12px;
+    border-radius: 12px;
+  }
+  .behavior-grid {
+    gap: 8px;
+  }
+  .b-item {
+    padding: 7px 12px;
+    border-radius: 6px;
+  }
+  .b-dot {
+    width: 8px;
+    height: 8px;
+    margin-right: 8px;
+  }
+  .b-name {
+    font-size: 18px;
+  }
+  .b-val {
+    font-size: 22px;
   }
   .adas-grid {
-    gap: 6px;
+    gap: 10px;
   }
   .adas-col {
-    gap: 4px;
+    gap: 6px;
   }
   .adas-item {
-    padding: 5px 8px;
-    border-radius: 5px;
+    padding: 7px 12px;
+    border-radius: 6px;
   }
   .adas-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 2px;
-    margin-right: 7px;
+    width: 8px;
+    height: 8px;
+    margin-right: 8px;
   }
   .adas-name {
-    font-size: 13.5px;
+    font-size: 18px;
   }
   .adas-val {
-    font-size: 17px;
+    font-size: 22px;
   }
 
   /* Right Module 3: Incidents Monitor */
@@ -1222,17 +1254,17 @@
     justify-content: space-between;
   }
   .veh-sec-title {
-    font-size: 24px;
+    font-size: 26px;
     margin-bottom: 12px;
   }
   .vst-left svg {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
   }
   .adas-badge {
-    font-size: 18px;
-    padding: 5px 16px;
-    border-radius: 16px;
+    font-size: 19px;
+    padding: 6px 18px;
+    border-radius: 18px;
   }
   .behavior-grid {
     display: grid;
@@ -1242,21 +1274,22 @@
     flex: 1;
   }
   .b-item {
-    padding: 11px 16px;
+    padding: 12px 18px;
     border-radius: 8px;
     height: 100%;
     box-sizing: border-box;
   }
   .b-dot {
-    width: 9px;
-    height: 9px;
-    margin-right: 9px;
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
   }
   .b-name {
-    font-size: 20px;
+    font-size: 22px;
+    font-weight: 600;
   }
   .b-val {
-    font-size: 26px;
+    font-size: 28px;
   }
   .adas-grid {
     display: grid;
@@ -1271,21 +1304,22 @@
     height: 100%;
   }
   .adas-item {
-    padding: 11px 16px;
+    padding: 12px 18px;
     border-radius: 8px;
     height: 100%;
     box-sizing: border-box;
   }
   .adas-dot {
-    width: 9px;
-    height: 9px;
-    margin-right: 9px;
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
   }
   .adas-name {
-    font-size: 20px;
+    font-size: 22px;
+    font-weight: 600;
   }
   .adas-val {
-    font-size: 26px;
+    font-size: 28px;
   }
 
   /* Right Module 3A: Vehicles Roster Carousel */
@@ -1520,3 +1554,27 @@
     height: 24px;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Dynamic JS-flagged Giant Screen Fallback/Enforcement
+   Guarantees that on ultra-wide / command screens, fonts and sizes are never 12px.
+   -------------------------------------------------------------------------- */
+html.giant-screen .panel-title {
+  font-size: 32px !important;
+}
+html.giant-screen .veh-sec-title {
+  font-size: 26px !important;
+}
+html.giant-screen .adas-badge {
+  font-size: 19px !important;
+}
+html.giant-screen .b-name,
+html.giant-screen .adas-name {
+  font-size: 22px !important;
+  font-weight: 600 !important;
+}
+html.giant-screen .b-val,
+html.giant-screen .adas-val {
+  font-size: 28px !important;
+}
+

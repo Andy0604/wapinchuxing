@@ -668,7 +668,7 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 .queue-header-row {
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   color: #92b4d6;
   margin-bottom: 6px;
@@ -684,7 +684,7 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 .q-hdr-cell {
   display: flex;
   justify-content: space-between;
-  font-size: 12px;
+  font-size: 14px;
   font-weight: 500;
   color: #92b4d6;
   padding: 0 4px;
@@ -935,7 +935,7 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   display: flex;
   align-items: center;
   justify-content: space-between;
-  font-size: 13.5px;
+  font-size: 17px;
   font-weight: 600;
   color: #e2f1ff;
   margin-bottom: 7px;
@@ -946,23 +946,23 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   gap: 6px;
 }
 .vst-left svg {
-  width: 16px;
-  height: 16px;
+  width: 18px;
+  height: 18px;
   color: #38bdf8;
 }
 .adas-badge {
   background: rgba(10, 36, 68, 0.7);
   border: 1px solid rgba(56, 189, 248, 0.4);
   color: #38bdf8;
-  font-size: 11.5px;
-  padding: 2px 8px;
-  border-radius: 10px;
+  font-size: 13.5px;
+  padding: 3px 10px;
+  border-radius: 12px;
 }
 .behavior-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
   grid-template-rows: repeat(5, 1fr);
-  gap: 5px;
+  gap: 6px;
   flex: 1;
 }
 .b-item {
@@ -970,8 +970,8 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   align-items: center;
   background: rgba(12, 32, 64, 0.65);
   border: 1px solid rgba(85, 160, 240, 0.18);
-  border-radius: 4px;
-  padding: 4.5px 7px;
+  border-radius: 5px;
+  padding: 5px 9px;
   transition: all 0.15s;
 }
 .b-item:hover {
@@ -982,10 +982,10 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   grid-column: 1 / -1;
 }
 .b-dot {
-  width: 6px;
-  height: 6px;
+  width: 7.5px;
+  height: 7.5px;
   border-radius: 50%;
-  margin-right: 6px;
+  margin-right: 7px;
   flex-shrink: 0;
 }
 .b-dot.blue { background: #38bdf8; box-shadow: 0 0 5px rgba(56, 189, 248, 0.7); }
@@ -993,7 +993,7 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 .b-dot.red { background: #ff5e6a; box-shadow: 0 0 5px rgba(255, 94, 106, 0.7); }
 .b-name {
   color: #a4c4e2;
-  font-size: 12px;
+  font-size: 16px;
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
@@ -1001,7 +1001,7 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   flex: 1;
 }
 .b-val {
-  font: 700 14px/1 var(--num);
+  font: 700 18px/1 var(--num);
   margin-left: 4px;
 }
 .b-val.zero { color: #5d7d9e; }
@@ -1097,8 +1097,8 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   align-items: center;
   background: rgba(12, 32, 64, 0.65);
   border: 1px solid rgba(85, 160, 240, 0.18);
-  border-radius: 4px;
-  padding: 4.5px 7px;
+  border-radius: 5px;
+  padding: 5px 9px;
   transition: background 0.15s, border-color 0.15s;
 }
 .adas-item:hover {
@@ -1106,16 +1106,16 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   border-color: rgba(125, 195, 255, 0.35);
 }
 .adas-dot {
-  width: 6px;
-  height: 6px;
-  border-radius: 1.5px;
+  width: 7.5px;
+  height: 7.5px;
+  border-radius: 2px;
   background: var(--c);
-  margin-right: 6px;
+  margin-right: 7px;
   flex-shrink: 0;
 }
 .adas-name {
   color: #a4c4e2;
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 500;
   white-space: nowrap;
   overflow: hidden;
@@ -1123,7 +1123,7 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   flex: 1;
 }
 .adas-val {
-  font: 700 15px/1 var(--num);
+  font: 700 18px/1 var(--num);
   margin-left: 5px;
   min-width: 16px;
   text-align: right;
@@ -2100,11 +2100,15 @@ footer {
   .cap-box small { font-size: 14px; }
   .cap-chip-lbl { font-size: 14px; }
   .cap-chip-val { font-size: 17px; }
-  .alert-lbl { font-size: 15.5px; }
+  .veh-sec-title { font-size: 19px; }
+  .adas-badge { font-size: 14px; }
+  .b-name { font-size: 17px; }
+  .b-val { font-size: 21px; }
+  .alert-lbl { font-size: 16px; }
   .alert-val { font-size: 26px; }
-  .adas-header { font-size: 15px; }
-  .adas-name { font-size: 14px; }
-  .adas-val { font-size: 17px; }
+  .adas-header { font-size: 16px; }
+  .adas-name { font-size: 17px; }
+  .adas-val { font-size: 21px; }
   .inc-stat-box strong { font-size: 30px; }
   .inc-stat-box small { font-size: 14px; }
   .inc-v2-time { font-size: 14px; }
@@ -2526,36 +2530,64 @@ footer {
   .adas-section {
     gap: 5px;
   }
-  .adas-header {
-    font-size: 14.5px;
-    gap: 8px;
-    margin-bottom: 2px;
+  /* Right Module 2: Driving Monitor (Behavior + ADAS) */
+  .panel-veh-behavior-adas {
+    flex: 1.25;
   }
-  .adas-header .icon {
-    width: 17px;
-    height: 17px;
+  .veh-split-grid {
+    gap: 14px;
+  }
+  .veh-sec-title {
+    font-size: 20px;
+    margin-bottom: 8px;
+  }
+  .vst-left svg {
+    width: 20px;
+    height: 20px;
+  }
+  .adas-badge {
+    font-size: 15px;
+    padding: 4px 12px;
+    border-radius: 12px;
+  }
+  .behavior-grid {
+    gap: 8px;
+  }
+  .b-item {
+    padding: 7px 12px;
+    border-radius: 6px;
+  }
+  .b-dot {
+    width: 8px;
+    height: 8px;
+    margin-right: 8px;
+  }
+  .b-name {
+    font-size: 18px;
+  }
+  .b-val {
+    font-size: 22px;
   }
   .adas-grid {
-    gap: 6px;
+    gap: 10px;
   }
   .adas-col {
-    gap: 4px;
+    gap: 6px;
   }
   .adas-item {
-    padding: 5px 8px;
-    border-radius: 5px;
+    padding: 7px 12px;
+    border-radius: 6px;
   }
   .adas-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 2px;
-    margin-right: 7px;
+    width: 8px;
+    height: 8px;
+    margin-right: 8px;
   }
   .adas-name {
-    font-size: 13.5px;
+    font-size: 18px;
   }
   .adas-val {
-    font-size: 17px;
+    font-size: 22px;
   }
 
   /* Right Module 3: Incidents Monitor */
@@ -3220,17 +3252,17 @@ footer {
     justify-content: space-between;
   }
   .veh-sec-title {
-    font-size: 24px;
+    font-size: 26px;
     margin-bottom: 12px;
   }
   .vst-left svg {
-    width: 24px;
-    height: 24px;
+    width: 26px;
+    height: 26px;
   }
   .adas-badge {
-    font-size: 18px;
-    padding: 5px 16px;
-    border-radius: 16px;
+    font-size: 19px;
+    padding: 6px 18px;
+    border-radius: 18px;
   }
   .behavior-grid {
     display: grid;
@@ -3240,21 +3272,22 @@ footer {
     flex: 1;
   }
   .b-item {
-    padding: 11px 16px;
+    padding: 12px 18px;
     border-radius: 8px;
     height: 100%;
     box-sizing: border-box;
   }
   .b-dot {
-    width: 9px;
-    height: 9px;
-    margin-right: 9px;
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
   }
   .b-name {
-    font-size: 20px;
+    font-size: 22px;
+    font-weight: 600;
   }
   .b-val {
-    font-size: 26px;
+    font-size: 28px;
   }
   .adas-grid {
     display: grid;
@@ -3269,21 +3302,22 @@ footer {
     height: 100%;
   }
   .adas-item {
-    padding: 11px 16px;
+    padding: 12px 18px;
     border-radius: 8px;
     height: 100%;
     box-sizing: border-box;
   }
   .adas-dot {
-    width: 9px;
-    height: 9px;
-    margin-right: 9px;
+    width: 10px;
+    height: 10px;
+    margin-right: 10px;
   }
   .adas-name {
-    font-size: 20px;
+    font-size: 22px;
+    font-weight: 600;
   }
   .adas-val {
-    font-size: 26px;
+    font-size: 28px;
   }
 
   /* Right Module 3A: Vehicles Roster Carousel */
@@ -3518,6 +3552,30 @@ footer {
     height: 24px;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Dynamic JS-flagged Giant Screen Fallback/Enforcement
+   Guarantees that on ultra-wide / command screens, fonts and sizes are never 12px.
+   -------------------------------------------------------------------------- */
+html.giant-screen .panel-title {
+  font-size: 32px !important;
+}
+html.giant-screen .veh-sec-title {
+  font-size: 26px !important;
+}
+html.giant-screen .adas-badge {
+  font-size: 19px !important;
+}
+html.giant-screen .b-name,
+html.giant-screen .adas-name {
+  font-size: 22px !important;
+  font-weight: 600 !important;
+}
+html.giant-screen .b-val,
+html.giant-screen .adas-val {
+  font-size: 28px !important;
+}
+
 </style></head>
 <body>
 <div id="app">
