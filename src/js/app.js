@@ -80,6 +80,8 @@ function onAction(a, d = {}){
     case 'openOrder': openOrderModal(Number(d.queueIdx || 0)); break;
     case 'openIncident': openIncidentModal(d.incId); break;
     case 'closeModal': closeModal(); break;
+    case 'closeOrderModal': closeModal('order'); break;
+    case 'closeIncidentModal': closeModal('incident'); break;
     case 'resolveIncident': resolveIncident(d.incId); break;
     case 'fullscreen':toggleFullscreen();break;
     case 'events':modeChange('events');break;

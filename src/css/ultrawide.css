@@ -53,17 +53,17 @@
   }
 
   main {
-    grid-template-columns: clamp(400px, 18.5vw, 560px) minmax(0, 1fr) clamp(400px, 18.5vw, 560px);
+    grid-template-columns: clamp(480px, 20.5vw, 760px) minmax(0, 1fr) clamp(480px, 20.5vw, 760px);
     gap: 20px;
-    padding: clamp(18px, 1.8vh, 32px) clamp(24px, 1.8vw, 48px) clamp(12px, 1.2vh, 24px);
+    padding: clamp(16px, 1.8vh, 30px) clamp(20px, 1.6vw, 44px) clamp(10px, 1.2vh, 20px);
   }
 
   .panel {
-    padding: clamp(18px, 1.3vw, 28px);
+    padding: clamp(16px, 1.2vw, 26px);
     border-radius: 8px;
   }
   .panel-title {
-    font-size: clamp(18px, 1.2vw, 24px);
+    font-size: clamp(20px, 1.3vw, 25px);
   }
   .panel-title .icon {
     width: 20px;
@@ -72,10 +72,46 @@
   .section-en {
     font-size: 10px;
   }
-  .tag, .microbtn, .tag-static {
-    font-size: 12px;
-    padding: 3px 10px;
+  .tag, .microbtn, .tag-static, .tag-badge {
+    font-size: 13.5px;
+    padding: 3px 12px;
   }
+
+  /* Scaling new panel metrics in 4K */
+  .m-lbl { font-size: 15px; }
+  .m-val strong { font-size: 38px; }
+  .m-val small { font-size: 14px; }
+  .m-delta { font-size: 14px; }
+  .m-delta b { font-size: 16px; }
+  .badge-pill { font-size: 14px; padding: 2px 10px; }
+  .env-val { font-size: 21px; }
+  .env-lbl { font-size: 13.5px; }
+  .gmv-val { font-size: 40px; }
+  .arpu-val { font-size: 32px; }
+  .arpu-lbl { font-size: 13.5px; }
+  .order-box strong { font-size: 30px; }
+  .order-box small { font-size: 14px; }
+  .svc-num strong { font-size: 30px; }
+  .svc-num small { font-size: 14.5px; }
+  .svc-lbl { font-size: 14px; }
+  .queue-header { font-size: 14px; }
+  .q-stop { font-size: 16px; }
+  .q-pax { font-size: 15px; }
+  .q-time { font-size: 18px; }
+  .cap-box strong { font-size: 30px; }
+  .cap-box small { font-size: 14px; }
+  .cap-chip-lbl { font-size: 14px; }
+  .cap-chip-val { font-size: 17px; }
+  .alert-lbl { font-size: 15.5px; }
+  .alert-val { font-size: 26px; }
+  .adas-header { font-size: 15px; }
+  .adas-name { font-size: 14px; }
+  .adas-val { font-size: 17px; }
+  .inc-stat-box strong { font-size: 30px; }
+  .inc-stat-box small { font-size: 14px; }
+  .inc-v2-time { font-size: 14px; }
+  .inc-v2-title { font-size: 15px; }
+  .inc-v2-act-val { font-size: 14px; }
 
   .total-num {
     font-size: clamp(44px, 3.2vw, 68px);
@@ -187,10 +223,10 @@
    Level 2: Ultrawide Giant Screens (8320 x 2100 & min-width: 4200px)
    Tailored for massive command centers, video walls, and 4:1 display spans
    -------------------------------------------------------------------------- */
-@media (min-width: 4200px), (min-width: 3400px) and (min-aspect-ratio: 24/10) {
+@media (min-width: 3200px), (min-width: 2200px) and (min-aspect-ratio: 2/1), (min-aspect-ratio: 24/10) {
   body {
-    font-size: 16px;
-    line-height: 1.4;
+    font-size: 15px;
+    line-height: 1.35;
   }
 
   /* Reset 3D pane yaw on giant screens so all data stays crisp and flat */
@@ -204,70 +240,71 @@
 
   /* Header scaling */
   header {
-    height: clamp(100px, 5.8vh, 130px);
-    padding: 0 clamp(36px, 2.2vw, 80px) 8px;
+    height: clamp(76px, 8vh, 96px);
+    padding: 0 clamp(28px, 2vw, 64px) 5px;
   }
   .brand {
-    gap: 16px;
+    gap: 14px;
   }
   .brandmark {
-    width: 60px;
-    height: 60px;
+    width: 52px;
+    height: 52px;
   }
   .brand strong {
-    font-size: 24px;
-    letter-spacing: .18em;
+    font-size: 22px;
+    letter-spacing: .16em;
   }
   .brand small {
-    font-size: 13px;
-    letter-spacing: .2em;
-    margin-top: 4px;
+    font-size: 11.5px;
+    letter-spacing: .18em;
+    margin-top: 3px;
   }
   .mast h1 {
-    font-size: clamp(40px, 1.6vw, 56px);
-    letter-spacing: .16em;
-    margin-bottom: 4px;
-    text-shadow: 0 0 32px #81cafa55;
+    font-size: clamp(34px, 1.8vw, 48px);
+    letter-spacing: .15em;
+    margin-bottom: 3px;
+    text-shadow: 0 0 28px #81cafa55;
   }
   .mast-sub {
-    font-size: clamp(16px, .7vw, 22px);
-    letter-spacing: .36em;
+    font-size: clamp(14px, .75vw, 18px);
+    letter-spacing: .32em;
   }
   .clock {
     gap: 2px;
   }
   .clock strong {
-    font-size: 34px;
+    font-size: 28px;
   }
   .clock small {
-    font-size: 14px;
+    font-size: 12px;
   }
   .icbtn {
-    width: 52px;
-    height: 52px;
+    width: 44px;
+    height: 44px;
     border-radius: 6px;
     border-width: 1.5px;
   }
   .icbtn .icon {
-    width: 24px;
-    height: 24px;
+    width: 20px;
+    height: 20px;
   }
   .head-right {
-    gap: 24px;
+    gap: 20px;
   }
   .head-rule {
-    bottom: -4px;
+    bottom: -3px;
   }
 
-  /* Professional HUD Wings: Golden width proportion (around 720px~840px each), leaving huge center for 3D map */
+  /* Professional HUD Wings: Golden width proportion (around 600px~780px each), leaving center for 3D map */
   main {
-    grid-template-columns: clamp(660px, 9.2vw, 840px) minmax(0, 1fr) clamp(660px, 9.2vw, 840px);
-    gap: clamp(24px, 1vw, 40px);
-    padding: clamp(18px, 1.4vh, 32px) clamp(28px, 1.5vw, 56px) clamp(14px, 1.1vh, 24px);
+    grid-template-columns: clamp(520px, 20vw, 780px) minmax(0, 1fr) clamp(520px, 20vw, 780px);
+    gap: clamp(16px, 1.1vw, 32px);
+    padding: clamp(8px, 1.2vh, 18px) clamp(20px, 1.5vw, 40px) clamp(6px, 1vh, 14px);
   }
 
   .rail {
-    gap: clamp(14px, 1.1vh, 22px);
+    gap: clamp(8px, 1.1vh, 14px);
+    min-height: 0;
   }
 
   .panel {
@@ -275,147 +312,149 @@
     border: 1px solid rgba(35, 88, 150, 0.65) !important;
     border-radius: 8px !important;
     box-shadow: 0 10px 32px rgba(1, 6, 16, 0.7), inset 0 1px 0 rgba(70, 150, 245, 0.16) !important;
-    padding: clamp(16px, 1.2vw, 24px) clamp(16px, 1.2vw, 24px) !important;
+    padding: clamp(8px, 1.1vh, 14px) clamp(12px, 1vw, 20px) !important;
+    min-height: 0;
+    overflow: hidden;
   }
   .panel-head {
-    margin-bottom: clamp(12px, 1vh, 18px);
+    margin-bottom: clamp(6px, 0.9vh, 12px);
   }
   .panel-title {
-    font-size: 20px;
+    font-size: 22px;
     padding-left: 14px;
   }
   .panel-title:before {
-    width: 5px;
+    width: 4.5px;
     height: 18px;
-    border-radius: 2.5px;
+    border-radius: 2px;
   }
   .tag-badge {
-    font-size: 13px;
+    font-size: 13.5px;
     padding: 3px 12px;
-    border-radius: 14px;
+    border-radius: 12px;
   }
 
   /* Left Module 1: Island Overview */
   .overview-dual {
-    gap: 10px;
+    gap: 8px;
   }
   .metric-card {
-    padding: 12px 14px;
+    padding: 8px 12px;
     border-radius: 6px;
   }
   .m-lbl {
-    font-size: 13px;
+    font-size: 14.5px;
   }
   .m-val strong {
-    font-size: 32px;
+    font-size: 38px;
   }
   .m-val small {
-    font-size: 13px;
+    font-size: 14px;
     margin-left: 5px;
   }
   .m-delta {
-    font-size: 13px;
+    font-size: 13.5px;
   }
   .m-delta b {
-    font-size: 15px;
+    font-size: 15.5px;
   }
   .badge-pill {
     font-size: 13px;
-    padding: 3px 8px;
+    padding: 2px 8px;
   }
   .env-grid {
-    gap: 8px;
-    margin-top: 10px;
+    gap: 6px;
+    margin-top: 8px;
   }
   .env-box {
-    padding: 10px 6px;
+    padding: 6px 4px;
     border-radius: 6px;
   }
   .env-ico {
-    width: 24px;
-    height: 24px;
-    margin-bottom: 4px;
-  }
-  .env-ico svg {
     width: 22px;
     height: 22px;
+    margin-bottom: 3px;
+  }
+  .env-ico svg {
+    width: 20px;
+    height: 20px;
   }
   .env-val {
-    font-size: 18px;
+    font-size: 21px;
   }
   .env-lbl {
-    font-size: 12px;
-    margin-top: 4px;
+    font-size: 13px;
+    margin-top: 3px;
   }
 
   /* Left Module 2: Operations Monitor */
   .gmv-dual {
-    gap: 14px;
-    padding-bottom: 8px;
+    gap: 12px;
+    padding-bottom: 6px;
   }
   .gmv-val {
-    font-size: 34px;
-    margin: 4px 0;
+    font-size: 40px;
+    margin: 3px 0;
   }
   .arpu-card {
-    padding: 10px 18px;
-    min-width: 90px;
+    padding: 8px 14px;
+    min-width: 85px;
     border-radius: 6px;
   }
   .arpu-val {
-    font-size: 28px;
+    font-size: 32px;
   }
   .arpu-lbl {
-    font-size: 12px;
+    font-size: 13.5px;
   }
   .order-grid {
-    gap: 8px;
-    margin-top: 6px;
+    gap: 6px;
+    margin-top: 5px;
   }
   .order-box {
-    padding: 10px 6px;
+    padding: 8px 4px 7px;
     border-radius: 6px;
   }
   .order-box strong {
-    font-size: 23px;
+    font-size: 30px;
   }
   .order-box small {
-    font-size: 12px;
-    margin-top: 4px;
+    font-size: 13.5px;
+    margin-top: 3px;
   }
 
   /* Left Module 3: Service Monitor */
   .svc-grid {
-    gap: 8px;
+    gap: 6px;
   }
   .svc-box {
-    padding: 10px 6px;
+    padding: 8px 4px;
     border-radius: 6px;
   }
   .svc-num strong {
-    font-size: 24px;
+    font-size: 30px;
   }
   .svc-num small {
-    font-size: 13px;
+    font-size: 14.5px;
     margin-left: 3px;
   }
   .svc-lbl {
-    font-size: 12px;
-    margin-top: 4px;
+    font-size: 13.5px;
+    margin-top: 3px;
   }
   .queue-header {
-    font-size: 13px;
-    margin: 12px 4px 6px;
+    font-size: 13.5px;
+    margin: 8px 4px 5px;
   }
   .queue-list {
-    gap: 6px;
+    gap: 5px;
   }
   .queue-row {
-    padding: 9px 14px;
+    padding: 7px 12px;
     border-radius: 6px;
   }
   .q-stop {
-    font-size: 13px;
+    font-size: 15.5px;
     padding-left: 16px;
   }
   .q-stop:before {
@@ -423,145 +462,184 @@
     height: 6px;
   }
   .q-pax {
-    font-size: 13px;
+    font-size: 14.5px;
   }
   .q-time {
-    font-size: 15px;
+    font-size: 18px;
   }
 
   /* Right Module 1: Capacity Overview */
   .cap-grid {
-    gap: 8px;
+    gap: 6px;
   }
   .cap-box {
-    padding: 12px 6px;
+    padding: 8px 4px 7px;
     border-radius: 6px;
   }
   .cap-box strong {
-    font-size: 26px;
+    font-size: 30px;
   }
   .cap-box small {
-    font-size: 12px;
-    margin-top: 4px;
+    font-size: 13.5px;
+    margin-top: 3px;
+  }
+  .cap-chip-lbl {
+    font-size: 13.5px;
+  }
+  .cap-chip-val {
+    font-size: 17px;
   }
   .cap-bar-info {
-    margin-top: 10px;
-    padding: 10px 14px;
-    font-size: 13px;
+    margin-top: 8px;
+    padding: 8px 12px;
+    font-size: 13.5px;
     border-radius: 6px;
   }
   .cap-bar-info b {
-    font-size: 15px;
+    font-size: 15.5px;
   }
 
   /* Right Module 2: Vehicles Monitor (ADAS & Driver) */
   .driver-alert-box {
-    padding: 10px 14px;
+    padding: 8px 12px;
     border-radius: 6px;
-    margin-bottom: 10px;
+    margin-bottom: 8px;
   }
   .alert-dot {
-    width: 9px;
-    height: 9px;
+    width: 8px;
+    height: 8px;
     border-radius: 2px;
     margin-right: 10px;
   }
   .alert-lbl {
-    font-size: 13px;
+    font-size: 15px;
   }
   .alert-val {
-    font-size: 20px;
+    font-size: 26px;
   }
   .adas-section {
-    gap: 6px;
+    gap: 5px;
   }
   .adas-header {
-    font-size: 13px;
+    font-size: 14.5px;
     gap: 8px;
-    margin-bottom: 3px;
+    margin-bottom: 2px;
   }
   .adas-header .icon {
     width: 17px;
     height: 17px;
   }
   .adas-grid {
-    gap: 8px;
-  }
-  .adas-col {
     gap: 6px;
   }
+  .adas-col {
+    gap: 4px;
+  }
   .adas-item {
-    padding: 7px 10px;
+    padding: 5px 8px;
     border-radius: 5px;
   }
   .adas-dot {
-    width: 8px;
-    height: 8px;
+    width: 7px;
+    height: 7px;
     border-radius: 2px;
-    margin-right: 8px;
+    margin-right: 7px;
   }
   .adas-name {
-    font-size: 12px;
+    font-size: 13.5px;
   }
   .adas-val {
-    font-size: 14px;
+    font-size: 17px;
   }
 
   /* Right Module 3: Incidents Monitor */
   .inc-stats-row {
-    gap: 8px;
+    gap: 6px;
   }
   .inc-stat-box {
-    padding: 10px 6px;
+    padding: 8px 4px;
     border-radius: 6px;
   }
   .inc-stat-box strong {
-    font-size: 24px;
+    font-size: 30px;
   }
   .inc-stat-box small {
-    font-size: 12px;
-    margin-top: 4px;
+    font-size: 13.5px;
+    margin-top: 3px;
   }
   .incident-list-v2 {
-    gap: 8px;
-    margin-top: 10px;
+    gap: 6px;
+    margin-top: 8px;
   }
   .inc-v2-card {
-    padding: 11px 14px;
+    padding: 8px 12px;
     border-radius: 6px;
-    gap: 7px;
+    gap: 5px;
   }
   .inc-v2-top {
     gap: 8px;
   }
   .inc-v2-time {
-    font-size: 13px;
+    font-size: 13.5px;
   }
   .inc-v2-badge {
-    font-size: 11px;
+    font-size: 12px;
     padding: 2px 6px;
     border-radius: 2px;
   }
   .inc-v2-title {
-    font-size: 13px;
+    font-size: 15px;
   }
   .inc-v2-status {
-    font-size: 11px;
+    font-size: 12px;
     padding: 2px 7px;
     border-radius: 2px;
   }
   .inc-v2-bottom {
-    font-size: 12px;
-    padding-left: 38px;
+    font-size: 13.5px;
+    padding-left: 36px;
     gap: 8px;
   }
   .inc-v2-act-lbl {
-    font-size: 11px;
+    font-size: 12px;
     padding: 1px 5px;
     border-radius: 2px;
   }
   .inc-v2-act-val {
-    font-size: 12px;
+    font-size: 13.5px;
+  }
+
+  /* Bottom Floating Popups */
+  .map-float-panel {
+    width: 480px !important;
+    bottom: 16px !important;
+    left: 16px !important;
+    padding: 16px 18px !important;
+    border-radius: 10px !important;
+  }
+  .map-float-panel.align-right {
+    left: auto !important;
+    right: 16px !important;
+    bottom: 16px !important;
+  }
+  .modal-title {
+    font-size: 18px !important;
+  }
+  .modal-code {
+    font-size: 16px !important;
+  }
+  .modal-sub-card .sc-label {
+    font-size: 12.5px !important;
+  }
+  .modal-sub-card .sc-val {
+    font-size: 14.5px !important;
+  }
+  .timeline-item {
+    font-size: 13.5px !important;
+  }
+  .modal-collapse-btn {
+    font-size: 13px !important;
+    padding: 3px 12px !important;
   }
 
   /* Footer Navigation */

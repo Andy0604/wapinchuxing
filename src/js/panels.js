@@ -402,14 +402,14 @@ function incidentMonitorPanel(handled = new Set()) {
    -------------------------------------------------------------------------- */
 function openOrderModal(idx) {
   const data = queueOrderDetails[idx] || queueOrderDetails[0];
-  const modal = document.getElementById('event-modal');
+  const modal = document.getElementById('order-modal') || document.getElementById('event-modal');
   if (!modal) return;
   modal.classList.remove('align-right');
   modal.innerHTML = `
     <div class="modal-head">
       <h3 class="modal-title">车辆订单详情</h3>
       <div class="modal-head-actions">
-        <button class="modal-collapse-btn" data-action="closeModal">收起</button>
+        <button class="modal-collapse-btn" data-action="closeOrderModal">收起</button>
       </div>
     </div>
     <div class="modal-dashed-card">
@@ -461,7 +461,7 @@ function openOrderModal(idx) {
 
 function openIncidentModal(id) {
   const item = incidentStore.find(i => i.id === id) || incidentStore[0];
-  const modal = document.getElementById('event-modal');
+  const modal = document.getElementById('incident-modal') || document.getElementById('event-modal');
   if (!modal) return;
   const isHandled = item.status === '已处理';
   modal.classList.add('align-right');
@@ -469,7 +469,7 @@ function openIncidentModal(id) {
     <div class="modal-head">
       <h3 class="modal-title">事件详情</h3>
       <div class="modal-head-actions">
-        <button class="modal-collapse-btn" data-action="closeModal">收起</button>
+        <button class="modal-collapse-btn" data-action="closeIncidentModal">收起</button>
       </div>
     </div>
     <div class="modal-dashed-card">
@@ -487,7 +487,7 @@ function openIncidentModal(id) {
       </div>
       <div class="modal-sub-card full">
         <span class="sc-label">${item.tag}内容</span>
-        <span class="sc-val" style="font-size:13px; line-height:1.5;">${item.content}</span>
+        <span class="sc-val" style="font-size:14px; line-height:1.5;">${item.content}</span>
       </div>
       <div class="modal-sub-card">
         <span class="sc-label">发生位置</span>
@@ -503,7 +503,7 @@ function openIncidentModal(id) {
       </div>
     </div>
     <div class="modal-actions">
-      <button class="modal-btn cancel" data-action="closeModal">关闭</button>
+      <button class="modal-btn cancel" data-action="closeIncidentModal">关闭</button>
       <button class="modal-btn primary" data-action="resolveIncident" data-inc-id="${item.id}" ${isHandled ? 'disabled' : ''}>
         ${isHandled ? '✓ 已处理' : '✓ 标记已处理'}
       </button>
@@ -512,9 +512,19 @@ function openIncidentModal(id) {
   modal.hidden = false;
 }
 
-function closeModal() {
-  const modal = document.getElementById('event-modal');
-  if (modal) modal.hidden = true;
+function closeModal(target) {
+  if (target === 'order') {
+    const m = document.getElementById('order-modal');
+    if (m) m.hidden = true;
+  } else if (target === 'incident') {
+    const m = document.getElementById('incident-modal');
+    if (m) m.hidden = true;
+  } else {
+    ['order-modal', 'incident-modal', 'event-modal'].forEach(id => {
+      const m = document.getElementById(id);
+      if (m) m.hidden = true;
+    });
+  }
 }
 
 function resolveIncident(id) {
