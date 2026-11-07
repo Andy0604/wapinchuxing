@@ -47,9 +47,9 @@ function islandOverviewPanel(period = '今日') {
       </div>
       <div class="metric-card">
         <span class="m-lbl">今日运送客流</span>
-        <div class="m-val"><strong>738</strong><small>人次</small></div>
+        <div class="m-val"><strong>1,320</strong><small>人次</small></div>
         <div class="m-badges">
-          <span class="badge-pill">352 单</span>
+          <span class="badge-pill">363 单</span>
           <span class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>10%</b></span>
         </div>
       </div>
@@ -104,31 +104,31 @@ function orderTrendPanel(period = orderTrendPeriod) {
 
   const points = period === '今日'
     ? [
-        { t: '06:00', v: 16 },
-        { t: '08:00', v: 42 },
-        { t: '10:00', v: 85 },
-        { t: '12:00', v: 70 },
-        { t: '14:00', v: 94 },
-        { t: '16:00', v: 62 },
-        { t: '18:00', v: 48 },
-        { t: '20:00', v: 30 },
-        { t: '22:00', v: 18 }
+        { t: '06:00', v: 0 },
+        { t: '08:00', v: 68 },
+        { t: '10:00', v: 102 },
+        { t: '12:00', v: 68 },
+        { t: '14:00', v: 85 },
+        { t: '16:00', v: 40 },
+        { t: '18:00', v: 0 },
+        { t: '20:00', v: 0 },
+        { t: '22:00', v: 0 }
       ]
     : [
-        { t: '06:00', v: 12 },
-        { t: '08:00', v: 36 },
-        { t: '10:00', v: 76 },
-        { t: '12:00', v: 62 },
-        { t: '14:00', v: 84 },
-        { t: '16:00', v: 54 },
-        { t: '18:00', v: 40 },
-        { t: '20:00', v: 24 },
-        { t: '22:00', v: 14 }
+        { t: '06:00', v: 0 },
+        { t: '08:00', v: 54 },
+        { t: '10:00', v: 88 },
+        { t: '12:00', v: 60 },
+        { t: '14:00', v: 76 },
+        { t: '16:00', v: 35 },
+        { t: '18:00', v: 0 },
+        { t: '20:00', v: 0 },
+        { t: '22:00', v: 0 }
       ];
 
   const coords = points.map((p, i) => {
     const x = 24 + i * 56.5;
-    const y = 110 - (p.v / 100) * 88;
+    const y = 110 - (p.v / 115) * 88;
     return { x, y, v: p.v, t: p.t };
   });
 
@@ -151,7 +151,7 @@ function orderTrendPanel(period = orderTrendPeriod) {
     ${panelHeader('订单趋势', badge)}
     <div class="trend-sub-bar">
       <span class="trend-unit">订单 / 2小时</span>
-      <span class="trend-peak-lbl">最高时段: <b>14:00 (${period === '今日' ? '94' : '84'}单)</b></span>
+      <span class="trend-peak-lbl">最高时段: <b>10:00 (${period === '今日' ? '102' : '88'}单)</b></span>
     </div>
     <div class="trend-svg-wrap">
       <svg viewBox="0 0 500 128" preserveAspectRatio="none">
@@ -177,13 +177,13 @@ function orderTrendPanel(period = orderTrendPeriod) {
    左侧模块 2B: 运营监控 (GMV + 客单价 + 订单状态格)
    -------------------------------------------------------------------------- */
 function operationsMonitorPanel() {
-  const badge = `<span class="tag-badge">订单总数 352</span>`;
+  const badge = `<span class="tag-badge">订单总数 363</span>`;
   return `<section class="panel panel-ops">
     ${panelHeader('运营监控', badge)}
     <div class="gmv-dual">
       <div class="gmv-left">
         <span class="m-lbl">今日营收 <small>GMV</small></span>
-        <div class="gmv-val">¥12,680</div>
+        <div class="gmv-val">¥13,068</div>
         <div class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>10%</b></div>
       </div>
       <div class="arpu-card">
@@ -193,27 +193,27 @@ function operationsMonitorPanel() {
     </div>
     <div class="order-grid">
       <div class="order-box box-cancel">
-        <strong class="font-num num-cancel">8</strong>
+        <strong class="font-num num-cancel">45</strong>
         <small>已取消</small>
       </div>
       <div class="order-box box-done">
-        <strong class="font-num num-done">286</strong>
+        <strong class="font-num num-done">289</strong>
         <small>已完成</small>
       </div>
       <div class="order-box box-serving">
-        <strong class="font-num num-serving">26</strong>
+        <strong class="font-num num-serving">17</strong>
         <small>服务中</small>
       </div>
       <div class="order-box box-pending">
-        <strong class="font-num num-pending">32</strong>
+        <strong class="font-num num-pending">12</strong>
         <small>待接单</small>
       </div>
     </div>
-    <div class="order-progress-strip" title="订单状态比例分布">
-      <span class="seg cancel" style="width: 2.3%;" title="已取消: 8单 (2.3%)"></span>
-      <span class="seg done" style="width: 81.2%;" title="已完成: 286单 (81.2%)"></span>
-      <span class="seg serving" style="width: 7.4%;" title="服务中: 26单 (7.4%)"></span>
-      <span class="seg pending" style="width: 9.1%;" title="待接单: 32单 (9.1%)"></span>
+    <div class="order-progress-strip" title="订单状态比例分布: 已完成 289单 (79.6%) / 已取消 45单 (12.4%) / 服务中 17单 (4.7%) / 待接单 12单 (3.3%)">
+      <span class="seg cancel" style="width: 12.4%;" title="已取消: 45单 (12.4%)"></span>
+      <span class="seg done" style="width: 79.6%;" title="已完成: 289单 (79.6%)"></span>
+      <span class="seg serving" style="width: 4.7%;" title="服务中: 17单 (4.7%)"></span>
+      <span class="seg pending" style="width: 3.3%;" title="待接单: 12单 (3.3%)"></span>
     </div>
   </section>`;
 }
@@ -223,129 +223,129 @@ function operationsMonitorPanel() {
    -------------------------------------------------------------------------- */
 const queueOrderDetails = [
   {
-    id: 'WP20261106274',
+    id: 'WZ202611070347',
     status: '服务中',
     passengerPhone: '1886****4562',
-    useTime: '今日 08:38',
-    driver: '冯雪 (WZ-267)',
+    useTime: '今日 16:31',
+    driver: '杨其静 (WZ-129)',
     driverPhone: '1356****6498',
-    from: '石螺口',
-    to: '南湾运动公园',
-    route: '石螺口 → 南湾运动公园',
-    pax: '6 / 7 人',
-    paxCount: '6 人',
-    price: '¥49.00',
-    wait: '11:49',
+    from: '鳄鱼山景区',
+    to: '南湾街',
+    route: '鳄鱼山景区 火山口 → 南湾街 餐饮一条街',
+    pax: '5 / 7 人',
+    paxCount: '5 人',
+    price: '¥38.00',
+    wait: '02:00',
     timeline: [
-      { name: '叫车时间', time: '08:38' },
-      { name: '司机接单时间', time: '08:40' },
-      { name: '司机出发时间', time: '08:44' },
-      { name: '司机接到乘客时间', time: '08:52' }
+      { name: '叫车时间', time: '16:31' },
+      { name: '司机接单时间', time: '16:32' },
+      { name: '司机出发时间', time: '16:32' },
+      { name: '司机接到乘客时间', time: '16:34' }
     ]
   },
   {
-    id: 'WP20261106275',
+    id: 'WZ202611070348',
     status: '服务中',
     passengerPhone: '1597****8823',
-    useTime: '今日 10:17',
-    driver: '李磊 (WZ-303)',
+    useTime: '今日 16:32',
+    driver: '谢荣锋 (WZ-128)',
     driverPhone: '1387****1290',
-    from: '南湾运动公园',
-    to: '五彩滩',
-    route: '南湾运动公园 → 五彩滩',
-    pax: '4 / 7 人',
-    paxCount: '4 人',
-    price: '¥38.00',
-    wait: '10:17',
+    from: '盛塘天主教堂',
+    to: '斜阳岛码头',
+    route: '盛塘天主教堂 → 斜阳岛码头',
+    pax: '2 / 7 人',
+    paxCount: '2 人',
+    price: '¥32.00',
+    wait: '05:00',
     timeline: [
-      { name: '叫车时间', time: '10:17' },
-      { name: '司机接单时间', time: '10:19' },
-      { name: '司机出发时间', time: '10:22' },
-      { name: '司机接到乘客时间', time: '10:28' }
+      { name: '叫车时间', time: '16:32' },
+      { name: '司机接单时间', time: '16:33' },
+      { name: '司机出发时间', time: '16:34' },
+      { name: '司机接到乘客时间', time: '16:38' }
     ]
   },
   {
-    id: 'WP20261106276',
+    id: 'WZ202611070349',
     status: '服务中',
     passengerPhone: '1397****5519',
-    useTime: '今日 08:42',
-    driver: '王海 (WZ-305)',
+    useTime: '今日 16:33',
+    driver: '陈纲 (WZ-132)',
     driverPhone: '1390****7761',
-    from: '西角码头',
-    to: '盛塘天主教堂',
-    route: '西角码头 → 盛塘天主教堂',
-    pax: '3 / 7 人',
-    paxCount: '3 人',
+    from: '东安村',
+    to: '西角码头',
+    route: '东安村 → 西角码头（客运码头）',
+    pax: '2 / 7 人',
+    paxCount: '2 人',
     price: '¥35.00',
-    wait: '08:42',
+    wait: '08:00',
     timeline: [
-      { name: '叫车时间', time: '08:42' },
-      { name: '司机接单时间', time: '08:43' },
-      { name: '司机出发时间', time: '08:46' },
-      { name: '司机接到乘客时间', time: '08:55' }
+      { name: '叫车时间', time: '16:33' },
+      { name: '司机接单时间', time: '16:34' },
+      { name: '司机出发时间', time: '16:35' },
+      { name: '司机接到乘客时间', time: '16:42' }
     ]
   },
   {
-    id: 'WP20261106277',
+    id: 'WZ202611070350',
     status: '服务中',
     passengerPhone: '1770****9932',
-    useTime: '今日 07:55',
-    driver: '陈飞 (WZ-309)',
+    useTime: '今日 16:33',
+    driver: '杨晶红 (WZ-112)',
     driverPhone: '1361****3452',
-    from: '五彩滩',
-    to: '鳄鱼山景区',
-    route: '五彩滩 → 鳄鱼山景区',
-    pax: '2 / 7 人',
-    paxCount: '2 人',
-    price: '¥28.00',
-    wait: '07:55',
+    from: '西角码头',
+    to: '北港村',
+    route: '西角码头（客运码头） → 北港村',
+    pax: '4 / 7 人',
+    paxCount: '4 人',
+    price: '¥36.00',
+    wait: '02:00',
     timeline: [
-      { name: '叫车时间', time: '07:55' },
-      { name: '司机接单时间', time: '07:57' },
-      { name: '司机出发时间', time: '08:01' },
-      { name: '司机接到乘客时间', time: '08:10' }
+      { name: '叫车时间', time: '16:33' },
+      { name: '司机接单时间', time: '16:34' },
+      { name: '司机出发时间', time: '16:35' },
+      { name: '司机接到乘客时间', time: '16:36' }
     ]
   },
   {
-    id: 'WP20261106278',
+    id: 'WZ202611070351',
     status: '服务中',
     passengerPhone: '1827****1039',
-    useTime: '今日 07:15',
-    driver: '朱浩 (WZ-202)',
+    useTime: '今日 16:35',
+    driver: '刘晓云 (WZ-101)',
     driverPhone: '1378****9921',
-    from: '贝壳沙滩',
-    to: '盛塘天主教堂',
-    route: '贝壳沙滩 → 盛塘天主教堂',
-    pax: '3 / 7 人',
-    paxCount: '3 人',
-    price: '¥32.00',
-    wait: '07:15',
+    from: '滴水村',
+    to: '南湾海鲜市场',
+    route: '滴水村 民宿区 → 南湾街 海鲜市场',
+    pax: '5 / 7 人',
+    paxCount: '5 人',
+    price: '¥36.00',
+    wait: '02:00',
     timeline: [
-      { name: '叫车时间', time: '07:15' },
-      { name: '司机接单时间', time: '07:17' },
-      { name: '司机出发时间', time: '07:20' },
-      { name: '司机接到乘客时间', time: '07:30' }
+      { name: '叫车时间', time: '16:35' },
+      { name: '司机接单时间', time: '16:36' },
+      { name: '司机出发时间', time: '16:37' },
+      { name: '司机接到乘客时间', time: '16:38' }
     ]
   },
   {
-    id: 'WP20261106279',
+    id: 'WZ202611070352',
     status: '服务中',
     passengerPhone: '1368****4427',
-    useTime: '今日 06:48',
-    driver: '方敏 (WZ-105)',
+    useTime: '今日 16:37',
+    driver: '李景 (WZ-126)',
     driverPhone: '1587****6618',
     from: '盛塘天主教堂',
-    to: '南湾海鲜市场',
-    route: '盛塘天主教堂 → 南湾海鲜市场',
-    pax: '2 / 7 人',
-    paxCount: '2 人',
-    price: '¥26.00',
-    wait: '06:48',
+    to: '西角码头',
+    route: '盛塘天主教堂 → 西角码头（客运码头）',
+    pax: '4 / 7 人',
+    paxCount: '4 人',
+    price: '¥42.00',
+    wait: '02:00',
     timeline: [
-      { name: '叫车时间', time: '06:48' },
-      { name: '司机接单时间', time: '06:50' },
-      { name: '司机出发时间', time: '06:54' },
-      { name: '司机接到乘客时间', time: '07:02' }
+      { name: '叫车时间', time: '16:37' },
+      { name: '司机接单时间', time: '16:38' },
+      { name: '司机出发时间', time: '16:39' },
+      { name: '司机接到乘客时间', time: '16:40' }
     ]
   }
 ];
@@ -366,13 +366,13 @@ function serviceMonitorPanel() {
   `).join('');
 
   const areaDistItems = [
-    { name: '南湾运动公园', count: 9, pct: 90, color: '#f59e0b' },
-    { name: '五彩滩景区', count: 6, pct: 60, color: '#10b981' },
-    { name: '石螺口景区', count: 5, pct: 50, color: '#00d8ff' },
-    { name: '西角码头', count: 4, pct: 40, color: '#38bdf8' },
-    { name: '天主教堂', count: 2, pct: 20, color: '#38bdf8' },
-    { name: '鳄鱼山景区', count: 1, pct: 10, color: '#38bdf8' },
-    { name: '其他', count: 1, pct: 10, color: '#38bdf8' }
+    { name: '南湾运动公园', count: 12, pct: 100, color: '#f59e0b' },
+    { name: '西角码头', count: 5, pct: 42, color: '#10b981' },
+    { name: '鳄鱼山景区', count: 5, pct: 42, color: '#00d8ff' },
+    { name: '五彩滩景区', count: 4, pct: 33, color: '#38bdf8' },
+    { name: '石螺口景区', count: 3, pct: 25, color: '#38bdf8' },
+    { name: '天主教堂', count: 2, pct: 17, color: '#38bdf8' },
+    { name: '其他', count: 1, pct: 8, color: '#38bdf8' }
   ];
 
   const distRows = areaDistItems.map(item => `
@@ -388,23 +388,23 @@ function serviceMonitorPanel() {
     <!-- 顶部 5 个业务指标 -->
     <div class="svc-5grid">
       <div class="svc-box">
-        <div class="svc-num"><strong>8</strong><small>分钟</small></div>
+        <div class="svc-num"><strong>4</strong><small>分钟</small></div>
         <div class="svc-lbl">平均等待时长</div>
       </div>
       <div class="svc-box">
-        <div class="svc-num"><strong>98.2</strong><small>%</small></div>
+        <div class="svc-num"><strong>84.3</strong><small>%</small></div>
         <div class="svc-lbl">应答率</div>
       </div>
       <div class="svc-box">
-        <div class="svc-num"><strong>2.3</strong><small>%</small></div>
+        <div class="svc-num"><strong>12.4</strong><small>%</small></div>
         <div class="svc-lbl">取消率</div>
       </div>
       <div class="svc-box">
-        <div class="svc-num"><strong>30</strong><small>%</small></div>
-        <div class="svc-lbl">3分钟内接单率</div>
+        <div class="svc-num"><strong>78.2</strong><small>%</small></div>
+        <div class="svc-lbl">2分钟内接单率</div>
       </div>
       <div class="svc-box">
-        <div class="svc-num"><strong>30</strong><small>%</small></div>
+        <div class="svc-num"><strong>22.9</strong><small>%</small></div>
         <div class="svc-lbl">1分钟内接单率</div>
       </div>
     </div>
@@ -414,7 +414,7 @@ function serviceMonitorPanel() {
       <div class="svc-dist-col">
         <div class="svc-sub-head">
           <span class="ssh-title">车辆区域分布 (实时)</span>
-          <span class="ssh-meta">在线 <b>28</b> 辆 · 按数量排序</span>
+          <span class="ssh-meta">在线 <b>32</b> 辆 · 按数量排序</span>
         </div>
         <div class="area-dist-list">${distRows}</div>
       </div>
@@ -439,31 +439,31 @@ function capacityOverviewPanel() {
     ${panelHeader('运力总览', badge)}
     <div class="cap-grid">
       <div class="cap-box total">
-        <strong class="cap-num font-num">31</strong>
+        <strong class="cap-num font-num">32</strong>
         <small>车辆总数</small>
       </div>
       <div class="cap-box running">
-        <strong class="cap-num font-num">21</strong>
+        <strong class="cap-num font-num">20</strong>
         <small>运营中</small>
       </div>
       <div class="cap-box idle">
-        <strong class="cap-num font-num">7</strong>
+        <strong class="cap-num font-num">6</strong>
         <small>空驶</small>
       </div>
       <div class="cap-box service">
-        <strong class="cap-num font-num">3</strong>
+        <strong class="cap-num font-num">6</strong>
         <small>充电/维修</small>
       </div>
     </div>
-    <div class="cap-dist-bar" title="运力分布: 运营 21 / 空驶 7 / 充维 3">
-      <span class="seg-run" style="width: 67.7%;"></span>
-      <span class="seg-idle" style="width: 22.6%;"></span>
-      <span class="seg-serv" style="width: 9.7%;"></span>
+    <div class="cap-dist-bar" title="运力分布: 运营 20 / 空驶 6 / 充维 6">
+      <span class="seg-run" style="width: 62.5%;"></span>
+      <span class="seg-idle" style="width: 18.75%;"></span>
+      <span class="seg-serv" style="width: 18.75%;"></span>
     </div>
     <div class="cap-metrics-dual">
       <div class="cap-chip">
         <span class="cap-chip-lbl">车辆在线率</span>
-        <span class="cap-chip-val font-num c-mint">90.3%</span>
+        <span class="cap-chip-val font-num c-mint">100%</span>
       </div>
       <div class="cap-chip">
         <span class="cap-chip-lbl">平均满载率</span>
@@ -544,51 +544,56 @@ function vehicleBehaviorAndAdasPanel() {
 const carouselVehicles = [
   // Page 1
   [
-    { id: 'WZ-307', driver: '张盼', from: '石螺口', to: '南湾运动公园', pax: '3人', bat: 78 },
-    { id: 'WZ-303', driver: '李强', from: '石螺口', to: '南湾运动公园', pax: '4人', bat: 85 },
-    { id: 'WZ-305', driver: '王海', from: '石螺口', to: '南湾运动公园', pax: '3人', bat: 46 },
-    { id: 'WZ-309', driver: '陈飞', from: '石螺口', to: '南湾运动公园', pax: '5人', bat: 91 },
-    { id: 'WZ-312', driver: '刘洋', from: '西角码头', to: '盛塘天主教堂', pax: '2人', bat: 67 }
+    { id: 'WZ-101', driver: '刘晓云', from: '滴水村', to: '南湾街', pax: '5人', bat: 92 },
+    { id: 'WZ-102', driver: '卢献蜜', from: '井仔村', to: '北港村', pax: '6人', bat: 88 },
+    { id: 'WZ-103', driver: '张红宇', from: '南湾街', to: '南湾街', pax: '6人', bat: 74 },
+    { id: 'WZ-104', driver: '金洛林', from: '南湾街', to: '五彩滩', pax: '2人', bat: 63 },
+    { id: 'WZ-105', driver: '于海洋', from: '蓝桥', to: '滴水丹屏', pax: '6人', bat: 85 }
   ],
   // Page 2
   [
-    { id: 'WZ-101', driver: '严旭', from: '西角码头', to: '南湾海鲜市场', pax: '5人', bat: 92 },
-    { id: 'WZ-102', driver: '魏刚', from: '西角码头', to: '鳄鱼山景区', pax: '4人', bat: 80 },
-    { id: 'WZ-103', driver: '陆涛', from: '石螺口', to: '贝壳沙滩', pax: '6人', bat: 74 },
-    { id: 'WZ-104', driver: '姜波', from: '蓝桥', to: '盛塘天主教堂', pax: '2人', bat: 63 },
-    { id: 'WZ-105', driver: '方敏', from: '南湾海鲜市场', to: '五彩滩', pax: '3人', bat: 88 }
+    { id: 'WZ-106', driver: '陈红', from: '滴水村', to: '南湾街', pax: '6人', bat: 78 },
+    { id: 'WZ-107', driver: '胡瀚文', from: '西角码头', to: '南湾运动公园', pax: '6人', bat: 90 },
+    { id: 'WZ-108', driver: '钟永轩', from: '滴水村', to: '五彩滩', pax: '2人', bat: 68 },
+    { id: 'WZ-109', driver: '陈义', from: '幕崖', to: '西角码头', pax: '6人', bat: 82 },
+    { id: 'WZ-110', driver: '刘扬', from: '滴水丹屏', to: '南湾', pax: '4人', bat: 75 }
   ],
   // Page 3
   [
-    { id: 'WZ-201', driver: '薛磊', from: '五彩滩', to: '鳄鱼山景区', pax: '4人', bat: 70 },
-    { id: 'WZ-202', driver: '朱浩', from: '南湾运动公园', to: '盛塘天主教堂', pax: '5人', bat: 82 },
-    { id: 'WZ-203', driver: '何彬', from: '西角码头', to: '石螺口', pax: '1人', bat: 55 },
-    { id: 'WZ-204', driver: '崔杰', from: '贝壳沙滩', to: '西角码头', pax: '3人', bat: 79 },
-    { id: 'WZ-205', driver: '杜伟', from: '鳄鱼山景区', to: '南湾运动公园', pax: '6人', bat: 86 }
+    { id: 'WZ-111', driver: '吴昊江', from: '石螺口海滩', to: '西角码头', pax: '2人', bat: 94 },
+    { id: 'WZ-112', driver: '杨晶红', from: '西角码头', to: '北港村', pax: '4人', bat: 71 },
+    { id: 'WZ-113', driver: '杨荣', from: '盛塘天主教堂', to: '斜阳岛码头', pax: '3人', bat: 86 },
+    { id: 'WZ-114', driver: '周青青', from: '南湾', to: '石螺口', pax: '1人', bat: 65 },
+    { id: 'WZ-115', driver: '张雷', from: '石螺口', to: '滴水村', pax: '4人', bat: 80 }
   ],
   // Page 4
   [
-    { id: 'WZ-301', driver: '胡鹏', from: '石螺口', to: '南湾运动公园', pax: '4人', bat: 90 },
-    { id: 'WZ-302', driver: '卢亮', from: '南湾海鲜市场', to: '蓝桥', pax: '2人', bat: 65 },
-    { id: 'WZ-304', driver: '蔡勇', from: '盛塘天主教堂', to: '五彩滩', pax: '5人', bat: 72 },
-    { id: 'WZ-306', driver: '贾宁', from: '西角码头', to: '南湾运动公园', pax: '3人', bat: 81 },
-    { id: 'WZ-308', driver: '夏冬', from: '贝壳沙滩', to: '鳄鱼山景区', pax: '4人', bat: 58 }
+    { id: 'WZ-116', driver: '刘红君', from: '石螺口', to: '南湾', pax: '4人', bat: 77 },
+    { id: 'WZ-117', driver: '邹勇', from: '南湾街', to: '西角码头', pax: '2人', bat: 89 },
+    { id: 'WZ-118', driver: '余仁智', from: '贝壳沙滩', to: '地质博物馆', pax: '6人', bat: 59 },
+    { id: 'WZ-119', driver: '罗传霞', from: '盛塘天主教堂', to: '西角码头', pax: '1人', bat: 83 },
+    { id: 'WZ-120', driver: '李世伟', from: '五彩滩', to: '南湾街', pax: '4人', bat: 91 }
   ],
   // Page 5
   [
-    { id: 'WZ-310', driver: '钱坤', from: '五彩滩', to: '石螺口', pax: '6人', bat: 84 },
-    { id: 'WZ-311', driver: '邹峰', from: '南湾运动公园', to: '蓝桥', pax: '3人', bat: 77 },
-    { id: 'WZ-106', driver: '顾成', from: '西角码头', to: '盛塘天主教堂', pax: '2人', bat: 69 },
-    { id: 'WZ-107', driver: '白龙', from: '石螺口', to: '鳄鱼山景区', pax: '5人', bat: 93 },
-    { id: 'WZ-108', driver: '毛磊', from: '盛塘天主教堂', to: '南湾海鲜市场', pax: '4人', bat: 75 }
+    { id: 'WZ-121', driver: '孙雄伟', from: '北港村', to: '南湾', pax: '4人', bat: 66 },
+    { id: 'WZ-122', driver: '朱娇娇', from: '西角码头', to: '滴水村', pax: '4人', bat: 79 },
+    { id: 'WZ-123', driver: '赵县平', from: '南湾街', to: '贝壳沙滩', pax: '4人', bat: 84 },
+    { id: 'WZ-124', driver: '翟测试', from: '石螺口海滩', to: '南湾运动公园', pax: '5人', bat: 72 },
+    { id: 'WZ-125', driver: '罗卿卿', from: '五彩滩', to: '南湾港', pax: '4人', bat: 88 }
   ],
   // Page 6
   [
-    { id: 'WZ-206', driver: '秦川', from: '蓝桥', to: '西角码头', pax: '1人', bat: 60 },
-    { id: 'WZ-207', driver: '龚平', from: '南湾运动公园', to: '五彩滩', pax: '4人', bat: 89 },
-    { id: 'WZ-208', driver: '武强', from: '鳄鱼山景区', to: '石螺口', pax: '5人', bat: 73 },
-    { id: 'WZ-313', driver: '常青', from: '西角码头', to: '南湾海鲜市场', pax: '3人', bat: 86 },
-    { id: 'WZ-314', driver: '董健', from: '贝壳沙滩', to: '盛塘天主教堂', pax: '2人', bat: 64 }
+    { id: 'WZ-126', driver: '李景', from: '盛塘天主教堂', to: '西角码头', pax: '4人', bat: 69 },
+    { id: 'WZ-127', driver: '刘继超', from: '西角码头', to: '后背塘', pax: '2人', bat: 85 },
+    { id: 'WZ-128', driver: '谢荣锋', from: '石螺口海滩', to: '西角码头', pax: '1人', bat: 62 },
+    { id: 'WZ-129', driver: '杨其静', from: '鳄鱼山景区', to: '南湾街', pax: '5人', bat: 93 },
+    { id: 'WZ-130', driver: '张锋', from: '五彩滩', to: '南湾港', pax: '2人', bat: 76 }
+  ],
+  // Page 7
+  [
+    { id: 'WZ-131', driver: '陈小合', from: '地质博物馆', to: '南湾', pax: '2人', bat: 81 },
+    { id: 'WZ-132', driver: '陈纲', from: '东安村', to: '西角码头', pax: '2人', bat: 87 }
   ]
 ];
 
@@ -654,7 +659,7 @@ function startVehCarousel() {
 }
 
 function vehicleRosterCarouselPanel() {
-  const badge = `<span class="tag-badge">在线 28/31 · 核载7人</span>`;
+  const badge = `<span class="tag-badge">在线 32/32 · 核载7人</span>`;
   return `<section class="panel panel-veh-carousel">
     ${panelHeader('车辆监控', badge)}
     <div id="veh-roster-body" class="veh-roster-body-wrap">
@@ -668,40 +673,88 @@ function vehicleRosterCarouselPanel() {
    -------------------------------------------------------------------------- */
 const incidentStore = [
   {
-    id: 'EV202611060015',
-    time: '15:20',
+    id: 'EV202611070006',
+    time: '15:00',
     type: 'warn',
     tag: '预警',
-    title: '船舶 15:20 分到港，客流上升',
-    content: '监测到「北海—涠洲」航线 15:20 班次到港，预计西角码头瞬时客流上升约 260 人，现有候车运力存在缺口。',
+    title: '船舶 15:30 分到港，客流上升',
+    content: '监测到「北海—涠洲」航线 15:30 班次即将到港，预计客流大幅上升，西角码头候车运力需提前储备。',
     location: '西角码头',
     car: '—',
     action: '通知调度，增派车辆',
     status: '未处理'
   },
   {
-    id: 'EV202611060018',
-    time: '15:08',
-    type: 'err',
-    tag: '异常',
-    title: 'WZ-102 车辆超速，最高时速 70km/h',
-    content: '车辆 WZ-102 在西角码头往南湾街路段行驶速度达到 70km/h，超出限速 40km/h 指标，触发超速警报。',
-    location: '西角支线 K2+400',
-    car: 'WZ-102',
-    action: '提醒司机注意安全',
+    id: 'EV202611070005',
+    time: '13:20',
+    type: 'warn',
+    tag: '预警',
+    title: '船舶 13:50 分到港，客流上升',
+    content: '监测到「北海—涠洲」航线 13:50 班次即将到港，预计客流上升，西角码头候车运力需调度补充。',
+    location: '西角码头',
+    car: '—',
+    action: '通知调度，增派车辆',
     status: '未处理'
+  },
+  {
+    id: 'EV202611070004',
+    time: '12:30',
+    type: 'warn',
+    tag: '预警',
+    title: '涠洲岛仙人掌基地路段施工，请绕行',
+    content: '涠洲岛仙人掌基地周边路段施工，通行效率受阻，存在缓行拥堵风险。',
+    location: '仙人掌基地路段',
+    car: '—',
+    action: '通知司机注意绕行',
+    status: '已处理'
+  },
+  {
+    id: 'EV202611070003',
+    time: '11:20',
+    type: 'warn',
+    tag: '预警',
+    title: '船舶 11:50 分到港，客流上升',
+    content: '监测到「北海—涠洲」航线 11:50 班次到港，西角码头客流集中上升，调度增派车辆接驳。',
+    location: '西角码头',
+    car: '—',
+    action: '通知调度，增派车辆',
+    status: '已处理'
+  },
+  {
+    id: 'EV202611070002',
+    time: '10:58',
+    type: 'warn',
+    tag: '预警',
+    title: '南湾海鲜市场多辆车速偏低，拥堵预警',
+    content: '南湾海鲜市场路段多辆观光车实时车速偏低，道路拥挤，建议周边车辆绕行。',
+    location: '南湾海鲜市场',
+    car: 'WZ-103等',
+    action: '通知司机注意绕行',
+    status: '已处理'
+  },
+  {
+    id: 'EV202611070001',
+    time: '10:20',
+    type: 'warn',
+    tag: '预警',
+    title: '船舶 10:50 分到港，客流上升',
+    content: '监测到「北海—涠洲」航线 10:50 班次到港，客流显著上升，调度已增派接运车辆。',
+    location: '西角码头',
+    car: '—',
+    action: '通知调度，增派车辆',
+    status: '已处理'
   }
 ];
 
 function incidentMonitorPanel(handled = new Set()) {
-  const badge = `<span class="tag-badge">今日 6 起 · 最新3条</span>`;
+  const badge = `<span class="tag-badge">今日 6 起 · 待办 2 起</span>`;
   
-  const handledItems = incidentStore.filter(i => i.status === '已处理');
-  const warnUnhandled = 4 - incidentStore.filter(i => i.type === 'warn' && i.status === '已处理').length;
-  const errUnhandled = 2 - incidentStore.filter(i => i.type === 'err' && i.status === '已处理').length;
-  const okTotal = 6; // 对照图3展示
+  const unhandledWarn = incidentStore.filter(i => i.type === 'warn' && i.status !== '已处理').length;
+  const unhandledErr = incidentStore.filter(i => i.type === 'err' && i.status !== '已处理').length;
+  const okTotal = incidentStore.filter(i => i.status === '已处理').length;
 
-  const cards = incidentStore.map(item => `
+  const displayCards = incidentStore.slice(0, 2);
+  const cards = displayCards.map(item => `
     <div class="inc-v2-card ${item.type} ${item.status === '已处理' ? 'is-handled' : ''}" data-action="openIncident" data-inc-id="${item.id}" role="button" tabindex="0" title="点击查看事件详情">
       <div class="inc-v2-header">
         <div class="inc-v2-meta">
@@ -722,11 +775,11 @@ function incidentMonitorPanel(handled = new Set()) {
     ${panelHeader('事件监控', badge)}
     <div class="inc-stats-row">
       <div class="inc-stat-box err">
-        <strong class="font-num">${Math.max(0, errUnhandled)}</strong>
+        <strong class="font-num">${unhandledErr}</strong>
         <small>异常</small>
       </div>
       <div class="inc-stat-box warn">
-        <strong class="font-num">${Math.max(0, warnUnhandled)}</strong>
+        <strong class="font-num">${unhandledWarn}</strong>
         <small>预警</small>
       </div>
       <div class="inc-stat-box ok">
