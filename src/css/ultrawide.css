@@ -969,26 +969,29 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 14px 6px;
-    border-radius: 8px;
+    padding: 18px 10px;
+    border-radius: 10px;
     height: 100%;
     box-sizing: border-box;
   }
   .env-ico {
-    width: 36px;
-    height: 36px;
-    margin-bottom: 6px;
+    width: 48px;
+    height: 48px;
+    margin-bottom: 8px;
   }
   .env-ico svg {
-    width: 32px;
-    height: 32px;
+    width: 44px;
+    height: 44px;
   }
   .env-val {
-    font-size: 30px;
+    font-size: 42px;
+    font-weight: 700;
   }
   .env-lbl {
-    font-size: 19px;
-    margin-top: 6px;
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 8px;
+    color: #bad8f5;
   }
 
   /* Left Module 2A: Order Trend */
@@ -1220,220 +1223,293 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    padding: 14px 6px;
-    border-radius: 8px;
+    padding: 16px 8px;
+    border-radius: 9px;
     height: 100%;
     box-sizing: border-box;
   }
   .cap-box strong {
-    font-size: 52px;
+    font-size: 60px;
+    font-weight: 700;
   }
   .cap-box small {
-    font-size: 20px;
-    margin-top: 6px;
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 8px;
+    color: #bad8f5;
   }
   .cap-dist-bar {
     flex: none;
-    height: 7px;
-    margin: 12px 0;
+    height: 10px;
+    border-radius: 5px;
+    margin: 14px 0;
   }
   .cap-metrics-dual {
     flex: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 14px;
     min-height: 0;
   }
   .cap-chip {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 10px 20px;
-    border-radius: 8px;
+    padding: 14px 24px;
+    border-radius: 9px;
     height: 100%;
     box-sizing: border-box;
   }
   .cap-chip-lbl {
-    font-size: 20px;
+    font-size: 24px;
+    font-weight: 500;
   }
   .cap-chip-val {
-    font-size: 28px;
+    font-size: 34px;
+    font-weight: 700;
   }
 
   /* Right Module 2: Driving Monitor (Behavior + ADAS) */
   .panel-veh-behavior-adas {
     flex: 1.35;
+    display: flex;
+    flex-direction: column;
   }
   .veh-split-grid {
     gap: 22px;
     align-items: stretch;
+    flex: 1;
+    min-height: 0;
   }
   .behavior-side, .adas-side {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    flex: 1;
+    min-height: 0;
   }
   .veh-sec-title {
-    font-size: 26px;
-    margin-bottom: 12px;
+    font-size: 30px;
+    margin-bottom: 14px;
+    font-weight: 600;
   }
   .vst-left svg {
-    width: 26px;
-    height: 26px;
+    width: 30px;
+    height: 30px;
   }
   .adas-badge {
-    font-size: 19px;
-    padding: 6px 18px;
-    border-radius: 18px;
+    font-size: 22px;
+    padding: 7px 22px;
+    border-radius: 20px;
   }
   .behavior-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(5, 1fr);
-    gap: 12px;
+    gap: 14px;
     flex: 1;
+    min-height: 0;
   }
   .b-item {
-    padding: 12px 18px;
-    border-radius: 8px;
+    padding: 14px 22px;
+    border-radius: 9px;
     height: 100%;
     box-sizing: border-box;
   }
   .b-dot {
-    width: 10px;
-    height: 10px;
-    margin-right: 10px;
+    width: 12px;
+    height: 12px;
+    margin-right: 12px;
   }
   .b-name {
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 600;
   }
   .b-val {
-    font-size: 28px;
+    font-size: 34px;
+    font-weight: 700;
   }
   .adas-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
+    gap: 16px;
     flex: 1;
+    min-height: 0;
   }
   .adas-col {
     display: grid;
     grid-template-rows: repeat(5, 1fr);
-    gap: 12px;
+    gap: 14px;
     height: 100%;
+    min-height: 0;
   }
   .adas-item {
-    padding: 12px 18px;
-    border-radius: 8px;
+    padding: 14px 22px;
+    border-radius: 9px;
     height: 100%;
     box-sizing: border-box;
   }
   .adas-dot {
-    width: 10px;
-    height: 10px;
-    margin-right: 10px;
+    width: 12px;
+    height: 12px;
+    margin-right: 12px;
   }
   .adas-name {
-    font-size: 22px;
+    font-size: 26px;
     font-weight: 600;
   }
   .adas-val {
-    font-size: 28px;
+    font-size: 34px;
+    font-weight: 700;
   }
 
-  /* Right Module 3A: Vehicles Roster Carousel */
+  /* Right Module 3A: Vehicles Roster Carousel (Stretched to fill column) */
   .panel-veh-carousel {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
+  .veh-roster-body-wrap {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    justify-content: space-between;
+    min-height: 0;
   }
   .veh-roster-list {
-    gap: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    gap: 10px;
+    min-height: 0;
   }
   .veh-card-mini {
-    padding: 9px 14px;
-    border-radius: 9px;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 20px;
+    border-radius: 10px;
   }
   .vcm-dot {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
   }
   .vcm-id {
-    font-size: 19px;
+    font-size: 26px;
+    font-weight: 700;
   }
   .vcm-driver {
-    font-size: 17px;
-    padding-left: 14px;
+    font-size: 22px;
+    padding-left: 15px;
   }
   .vcm-mid {
-    font-size: 17.5px;
-    gap: 4px;
+    font-size: 24px;
+    font-weight: 600;
+    gap: 6px;
+  }
+  .vcm-stop i {
+    width: 8.5px;
+    height: 8.5px;
   }
   .vcm-pax {
-    font-size: 19px;
+    font-size: 26px;
+    font-weight: 700;
   }
   .vcm-bat {
-    font-size: 17px;
+    font-size: 22px;
+    gap: 6px;
   }
   .bat-icon {
-    width: 20px;
-    height: 12px;
+    width: 24px;
+    height: 14px;
   }
   .pager-num {
-    font-size: 17px;
+    font-size: 22px;
   }
   .pager-dot {
-    width: 9px;
-    height: 9px;
+    width: 12px;
+    height: 12px;
   }
 
   /* Right Module 3B: Incidents Monitor */
+  .panel-incidents {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+  }
   .inc-stats-row {
-    gap: 10px;
-    margin-bottom: 12px;
+    gap: 14px;
+    margin-bottom: 16px;
   }
   .inc-stat-box {
-    padding: 12px 6px;
-    border-radius: 8px;
+    padding: 16px 8px;
+    border-radius: 10px;
   }
   .inc-stat-box strong {
-    font-size: 44px;
+    font-size: 54px;
+    font-weight: 700;
   }
   .inc-stat-box small {
-    font-size: 19px;
-    margin-top: 5px;
+    font-size: 24px;
+    font-weight: 500;
+    margin-top: 6px;
+    color: #bad8f5;
   }
   .incident-list-v2 {
-    gap: 10px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 0;
   }
   .inc-v2-card {
-    padding: 12px 16px;
-    border-radius: 9px;
-    gap: 6px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 16px 22px;
+    border-radius: 10px;
+    gap: 8px;
+  }
+  .inc-v2-header {
+    display: flex;
+    align-items: center;
+    gap: 10px;
   }
   .inc-v2-time {
-    font-size: 18px;
+    font-size: 22px;
+    font-weight: 600;
   }
   .inc-v2-badge {
-    font-size: 16.5px;
-    padding: 3px 10px;
+    font-size: 20px;
+    padding: 4px 14px;
+    border-radius: 6px;
   }
   .inc-v2-title {
-    font-size: 19px;
+    font-size: 25px;
+    font-weight: 600;
     margin: 4px 0;
+    line-height: 1.4;
   }
   .inc-v2-status {
-    font-size: 16px;
-    padding: 3px 11px;
+    font-size: 20px;
+    padding: 5px 16px;
+    border-radius: 6px;
   }
   .inc-v2-footer {
-    font-size: 17px;
+    font-size: 22px;
   }
   .inc-v2-act-lbl {
-    font-size: 15.5px;
-    padding: 2px 7px;
+    font-size: 20px;
+    padding: 3px 10px;
+    border-radius: 5px;
   }
   .inc-v2-act-val {
-    font-size: 18px;
+    font-size: 24px;
+    font-weight: 600;
   }
 
   /* Floating Popups: Vehicle Order Details & Incident Details */
@@ -1583,19 +1659,97 @@ html.giant-screen .panel-title {
   font-size: 34px !important;
 }
 html.giant-screen .veh-sec-title {
-  font-size: 28px !important;
+  font-size: 30px !important;
 }
 html.giant-screen .adas-badge {
-  font-size: 20px !important;
+  font-size: 22px !important;
 }
 html.giant-screen .b-name,
 html.giant-screen .adas-name {
-  font-size: 24px !important;
+  font-size: 26px !important;
   font-weight: 600 !important;
 }
 html.giant-screen .b-val,
 html.giant-screen .adas-val {
-  font-size: 30px !important;
+  font-size: 34px !important;
+  font-weight: 700 !important;
+}
+html.giant-screen .env-val {
+  font-size: 42px !important;
+  font-weight: 700 !important;
+}
+html.giant-screen .env-lbl {
+  font-size: 24px !important;
+  font-weight: 500 !important;
+}
+html.giant-screen .cap-box strong {
+  font-size: 60px !important;
+  font-weight: 700 !important;
+}
+html.giant-screen .cap-box small {
+  font-size: 24px !important;
+  font-weight: 500 !important;
+}
+html.giant-screen .cap-chip-lbl {
+  font-size: 24px !important;
+  font-weight: 500 !important;
+}
+html.giant-screen .cap-chip-val {
+  font-size: 34px !important;
+  font-weight: 700 !important;
+}
+html.giant-screen .veh-card-mini {
+  flex: 1 !important;
+}
+html.giant-screen .vcm-id {
+  font-size: 26px !important;
+  font-weight: 700 !important;
+}
+html.giant-screen .vcm-driver {
+  font-size: 22px !important;
+}
+html.giant-screen .vcm-mid {
+  font-size: 24px !important;
+  font-weight: 600 !important;
+}
+html.giant-screen .vcm-pax {
+  font-size: 26px !important;
+  font-weight: 700 !important;
+}
+html.giant-screen .vcm-bat {
+  font-size: 22px !important;
+}
+html.giant-screen .inc-stat-box strong {
+  font-size: 54px !important;
+  font-weight: 700 !important;
+}
+html.giant-screen .inc-stat-box small {
+  font-size: 24px !important;
+  font-weight: 500 !important;
+}
+html.giant-screen .inc-v2-time {
+  font-size: 22px !important;
+  font-weight: 600 !important;
+}
+html.giant-screen .inc-v2-badge {
+  font-size: 20px !important;
+}
+html.giant-screen .inc-v2-title {
+  font-size: 25px !important;
+  font-weight: 600 !important;
+}
+html.giant-screen .inc-v2-status {
+  font-size: 20px !important;
+}
+html.giant-screen .inc-v2-footer {
+  font-size: 22px !important;
+}
+html.giant-screen .inc-v2-act-lbl {
+  font-size: 20px !important;
+}
+html.giant-screen .inc-v2-act-val {
+  font-size: 24px !important;
+  font-weight: 600 !important;
 }
 html.giant-screen .queue-header-row {
   font-size: 23px !important;
