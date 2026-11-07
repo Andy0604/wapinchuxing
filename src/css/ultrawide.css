@@ -811,44 +811,70 @@
   }
 
   /* Left Module 1A: Future Forecast */
+  .panel-forecast {
+    display: flex;
+    flex-direction: column;
+  }
   .forecast-bars-grid {
-    gap: 12px;
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
+    gap: 16px;
     padding: 12px 6px 4px;
+    min-height: 0;
   }
   .forecast-col {
     gap: 8px;
+    height: 100%;
   }
   .f-val {
     font-size: 20px;
+    flex: none;
   }
   .f-bar-wrap {
+    flex: 1;
+    width: 100%;
     max-width: 58px;
-    height: 110px;
+    min-height: 120px;
+    max-height: 250px;
     border-radius: 6px;
   }
   .f-day {
     font-size: 17px;
+    flex: none;
   }
 
   /* Left Module 1B: Island Overview */
+  .panel-overview {
+    display: flex;
+    flex-direction: column;
+  }
   .overview-dual {
+    flex: 1.15;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
+    min-height: 0;
   }
   .metric-card {
-    padding: 12px 16px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 14px 18px;
     border-radius: 8px;
+    height: 100%;
+    box-sizing: border-box;
   }
   .m-lbl {
     font-size: 18px;
     margin-bottom: 4px;
   }
   .m-val strong {
-    font-size: 42px;
+    font-size: 44px;
   }
   .m-val small {
-    font-size: 17px;
+    font-size: 18px;
     margin-left: 4px;
   }
   .m-delta {
@@ -863,33 +889,45 @@
     padding: 3px 10px;
   }
   .env-grid {
+    flex: 1;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
     margin-top: 10px;
+    min-height: 0;
   }
   .env-box {
-    padding: 10px 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 4px;
     border-radius: 8px;
+    height: 100%;
+    box-sizing: border-box;
   }
   .env-ico {
-    width: 28px;
-    height: 28px;
-    margin-bottom: 4px;
+    width: 32px;
+    height: 32px;
+    margin-bottom: 6px;
   }
   .env-ico svg {
-    width: 24px;
-    height: 24px;
+    width: 28px;
+    height: 28px;
   }
   .env-val {
-    font-size: 23px;
+    font-size: 26px;
   }
   .env-lbl {
-    font-size: 16px;
-    margin-top: 4px;
+    font-size: 17px;
+    margin-top: 6px;
   }
 
   /* Left Module 2A: Order Trend */
+  .panel-order-trend {
+    display: flex;
+    flex-direction: column;
+  }
   .trend-tabs .tag-badge {
     font-size: 15px;
     padding: 3px 12px;
@@ -897,6 +935,7 @@
   .trend-sub-bar {
     font-size: 16px;
     margin-bottom: 8px;
+    flex: none;
   }
   .trend-unit {
     font-size: 16px;
@@ -904,55 +943,93 @@
   .trend-peak-lbl {
     font-size: 16px;
   }
+  .trend-svg-wrap {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    min-height: 0;
+  }
   .trend-svg-wrap svg {
-    height: 110px;
+    flex: 1;
+    width: 100%;
+    height: 100%;
+    min-height: 160px;
   }
   .trend-axis-x {
     font-size: 15px;
     margin-top: 6px;
+    flex: none;
   }
 
   /* Left Module 2B: Operations Monitor */
+  .panel-ops {
+    display: flex;
+    flex-direction: column;
+  }
   .gmv-dual {
+    flex: 1;
+    display: flex;
+    justify-content: space-between;
+    align-items: stretch;
     gap: 14px;
-    padding: 8px 12px 10px;
+    padding: 12px 18px;
     border-radius: 8px;
+    min-height: 0;
+  }
+  .gmv-left {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
   }
   .gmv-val {
-    font-size: 44px;
+    font-size: 46px;
     margin: 4px 0;
   }
   .arpu-card {
-    padding: 8px 16px;
-    min-width: 90px;
+    padding: 10px 20px;
+    min-width: 100px;
     border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
   }
   .arpu-val {
-    font-size: 36px;
+    font-size: 38px;
   }
   .arpu-lbl {
-    font-size: 16px;
+    font-size: 17px;
   }
   .order-grid {
+    flex: 1.25;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 8px;
     margin-top: 10px;
+    min-height: 0;
   }
   .order-box {
-    padding: 10px 4px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 12px 4px;
     border-radius: 8px;
+    height: 100%;
+    box-sizing: border-box;
   }
   .order-box strong {
-    font-size: 34px;
+    font-size: 36px;
   }
   .order-box small {
-    font-size: 16px;
+    font-size: 17px;
     margin-top: 4px;
   }
   .order-progress-strip {
-    height: 6px;
+    height: 7px;
     margin-top: 10px;
+    flex: none;
   }
 
   /* Left Module 3: Service Monitor */
@@ -1042,14 +1119,27 @@
   }
 
   /* Right Module 1: Capacity Overview */
+  .panel-capacity {
+    flex: 0.72;
+    display: flex;
+    flex-direction: column;
+  }
   .cap-grid {
+    flex: 1.15;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 10px;
+    min-height: 0;
   }
   .cap-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
     padding: 12px 6px;
     border-radius: 8px;
+    height: 100%;
+    box-sizing: border-box;
   }
   .cap-box strong {
     font-size: 42px;
@@ -1059,17 +1149,25 @@
     margin-top: 6px;
   }
   .cap-dist-bar {
+    flex: none;
     height: 6px;
     margin: 10px 0;
   }
   .cap-metrics-dual {
+    flex: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
     gap: 10px;
+    min-height: 0;
   }
   .cap-chip {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
     padding: 8px 16px;
     border-radius: 8px;
+    height: 100%;
+    box-sizing: border-box;
   }
   .cap-chip-lbl {
     font-size: 17px;
@@ -1080,7 +1178,7 @@
 
   /* Right Module 2: Vehicles Monitor (Behavior + ADAS) */
   .panel-veh-behavior-adas {
-    flex: 1.25;
+    flex: 1.38;
   }
   .veh-split-grid {
     gap: 16px;
