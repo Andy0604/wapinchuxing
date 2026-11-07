@@ -69,20 +69,20 @@ function operationsMonitorPanel() {
       </div>
     </div>
     <div class="order-grid">
-      <div class="order-box">
-        <strong class="font-num">8</strong>
+      <div class="order-box box-cancel">
+        <strong class="font-num num-cancel">8</strong>
         <small>已取消</small>
       </div>
-      <div class="order-box">
-        <strong class="font-num">286</strong>
+      <div class="order-box box-done">
+        <strong class="font-num num-done">286</strong>
         <small>已完成</small>
       </div>
-      <div class="order-box">
-        <strong class="font-num">26</strong>
+      <div class="order-box box-serving">
+        <strong class="font-num num-serving">26</strong>
         <small>服务中</small>
       </div>
-      <div class="order-box">
-        <strong class="font-num">32</strong>
+      <div class="order-box box-pending">
+        <strong class="font-num num-pending">32</strong>
         <small>待接单</small>
       </div>
     </div>
