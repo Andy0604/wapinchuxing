@@ -235,27 +235,37 @@ function capacityOverviewPanel() {
   return `<section class="panel panel-capacity">
     ${panelHeader('运力总览', badge)}
     <div class="cap-grid">
-      <div class="cap-box">
-        <strong>31</strong>
-        <small>车辆总数</small>
+      <div class="cap-box total">
+        <strong class="cap-num font-num">31</strong>
+        <small class="cap-label">车辆总数</small>
       </div>
-      <div class="cap-box">
-        <strong class="c-mint">21</strong>
-        <small>运营中</small>
+      <div class="cap-box running">
+        <strong class="cap-num font-num">21</strong>
+        <small class="cap-label">运营中</small>
       </div>
-      <div class="cap-box">
-        <strong class="c-blue">7</strong>
-        <small>空驶</small>
+      <div class="cap-box idle">
+        <strong class="cap-num font-num">7</strong>
+        <small class="cap-label">空驶</small>
       </div>
-      <div class="cap-box">
-        <strong class="c-sub">3</strong>
-        <small>充电/维修</small>
+      <div class="cap-box service">
+        <strong class="cap-num font-num">3</strong>
+        <small class="cap-label">充电/维修</small>
       </div>
     </div>
-    <div class="cap-bar-info">
-      <span>车辆在线率 <b>90.3%</b></span>
-      <span class="cap-sep">|</span>
-      <span>平均满载率 <b>86%</b></span>
+    <div class="cap-dist-bar" title="运力分布: 运营中 67.7%, 空驶 22.6%, 充电/维修 9.7%">
+      <i class="seg-run" style="width: 67.7%"></i>
+      <i class="seg-idle" style="width: 22.6%"></i>
+      <i class="seg-serv" style="width: 9.7%"></i>
+    </div>
+    <div class="cap-metrics-dual">
+      <div class="cap-chip">
+        <span class="cap-chip-lbl">车辆在线率</span>
+        <span class="cap-chip-val font-num c-mint">90.3%</span>
+      </div>
+      <div class="cap-chip">
+        <span class="cap-chip-lbl">平均满载率</span>
+        <span class="cap-chip-val font-num c-cyan">86%</span>
+      </div>
     </div>
   </section>`;
 }
@@ -266,34 +276,40 @@ function capacityOverviewPanel() {
 function vehicleMonitorPanel() {
   const badge = `<span class="tag-badge">今日预警 59 起</span>`;
   const adasLeft = [
-    { name: '向前碰撞', val: 2, c: '#3ba9ff', hot: false },
-    { name: '车道偏离报警', val: 16, c: '#3ba9ff', hot: true },
-    { name: '车距过近报警', val: 6, c: '#3ba9ff', hot: false },
-    { name: '行人碰撞报警', val: 24, c: '#55f1cd', hot: true },
-    { name: '频繁变道报警', val: 0, c: '#f5b842', hot: false }
+    { name: '向前碰撞', val: 2, c: '#38bdf8', level: 'warn' },
+    { name: '车道偏离报警', val: 16, c: '#ff5e6a', level: 'danger' },
+    { name: '车距过近报警', val: 6, c: '#f59e0b', level: 'warn' },
+    { name: '行人碰撞报警', val: 24, c: '#ff5e6a', level: 'danger' },
+    { name: '频繁变道报警', val: 0, c: '#627d98', level: 'zero' }
   ];
 
   const adasRight = [
-    { name: '道路标识超限报警', val: 0, c: '#ff9d42', hot: false },
-    { name: '障碍物报警', val: 0, c: '#ff5c5c', hot: false },
-    { name: '道路标识识别事件', val: 0, c: '#b562ff', hot: false },
-    { name: '主动抓拍事件', val: 0, c: '#b562ff', hot: false }
+    { name: '道路标识超限', val: 0, c: '#627d98', level: 'zero' },
+    { name: '障碍物报警', val: 0, c: '#627d98', level: 'zero' },
+    { name: '标识识别事件', val: 0, c: '#627d98', level: 'zero' },
+    { name: '主动抓拍事件', val: 0, c: '#627d98', level: 'zero' }
   ];
 
   const renderItem = item => `
-    <div class="adas-item">
+    <div class="adas-item ${item.level}">
       <span class="adas-dot" style="--c:${item.c}"></span>
       <span class="adas-name">${item.name}</span>
-      <strong class="adas-val ${item.hot ? 'hot' : ''}">${item.val}</strong>
+      <strong class="adas-val font-num ${item.level}">${item.val}</strong>
     </div>
   `;
 
   return `<section class="panel panel-vehicles">
     ${panelHeader('车辆监控', badge)}
     <div class="driver-alert-box">
-      <span class="alert-dot amber-bg"></span>
-      <span class="alert-lbl">驾驶员异常</span>
-      <strong class="alert-val">2</strong>
+      <div class="alert-left">
+        <span class="alert-pulse amber"></span>
+        <span class="alert-lbl">驾驶员异常</span>
+        <span class="alert-tag">今日监测</span>
+      </div>
+      <div class="alert-right">
+        <strong class="alert-val font-num">2</strong>
+        <small class="alert-unit">起</small>
+      </div>
     </div>
     <div class="adas-section">
       <div class="adas-header">${ico('dish')} <span>ADAS 统计</span></div>
@@ -314,7 +330,7 @@ const incidentStore = [
     time: '15:20',
     type: 'warn',
     tag: '预警',
-    title: '船舶 15:20 分到达，客流上升',
+    title: '船舶 15:20 分到港，客流瞬时上升',
     content: '监测到「北海—涠洲」航线 15:20 班次到港，预计西角码头瞬时客流上升约 260 人，现有候车运力存在缺口。',
     location: '西角码头',
     car: '—',
@@ -346,14 +362,16 @@ function incidentMonitorPanel(handled = new Set()) {
 
   const cards = incidentStore.map(item => `
     <div class="inc-v2-card ${item.type} ${item.status === '已处理' ? 'is-handled' : ''}" data-action="openIncident" data-inc-id="${item.id}" role="button" tabindex="0" title="点击查看事件详情">
-      <div class="inc-v2-top">
-        <span class="inc-v2-time">${item.time}</span>
-        <span class="inc-v2-badge ${item.type}">${item.tag}</span>
-        <strong class="inc-v2-title">${item.title}</strong>
+      <div class="inc-v2-header">
+        <div class="inc-v2-meta">
+          <span class="inc-v2-badge ${item.type}">${item.tag}</span>
+          <span class="inc-v2-time font-num">${item.time}</span>
+        </div>
         <span class="inc-v2-status ${item.status === '已处理' ? 'ok' : ''}">${item.status}</span>
       </div>
-      <div class="inc-v2-bottom">
-        <span class="inc-v2-act-lbl">处理方式：</span>
+      <div class="inc-v2-title">${item.title}</div>
+      <div class="inc-v2-footer">
+        <span class="inc-v2-act-lbl">处理方式</span>
         <span class="inc-v2-act-val">${item.action}</span>
       </div>
     </div>
@@ -363,15 +381,15 @@ function incidentMonitorPanel(handled = new Set()) {
     ${panelHeader('事件监控', badge)}
     <div class="inc-stats-row">
       <div class="inc-stat-box err">
-        <strong>${errUnhandled}</strong>
+        <strong class="font-num">${errUnhandled}</strong>
         <small>异常</small>
       </div>
       <div class="inc-stat-box warn">
-        <strong>${warnUnhandled}</strong>
+        <strong class="font-num">${warnUnhandled}</strong>
         <small>预警</small>
       </div>
       <div class="inc-stat-box ok">
-        <strong>${okTotal}</strong>
+        <strong class="font-num">${okTotal}</strong>
         <small>已处理</small>
       </div>
     </div>

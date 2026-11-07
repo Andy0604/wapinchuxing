@@ -489,44 +489,104 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   gap: 6px;
 }
 .cap-box {
-  background: rgba(15, 36, 72, 0.72);
+  background: rgba(14, 38, 76, 0.72);
   border: 1px solid rgba(95, 175, 250, 0.22);
   border-radius: 8px;
-  padding: 9px 4px;
+  padding: 8px 4px 7px;
   text-align: center;
+  transition: all 0.15s;
 }
+.cap-box.total {
+  background: linear-gradient(180deg, rgba(16, 42, 80, 0.75), rgba(10, 28, 56, 0.82));
+  border-color: rgba(125, 185, 245, 0.28);
+}
+.cap-box.total strong {
+  color: #f0f7ff;
+}
+.cap-box.running {
+  background: linear-gradient(180deg, rgba(12, 44, 40, 0.75), rgba(8, 28, 26, 0.82));
+  border-color: rgba(16, 185, 129, 0.38);
+}
+.cap-box.running strong {
+  color: #10b981;
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.45);
+}
+.cap-box.idle {
+  background: linear-gradient(180deg, rgba(10, 38, 64, 0.75), rgba(7, 24, 42, 0.82));
+  border-color: rgba(6, 182, 212, 0.38);
+}
+.cap-box.idle strong {
+  color: #06b6d4;
+  text-shadow: 0 0 10px rgba(6, 182, 212, 0.45);
+}
+.cap-box.service {
+  background: linear-gradient(180deg, rgba(46, 32, 12, 0.75), rgba(30, 20, 8, 0.82));
+  border-color: rgba(245, 158, 11, 0.38);
+}
+.cap-box.service strong {
+  color: #f59e0b;
+  text-shadow: 0 0 10px rgba(245, 158, 11, 0.45);
+}
+
 .cap-box strong {
-  font: 700 20px/1.1 var(--num);
+  font: 700 22px/1 var(--num);
   display: block;
-  color: #f7fbff;
 }
 .cap-box small {
   font-size: 10px;
-  color: #92b4d6;
+  color: #8eb0d2;
   margin-top: 4px;
   display: block;
+  letter-spacing: 0.02em;
 }
-.cap-bar-info {
-  margin-top: 8px;
-  padding: 7px 10px;
-  background: rgba(15, 36, 72, 0.72);
-  border: 1px solid rgba(95, 175, 250, 0.22);
-  border-radius: 8px;
+
+.cap-dist-bar {
+  height: 4px;
+  border-radius: 2px;
+  overflow: hidden;
   display: flex;
-  justify-content: space-around;
+  gap: 2px;
+  background: rgba(10, 24, 48, 0.7);
+  margin: 6px 0 7px;
+}
+.cap-dist-bar .seg-run {
+  background: #10b981;
+}
+.cap-dist-bar .seg-idle {
+  background: #06b6d4;
+}
+.cap-dist-bar .seg-serv {
+  background: #f59e0b;
+}
+
+.cap-metrics-dual {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 6px;
+}
+.cap-chip {
+  background: rgba(12, 32, 64, 0.65);
+  border: 1px solid rgba(85, 160, 240, 0.2);
+  border-radius: 6px;
+  padding: 5px 8px;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+.cap-chip-lbl {
   font-size: 11px;
-  color: #92b4d6;
+  color: #8cb2d8;
 }
-.cap-bar-info b {
-  color: #38efbd;
-  font-family: var(--num);
-  font-size: 13px;
-  font-weight: 600;
-  margin-left: 4px;
+.cap-chip-val {
+  font: 700 13px var(--num);
 }
-.cap-sep {
-  color: #274b62;
+.c-mint {
+  color: #10b981;
+  text-shadow: 0 0 8px rgba(16, 185, 129, 0.35);
+}
+.c-cyan {
+  color: #06b6d4;
+  text-shadow: 0 0 8px rgba(6, 182, 212, 0.35);
 }
 
 /* --------------------------------------------------------------------------
@@ -538,37 +598,59 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 .driver-alert-box {
   display: flex;
   align-items: center;
-  background: rgba(15, 36, 72, 0.72);
-  border: 1px solid rgba(95, 175, 250, 0.22);
-  border-radius: 8px;
-  padding: 8px 14px;
-  margin-bottom: 9px;
+  justify-content: space-between;
+  background: linear-gradient(90deg, rgba(46, 32, 10, 0.68), rgba(16, 36, 68, 0.72));
+  border: 1px solid rgba(245, 158, 11, 0.38);
+  border-left: 3px solid #f59e0b;
+  border-radius: 6px;
+  padding: 6px 10px;
+  margin-bottom: 7px;
 }
-.alert-dot {
-  width: 8px;
-  height: 8px;
-  border-radius: 2px;
-  margin-right: 9px;
+.alert-left {
+  display: flex;
+  align-items: center;
+  gap: 7px;
 }
-.alert-dot.amber-bg {
-  background: #f5b842;
-  box-shadow: 0 0 6px rgba(245, 184, 66, 0.5);
+.alert-pulse.amber {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: #f59e0b;
+  box-shadow: 0 0 8px #f59e0b;
+  animation: pulse 2.4s infinite;
 }
 .alert-lbl {
   font-size: 12px;
-  color: #f7fbff;
+  color: #f0f6ff;
   font-weight: 500;
 }
+.alert-tag {
+  font-size: 9px;
+  padding: 1px 5px;
+  border-radius: 2px;
+  color: #fcd34d;
+  background: rgba(245, 158, 11, 0.15);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+.alert-right {
+  display: flex;
+  align-items: baseline;
+  gap: 2px;
+}
 .alert-val {
-  margin-left: auto;
-  font: 700 17px var(--num);
-  color: #f7fbff;
+  font: 700 19px/1 var(--num);
+  color: #f59e0b;
+  text-shadow: 0 0 10px rgba(245, 158, 11, 0.5);
+}
+.alert-unit {
+  font-size: 11px;
+  color: #caa265;
 }
 
 .adas-section {
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 5px;
 }
 .adas-header {
   display: flex;
@@ -576,42 +658,47 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   gap: 6px;
   font-size: 12px;
   font-weight: 600;
-  color: #f7fbff;
-  margin: 3px 0 2px;
+  color: #e2f1ff;
+  margin: 1px 0;
 }
 .adas-header .icon {
-  width: 15px;
-  height: 15px;
-  color: #73d8ff;
+  width: 14px;
+  height: 14px;
+  color: #38bdf8;
 }
 .adas-grid {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  gap: 7px;
+  gap: 6px;
 }
 .adas-col {
   display: flex;
   flex-direction: column;
-  gap: 5px;
+  gap: 4px;
 }
 .adas-item {
   display: flex;
   align-items: center;
-  background: rgba(15, 36, 72, 0.72);
-  border: 1px solid rgba(95, 175, 250, 0.22);
-  border-radius: 3px;
-  padding: 6px 9px;
+  background: rgba(12, 32, 64, 0.65);
+  border: 1px solid rgba(85, 160, 240, 0.18);
+  border-radius: 4px;
+  padding: 4.5px 7px;
+  transition: background 0.15s, border-color 0.15s;
+}
+.adas-item:hover {
+  background: rgba(20, 48, 92, 0.85);
+  border-color: rgba(125, 195, 255, 0.35);
 }
 .adas-dot {
-  width: 7px;
-  height: 7px;
+  width: 6px;
+  height: 6px;
   border-radius: 1.5px;
   background: var(--c);
-  margin-right: 8px;
+  margin-right: 6px;
   flex-shrink: 0;
 }
 .adas-name {
-  color: #b8d4f0;
+  color: #a4c4e2;
   font-size: 11px;
   white-space: nowrap;
   overflow: hidden;
@@ -619,14 +706,21 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   flex: 1;
 }
 .adas-val {
-  font: 600 13px var(--num);
-  color: #f7fbff;
-  margin-left: 6px;
+  font: 700 13px/1 var(--num);
+  margin-left: 5px;
+  min-width: 16px;
+  text-align: right;
 }
-.adas-val.hot {
-  color: #ff9d42;
-  font-weight: 700;
-  text-shadow: 0 0 6px rgba(255, 157, 66, 0.4);
+.adas-val.danger {
+  color: #ff5e6a;
+  text-shadow: 0 0 8px rgba(255, 94, 106, 0.55);
+}
+.adas-val.warn {
+  color: #f5b842;
+}
+.adas-val.zero {
+  color: #5d7d9e;
+  font-weight: 500;
 }
 
 /* --------------------------------------------------------------------------
@@ -639,74 +733,113 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 6px;
+  margin-bottom: 7px;
 }
 .inc-stat-box {
   border-radius: 8px;
   padding: 7px 4px;
   text-align: center;
+  transition: all 0.15s;
 }
 .inc-stat-box strong {
-  font: 700 19px/1 var(--num);
+  font: 700 22px/1 var(--num);
   display: block;
 }
 .inc-stat-box small {
-  font-size: 10px;
+  font-size: 11px;
   margin-top: 3px;
   display: block;
 }
 .inc-stat-box.err {
-  background: rgba(65, 18, 22, 0.5);
-  border: 1px solid rgba(185, 48, 58, 0.5);
+  background: linear-gradient(180deg, rgba(60, 18, 25, 0.75), rgba(38, 10, 15, 0.82));
+  border: 1px solid rgba(255, 77, 94, 0.45);
 }
-.inc-stat-box.err strong { color: #ff5e5e; text-shadow: 0 0 8px rgba(255, 94, 94, 0.4); }
-.inc-stat-box.err small { color: #d67a80; }
+.inc-stat-box.err strong {
+  color: #ff5e6a;
+  text-shadow: 0 0 10px rgba(255, 94, 106, 0.5);
+}
+.inc-stat-box.err small {
+  color: #fca5a5;
+}
 
 .inc-stat-box.warn {
-  background: rgba(65, 48, 15, 0.5);
-  border: 1px solid rgba(190, 132, 40, 0.5);
+  background: linear-gradient(180deg, rgba(56, 36, 12, 0.75), rgba(36, 22, 8, 0.82));
+  border: 1px solid rgba(245, 158, 11, 0.45);
 }
-.inc-stat-box.warn strong { color: #f5b842; text-shadow: 0 0 8px rgba(245, 184, 66, 0.4); }
-.inc-stat-box.warn small { color: #caa566; }
+.inc-stat-box.warn strong {
+  color: #f5b842;
+  text-shadow: 0 0 10px rgba(245, 184, 66, 0.5);
+}
+.inc-stat-box.warn small {
+  color: #fcd34d;
+}
 
 .inc-stat-box.ok {
-  background: rgba(18, 46, 80, 0.6);
-  border: 1px solid rgba(35, 88, 150, 0.6);
+  background: linear-gradient(180deg, rgba(12, 46, 38, 0.75), rgba(8, 30, 24, 0.82));
+  border: 1px solid rgba(16, 185, 129, 0.45);
 }
-.inc-stat-box.ok strong { color: #38efbd; }
-.inc-stat-box.ok small { color: #79a6c7; }
+.inc-stat-box.ok strong {
+  color: #10b981;
+  text-shadow: 0 0 10px rgba(16, 185, 129, 0.45);
+}
+.inc-stat-box.ok small {
+  color: #6ee7b7;
+}
 
 /* V2 告警事件卡片 */
 .incident-list-v2 {
   display: flex;
   flex-direction: column;
   gap: 7px;
-  margin-top: 9px;
 }
 .inc-v2-card {
-  border-radius: 8px;
-  padding: 9px 11px;
+  border-radius: 7px;
+  padding: 8px 10px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
-  background: rgba(15, 36, 72, 0.72);
+  gap: 5px;
+  cursor: pointer;
+  transition: all 0.16s ease-out;
 }
 .inc-v2-card.warn {
-  border: 1px solid rgba(220, 160, 50, 0.45);
+  background: linear-gradient(145deg, rgba(22, 38, 68, 0.82), rgba(12, 26, 48, 0.88));
+  border: 1px solid rgba(220, 160, 50, 0.42);
+  border-left: 3px solid #f5b842;
   box-shadow: inset 0 0 12px rgba(220, 160, 50, 0.08);
 }
-.inc-v2-card.err {
-  border: 1px solid rgba(200, 55, 65, 0.45);
-  box-shadow: inset 0 0 12px rgba(200, 55, 65, 0.08);
+.inc-v2-card.warn:hover {
+  background: linear-gradient(145deg, rgba(32, 54, 94, 0.92), rgba(16, 36, 68, 0.95));
+  border-color: #f5b842;
+  box-shadow: 0 4px 16px rgba(245, 184, 66, 0.18);
+  transform: translateY(-1px);
 }
-.inc-v2-top {
+.inc-v2-card.err {
+  background: linear-gradient(145deg, rgba(26, 32, 64, 0.82), rgba(14, 22, 44, 0.88));
+  border: 1px solid rgba(255, 77, 94, 0.42);
+  border-left: 3px solid #ff4d5e;
+  box-shadow: inset 0 0 12px rgba(255, 77, 94, 0.08);
+}
+.inc-v2-card.err:hover {
+  background: linear-gradient(145deg, rgba(36, 46, 88, 0.92), rgba(20, 30, 62, 0.95));
+  border-color: #ff4d5e;
+  box-shadow: 0 4px 16px rgba(255, 77, 94, 0.18);
+  transform: translateY(-1px);
+}
+.inc-v2-card.is-handled {
+  opacity: 0.78;
+  border-color: rgba(16, 185, 129, 0.45);
+  border-left-color: #10b981;
+}
+
+.inc-v2-header {
   display: flex;
   align-items: center;
-  gap: 7px;
+  justify-content: space-between;
 }
-.inc-v2-time {
-  font: 11px var(--mono);
-  color: #92b4d6;
-  white-space: nowrap;
+.inc-v2-meta {
+  display: flex;
+  align-items: center;
+  gap: 6px;
 }
 .inc-v2-badge {
   font-size: 10px;
@@ -718,21 +851,16 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 .inc-v2-badge.warn {
   border: 1px solid rgba(245, 184, 66, 0.65);
   color: #f5b842;
-  background: rgba(245, 184, 66, 0.12);
+  background: rgba(245, 184, 66, 0.15);
 }
 .inc-v2-badge.err {
   border: 1px solid rgba(255, 94, 94, 0.65);
   color: #ff6e6e;
-  background: rgba(255, 94, 94, 0.12);
+  background: rgba(255, 94, 94, 0.15);
 }
-.inc-v2-title {
-  font-size: 12px;
-  font-weight: 600;
-  color: #f7fbff;
-  flex: 1;
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+.inc-v2-time {
+  font: 11px var(--mono);
+  color: #8db5dc;
 }
 .inc-v2-status {
   font-size: 10px;
@@ -740,16 +868,27 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   border-radius: 2px;
   border: 1px solid rgba(245, 108, 126, 0.6);
   color: #fca5a5;
-  background: rgba(245, 108, 126, 0.12);
+  background: rgba(245, 108, 126, 0.14);
   white-space: nowrap;
-  margin-left: auto;
 }
-.inc-v2-bottom {
+.inc-v2-status.ok {
+  border-color: rgba(16, 185, 129, 0.6);
+  color: #6ee7b7;
+  background: rgba(16, 185, 129, 0.14);
+}
+
+.inc-v2-title {
+  font-size: 12px;
+  font-weight: 600;
+  color: #f0f6ff;
+  line-height: 1.35;
+  margin: 1px 0;
+}
+.inc-v2-footer {
   display: flex;
   align-items: center;
-  gap: 7px;
+  gap: 6px;
   font-size: 11px;
-  padding-left: 42px;
 }
 .inc-v2-act-lbl {
   border: 1px solid rgba(245, 184, 66, 0.55);
@@ -760,8 +899,11 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   white-space: nowrap;
 }
 .inc-v2-act-val {
-  color: #73d8ff;
+  color: #38bdf8;
   font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 /* --------------------------------------------------------------------------
@@ -2289,27 +2431,37 @@ function capacityOverviewPanel() {
   return `<section class="panel panel-capacity">
     ${panelHeader('运力总览', badge)}
     <div class="cap-grid">
-      <div class="cap-box">
-        <strong>31</strong>
-        <small>车辆总数</small>
+      <div class="cap-box total">
+        <strong class="cap-num font-num">31</strong>
+        <small class="cap-label">车辆总数</small>
       </div>
-      <div class="cap-box">
-        <strong class="c-mint">21</strong>
-        <small>运营中</small>
+      <div class="cap-box running">
+        <strong class="cap-num font-num">21</strong>
+        <small class="cap-label">运营中</small>
       </div>
-      <div class="cap-box">
-        <strong class="c-blue">7</strong>
-        <small>空驶</small>
+      <div class="cap-box idle">
+        <strong class="cap-num font-num">7</strong>
+        <small class="cap-label">空驶</small>
       </div>
-      <div class="cap-box">
-        <strong class="c-sub">3</strong>
-        <small>充电/维修</small>
+      <div class="cap-box service">
+        <strong class="cap-num font-num">3</strong>
+        <small class="cap-label">充电/维修</small>
       </div>
     </div>
-    <div class="cap-bar-info">
-      <span>车辆在线率 <b>90.3%</b></span>
-      <span class="cap-sep">|</span>
-      <span>平均满载率 <b>86%</b></span>
+    <div class="cap-dist-bar" title="运力分布: 运营中 67.7%, 空驶 22.6%, 充电/维修 9.7%">
+      <i class="seg-run" style="width: 67.7%"></i>
+      <i class="seg-idle" style="width: 22.6%"></i>
+      <i class="seg-serv" style="width: 9.7%"></i>
+    </div>
+    <div class="cap-metrics-dual">
+      <div class="cap-chip">
+        <span class="cap-chip-lbl">车辆在线率</span>
+        <span class="cap-chip-val font-num c-mint">90.3%</span>
+      </div>
+      <div class="cap-chip">
+        <span class="cap-chip-lbl">平均满载率</span>
+        <span class="cap-chip-val font-num c-cyan">86%</span>
+      </div>
     </div>
   </section>`;
 }
@@ -2320,34 +2472,40 @@ function capacityOverviewPanel() {
 function vehicleMonitorPanel() {
   const badge = `<span class="tag-badge">今日预警 59 起</span>`;
   const adasLeft = [
-    { name: '向前碰撞', val: 2, c: '#3ba9ff', hot: false },
-    { name: '车道偏离报警', val: 16, c: '#3ba9ff', hot: true },
-    { name: '车距过近报警', val: 6, c: '#3ba9ff', hot: false },
-    { name: '行人碰撞报警', val: 24, c: '#55f1cd', hot: true },
-    { name: '频繁变道报警', val: 0, c: '#f5b842', hot: false }
+    { name: '向前碰撞', val: 2, c: '#38bdf8', level: 'warn' },
+    { name: '车道偏离报警', val: 16, c: '#ff5e6a', level: 'danger' },
+    { name: '车距过近报警', val: 6, c: '#f59e0b', level: 'warn' },
+    { name: '行人碰撞报警', val: 24, c: '#ff5e6a', level: 'danger' },
+    { name: '频繁变道报警', val: 0, c: '#627d98', level: 'zero' }
   ];
 
   const adasRight = [
-    { name: '道路标识超限报警', val: 0, c: '#ff9d42', hot: false },
-    { name: '障碍物报警', val: 0, c: '#ff5c5c', hot: false },
-    { name: '道路标识识别事件', val: 0, c: '#b562ff', hot: false },
-    { name: '主动抓拍事件', val: 0, c: '#b562ff', hot: false }
+    { name: '道路标识超限', val: 0, c: '#627d98', level: 'zero' },
+    { name: '障碍物报警', val: 0, c: '#627d98', level: 'zero' },
+    { name: '标识识别事件', val: 0, c: '#627d98', level: 'zero' },
+    { name: '主动抓拍事件', val: 0, c: '#627d98', level: 'zero' }
   ];
 
   const renderItem = item => `
-    <div class="adas-item">
+    <div class="adas-item ${item.level}">
       <span class="adas-dot" style="--c:${item.c}"></span>
       <span class="adas-name">${item.name}</span>
-      <strong class="adas-val ${item.hot ? 'hot' : ''}">${item.val}</strong>
+      <strong class="adas-val font-num ${item.level}">${item.val}</strong>
     </div>
   `;
 
   return `<section class="panel panel-vehicles">
     ${panelHeader('车辆监控', badge)}
     <div class="driver-alert-box">
-      <span class="alert-dot amber-bg"></span>
-      <span class="alert-lbl">驾驶员异常</span>
-      <strong class="alert-val">2</strong>
+      <div class="alert-left">
+        <span class="alert-pulse amber"></span>
+        <span class="alert-lbl">驾驶员异常</span>
+        <span class="alert-tag">今日监测</span>
+      </div>
+      <div class="alert-right">
+        <strong class="alert-val font-num">2</strong>
+        <small class="alert-unit">起</small>
+      </div>
     </div>
     <div class="adas-section">
       <div class="adas-header">${ico('dish')} <span>ADAS 统计</span></div>
@@ -2368,7 +2526,7 @@ const incidentStore = [
     time: '15:20',
     type: 'warn',
     tag: '预警',
-    title: '船舶 15:20 分到达，客流上升',
+    title: '船舶 15:20 分到港，客流瞬时上升',
     content: '监测到「北海—涠洲」航线 15:20 班次到港，预计西角码头瞬时客流上升约 260 人，现有候车运力存在缺口。',
     location: '西角码头',
     car: '—',
@@ -2400,14 +2558,16 @@ function incidentMonitorPanel(handled = new Set()) {
 
   const cards = incidentStore.map(item => `
     <div class="inc-v2-card ${item.type} ${item.status === '已处理' ? 'is-handled' : ''}" data-action="openIncident" data-inc-id="${item.id}" role="button" tabindex="0" title="点击查看事件详情">
-      <div class="inc-v2-top">
-        <span class="inc-v2-time">${item.time}</span>
-        <span class="inc-v2-badge ${item.type}">${item.tag}</span>
-        <strong class="inc-v2-title">${item.title}</strong>
+      <div class="inc-v2-header">
+        <div class="inc-v2-meta">
+          <span class="inc-v2-badge ${item.type}">${item.tag}</span>
+          <span class="inc-v2-time font-num">${item.time}</span>
+        </div>
         <span class="inc-v2-status ${item.status === '已处理' ? 'ok' : ''}">${item.status}</span>
       </div>
-      <div class="inc-v2-bottom">
-        <span class="inc-v2-act-lbl">处理方式：</span>
+      <div class="inc-v2-title">${item.title}</div>
+      <div class="inc-v2-footer">
+        <span class="inc-v2-act-lbl">处理方式</span>
         <span class="inc-v2-act-val">${item.action}</span>
       </div>
     </div>
@@ -2417,15 +2577,15 @@ function incidentMonitorPanel(handled = new Set()) {
     ${panelHeader('事件监控', badge)}
     <div class="inc-stats-row">
       <div class="inc-stat-box err">
-        <strong>${errUnhandled}</strong>
+        <strong class="font-num">${errUnhandled}</strong>
         <small>异常</small>
       </div>
       <div class="inc-stat-box warn">
-        <strong>${warnUnhandled}</strong>
+        <strong class="font-num">${warnUnhandled}</strong>
         <small>预警</small>
       </div>
       <div class="inc-stat-box ok">
-        <strong>${okTotal}</strong>
+        <strong class="font-num">${okTotal}</strong>
         <small>已处理</small>
       </div>
     </div>
