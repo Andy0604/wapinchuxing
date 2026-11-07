@@ -474,7 +474,7 @@ function capacityOverviewPanel() {
 }
 
 /* --------------------------------------------------------------------------
-   右侧模块 2: 车辆监控 (驾驶行为 + ADAS 统计，带今日预警 59 起)
+   右侧模块 2: 驾驶监控 (驾驶行为 + ADAS 统计，带今日预警 59 起)
    -------------------------------------------------------------------------- */
 function vehicleBehaviorAndAdasPanel() {
   const adasLeft = [
@@ -501,7 +501,7 @@ function vehicleBehaviorAndAdasPanel() {
   `;
 
   return `<section class="panel panel-veh-behavior-adas">
-    ${panelHeader('车辆监控')}
+    ${panelHeader('驾驶监控')}
     <div class="veh-split-grid">
       <!-- 左列: 驾驶行为 -->
       <div class="behavior-side">
@@ -826,7 +826,7 @@ function openIncidentModal(id) {
       </div>
       <div class="modal-sub-card full">
         <span class="sc-label">${item.tag}内容</span>
-        <span class="sc-val" style="font-size:14px; line-height:1.5;">${item.content}</span>
+        <span class="sc-val sc-content">${item.content}</span>
       </div>
       <div class="modal-sub-card">
         <span class="sc-label">发生位置</span>

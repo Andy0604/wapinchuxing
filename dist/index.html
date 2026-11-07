@@ -2051,7 +2051,7 @@ footer {
   }
 
   main {
-    grid-template-columns: clamp(480px, 20.5vw, 760px) minmax(0, 1fr) clamp(480px, 20.5vw, 760px);
+    grid-template-columns: clamp(620px, 22.5vw, 960px) minmax(0, 1fr) clamp(620px, 22.5vw, 960px);
     gap: 20px;
     padding: clamp(16px, 1.8vh, 30px) clamp(20px, 1.6vw, 44px) clamp(10px, 1.2vh, 20px);
   }
@@ -2293,15 +2293,23 @@ footer {
     bottom: -3px;
   }
 
-  /* Professional HUD Wings: Golden width proportion (around 600px~780px each), leaving center for 3D map */
+  /* Professional HUD Wings: 22.5% proportion (dual columns layout), leaving center for 3D map */
   main {
-    grid-template-columns: clamp(520px, 20vw, 780px) minmax(0, 1fr) clamp(520px, 20vw, 780px);
+    grid-template-columns: minmax(0, 22.5fr) minmax(0, 55fr) minmax(0, 22.5fr);
     gap: clamp(16px, 1.1vw, 32px);
     padding: clamp(8px, 1.2vh, 18px) clamp(20px, 1.5vw, 40px) clamp(6px, 1vh, 14px);
   }
 
   .rail {
     gap: clamp(8px, 1.1vh, 14px);
+    min-height: 0;
+  }
+
+  .rail > .panel-row-dual {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(10px, 1vw, 16px);
     min-height: 0;
   }
 
@@ -2609,33 +2617,57 @@ footer {
 
   /* Bottom Floating Popups */
   .map-float-panel {
-    width: 480px !important;
-    bottom: 16px !important;
-    left: 16px !important;
-    padding: 16px 18px !important;
-    border-radius: 10px !important;
+    width: 620px !important;
+    bottom: 20px !important;
+    left: 20px !important;
+    padding: 20px 22px !important;
+    border-radius: 12px !important;
+    gap: 12px !important;
   }
   .map-float-panel.align-right {
     left: auto !important;
-    right: 16px !important;
-    bottom: 16px !important;
+    right: 20px !important;
+    bottom: 20px !important;
   }
   .modal-title {
-    font-size: 18px !important;
+    font-size: 22px !important;
   }
   .modal-code {
-    font-size: 16px !important;
+    font-size: 20px !important;
+  }
+  .modal-pill {
+    font-size: 14px !important;
+    padding: 3px 12px !important;
+  }
+  .modal-sub-card {
+    padding: 10px 14px !important;
   }
   .modal-sub-card .sc-label {
-    font-size: 12.5px !important;
+    font-size: 14px !important;
   }
   .modal-sub-card .sc-val {
-    font-size: 14.5px !important;
+    font-size: 17px !important;
+  }
+  .modal-sub-card .sc-val.amber {
+    font-size: 20px !important;
+  }
+  .modal-section-title {
+    font-size: 16px !important;
   }
   .timeline-item {
-    font-size: 13.5px !important;
+    font-size: 15px !important;
+  }
+  .timeline-time {
+    font-size: 15px !important;
   }
   .modal-collapse-btn {
+    font-size: 14px !important;
+    padding: 4px 14px !important;
+  }
+  .modal-btn {
+    font-size: 15px !important;
+    padding: 8px 18px !important;
+  }
     font-size: 13px !important;
     padding: 3px 12px !important;
   }
@@ -2705,7 +2737,7 @@ footer {
    Tailored for massive command centers, ultra-resolution walls (e.g. 8320 x 2100).
    Fonts, heights and modules scale up so panels are visually saturated, bold, and aesthetic.
    -------------------------------------------------------------------------- */
-@media (min-width: 4800px), (min-width: 3200px) and (min-height: 1550px), html.giant-screen {
+@media (min-width: 3600px), (min-width: 2400px) and (min-aspect-ratio: 28/10), (min-width: 3000px) and (min-height: 1400px) {
   body {
     font-size: 18px;
     line-height: 1.45;
@@ -2764,9 +2796,9 @@ footer {
     gap: 28px;
   }
 
-  /* Command Wall Layout: Dual Columns widened by ~25% (from ~1480px to ~1880px width) */
+  /* Command Wall Layout: Dual Columns widened by ~25% (22.5% each, ~1872px on 8320 wall) */
   main {
-    grid-template-columns: clamp(1400px, 22.5vw, 1920px) minmax(0, 1fr) clamp(1400px, 22.5vw, 1920px);
+    grid-template-columns: minmax(0, 22.5fr) minmax(0, 55fr) minmax(0, 22.5fr);
     gap: clamp(20px, 1vw, 36px);
     padding: clamp(12px, 1.2vh, 24px) clamp(24px, 1.3vw, 44px) clamp(10px, 1vh, 18px);
   }
@@ -3174,12 +3206,12 @@ footer {
     font-size: 28px;
   }
 
-  /* Right Module 2: Vehicles Monitor (Behavior + ADAS) */
+  /* Right Module 2: Driving Monitor (Behavior + ADAS) */
   .panel-veh-behavior-adas {
     flex: 1.35;
   }
   .veh-split-grid {
-    gap: 20px;
+    gap: 22px;
     align-items: stretch;
   }
   .behavior-side, .adas-side {
@@ -3188,69 +3220,70 @@ footer {
     justify-content: space-between;
   }
   .veh-sec-title {
-    font-size: 21px;
-    margin-bottom: 10px;
+    font-size: 24px;
+    margin-bottom: 12px;
   }
   .vst-left svg {
-    width: 22px;
-    height: 22px;
+    width: 24px;
+    height: 24px;
   }
   .adas-badge {
-    font-size: 16.5px;
-    padding: 4px 14px;
+    font-size: 18px;
+    padding: 5px 16px;
+    border-radius: 16px;
   }
   .behavior-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(5, 1fr);
-    gap: 10px;
+    gap: 12px;
     flex: 1;
   }
   .b-item {
-    padding: 10px 14px;
-    border-radius: 7px;
+    padding: 11px 16px;
+    border-radius: 8px;
     height: 100%;
     box-sizing: border-box;
   }
   .b-dot {
-    width: 8px;
-    height: 8px;
-    margin-right: 8px;
+    width: 9px;
+    height: 9px;
+    margin-right: 9px;
   }
   .b-name {
-    font-size: 18px;
+    font-size: 20px;
   }
   .b-val {
-    font-size: 22px;
+    font-size: 26px;
   }
   .adas-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 12px;
+    gap: 14px;
     flex: 1;
   }
   .adas-col {
     display: grid;
     grid-template-rows: repeat(5, 1fr);
-    gap: 10px;
+    gap: 12px;
     height: 100%;
   }
   .adas-item {
-    padding: 10px 14px;
-    border-radius: 7px;
+    padding: 11px 16px;
+    border-radius: 8px;
     height: 100%;
     box-sizing: border-box;
   }
   .adas-dot {
-    width: 8px;
-    height: 8px;
-    margin-right: 8px;
+    width: 9px;
+    height: 9px;
+    margin-right: 9px;
   }
   .adas-name {
-    font-size: 18px;
+    font-size: 20px;
   }
   .adas-val {
-    font-size: 22px;
+    font-size: 26px;
   }
 
   /* Right Module 3A: Vehicles Roster Carousel */
@@ -3347,37 +3380,108 @@ footer {
     font-size: 18px;
   }
 
-  /* Floating Popups */
+  /* Floating Popups: Vehicle Order Details & Incident Details */
   .map-float-panel {
-    width: 600px !important;
-    bottom: 24px !important;
-    left: 24px !important;
-    padding: 22px 24px !important;
-    border-radius: 12px !important;
+    width: min(840px, 42vw) !important;
+    bottom: 28px !important;
+    left: 28px !important;
+    padding: 26px 30px !important;
+    border-radius: 14px !important;
+    gap: 16px !important;
+    box-shadow: 0 20px 56px rgba(0, 0, 0, 0.75), 0 0 28px rgba(35, 125, 235, 0.35) !important;
   }
   .map-float-panel.align-right {
     left: auto !important;
-    right: 24px !important;
-    bottom: 24px !important;
+    right: 28px !important;
+    bottom: 28px !important;
   }
   .modal-title {
-    font-size: 23px !important;
+    font-size: 30px !important;
+    gap: 12px !important;
+    padding-left: 20px !important;
   }
-  .modal-code {
-    font-size: 20px !important;
-  }
-  .modal-sub-card .sc-label {
-    font-size: 16px !important;
-  }
-  .modal-sub-card .sc-val {
-    font-size: 19px !important;
-  }
-  .timeline-item {
-    font-size: 17px !important;
+  .modal-title:before {
+    width: 6px !important;
+    height: 26px !important;
   }
   .modal-collapse-btn {
-    font-size: 16px !important;
-    padding: 4px 14px !important;
+    font-size: 18px !important;
+    padding: 6px 20px !important;
+    border-radius: 6px !important;
+  }
+  .modal-dashed-card {
+    padding: 14px 20px !important;
+    border-radius: 10px !important;
+  }
+  .modal-code {
+    font-size: 26px !important;
+  }
+  .modal-pill {
+    font-size: 18px !important;
+    padding: 5px 16px !important;
+  }
+  .modal-grid-2 {
+    gap: 12px !important;
+  }
+  .modal-sub-card {
+    padding: 12px 16px !important;
+    border-radius: 9px !important;
+    gap: 6px !important;
+  }
+  .modal-sub-card .sc-label {
+    font-size: 18px !important;
+  }
+  .modal-sub-card .sc-val {
+    font-size: 22px !important;
+  }
+  .modal-sub-card .sc-val.amber {
+    font-size: 26px !important;
+  }
+  .modal-sub-card .sc-val.sc-content {
+    font-size: 20px !important;
+    line-height: 1.5 !important;
+    font-weight: 500 !important;
+  }
+  .modal-section-title {
+    font-size: 22px !important;
+    padding-left: 14px !important;
+    margin: 8px 0 4px !important;
+  }
+  .modal-section-title:before {
+    width: 5px !important;
+    height: 18px !important;
+  }
+  .modal-timeline {
+    padding-left: 26px !important;
+    margin: 8px 0 !important;
+  }
+  .modal-timeline:before {
+    left: 8px !important;
+    width: 2px !important;
+  }
+  .timeline-item {
+    font-size: 20px !important;
+    padding: 8px 0 !important;
+  }
+  .timeline-item:before {
+    left: -26px !important;
+    width: 9px !important;
+    height: 9px !important;
+  }
+  .timeline-name {
+    font-size: 19px !important;
+  }
+  .timeline-time {
+    font-size: 20px !important;
+  }
+  .modal-actions {
+    margin-top: 14px !important;
+    gap: 14px !important;
+  }
+  .modal-btn {
+    padding: 12px 26px !important;
+    font-size: 19px !important;
+    border-radius: 8px !important;
   }
 
   /* Footer Navigation */
@@ -4039,7 +4143,7 @@ function capacityOverviewPanel() {
 }
 
 /* --------------------------------------------------------------------------
-   右侧模块 2: 车辆监控 (驾驶行为 + ADAS 统计，带今日预警 59 起)
+   右侧模块 2: 驾驶监控 (驾驶行为 + ADAS 统计，带今日预警 59 起)
    -------------------------------------------------------------------------- */
 function vehicleBehaviorAndAdasPanel() {
   const adasLeft = [
@@ -4066,7 +4170,7 @@ function vehicleBehaviorAndAdasPanel() {
   `;
 
   return `<section class="panel panel-veh-behavior-adas">
-    ${panelHeader('车辆监控')}
+    ${panelHeader('驾驶监控')}
     <div class="veh-split-grid">
       <!-- 左列: 驾驶行为 -->
       <div class="behavior-side">
@@ -4391,7 +4495,7 @@ function openIncidentModal(id) {
       </div>
       <div class="modal-sub-card full">
         <span class="sc-label">${item.tag}内容</span>
-        <span class="sc-val" style="font-size:14px; line-height:1.5;">${item.content}</span>
+        <span class="sc-val sc-content">${item.content}</span>
       </div>
       <div class="modal-sub-card">
         <span class="sc-label">发生位置</span>
@@ -5350,7 +5454,7 @@ function onAction(a, d = {}){
 }
 function setClock(){const now=new Date(),z='Asia/Shanghai';byId('clock').textContent=now.toLocaleTimeString('en-GB',{timeZone:z,hour12:false});byId('date').textContent=now.toLocaleDateString('sv-SE',{timeZone:z}).replaceAll('-','.')+'  '+now.toLocaleDateString('zh-CN',{timeZone:z,weekday:'short'})}
 function updateScreenScale(){
-  const isGiant = window.innerWidth >= 4800 || (window.innerWidth >= 3000 && window.innerHeight >= 1500);
+  const isGiant = window.innerWidth >= 3600 || (window.innerWidth >= 2400 && window.innerWidth / window.innerHeight >= 2.5);
   document.documentElement.classList.toggle('giant-screen', isGiant);
   const scale = Math.min(2.2, Math.max(1, window.innerHeight / 1080));
   document.documentElement.style.setProperty('--screen-scale', scale.toFixed(3));
