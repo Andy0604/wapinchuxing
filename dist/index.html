@@ -637,7 +637,10 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   font-size: 12.5px;
 }
 .dist-name {
-  width: 88px;
+  width: auto;
+  min-width: 90px;
+  max-width: 160px;
+  font-size: 15px;
   color: #bad8f5;
   white-space: nowrap;
   overflow: hidden;
@@ -646,7 +649,7 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 }
 .dist-bar {
   flex: 1;
-  height: 6px;
+  height: 7px;
   background: rgba(10, 25, 52, 0.65);
   border-radius: 3px;
   overflow: hidden;
@@ -658,10 +661,10 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   box-shadow: 0 0 6px rgba(0, 216, 255, 0.4);
 }
 .dist-val {
-  width: 16px;
+  width: 18px;
   text-align: right;
   font-weight: 700;
-  font-size: 14px;
+  font-size: 16px;
   color: #f7fbff;
   flex-shrink: 0;
 }
@@ -730,8 +733,8 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 }
 .q-stop {
   position: relative;
-  padding-left: 14px;
-  font-size: 14px;
+  padding-left: 15px;
+  font-size: 16px;
   font-weight: 600;
   color: #f7fbff;
   letter-spacing: 0.02em;
@@ -742,8 +745,8 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   left: 1px;
   top: 50%;
   transform: translateY(-50%);
-  width: 6px;
-  height: 6px;
+  width: 6.5px;
+  height: 6.5px;
   border-radius: 50%;
 }
 .q-stop.from:before {
@@ -753,8 +756,8 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 .q-stop.to:before {
   border: 1.5px solid #f5b842;
   background: transparent;
-  width: 5px;
-  height: 5px;
+  width: 5.5px;
+  height: 5.5px;
 }
 .queue-meta {
   text-align: right;
@@ -763,13 +766,13 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   gap: 3px;
 }
 .q-pax {
-  font-size: 14px;
+  font-size: 15px;
   color: #e6f1fc;
   font-family: var(--num);
   font-weight: 600;
 }
 .q-time {
-  font: 700 16px var(--num);
+  font: 700 17px var(--num);
   color: #ff5e6a;
   text-shadow: 0 0 8px rgba(255, 94, 106, 0.45);
   letter-spacing: 0.02em;
@@ -2442,40 +2445,44 @@ footer {
     border-radius: 6px;
   }
   .svc-num strong {
-    font-size: 30px;
+    font-size: 34px;
   }
   .svc-num small {
-    font-size: 14.5px;
+    font-size: 16px;
     margin-left: 3px;
   }
   .svc-lbl {
-    font-size: 13.5px;
-    margin-top: 3px;
+    font-size: 15px;
+    margin-top: 4px;
+  }
+  .queue-header-row {
+    font-size: 17px;
+    margin-bottom: 7px;
   }
   .queue-header {
-    font-size: 13.5px;
+    font-size: 16px;
     margin: 8px 4px 5px;
   }
   .queue-list {
-    gap: 5px;
+    gap: 6px;
   }
   .queue-row {
-    padding: 7px 12px;
+    padding: 8px 12px;
     border-radius: 6px;
   }
   .q-stop {
-    font-size: 15.5px;
-    padding-left: 16px;
+    font-size: 18px;
+    padding-left: 18px;
   }
   .q-stop:before {
-    width: 6px;
-    height: 6px;
+    width: 7px;
+    height: 7px;
   }
   .q-pax {
-    font-size: 14.5px;
+    font-size: 18px;
   }
   .q-time {
-    font-size: 18px;
+    font-size: 21px;
   }
 
   /* Right Module 1: Capacity Overview */
@@ -3123,61 +3130,77 @@ footer {
     margin-bottom: 10px;
   }
   .ssh-title {
-    font-size: 21px;
+    font-size: 25px;
+    font-weight: 600;
   }
   .ssh-meta {
-    font-size: 17px;
+    font-size: 20px;
   }
   .area-dist-list {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     flex: 1;
-    gap: 7px;
+    gap: 8px;
   }
   .dist-row {
-    gap: 12px;
-    font-size: 18.5px;
+    gap: 14px;
+    font-size: 23px;
     padding: 3px 0;
   }
   .dist-name {
-    width: 160px;
+    width: auto;
+    min-width: 140px;
+    max-width: 220px;
+    font-size: 24px;
+    font-weight: 500;
   }
   .dist-bar {
-    height: 9px;
+    height: 12px;
+    border-radius: 4px;
   }
   .dist-val {
-    font-size: 22px;
-    width: 26px;
+    font-size: 28px;
+    width: 34px;
   }
   .queue-header-row {
-    font-size: 18px;
-    margin-bottom: 10px;
+    font-size: 23px;
+    font-weight: 600;
+    margin-bottom: 12px;
   }
   .queue-list {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     flex: 1;
-    gap: 7px;
+    gap: 6px;
+    min-height: 0;
   }
   .queue-row {
-    padding: 8px 14px;
+    padding: 7px 16px;
     border-radius: 8px;
   }
   .q-stop {
-    font-size: 19px;
-    padding-left: 20px;
+    font-size: 25px;
+    font-weight: 600;
+    padding-left: 26px;
   }
   .q-stop:before {
-    width: 8px;
-    height: 8px;
+    width: 10px;
+    height: 10px;
+  }
+  .q-stop.to:before {
+    width: 8.5px;
+    height: 8.5px;
+    border-width: 2px;
   }
   .q-pax {
-    font-size: 19px;
+    font-size: 25px;
+    font-weight: 600;
   }
   .q-time {
-    font-size: 22px;
+    font-size: 29px;
+    font-weight: 700;
   }
 
   /* Right Module 1: Capacity Overview */
@@ -3555,25 +3578,57 @@ footer {
 
 /* --------------------------------------------------------------------------
    Dynamic JS-flagged Giant Screen Fallback/Enforcement
-   Guarantees that on ultra-wide / command screens, fonts and sizes are never 12px.
+   Guarantees that on ultra-wide / command screens, fonts and sizes are never small.
    -------------------------------------------------------------------------- */
 html.giant-screen .panel-title {
-  font-size: 32px !important;
+  font-size: 34px !important;
 }
 html.giant-screen .veh-sec-title {
-  font-size: 26px !important;
+  font-size: 28px !important;
 }
 html.giant-screen .adas-badge {
-  font-size: 19px !important;
+  font-size: 20px !important;
 }
 html.giant-screen .b-name,
 html.giant-screen .adas-name {
-  font-size: 22px !important;
+  font-size: 24px !important;
   font-weight: 600 !important;
 }
 html.giant-screen .b-val,
 html.giant-screen .adas-val {
+  font-size: 30px !important;
+}
+html.giant-screen .queue-header-row {
+  font-size: 23px !important;
+  font-weight: 600 !important;
+}
+html.giant-screen .q-stop {
+  font-size: 25px !important;
+  font-weight: 600 !important;
+}
+html.giant-screen .q-pax {
+  font-size: 25px !important;
+  font-weight: 600 !important;
+}
+html.giant-screen .q-time {
+  font-size: 29px !important;
+  font-weight: 700 !important;
+}
+html.giant-screen .dist-name {
+  width: auto !important;
+  min-width: 140px !important;
+  max-width: 220px !important;
+  font-size: 24px !important;
+  font-weight: 500 !important;
+}
+html.giant-screen .dist-val {
   font-size: 28px !important;
+}
+html.giant-screen .ssh-title {
+  font-size: 26px !important;
+}
+html.giant-screen .ssh-meta {
+  font-size: 21px !important;
 }
 
 </style></head>
@@ -4079,7 +4134,7 @@ const queueOrderDetails = [
 
 function serviceMonitorPanel() {
   const badge = `<span class="tag-badge mint-tag"><i class="live-dot"></i>实时</span>`;
-  const rows = queueOrderDetails.slice(0, 6).map((q, idx) => `
+  const rows = queueOrderDetails.slice(0, 5).map((q, idx) => `
     <div class="queue-row" data-action="openOrder" data-queue-idx="${idx}" role="button" tabindex="0" title="点击查看车辆订单详情">
       <div class="queue-route">
         <span class="q-stop from">${q.from}</span>

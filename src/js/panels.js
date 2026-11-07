@@ -352,7 +352,7 @@ const queueOrderDetails = [
 
 function serviceMonitorPanel() {
   const badge = `<span class="tag-badge mint-tag"><i class="live-dot"></i>实时</span>`;
-  const rows = queueOrderDetails.slice(0, 6).map((q, idx) => `
+  const rows = queueOrderDetails.slice(0, 5).map((q, idx) => `
     <div class="queue-row" data-action="openOrder" data-queue-idx="${idx}" role="button" tabindex="0" title="点击查看车辆订单详情">
       <div class="queue-route">
         <span class="q-stop from">${q.from}</span>
