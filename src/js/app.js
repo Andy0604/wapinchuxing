@@ -79,6 +79,8 @@ function onAction(a, d = {}){
   switch(a){
     case 'openOrder': openOrderModal(Number(d.queueIdx || 0)); break;
     case 'openIncident': openIncidentModal(d.incId); break;
+    case 'setOrderTrend': setOrderTrendPeriod(d.trendPeriod); break;
+    case 'setVehPage': setVehCarouselPage(Number(d.page || 0)); break;
     case 'closeModal': closeModal(); break;
     case 'closeOrderModal': closeModal('order'); break;
     case 'closeIncidentModal': closeModal('incident'); break;

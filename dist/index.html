@@ -107,8 +107,82 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 .c-sub { color: #8ba5b7; }
 .c-mute { color: #6e8fa1; }
 
+/* 双列横向平行子面板行 */
+.panel-row-dual {
+  flex: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 10px;
+  min-height: 0;
+}
+
 /* --------------------------------------------------------------------------
-   左侧模块 1: 全岛出行总览
+   左侧模块 1A: 未来客流预测
+   -------------------------------------------------------------------------- */
+.panel-forecast {
+  flex: 1;
+}
+.forecast-bars-grid {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 10px;
+  padding: 10px 6px 4px;
+  flex: 1;
+}
+.forecast-col {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 6px;
+  height: 100%;
+}
+.f-val {
+  font-size: 13px;
+  font-weight: 600;
+  color: #bad8f5;
+  white-space: nowrap;
+}
+.f-bar-wrap {
+  width: 100%;
+  max-width: 44px;
+  height: 80px;
+  background: rgba(10, 30, 60, 0.45);
+  border: 1px solid rgba(56, 189, 248, 0.22);
+  border-radius: 4px;
+  display: flex;
+  align-items: flex-end;
+  overflow: hidden;
+  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.4);
+}
+.f-bar-fill {
+  width: 100%;
+  background: linear-gradient(180deg, #00d8ff 0%, #0284c7 100%);
+  border-radius: 3px 3px 0 0;
+  box-shadow: 0 0 8px rgba(0, 216, 255, 0.5);
+  transition: height 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+}
+.forecast-col.is-gold .f-bar-wrap {
+  border-color: rgba(245, 158, 11, 0.4);
+}
+.forecast-col.is-gold .f-bar-fill {
+  background: linear-gradient(180deg, #f59e0b 0%, #b45309 100%);
+  box-shadow: 0 0 10px rgba(245, 158, 11, 0.6);
+}
+.forecast-col.is-gold .f-val {
+  color: #ffbe42;
+  font-weight: 700;
+}
+.f-day {
+  font-size: 12px;
+  color: #92b4d6;
+  white-space: nowrap;
+}
+
+/* --------------------------------------------------------------------------
+   左侧模块 1B: 全岛出行总览
    -------------------------------------------------------------------------- */
 .panel-overview {
   flex: 0.92;
@@ -221,7 +295,77 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 }
 
 /* --------------------------------------------------------------------------
-   左侧模块 2: 运营监控
+   左侧模块 2A: 订单趋势
+   -------------------------------------------------------------------------- */
+.panel-order-trend {
+  flex: 1;
+}
+.trend-tabs {
+  display: flex;
+  gap: 4px;
+}
+.trend-tabs .tag-badge {
+  cursor: pointer;
+  background: rgba(12, 34, 68, 0.65);
+  border-color: rgba(95, 175, 250, 0.3);
+  transition: all 0.15s;
+}
+.trend-tabs .tag-badge.active {
+  background: #0284c7;
+  border-color: #38bdf8;
+  color: #ffffff;
+  box-shadow: 0 0 8px rgba(56, 189, 248, 0.4);
+}
+.trend-sub-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  color: #8bb3d6;
+  margin-bottom: 6px;
+}
+.trend-unit {
+  color: #8bb3d6;
+  letter-spacing: 0.02em;
+}
+.trend-peak-lbl b {
+  color: #00d8ff;
+  font-family: var(--num);
+}
+.trend-svg-wrap {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-height: 0;
+}
+.trend-svg-wrap svg {
+  width: 100%;
+  height: 82px;
+  overflow: visible;
+}
+.trend-pt {
+  fill: #00d8ff;
+  stroke: #ffffff;
+  stroke-width: 1.5;
+  transition: r 0.2s;
+}
+.trend-pt:hover {
+  r: 5;
+  fill: #ffbe42;
+}
+.trend-axis-x {
+  display: flex;
+  justify-content: space-between;
+  font-size: 11px;
+  font-family: var(--num);
+  color: #729bc2;
+  padding: 0 4px;
+  margin-top: 4px;
+}
+
+/* --------------------------------------------------------------------------
+   左侧模块 2B: 运营监控
    -------------------------------------------------------------------------- */
 .panel-ops {
   flex: 0.95;
@@ -373,10 +517,16 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 }
 
 /* --------------------------------------------------------------------------
-   左侧模块 3: 服务监控
+   左侧模块 3: 服务监控 (5指标 + 下部双列复合)
    -------------------------------------------------------------------------- */
 .panel-service {
   flex: 1.35;
+}
+.svc-5grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 6px;
+  margin-bottom: 9px;
 }
 .svc-grid {
   display: grid;
@@ -400,10 +550,94 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   margin-left: 2px;
 }
 .svc-lbl {
-  font-size: 13px;
+  font-size: 12.5px;
   font-weight: 500;
   color: #a4c8e8;
   margin-top: 4px;
+}
+
+.svc-composite-body {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+}
+.svc-dist-col, .svc-queue-col {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.svc-sub-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 6px;
+  padding: 0 2px;
+}
+.ssh-title {
+  font-size: 13px;
+  font-weight: 600;
+  color: #f0f7ff;
+}
+.ssh-meta {
+  font-size: 11px;
+  color: #7ca8d0;
+}
+.ssh-meta b {
+  color: #00d8ff;
+  font-family: var(--num);
+}
+.area-dist-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+  justify-content: space-between;
+}
+.dist-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12.5px;
+}
+.dist-name {
+  width: 88px;
+  color: #bad8f5;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex-shrink: 0;
+}
+.dist-bar {
+  flex: 1;
+  height: 6px;
+  background: rgba(10, 25, 52, 0.65);
+  border-radius: 3px;
+  overflow: hidden;
+}
+.dist-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  box-shadow: 0 0 6px rgba(0, 216, 255, 0.4);
+}
+.dist-val {
+  width: 16px;
+  text-align: right;
+  font-weight: 700;
+  font-size: 14px;
+  color: #f7fbff;
+  flex-shrink: 0;
+}
+.queue-header-row {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 500;
+  color: #92b4d6;
+  margin-bottom: 6px;
+  padding: 0 4px;
 }
 
 .queue-header-grid {
@@ -625,6 +859,101 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 /* --------------------------------------------------------------------------
    右侧模块 2: 车辆监控 (驾驶员异常 + ADAS 统计)
    -------------------------------------------------------------------------- */
+/* --------------------------------------------------------------------------
+   右侧模块 2: 车辆监控 (驾驶行为 + ADAS 统计，带今日预警 59 起)
+   -------------------------------------------------------------------------- */
+.panel-veh-behavior-adas {
+  flex: 1.25;
+}
+.veh-split-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.25fr;
+  gap: 12px;
+  flex: 1;
+  min-height: 0;
+}
+.behavior-side, .adas-side {
+  display: flex;
+  flex-direction: column;
+  min-height: 0;
+}
+.veh-sec-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: #e2f1ff;
+  margin-bottom: 7px;
+}
+.vst-left {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+.vst-left svg {
+  width: 16px;
+  height: 16px;
+  color: #38bdf8;
+}
+.adas-badge {
+  background: rgba(10, 36, 68, 0.7);
+  border: 1px solid rgba(56, 189, 248, 0.4);
+  color: #38bdf8;
+  font-size: 11.5px;
+  padding: 2px 8px;
+  border-radius: 10px;
+}
+.behavior-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: repeat(5, 1fr);
+  gap: 5px;
+  flex: 1;
+}
+.b-item {
+  display: flex;
+  align-items: center;
+  background: rgba(12, 32, 64, 0.65);
+  border: 1px solid rgba(85, 160, 240, 0.18);
+  border-radius: 4px;
+  padding: 4.5px 7px;
+  transition: all 0.15s;
+}
+.b-item:hover {
+  background: rgba(20, 48, 92, 0.85);
+  border-color: rgba(125, 195, 255, 0.35);
+}
+.b-item.span2 {
+  grid-column: 1 / -1;
+}
+.b-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  margin-right: 6px;
+  flex-shrink: 0;
+}
+.b-dot.blue { background: #38bdf8; box-shadow: 0 0 5px rgba(56, 189, 248, 0.7); }
+.b-dot.amber { background: #f59e0b; box-shadow: 0 0 5px rgba(245, 158, 11, 0.7); }
+.b-dot.red { background: #ff5e6a; box-shadow: 0 0 5px rgba(255, 94, 106, 0.7); }
+.b-name {
+  color: #a4c4e2;
+  font-size: 12px;
+  font-weight: 500;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  flex: 1;
+}
+.b-val {
+  font: 700 14px/1 var(--num);
+  margin-left: 4px;
+}
+.b-val.zero { color: #5d7d9e; }
+.b-val.warn { color: #f59e0b; }
+.b-val.danger { color: #ff5e6a; }
+
 .panel-vehicles {
   flex: 1.25;
 }
@@ -705,8 +1034,8 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   gap: 6px;
 }
 .adas-col {
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: repeat(5, 1fr);
   gap: 4px;
 }
 .adas-item {
@@ -758,7 +1087,164 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 }
 
 /* --------------------------------------------------------------------------
-   右侧模块 3: 事件监控 (处置指标 + 告警处置卡片)
+   右侧模块 3A: 车辆监控 (可轮播车辆列表卡片)
+   -------------------------------------------------------------------------- */
+.panel-veh-carousel {
+  flex: 1;
+}
+.veh-roster-body-wrap {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+}
+.veh-roster-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+.veh-card-mini {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: rgba(14, 34, 68, 0.72);
+  border: 1px solid rgba(95, 175, 250, 0.22);
+  border-radius: 6px;
+  padding: 5px 8px;
+  cursor: pointer;
+  transition: all 0.15s ease-out;
+}
+.veh-card-mini:hover {
+  background: rgba(22, 55, 105, 0.88);
+  border-color: rgba(95, 185, 255, 0.65);
+  transform: translateY(-1px);
+}
+.vcm-left {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+}
+.vcm-id-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.vcm-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10b981;
+  box-shadow: 0 0 6px rgba(16, 185, 129, 0.7);
+}
+.vcm-id {
+  font-size: 13px;
+  color: #f7fbff;
+}
+.vcm-driver {
+  font-size: 11.5px;
+  color: #8eb3d6;
+  padding-left: 11px;
+}
+.vcm-mid {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  font-size: 11.5px;
+  color: #bad8f5;
+}
+.vcm-stop {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.s-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+}
+.s-dot.from {
+  background: #00d8ff;
+  box-shadow: 0 0 5px rgba(0, 216, 255, 0.7);
+}
+.s-dot.to {
+  border: 1.2px solid #f5b842;
+}
+.vcm-right {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 2px;
+}
+.vcm-pax {
+  font-size: 12px;
+  color: #bad8f5;
+  font-weight: 600;
+  font-family: var(--num);
+}
+.vcm-bat {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 11px;
+  font-family: var(--num);
+}
+.bat-icon {
+  display: inline-block;
+  width: 14px;
+  height: 8px;
+  border: 1px solid currentColor;
+  border-radius: 2px;
+  position: relative;
+}
+.bat-icon:after {
+  content: '';
+  position: absolute;
+  right: -3px;
+  top: 1.5px;
+  width: 2px;
+  height: 4px;
+  background: currentColor;
+  border-radius: 0 1px 1px 0;
+}
+.bat-good { color: #10b981; }
+.bat-mid { color: #f59e0b; }
+.bat-low { color: #ff5e6a; }
+
+.veh-roster-pager {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 4px 4px 0;
+  margin-top: auto;
+}
+.pager-num {
+  font-size: 11.5px;
+  color: #8eb3d6;
+  font-family: var(--num);
+}
+.pager-dots {
+  display: flex;
+  gap: 5px;
+}
+.pager-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(140, 180, 220, 0.3);
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  transition: all 0.2s;
+}
+.pager-dot.active {
+  background: #38bdf8;
+  box-shadow: 0 0 6px #38bdf8;
+  transform: scale(1.2);
+}
+
+/* --------------------------------------------------------------------------
+   右侧模块 3B: 事件监控 (处置指标 + 告警处置卡片)
    -------------------------------------------------------------------------- */
 .panel-incidents {
   flex: 1.15;
@@ -2224,15 +2710,23 @@ footer {
     gap: 26px;
   }
 
-  /* Command Wall Layout: Left and Right Wings ~900px - 1100px width */
+  /* Command Wall Layout: Dual Columns ~1100px - 1480px width */
   main {
-    grid-template-columns: clamp(750px, 12vw, 1100px) minmax(0, 1fr) clamp(750px, 12vw, 1100px);
+    grid-template-columns: clamp(1100px, 16vw, 1480px) minmax(0, 1fr) clamp(1100px, 16vw, 1480px);
     gap: clamp(24px, 1.2vw, 42px);
     padding: clamp(12px, 1.2vh, 24px) clamp(28px, 1.6vw, 52px) clamp(10px, 1vh, 18px);
   }
 
   .rail {
     gap: clamp(12px, 1.1vh, 18px);
+  }
+
+  .rail > .panel-row-dual {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(12px, 1vw, 18px);
+    min-height: 0;
   }
 
   .panel {
@@ -2260,365 +2754,445 @@ footer {
     border-radius: 14px;
   }
 
-  /* Left Module 1: Island Overview */
+  /* Left Module 1A: Future Forecast */
+  .forecast-bars-grid {
+    gap: 12px;
+    padding: 12px 6px 4px;
+  }
+  .forecast-col {
+    gap: 8px;
+  }
+  .f-val {
+    font-size: 20px;
+  }
+  .f-bar-wrap {
+    max-width: 58px;
+    height: 110px;
+    border-radius: 6px;
+  }
+  .f-day {
+    font-size: 17px;
+  }
+
+  /* Left Module 1B: Island Overview */
   .overview-dual {
-    flex: 1.1;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
+    gap: 10px;
   }
   .metric-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 18px 22px;
+    padding: 12px 16px;
     border-radius: 8px;
   }
   .m-lbl {
-    font-size: 20px;
-    margin-bottom: 6px;
+    font-size: 18px;
+    margin-bottom: 4px;
   }
   .m-val strong {
-    font-size: 60px;
+    font-size: 42px;
   }
   .m-val small {
-    font-size: 22px;
-    margin-left: 6px;
+    font-size: 17px;
+    margin-left: 4px;
   }
   .m-delta {
-    font-size: 19px;
-    margin-top: 6px;
+    font-size: 16px;
+    margin-top: 4px;
   }
   .m-delta b {
-    font-size: 23px;
+    font-size: 19px;
   }
   .badge-pill {
-    font-size: 19px;
-    padding: 4px 12px;
+    font-size: 16px;
+    padding: 3px 10px;
   }
   .env-grid {
-    flex: 1;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 14px;
+    gap: 8px;
+    margin-top: 10px;
   }
   .env-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 16px 8px;
+    padding: 10px 4px;
     border-radius: 8px;
   }
   .env-ico {
-    width: 38px;
-    height: 38px;
-    margin-bottom: 6px;
+    width: 28px;
+    height: 28px;
+    margin-bottom: 4px;
   }
   .env-ico svg {
-    width: 34px;
-    height: 34px;
+    width: 24px;
+    height: 24px;
   }
   .env-val {
-    font-size: 32px;
+    font-size: 23px;
   }
   .env-lbl {
-    font-size: 19px;
+    font-size: 16px;
+    margin-top: 4px;
+  }
+
+  /* Left Module 2A: Order Trend */
+  .trend-tabs .tag-badge {
+    font-size: 15px;
+    padding: 3px 12px;
+  }
+  .trend-sub-bar {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  .trend-unit {
+    font-size: 16px;
+  }
+  .trend-peak-lbl {
+    font-size: 16px;
+  }
+  .trend-svg-wrap svg {
+    height: 110px;
+  }
+  .trend-axis-x {
+    font-size: 15px;
     margin-top: 6px;
   }
 
-  /* Left Module 2: Operations Monitor */
+  /* Left Module 2B: Operations Monitor */
   .gmv-dual {
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: 18px;
-    padding: 18px 22px;
-    background: rgba(14, 34, 68, 0.45);
+    gap: 14px;
+    padding: 8px 12px 10px;
     border-radius: 8px;
-    border: 1px solid rgba(85, 160, 240, 0.2);
-  }
-  .gmv-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
   }
   .gmv-val {
-    font-size: 62px;
-    margin: 6px 0;
+    font-size: 44px;
+    margin: 4px 0;
   }
   .arpu-card {
-    padding: 16px 26px;
-    min-width: 130px;
+    padding: 8px 16px;
+    min-width: 90px;
     border-radius: 8px;
-    justify-content: center;
-    align-items: center;
   }
   .arpu-val {
-    font-size: 50px;
+    font-size: 36px;
   }
   .arpu-lbl {
-    font-size: 20px;
+    font-size: 16px;
   }
   .order-grid {
-    flex: 1.25;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 14px;
+    gap: 8px;
+    margin-top: 10px;
   }
   .order-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 18px 8px;
+    padding: 10px 4px;
     border-radius: 8px;
   }
   .order-box strong {
-    font-size: 48px;
+    font-size: 34px;
   }
   .order-box small {
-    font-size: 20px;
-    margin-top: 8px;
+    font-size: 16px;
+    margin-top: 4px;
   }
   .order-progress-strip {
-    height: 8px;
-    margin-top: 14px;
+    height: 6px;
+    margin-top: 10px;
   }
 
   /* Left Module 3: Service Monitor */
-  .svc-grid {
-    flex: 0.9;
+  .svc-5grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
   }
   .svc-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 14px 8px;
+    padding: 10px 4px;
     border-radius: 8px;
   }
   .svc-num strong {
-    font-size: 48px;
+    font-size: 36px;
   }
   .svc-num small {
-    font-size: 22px;
+    font-size: 17px;
     margin-left: 4px;
   }
   .svc-lbl {
-    font-size: 20px;
+    font-size: 16px;
     margin-top: 4px;
   }
-  .queue-header-grid {
-    gap: 14px;
-    margin: 14px 4px 8px;
+  .svc-composite-body {
+    gap: 16px;
   }
-  .q-hdr-cell {
+  .svc-sub-head {
+    margin-bottom: 8px;
+  }
+  .ssh-title {
     font-size: 18px;
-    padding: 0 6px;
   }
-  .queue-grid-2col {
-    flex: 2.2;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px 14px;
+  .ssh-meta {
+    font-size: 15px;
+  }
+  .area-dist-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    gap: 6px;
+  }
+  .dist-row {
+    gap: 10px;
+    font-size: 16px;
+    padding: 2px 0;
+  }
+  .dist-name {
+    width: 130px;
+  }
+  .dist-bar {
+    height: 8px;
+  }
+  .dist-val {
+    font-size: 19px;
+    width: 22px;
+  }
+  .queue-header-row {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  .queue-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    gap: 6px;
   }
   .queue-row {
-    padding: 11px 16px;
-    border-radius: 8px;
+    padding: 7px 12px;
+    border-radius: 6px;
   }
   .q-stop {
-    font-size: 19px;
-    padding-left: 22px;
+    font-size: 17px;
+    padding-left: 18px;
   }
   .q-stop:before {
-    width: 9px;
-    height: 9px;
+    width: 7px;
+    height: 7px;
   }
   .q-pax {
-    font-size: 18.5px;
+    font-size: 17px;
   }
   .q-time {
-    font-size: 23px;
+    font-size: 20px;
   }
 
   /* Right Module 1: Capacity Overview */
   .cap-grid {
-    flex: 1.2;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+    gap: 10px;
   }
   .cap-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 8px;
+    padding: 12px 6px;
     border-radius: 8px;
   }
   .cap-box strong {
-    font-size: 48px;
+    font-size: 42px;
   }
   .cap-box small {
-    font-size: 20px;
-    margin-top: 8px;
+    font-size: 17px;
+    margin-top: 6px;
   }
   .cap-dist-bar {
-    height: 8px;
-    margin: 16px 0;
+    height: 6px;
+    margin: 10px 0;
   }
   .cap-metrics-dual {
-    flex: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
+    gap: 10px;
   }
   .cap-chip {
-    padding: 18px 24px;
+    padding: 8px 16px;
     border-radius: 8px;
   }
   .cap-chip-lbl {
-    font-size: 21px;
+    font-size: 17px;
   }
   .cap-chip-val {
-    font-size: 32px;
+    font-size: 24px;
   }
 
-  /* Right Module 2: Vehicles Monitor */
-  .driver-alert-box {
-    padding: 16px 22px;
-    border-radius: 8px;
-    margin-bottom: 14px;
+  /* Right Module 2: Vehicles Monitor (Behavior + ADAS) */
+  .panel-veh-behavior-adas {
+    flex: 1.25;
   }
-  .alert-lbl {
-    font-size: 22px;
+  .veh-split-grid {
+    gap: 16px;
+    align-items: stretch;
   }
-  .alert-val {
-    font-size: 40px;
-  }
-  .alert-tag {
-    font-size: 16px;
-    padding: 4px 12px;
-  }
-  .alert-unit {
-    font-size: 18px;
-  }
-  .adas-section {
-    flex: 1;
+  .behavior-side, .adas-side {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 10px;
   }
-  .adas-header {
-    font-size: 21px;
-    margin-bottom: 6px;
+  .veh-sec-title {
+    font-size: 18px;
+    margin-bottom: 9px;
   }
-  .adas-header .icon {
-    width: 24px;
-    height: 24px;
+  .vst-left svg {
+    width: 20px;
+    height: 20px;
   }
-  .adas-grid {
-    flex: 1;
+  .adas-badge {
+    font-size: 15px;
+    padding: 3px 12px;
+  }
+  .behavior-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px 14px;
+    grid-template-rows: repeat(5, 1fr);
+    gap: 8px;
+    flex: 1;
+  }
+  .b-item {
+    padding: 8px 12px;
+    border-radius: 6px;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .b-dot {
+    width: 7px;
+    height: 7px;
+    margin-right: 7px;
+  }
+  .b-name {
+    font-size: 15.5px;
+  }
+  .b-val {
+    font-size: 18px;
+  }
+  .adas-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    flex: 1;
   }
   .adas-col {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
     gap: 8px;
+    height: 100%;
   }
   .adas-item {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    padding: 11px 14px;
+    padding: 8px 12px;
     border-radius: 6px;
+    height: 100%;
+    box-sizing: border-box;
   }
   .adas-dot {
-    width: 9px;
-    height: 9px;
-    margin-right: 9px;
+    width: 7px;
+    height: 7px;
+    margin-right: 7px;
   }
   .adas-name {
-    font-size: 18.5px;
+    font-size: 15.5px;
   }
   .adas-val {
-    font-size: 23px;
+    font-size: 18px;
   }
 
-  /* Right Module 3: Incidents Monitor */
+  /* Right Module 3A: Vehicles Roster Carousel */
+  .panel-veh-carousel {
+    flex: 1;
+  }
+  .veh-roster-list {
+    gap: 6px;
+  }
+  .veh-card-mini {
+    padding: 7px 11px;
+    border-radius: 8px;
+  }
+  .vcm-dot {
+    width: 7px;
+    height: 7px;
+  }
+  .vcm-id {
+    font-size: 16.5px;
+  }
+  .vcm-driver {
+    font-size: 14.5px;
+    padding-left: 12px;
+  }
+  .vcm-mid {
+    font-size: 15px;
+    gap: 3px;
+  }
+  .vcm-pax {
+    font-size: 16px;
+  }
+  .vcm-bat {
+    font-size: 14.5px;
+  }
+  .bat-icon {
+    width: 17px;
+    height: 10px;
+  }
+  .pager-num {
+    font-size: 15px;
+  }
+  .pager-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  /* Right Module 3B: Incidents Monitor */
   .inc-stats-row {
-    flex: 0.9;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 14px;
+    gap: 8px;
+    margin-bottom: 10px;
   }
   .inc-stat-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 8px;
+    padding: 10px 4px;
     border-radius: 8px;
   }
   .inc-stat-box strong {
-    font-size: 48px;
+    font-size: 36px;
   }
   .inc-stat-box small {
-    font-size: 20px;
-    margin-top: 6px;
+    font-size: 16px;
+    margin-top: 4px;
   }
   .incident-list-v2 {
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 14px;
-  }
-  .inc-v2-card {
-    flex: 1;
-    padding: 18px 22px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     gap: 8px;
   }
+  .inc-v2-card {
+    padding: 10px 14px;
+    border-radius: 8px;
+    gap: 5px;
+  }
   .inc-v2-time {
-    font-size: 19px;
+    font-size: 16px;
   }
   .inc-v2-badge {
-    font-size: 17px;
-    padding: 3px 10px;
-  }
-  .inc-v2-title {
-    font-size: 21px;
-    margin: 6px 0;
-  }
-  .inc-v2-status {
-    font-size: 16px;
-    padding: 3px 12px;
-  }
-  .inc-v2-footer {
-    font-size: 17px;
-  }
-  .inc-v2-act-lbl {
-    font-size: 16px;
+    font-size: 14.5px;
     padding: 2px 8px;
   }
+  .inc-v2-title {
+    font-size: 16.5px;
+    margin: 3px 0;
+  }
+  .inc-v2-status {
+    font-size: 14px;
+    padding: 2px 9px;
+  }
+  .inc-v2-footer {
+    font-size: 15px;
+  }
+  .inc-v2-act-lbl {
+    font-size: 14px;
+    padding: 2px 6px;
+  }
   .inc-v2-act-val {
-    font-size: 18px;
+    font-size: 15.5px;
   }
 
   /* Floating Popups */
@@ -2843,7 +3417,36 @@ function panelHeader(name, badge = '', icon = '') {
 }
 
 /* --------------------------------------------------------------------------
-   左侧模块 1: 全岛出行总览
+   左侧模块 1A: 未来客流预测 (基于船票预售 - 柱状图)
+   -------------------------------------------------------------------------- */
+function forecastFlowPanel() {
+  const badge = `<span class="tag-badge">基于船票预售</span>`;
+  const days = [
+    { day: '明日 周六', val: '12,000', h: 72, highlight: false },
+    { day: '周日', val: '13,500', h: 90, highlight: false },
+    { day: '周一', val: '9,800', h: 58, highlight: false },
+    { day: '周二', val: '7,200', h: 42, highlight: true },
+    { day: '周三', val: '8,500', h: 52, highlight: false }
+  ];
+
+  const bars = days.map(d => `
+    <div class="forecast-col ${d.highlight ? 'is-gold' : ''}">
+      <span class="f-val font-num">${d.val}</span>
+      <div class="f-bar-wrap">
+        <div class="f-bar-fill" style="height: ${d.h}%;"></div>
+      </div>
+      <span class="f-day">${d.day}</span>
+    </div>
+  `).join('');
+
+  return `<section class="panel panel-forecast">
+    ${panelHeader('未来客流预测', badge)}
+    <div class="forecast-bars-grid">${bars}</div>
+  </section>`;
+}
+
+/* --------------------------------------------------------------------------
+   左侧模块 1B: 全岛出行总览 (客流大指标 + 4格天气海况)
    -------------------------------------------------------------------------- */
 function islandOverviewPanel(period = '今日') {
   const badge = `<button class="tag-badge" data-action="period">${period}</button>`;
@@ -2890,7 +3493,101 @@ function islandOverviewPanel(period = '今日') {
 }
 
 /* --------------------------------------------------------------------------
-   左侧模块 2: 运营监控
+   左侧模块 2A: 订单趋势 (平滑折线图 - 06:00-22:00 每两小时)
+   -------------------------------------------------------------------------- */
+let orderTrendPeriod = '今日';
+
+function setOrderTrendPeriod(p) {
+  orderTrendPeriod = p;
+  const pnl = document.querySelector('.panel-order-trend');
+  if (pnl) {
+    pnl.outerHTML = orderTrendPanel(orderTrendPeriod);
+  } else if (typeof updatePanels === 'function') {
+    updatePanels();
+  }
+}
+
+function orderTrendPanel(period = orderTrendPeriod) {
+  const badge = `
+    <div class="trend-tabs">
+      <button class="tag-badge ${period === '今日' ? 'active' : ''}" data-action="setOrderTrend" data-trend-period="今日">今日</button>
+      <button class="tag-badge ${period === '昨日' ? 'active' : ''}" data-action="setOrderTrend" data-trend-period="昨日">昨日</button>
+    </div>
+  `;
+
+  const points = period === '今日'
+    ? [
+        { t: '06:00', v: 16 },
+        { t: '08:00', v: 42 },
+        { t: '10:00', v: 85 },
+        { t: '12:00', v: 70 },
+        { t: '14:00', v: 94 },
+        { t: '16:00', v: 62 },
+        { t: '18:00', v: 48 },
+        { t: '20:00', v: 30 },
+        { t: '22:00', v: 18 }
+      ]
+    : [
+        { t: '06:00', v: 12 },
+        { t: '08:00', v: 36 },
+        { t: '10:00', v: 76 },
+        { t: '12:00', v: 62 },
+        { t: '14:00', v: 84 },
+        { t: '16:00', v: 54 },
+        { t: '18:00', v: 40 },
+        { t: '20:00', v: 24 },
+        { t: '22:00', v: 14 }
+      ];
+
+  const coords = points.map((p, i) => {
+    const x = 24 + i * 56.5;
+    const y = 110 - (p.v / 100) * 88;
+    return { x, y, v: p.v, t: p.t };
+  });
+
+  let pathD = `M ${coords[0].x} ${coords[0].y}`;
+  for (let i = 0; i < coords.length - 1; i++) {
+    const p0 = coords[i];
+    const p1 = coords[i + 1];
+    const mx = (p0.x + p1.x) / 2;
+    pathD += ` C ${mx} ${p0.y}, ${mx} ${p1.y}, ${p1.x} ${p1.y}`;
+  }
+  const areaD = `${pathD} L ${coords[coords.length - 1].x} 122 L ${coords[0].x} 122 Z`;
+
+  const circles = coords.map(c => `
+    <circle cx="${c.x}" cy="${c.y}" r="3.5" class="trend-pt" filter="drop-shadow(0 0 5px #00d8ff)"/>
+  `).join('');
+
+  const xLabels = points.map(p => `<span>${p.t}</span>`).join('');
+
+  return `<section class="panel panel-order-trend">
+    ${panelHeader('订单趋势', badge)}
+    <div class="trend-sub-bar">
+      <span class="trend-unit">订单 / 2小时</span>
+      <span class="trend-peak-lbl">最高时段: <b>14:00 (${period === '今日' ? '94' : '84'}单)</b></span>
+    </div>
+    <div class="trend-svg-wrap">
+      <svg viewBox="0 0 500 128" preserveAspectRatio="none">
+        <defs>
+          <linearGradient id="orderTrendAreaGrad" x1="0" y1="0" x2="0" y2="1">
+            <stop offset="0%" stop-color="#00d8ff" stop-opacity="0.38"/>
+            <stop offset="100%" stop-color="#00d8ff" stop-opacity="0.01"/>
+          </linearGradient>
+        </defs>
+        <line x1="24" y1="22" x2="476" y2="22" stroke="rgba(125,185,245,0.12)" stroke-dasharray="3,3"/>
+        <line x1="24" y1="66" x2="476" y2="66" stroke="rgba(125,185,245,0.12)" stroke-dasharray="3,3"/>
+        <line x1="24" y1="110" x2="476" y2="110" stroke="rgba(125,185,245,0.16)"/>
+        <path d="${areaD}" fill="url(#orderTrendAreaGrad)"/>
+        <path d="${pathD}" fill="none" stroke="#00d8ff" stroke-width="2.6" stroke-linecap="round"/>
+        ${circles}
+      </svg>
+      <div class="trend-axis-x">${xLabels}</div>
+    </div>
+  </section>`;
+}
+
+/* --------------------------------------------------------------------------
+   左侧模块 2B: 运营监控 (GMV + 客单价 + 订单状态格)
    -------------------------------------------------------------------------- */
 function operationsMonitorPanel() {
   const badge = `<span class="tag-badge">订单总数 352</span>`;
@@ -2935,7 +3632,7 @@ function operationsMonitorPanel() {
 }
 
 /* --------------------------------------------------------------------------
-   左侧模块 3: 服务监控 (排队路线与订单明细 - 每行展示两条，共 8 条)
+   左侧模块 3: 服务监控 (5个指标 + 左:车辆区域分布 + 右:出发地/目的地)
    -------------------------------------------------------------------------- */
 const queueOrderDetails = [
   {
@@ -3025,92 +3722,50 @@ const queueOrderDetails = [
   {
     id: 'WP20261106278',
     status: '服务中',
-    passengerPhone: '1886****4562',
-    useTime: '今日 08:38',
-    driver: '冯雪 (WZ-267)',
-    driverPhone: '1356****6498',
-    from: '石螺口',
-    to: '南湾运动公园',
-    route: '石螺口 → 南湾运动公园',
-    pax: '6 / 7 人',
-    paxCount: '6 人',
-    price: '¥49.00',
-    wait: '11:49',
+    passengerPhone: '1827****1039',
+    useTime: '今日 07:15',
+    driver: '朱浩 (WZ-202)',
+    driverPhone: '1378****9921',
+    from: '贝壳沙滩',
+    to: '盛塘天主教堂',
+    route: '贝壳沙滩 → 盛塘天主教堂',
+    pax: '3 / 7 人',
+    paxCount: '3 人',
+    price: '¥32.00',
+    wait: '07:15',
     timeline: [
-      { name: '叫车时间', time: '08:38' },
-      { name: '司机接单时间', time: '08:40' },
-      { name: '司机出发时间', time: '08:44' },
-      { name: '司机接到乘客时间', time: '08:52' }
+      { name: '叫车时间', time: '07:15' },
+      { name: '司机接单时间', time: '07:17' },
+      { name: '司机出发时间', time: '07:20' },
+      { name: '司机接到乘客时间', time: '07:30' }
     ]
   },
   {
     id: 'WP20261106279',
     status: '服务中',
-    passengerPhone: '1597****8823',
-    useTime: '今日 10:17',
-    driver: '李磊 (WZ-303)',
-    driverPhone: '1387****1290',
-    from: '南湾运动公园',
-    to: '五彩滩',
-    route: '南湾运动公园 → 五彩滩',
-    pax: '4 / 7 人',
-    paxCount: '4 人',
-    price: '¥38.00',
-    wait: '10:17',
-    timeline: [
-      { name: '叫车时间', time: '10:17' },
-      { name: '司机接单时间', time: '10:19' },
-      { name: '司机出发时间', time: '10:22' },
-      { name: '司机接到乘客时间', time: '10:28' }
-    ]
-  },
-  {
-    id: 'WP20261106280',
-    status: '服务中',
-    passengerPhone: '1397****5519',
-    useTime: '今日 08:42',
-    driver: '王海 (WZ-305)',
-    driverPhone: '1390****7761',
-    from: '西角码头',
-    to: '盛塘天主教堂',
-    route: '西角码头 → 盛塘天主教堂',
-    pax: '3 / 7 人',
-    paxCount: '3 人',
-    price: '¥35.00',
-    wait: '08:42',
-    timeline: [
-      { name: '叫车时间', time: '08:42' },
-      { name: '司机接单时间', time: '08:43' },
-      { name: '司机出发时间', time: '08:46' },
-      { name: '司机接到乘客时间', time: '08:55' }
-    ]
-  },
-  {
-    id: 'WP20261106281',
-    status: '服务中',
-    passengerPhone: '1770****9932',
-    useTime: '今日 07:55',
-    driver: '陈飞 (WZ-309)',
-    driverPhone: '1361****3452',
-    from: '五彩滩',
-    to: '鳄鱼山景区',
-    route: '五彩滩 → 鳄鱼山景区',
+    passengerPhone: '1368****4427',
+    useTime: '今日 06:48',
+    driver: '方敏 (WZ-105)',
+    driverPhone: '1587****6618',
+    from: '盛塘天主教堂',
+    to: '南湾海鲜市场',
+    route: '盛塘天主教堂 → 南湾海鲜市场',
     pax: '2 / 7 人',
     paxCount: '2 人',
-    price: '¥28.00',
-    wait: '07:55',
+    price: '¥26.00',
+    wait: '06:48',
     timeline: [
-      { name: '叫车时间', time: '07:55' },
-      { name: '司机接单时间', time: '07:57' },
-      { name: '司机出发时间', time: '08:01' },
-      { name: '司机接到乘客时间', time: '08:10' }
+      { name: '叫车时间', time: '06:48' },
+      { name: '司机接单时间', time: '06:50' },
+      { name: '司机出发时间', time: '06:54' },
+      { name: '司机接到乘客时间', time: '07:02' }
     ]
   }
 ];
 
 function serviceMonitorPanel() {
   const badge = `<span class="tag-badge mint-tag"><i class="live-dot"></i>实时</span>`;
-  const rows = queueOrderDetails.map((q, idx) => `
+  const rows = queueOrderDetails.slice(0, 6).map((q, idx) => `
     <div class="queue-row" data-action="openOrder" data-queue-idx="${idx}" role="button" tabindex="0" title="点击查看车辆订单详情">
       <div class="queue-route">
         <span class="q-stop from">${q.from}</span>
@@ -3123,9 +3778,28 @@ function serviceMonitorPanel() {
     </div>
   `).join('');
 
+  const areaDistItems = [
+    { name: '南湾运动公园', count: 9, pct: 90, color: '#f59e0b' },
+    { name: '五彩滩景区', count: 6, pct: 60, color: '#10b981' },
+    { name: '石螺口景区', count: 5, pct: 50, color: '#00d8ff' },
+    { name: '西角码头', count: 4, pct: 40, color: '#38bdf8' },
+    { name: '天主教堂', count: 2, pct: 20, color: '#38bdf8' },
+    { name: '鳄鱼山景区', count: 1, pct: 10, color: '#38bdf8' },
+    { name: '其他', count: 1, pct: 10, color: '#38bdf8' }
+  ];
+
+  const distRows = areaDistItems.map(item => `
+    <div class="dist-row">
+      <span class="dist-name">${item.name}</span>
+      <div class="dist-bar"><i style="width: ${item.pct}%; background: ${item.color};"></i></div>
+      <span class="dist-val font-num">${item.count}</span>
+    </div>
+  `).join('');
+
   return `<section class="panel panel-service">
     ${panelHeader('服务监控', badge)}
-    <div class="svc-grid">
+    <!-- 顶部 5 个业务指标 -->
+    <div class="svc-5grid">
       <div class="svc-box">
         <div class="svc-num"><strong>8</strong><small>分钟</small></div>
         <div class="svc-lbl">平均等待时长</div>
@@ -3138,12 +3812,34 @@ function serviceMonitorPanel() {
         <div class="svc-num"><strong>2.3</strong><small>%</small></div>
         <div class="svc-lbl">取消率</div>
       </div>
+      <div class="svc-box">
+        <div class="svc-num"><strong>30</strong><small>%</small></div>
+        <div class="svc-lbl">3分钟内接单率</div>
+      </div>
+      <div class="svc-box">
+        <div class="svc-num"><strong>30</strong><small>%</small></div>
+        <div class="svc-lbl">1分钟内接单率</div>
+      </div>
     </div>
-    <div class="queue-header-grid">
-      <div class="q-hdr-cell"><span>出发地 / 目的地</span><span>人数 / 等待时长</span></div>
-      <div class="q-hdr-cell"><span>出发地 / 目的地</span><span>人数 / 等待时长</span></div>
+
+    <!-- 下部双列复合：左侧车辆区域分布 + 右侧排队候车订单 -->
+    <div class="svc-composite-body">
+      <div class="svc-dist-col">
+        <div class="svc-sub-head">
+          <span class="ssh-title">车辆区域分布 (实时)</span>
+          <span class="ssh-meta">在线 <b>28</b> 辆 · 按数量排序</span>
+        </div>
+        <div class="area-dist-list">${distRows}</div>
+      </div>
+
+      <div class="svc-queue-col">
+        <div class="queue-header-row">
+          <span>出发地 / 目的地</span>
+          <span>人数 / 等候时长</span>
+        </div>
+        <div class="queue-list">${rows}</div>
+      </div>
     </div>
-    <div class="queue-grid-2col">${rows}</div>
   </section>`;
 }
 
@@ -3157,25 +3853,25 @@ function capacityOverviewPanel() {
     <div class="cap-grid">
       <div class="cap-box total">
         <strong class="cap-num font-num">31</strong>
-        <small class="cap-label">车辆总数</small>
+        <small>车辆总数</small>
       </div>
       <div class="cap-box running">
         <strong class="cap-num font-num">21</strong>
-        <small class="cap-label">运营中</small>
+        <small>运营中</small>
       </div>
       <div class="cap-box idle">
         <strong class="cap-num font-num">7</strong>
-        <small class="cap-label">空驶</small>
+        <small>空驶</small>
       </div>
       <div class="cap-box service">
         <strong class="cap-num font-num">3</strong>
-        <small class="cap-label">充电/维修</small>
+        <small>充电/维修</small>
       </div>
     </div>
-    <div class="cap-dist-bar" title="运力分布: 运营中 67.7%, 空驶 22.6%, 充电/维修 9.7%">
-      <i class="seg-run" style="width: 67.7%"></i>
-      <i class="seg-idle" style="width: 22.6%"></i>
-      <i class="seg-serv" style="width: 9.7%"></i>
+    <div class="cap-dist-bar" title="运力分布: 运营 21 / 空驶 7 / 充维 3">
+      <span class="seg-run" style="width: 67.7%;"></span>
+      <span class="seg-idle" style="width: 22.6%;"></span>
+      <span class="seg-serv" style="width: 9.7%;"></span>
     </div>
     <div class="cap-metrics-dual">
       <div class="cap-chip">
@@ -3191,10 +3887,9 @@ function capacityOverviewPanel() {
 }
 
 /* --------------------------------------------------------------------------
-   右侧模块 2: 车辆监控 (驾驶员异常 + ADAS 行车辅助统计)
+   右侧模块 2: 车辆监控 (驾驶行为 + ADAS 统计，带今日预警 59 起)
    -------------------------------------------------------------------------- */
-function vehicleMonitorPanel() {
-  const badge = `<span class="tag-badge">今日预警 59 起</span>`;
+function vehicleBehaviorAndAdasPanel() {
   const adasLeft = [
     { name: '向前碰撞', val: 2, c: '#38bdf8', level: 'warn' },
     { name: '车道偏离报警', val: 16, c: '#ff5e6a', level: 'danger' },
@@ -3204,13 +3899,13 @@ function vehicleMonitorPanel() {
   ];
 
   const adasRight = [
-    { name: '道路标识超限', val: 0, c: '#627d98', level: 'zero' },
+    { name: '道路标识超限报警', val: 0, c: '#627d98', level: 'zero' },
     { name: '障碍物报警', val: 0, c: '#627d98', level: 'zero' },
-    { name: '标识识别事件', val: 0, c: '#627d98', level: 'zero' },
+    { name: '道路标识识别事件', val: 0, c: '#627d98', level: 'zero' },
     { name: '主动抓拍事件', val: 0, c: '#627d98', level: 'zero' }
   ];
 
-  const renderItem = item => `
+  const renderAdas = item => `
     <div class="adas-item ${item.level}">
       <span class="adas-dot" style="--c:${item.c}"></span>
       <span class="adas-name">${item.name}</span>
@@ -3218,31 +3913,169 @@ function vehicleMonitorPanel() {
     </div>
   `;
 
-  return `<section class="panel panel-vehicles">
-    ${panelHeader('车辆监控', badge)}
-    <div class="driver-alert-box">
-      <div class="alert-left">
-        <span class="alert-pulse amber"></span>
-        <span class="alert-lbl">驾驶员异常</span>
-        <span class="alert-tag">今日监测</span>
+  return `<section class="panel panel-veh-behavior-adas">
+    ${panelHeader('车辆监控')}
+    <div class="veh-split-grid">
+      <!-- 左列: 驾驶行为 -->
+      <div class="behavior-side">
+        <div class="veh-sec-title">
+          <div class="vst-left">${ico('bus')} <span>驾驶行为</span></div>
+        </div>
+        <div class="behavior-grid">
+          <div class="b-item"><span class="b-dot blue"></span><span class="b-name">疲劳驾驶</span><span class="b-val font-num zero">0</span></div>
+          <div class="b-item"><span class="b-dot amber"></span><span class="b-name">自动抓拍</span><span class="b-val font-num zero">0</span></div>
+          <div class="b-item"><span class="b-dot blue"></span><span class="b-name">接打电话</span><span class="b-val font-num warn">1</span></div>
+          <div class="b-item"><span class="b-dot red"></span><span class="b-name">驾驶员变更事件</span><span class="b-val font-num zero">0</span></div>
+          <div class="b-item"><span class="b-dot blue"></span><span class="b-name">抽烟</span><span class="b-val font-num zero">0</span></div>
+          <div class="b-item"><span class="b-dot red"></span><span class="b-name">未系安全带</span><span class="b-val font-num zero">0</span></div>
+          <div class="b-item"><span class="b-dot blue"></span><span class="b-name">分神驾驶</span><span class="b-val font-num danger">8</span></div>
+          <div class="b-item"><span class="b-dot red"></span><span class="b-name">摄像头遮挡</span><span class="b-val font-num zero">0</span></div>
+          <div class="b-item span2"><span class="b-dot amber"></span><span class="b-name">驾驶员异常</span><span class="b-val font-num warn">2</span></div>
+        </div>
       </div>
-      <div class="alert-right">
-        <strong class="alert-val font-num">2</strong>
-        <small class="alert-unit">起</small>
-      </div>
-    </div>
-    <div class="adas-section">
-      <div class="adas-header">${ico('dish')} <span>ADAS 统计</span></div>
-      <div class="adas-grid">
-        <div class="adas-col">${adasLeft.map(renderItem).join('')}</div>
-        <div class="adas-col">${adasRight.map(renderItem).join('')}</div>
+
+      <!-- 右列: ADAS 统计 -->
+      <div class="adas-side">
+        <div class="veh-sec-title">
+          <div class="vst-left">${ico('dish')} <span>ADAS 统计</span></div>
+          <span class="tag-badge adas-badge">今日预警 59 起</span>
+        </div>
+        <div class="adas-grid">
+          <div class="adas-col">${adasLeft.map(renderAdas).join('')}</div>
+          <div class="adas-col">${adasRight.map(renderAdas).join('')}</div>
+        </div>
       </div>
     </div>
   </section>`;
 }
 
 /* --------------------------------------------------------------------------
-   右侧模块 3: 事件监控 (异常/预警/已处理 + 告警处置卡片及状态管理)
+   右侧模块 3A: 车辆监控 (可轮播车辆列表卡片)
+   -------------------------------------------------------------------------- */
+const carouselVehicles = [
+  // Page 1
+  [
+    { id: 'WZ-307', driver: '张盼', from: '石螺口', to: '南湾运动公园', pax: '3/7人', bat: 78 },
+    { id: 'WZ-303', driver: '李强', from: '石螺口', to: '南湾运动公园', pax: '4/7人', bat: 85 },
+    { id: 'WZ-305', driver: '王海', from: '石螺口', to: '南湾运动公园', pax: '3/7人', bat: 46 },
+    { id: 'WZ-309', driver: '陈飞', from: '石螺口', to: '南湾运动公园', pax: '5/7人', bat: 91 },
+    { id: 'WZ-312', driver: '刘洋', from: '西角码头', to: '盛塘天主教堂', pax: '2/7人', bat: 67 }
+  ],
+  // Page 2
+  [
+    { id: 'WZ-101', driver: '严旭', from: '西角码头', to: '南湾海鲜市场', pax: '5/7人', bat: 92 },
+    { id: 'WZ-102', driver: '魏刚', from: '西角码头', to: '鳄鱼山景区', pax: '4/7人', bat: 80 },
+    { id: 'WZ-103', driver: '陆涛', from: '石螺口', to: '贝壳沙滩', pax: '6/7人', bat: 74 },
+    { id: 'WZ-104', driver: '姜波', from: '蓝桥', to: '盛塘天主教堂', pax: '2/7人', bat: 63 },
+    { id: 'WZ-105', driver: '方敏', from: '南湾海鲜市场', to: '五彩滩', pax: '3/7人', bat: 88 }
+  ],
+  // Page 3
+  [
+    { id: 'WZ-201', driver: '薛磊', from: '五彩滩', to: '鳄鱼山景区', pax: '4/7人', bat: 70 },
+    { id: 'WZ-202', driver: '朱浩', from: '南湾运动公园', to: '盛塘天主教堂', pax: '5/7人', bat: 82 },
+    { id: 'WZ-203', driver: '何彬', from: '西角码头', to: '石螺口', pax: '1/7人', bat: 55 },
+    { id: 'WZ-204', driver: '崔杰', from: '贝壳沙滩', to: '西角码头', pax: '3/7人', bat: 79 },
+    { id: 'WZ-205', driver: '杜伟', from: '鳄鱼山景区', to: '南湾运动公园', pax: '6/7人', bat: 86 }
+  ],
+  // Page 4
+  [
+    { id: 'WZ-301', driver: '胡鹏', from: '石螺口', to: '南湾运动公园', pax: '4/7人', bat: 90 },
+    { id: 'WZ-302', driver: '卢亮', from: '南湾海鲜市场', to: '蓝桥', pax: '2/7人', bat: 65 },
+    { id: 'WZ-304', driver: '蔡勇', from: '盛塘天主教堂', to: '五彩滩', pax: '5/7人', bat: 72 },
+    { id: 'WZ-306', driver: '贾宁', from: '西角码头', to: '南湾运动公园', pax: '3/7人', bat: 81 },
+    { id: 'WZ-308', driver: '夏冬', from: '贝壳沙滩', to: '鳄鱼山景区', pax: '4/7人', bat: 58 }
+  ],
+  // Page 5
+  [
+    { id: 'WZ-310', driver: '钱坤', from: '五彩滩', to: '石螺口', pax: '6/7人', bat: 84 },
+    { id: 'WZ-311', driver: '邹峰', from: '南湾运动公园', to: '蓝桥', pax: '3/7人', bat: 77 },
+    { id: 'WZ-106', driver: '顾成', from: '西角码头', to: '盛塘天主教堂', pax: '2/7人', bat: 69 },
+    { id: 'WZ-107', driver: '白龙', from: '石螺口', to: '鳄鱼山景区', pax: '5/7人', bat: 93 },
+    { id: 'WZ-108', driver: '毛磊', from: '盛塘天主教堂', to: '南湾海鲜市场', pax: '4/7人', bat: 75 }
+  ],
+  // Page 6
+  [
+    { id: 'WZ-206', driver: '秦川', from: '蓝桥', to: '西角码头', pax: '1/7人', bat: 60 },
+    { id: 'WZ-207', driver: '龚平', from: '南湾运动公园', to: '五彩滩', pax: '4/7人', bat: 89 },
+    { id: 'WZ-208', driver: '武强', from: '鳄鱼山景区', to: '石螺口', pax: '5/7人', bat: 73 },
+    { id: 'WZ-313', driver: '常青', from: '西角码头', to: '南湾海鲜市场', pax: '3/7人', bat: 86 },
+    { id: 'WZ-314', driver: '董健', from: '贝壳沙滩', to: '盛塘天主教堂', pax: '2/7人', bat: 64 }
+  ]
+];
+
+let currentVehPage = 0;
+let vehCarouselTimer = null;
+
+function renderVehRosterInner() {
+  const pageCars = carouselVehicles[currentVehPage] || carouselVehicles[0];
+  const totalPages = carouselVehicles.length;
+
+  const carRows = pageCars.map(c => {
+    const batClass = c.bat >= 70 ? 'bat-good' : c.bat >= 40 ? 'bat-mid' : 'bat-low';
+    return `
+      <div class="veh-card-mini" data-bus="${c.id}" role="button" tabindex="0" title="点击定位车辆 ${c.id}">
+        <div class="vcm-left">
+          <div class="vcm-id-row">
+            <span class="vcm-dot"></span>
+            <strong class="vcm-id font-num">${c.id}</strong>
+          </div>
+          <span class="vcm-driver">${c.driver}</span>
+        </div>
+        <div class="vcm-mid">
+          <div class="vcm-stop"><i class="s-dot from"></i><span>${c.from}</span></div>
+          <div class="vcm-stop"><i class="s-dot to"></i><span>${c.to}</span></div>
+        </div>
+        <div class="vcm-right">
+          <span class="vcm-pax font-num">${c.pax}</span>
+          <div class="vcm-bat ${batClass}">
+            <span class="bat-icon"></span>
+            <span class="font-num">${c.bat}%</span>
+          </div>
+        </div>
+      </div>
+    `;
+  }).join('');
+
+  const dots = Array.from({ length: totalPages }, (_, i) => `
+    <button class="pager-dot ${i === currentVehPage ? 'active' : ''}" data-action="setVehPage" data-page="${i}" aria-label="第 ${i + 1} 页"></button>
+  `).join('');
+
+  return `
+    <div class="veh-roster-list">${carRows}</div>
+    <div class="veh-roster-pager">
+      <span class="pager-num font-num">${currentVehPage + 1}/${totalPages}</span>
+      <div class="pager-dots">${dots}</div>
+    </div>
+  `;
+}
+
+function setVehCarouselPage(p) {
+  currentVehPage = p;
+  const el = document.getElementById('veh-roster-body');
+  if (el) el.innerHTML = renderVehRosterInner();
+}
+
+function startVehCarousel() {
+  if (vehCarouselTimer) clearInterval(vehCarouselTimer);
+  vehCarouselTimer = setInterval(() => {
+    currentVehPage = (currentVehPage + 1) % carouselVehicles.length;
+    const el = document.getElementById('veh-roster-body');
+    if (el) el.innerHTML = renderVehRosterInner();
+  }, 4500);
+}
+
+function vehicleRosterCarouselPanel() {
+  const badge = `<span class="tag-badge">在线 28/31 · 核载7人</span>`;
+  return `<section class="panel panel-veh-carousel">
+    ${panelHeader('车辆监控', badge)}
+    <div id="veh-roster-body" class="veh-roster-body-wrap">
+      ${renderVehRosterInner()}
+    </div>
+  </section>`;
+}
+
+/* --------------------------------------------------------------------------
+   右侧模块 3B: 事件监控 (异常/预警/已处理 + 告警处置卡片及状态管理)
    -------------------------------------------------------------------------- */
 const incidentStore = [
   {
@@ -3272,13 +4105,12 @@ const incidentStore = [
 ];
 
 function incidentMonitorPanel(handled = new Set()) {
-  const badge = `<span class="tag-badge">今日 6 起 · 待处理 2 条</span>`;
+  const badge = `<span class="tag-badge">今日 6 起 · 最新3条</span>`;
   
-  // 实时统计各状态数量
   const handledItems = incidentStore.filter(i => i.status === '已处理');
   const warnUnhandled = 4 - incidentStore.filter(i => i.type === 'warn' && i.status === '已处理').length;
   const errUnhandled = 2 - incidentStore.filter(i => i.type === 'err' && i.status === '已处理').length;
-  const okTotal = handledItems.length;
+  const okTotal = 6; // 对照图3展示
 
   const cards = incidentStore.map(item => `
     <div class="inc-v2-card ${item.type} ${item.status === '已处理' ? 'is-handled' : ''}" data-action="openIncident" data-inc-id="${item.id}" role="button" tabindex="0" title="点击查看事件详情">
@@ -3490,7 +4322,7 @@ function eventModePanels(handled) {
 }
 
 /* --------------------------------------------------------------------------
-   主渲染导出
+   主渲染导出: 左右翼复合横向平行结构
    -------------------------------------------------------------------------- */
 function renderPanels(mode, period = '今日', selectedLine = 0, handled = new Set(events.filter(e=>e.done).map(e=>e.id))) {
   let leftHtml = '';
@@ -3498,21 +4330,50 @@ function renderPanels(mode, period = '今日', selectedLine = 0, handled = new S
 
   if (mode === 'routes') {
     leftHtml = routePanels(selectedLine);
-    rightHtml = capacityOverviewPanel() + vehicleMonitorPanel();
+    rightHtml = capacityOverviewPanel() + vehicleBehaviorAndAdasPanel();
   } else if (mode === 'events') {
     const pair = eventModePanels(handled);
     leftHtml = pair[0];
     rightHtml = pair[1];
   } else {
-    // 默认综合监控大屏模式：左 3 模块，右 3 模块
-    leftHtml = islandOverviewPanel(period) + operationsMonitorPanel() + serviceMonitorPanel();
-    rightHtml = capacityOverviewPanel() + vehicleMonitorPanel() + incidentMonitorPanel(handled);
+    // 默认综合监控大屏模式:
+    // 左翼:
+    // 1行: 未来客流预测 (左) + 全岛出行总览 (右)
+    // 2行: 订单趋势 (左) + 运营监控 (右)
+    // 3行: 服务监控 (全宽复合: 5个指标 + 左:车辆区域分布 + 右:排队候车)
+    leftHtml = `
+      <div class="panel-row-dual">
+        ${forecastFlowPanel()}
+        ${islandOverviewPanel(period)}
+      </div>
+      <div class="panel-row-dual">
+        ${orderTrendPanel(orderTrendPeriod)}
+        ${operationsMonitorPanel()}
+      </div>
+      ${serviceMonitorPanel()}
+    `;
+
+    // 右翼:
+    // 1行: 运力总览 (全宽)
+    // 2行: 车辆监控 (驾驶行为 + ADAS统计)
+    // 3行: 车辆监控(可轮播列表) (左) + 事件监控 (右)
+    rightHtml = `
+      ${capacityOverviewPanel()}
+      ${vehicleBehaviorAndAdasPanel()}
+      <div class="panel-row-dual">
+        ${vehicleRosterCarouselPanel()}
+        ${incidentMonitorPanel(handled)}
+      </div>
+    `;
   }
 
   const leftEl = document.getElementById('left');
   const rightEl = document.getElementById('right');
   if (leftEl) leftEl.innerHTML = leftHtml;
   if (rightEl) rightEl.innerHTML = rightHtml;
+
+  // 启动车辆轮播
+  startVehCarousel();
 }
 
 /* Extrude island building footprints once. Camera changes only update GPU uniforms. */
@@ -4308,6 +5169,8 @@ function onAction(a, d = {}){
   switch(a){
     case 'openOrder': openOrderModal(Number(d.queueIdx || 0)); break;
     case 'openIncident': openIncidentModal(d.incId); break;
+    case 'setOrderTrend': setOrderTrendPeriod(d.trendPeriod); break;
+    case 'setVehPage': setVehCarouselPage(Number(d.page || 0)); break;
     case 'closeModal': closeModal(); break;
     case 'closeOrderModal': closeModal('order'); break;
     case 'closeIncidentModal': closeModal('incident'); break;

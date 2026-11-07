@@ -766,15 +766,23 @@
     gap: 26px;
   }
 
-  /* Command Wall Layout: Left and Right Wings ~900px - 1100px width */
+  /* Command Wall Layout: Dual Columns ~1100px - 1480px width */
   main {
-    grid-template-columns: clamp(750px, 12vw, 1100px) minmax(0, 1fr) clamp(750px, 12vw, 1100px);
+    grid-template-columns: clamp(1100px, 16vw, 1480px) minmax(0, 1fr) clamp(1100px, 16vw, 1480px);
     gap: clamp(24px, 1.2vw, 42px);
     padding: clamp(12px, 1.2vh, 24px) clamp(28px, 1.6vw, 52px) clamp(10px, 1vh, 18px);
   }
 
   .rail {
     gap: clamp(12px, 1.1vh, 18px);
+  }
+
+  .rail > .panel-row-dual {
+    flex: 1;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: clamp(12px, 1vw, 18px);
+    min-height: 0;
   }
 
   .panel {
@@ -802,365 +810,445 @@
     border-radius: 14px;
   }
 
-  /* Left Module 1: Island Overview */
+  /* Left Module 1A: Future Forecast */
+  .forecast-bars-grid {
+    gap: 12px;
+    padding: 12px 6px 4px;
+  }
+  .forecast-col {
+    gap: 8px;
+  }
+  .f-val {
+    font-size: 20px;
+  }
+  .f-bar-wrap {
+    max-width: 58px;
+    height: 110px;
+    border-radius: 6px;
+  }
+  .f-day {
+    font-size: 17px;
+  }
+
+  /* Left Module 1B: Island Overview */
   .overview-dual {
-    flex: 1.1;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
+    gap: 10px;
   }
   .metric-card {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    padding: 18px 22px;
+    padding: 12px 16px;
     border-radius: 8px;
   }
   .m-lbl {
-    font-size: 20px;
-    margin-bottom: 6px;
+    font-size: 18px;
+    margin-bottom: 4px;
   }
   .m-val strong {
-    font-size: 60px;
+    font-size: 42px;
   }
   .m-val small {
-    font-size: 22px;
-    margin-left: 6px;
+    font-size: 17px;
+    margin-left: 4px;
   }
   .m-delta {
-    font-size: 19px;
-    margin-top: 6px;
+    font-size: 16px;
+    margin-top: 4px;
   }
   .m-delta b {
-    font-size: 23px;
+    font-size: 19px;
   }
   .badge-pill {
-    font-size: 19px;
-    padding: 4px 12px;
+    font-size: 16px;
+    padding: 3px 10px;
   }
   .env-grid {
-    flex: 1;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 14px;
+    gap: 8px;
+    margin-top: 10px;
   }
   .env-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 16px 8px;
+    padding: 10px 4px;
     border-radius: 8px;
   }
   .env-ico {
-    width: 38px;
-    height: 38px;
-    margin-bottom: 6px;
+    width: 28px;
+    height: 28px;
+    margin-bottom: 4px;
   }
   .env-ico svg {
-    width: 34px;
-    height: 34px;
+    width: 24px;
+    height: 24px;
   }
   .env-val {
-    font-size: 32px;
+    font-size: 23px;
   }
   .env-lbl {
-    font-size: 19px;
+    font-size: 16px;
+    margin-top: 4px;
+  }
+
+  /* Left Module 2A: Order Trend */
+  .trend-tabs .tag-badge {
+    font-size: 15px;
+    padding: 3px 12px;
+  }
+  .trend-sub-bar {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  .trend-unit {
+    font-size: 16px;
+  }
+  .trend-peak-lbl {
+    font-size: 16px;
+  }
+  .trend-svg-wrap svg {
+    height: 110px;
+  }
+  .trend-axis-x {
+    font-size: 15px;
     margin-top: 6px;
   }
 
-  /* Left Module 2: Operations Monitor */
+  /* Left Module 2B: Operations Monitor */
   .gmv-dual {
-    flex: 1;
-    display: flex;
-    justify-content: space-between;
-    align-items: stretch;
-    gap: 18px;
-    padding: 18px 22px;
-    background: rgba(14, 34, 68, 0.45);
+    gap: 14px;
+    padding: 8px 12px 10px;
     border-radius: 8px;
-    border: 1px solid rgba(85, 160, 240, 0.2);
-  }
-  .gmv-left {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
   }
   .gmv-val {
-    font-size: 62px;
-    margin: 6px 0;
+    font-size: 44px;
+    margin: 4px 0;
   }
   .arpu-card {
-    padding: 16px 26px;
-    min-width: 130px;
+    padding: 8px 16px;
+    min-width: 90px;
     border-radius: 8px;
-    justify-content: center;
-    align-items: center;
   }
   .arpu-val {
-    font-size: 50px;
+    font-size: 36px;
   }
   .arpu-lbl {
-    font-size: 20px;
+    font-size: 16px;
   }
   .order-grid {
-    flex: 1.25;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
-    margin-top: 14px;
+    gap: 8px;
+    margin-top: 10px;
   }
   .order-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 18px 8px;
+    padding: 10px 4px;
     border-radius: 8px;
   }
   .order-box strong {
-    font-size: 48px;
+    font-size: 34px;
   }
   .order-box small {
-    font-size: 20px;
-    margin-top: 8px;
+    font-size: 16px;
+    margin-top: 4px;
   }
   .order-progress-strip {
-    height: 8px;
-    margin-top: 14px;
+    height: 6px;
+    margin-top: 10px;
   }
 
   /* Left Module 3: Service Monitor */
-  .svc-grid {
-    flex: 0.9;
+  .svc-5grid {
     display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+    margin-bottom: 12px;
   }
   .svc-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 14px 8px;
+    padding: 10px 4px;
     border-radius: 8px;
   }
   .svc-num strong {
-    font-size: 48px;
+    font-size: 36px;
   }
   .svc-num small {
-    font-size: 22px;
+    font-size: 17px;
     margin-left: 4px;
   }
   .svc-lbl {
-    font-size: 20px;
+    font-size: 16px;
     margin-top: 4px;
   }
-  .queue-header-grid {
-    gap: 14px;
-    margin: 14px 4px 8px;
+  .svc-composite-body {
+    gap: 16px;
   }
-  .q-hdr-cell {
+  .svc-sub-head {
+    margin-bottom: 8px;
+  }
+  .ssh-title {
     font-size: 18px;
-    padding: 0 6px;
   }
-  .queue-grid-2col {
-    flex: 2.2;
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 10px 14px;
+  .ssh-meta {
+    font-size: 15px;
+  }
+  .area-dist-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    gap: 6px;
+  }
+  .dist-row {
+    gap: 10px;
+    font-size: 16px;
+    padding: 2px 0;
+  }
+  .dist-name {
+    width: 130px;
+  }
+  .dist-bar {
+    height: 8px;
+  }
+  .dist-val {
+    font-size: 19px;
+    width: 22px;
+  }
+  .queue-header-row {
+    font-size: 16px;
+    margin-bottom: 8px;
+  }
+  .queue-list {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1;
+    gap: 6px;
   }
   .queue-row {
-    padding: 11px 16px;
-    border-radius: 8px;
+    padding: 7px 12px;
+    border-radius: 6px;
   }
   .q-stop {
-    font-size: 19px;
-    padding-left: 22px;
+    font-size: 17px;
+    padding-left: 18px;
   }
   .q-stop:before {
-    width: 9px;
-    height: 9px;
+    width: 7px;
+    height: 7px;
   }
   .q-pax {
-    font-size: 18.5px;
+    font-size: 17px;
   }
   .q-time {
-    font-size: 23px;
+    font-size: 20px;
   }
 
   /* Right Module 1: Capacity Overview */
   .cap-grid {
-    flex: 1.2;
     display: grid;
     grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+    gap: 10px;
   }
   .cap-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 8px;
+    padding: 12px 6px;
     border-radius: 8px;
   }
   .cap-box strong {
-    font-size: 48px;
+    font-size: 42px;
   }
   .cap-box small {
-    font-size: 20px;
-    margin-top: 8px;
+    font-size: 17px;
+    margin-top: 6px;
   }
   .cap-dist-bar {
-    height: 8px;
-    margin: 16px 0;
+    height: 6px;
+    margin: 10px 0;
   }
   .cap-metrics-dual {
-    flex: 1;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 14px;
+    gap: 10px;
   }
   .cap-chip {
-    padding: 18px 24px;
+    padding: 8px 16px;
     border-radius: 8px;
   }
   .cap-chip-lbl {
-    font-size: 21px;
+    font-size: 17px;
   }
   .cap-chip-val {
-    font-size: 32px;
+    font-size: 24px;
   }
 
-  /* Right Module 2: Vehicles Monitor */
-  .driver-alert-box {
-    padding: 16px 22px;
-    border-radius: 8px;
-    margin-bottom: 14px;
+  /* Right Module 2: Vehicles Monitor (Behavior + ADAS) */
+  .panel-veh-behavior-adas {
+    flex: 1.25;
   }
-  .alert-lbl {
-    font-size: 22px;
+  .veh-split-grid {
+    gap: 16px;
+    align-items: stretch;
   }
-  .alert-val {
-    font-size: 40px;
-  }
-  .alert-tag {
-    font-size: 16px;
-    padding: 4px 12px;
-  }
-  .alert-unit {
-    font-size: 18px;
-  }
-  .adas-section {
-    flex: 1;
+  .behavior-side, .adas-side {
     display: flex;
     flex-direction: column;
     justify-content: space-between;
-    gap: 10px;
   }
-  .adas-header {
-    font-size: 21px;
-    margin-bottom: 6px;
+  .veh-sec-title {
+    font-size: 18px;
+    margin-bottom: 9px;
   }
-  .adas-header .icon {
-    width: 24px;
-    height: 24px;
+  .vst-left svg {
+    width: 20px;
+    height: 20px;
   }
-  .adas-grid {
-    flex: 1;
+  .adas-badge {
+    font-size: 15px;
+    padding: 3px 12px;
+  }
+  .behavior-grid {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 10px 14px;
+    grid-template-rows: repeat(5, 1fr);
+    gap: 8px;
+    flex: 1;
+  }
+  .b-item {
+    padding: 8px 12px;
+    border-radius: 6px;
+    height: 100%;
+    box-sizing: border-box;
+  }
+  .b-dot {
+    width: 7px;
+    height: 7px;
+    margin-right: 7px;
+  }
+  .b-name {
+    font-size: 15.5px;
+  }
+  .b-val {
+    font-size: 18px;
+  }
+  .adas-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    flex: 1;
   }
   .adas-col {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    display: grid;
+    grid-template-rows: repeat(5, 1fr);
     gap: 8px;
+    height: 100%;
   }
   .adas-item {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    padding: 11px 14px;
+    padding: 8px 12px;
     border-radius: 6px;
+    height: 100%;
+    box-sizing: border-box;
   }
   .adas-dot {
-    width: 9px;
-    height: 9px;
-    margin-right: 9px;
+    width: 7px;
+    height: 7px;
+    margin-right: 7px;
   }
   .adas-name {
-    font-size: 18.5px;
+    font-size: 15.5px;
   }
   .adas-val {
-    font-size: 23px;
+    font-size: 18px;
   }
 
-  /* Right Module 3: Incidents Monitor */
+  /* Right Module 3A: Vehicles Roster Carousel */
+  .panel-veh-carousel {
+    flex: 1;
+  }
+  .veh-roster-list {
+    gap: 6px;
+  }
+  .veh-card-mini {
+    padding: 7px 11px;
+    border-radius: 8px;
+  }
+  .vcm-dot {
+    width: 7px;
+    height: 7px;
+  }
+  .vcm-id {
+    font-size: 16.5px;
+  }
+  .vcm-driver {
+    font-size: 14.5px;
+    padding-left: 12px;
+  }
+  .vcm-mid {
+    font-size: 15px;
+    gap: 3px;
+  }
+  .vcm-pax {
+    font-size: 16px;
+  }
+  .vcm-bat {
+    font-size: 14.5px;
+  }
+  .bat-icon {
+    width: 17px;
+    height: 10px;
+  }
+  .pager-num {
+    font-size: 15px;
+  }
+  .pager-dot {
+    width: 8px;
+    height: 8px;
+  }
+
+  /* Right Module 3B: Incidents Monitor */
   .inc-stats-row {
-    flex: 0.9;
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 12px;
-    margin-bottom: 14px;
+    gap: 8px;
+    margin-bottom: 10px;
   }
   .inc-stat-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    padding: 20px 8px;
+    padding: 10px 4px;
     border-radius: 8px;
   }
   .inc-stat-box strong {
-    font-size: 48px;
+    font-size: 36px;
   }
   .inc-stat-box small {
-    font-size: 20px;
-    margin-top: 6px;
+    font-size: 16px;
+    margin-top: 4px;
   }
   .incident-list-v2 {
-    flex: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    gap: 14px;
-  }
-  .inc-v2-card {
-    flex: 1;
-    padding: 18px 22px;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
     gap: 8px;
   }
+  .inc-v2-card {
+    padding: 10px 14px;
+    border-radius: 8px;
+    gap: 5px;
+  }
   .inc-v2-time {
-    font-size: 19px;
+    font-size: 16px;
   }
   .inc-v2-badge {
-    font-size: 17px;
-    padding: 3px 10px;
-  }
-  .inc-v2-title {
-    font-size: 21px;
-    margin: 6px 0;
-  }
-  .inc-v2-status {
-    font-size: 16px;
-    padding: 3px 12px;
-  }
-  .inc-v2-footer {
-    font-size: 17px;
-  }
-  .inc-v2-act-lbl {
-    font-size: 16px;
+    font-size: 14.5px;
     padding: 2px 8px;
   }
+  .inc-v2-title {
+    font-size: 16.5px;
+    margin: 3px 0;
+  }
+  .inc-v2-status {
+    font-size: 14px;
+    padding: 2px 9px;
+  }
+  .inc-v2-footer {
+    font-size: 15px;
+  }
+  .inc-v2-act-lbl {
+    font-size: 14px;
+    padding: 2px 6px;
+  }
   .inc-v2-act-val {
-    font-size: 18px;
+    font-size: 15.5px;
   }
 
   /* Floating Popups */
