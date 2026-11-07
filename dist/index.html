@@ -111,7 +111,7 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
    左侧模块 1: 全岛出行总览
    -------------------------------------------------------------------------- */
 .panel-overview {
-  flex: 1.05;
+  flex: 1;
 }
 .overview-dual {
   display: grid;
@@ -220,11 +220,91 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   margin-top: 3px;
 }
 
+/* 全岛客流趋势图与枢纽占比 */
+.sub-section-title {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12.5px;
+  font-weight: 600;
+  color: #d8ecff;
+  margin-bottom: 5px;
+}
+.sub-section-title small {
+  font-size: 11px;
+  color: #79a8d4;
+  font-weight: normal;
+}
+.overview-extra-block {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed rgba(95, 175, 250, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.flow-mini-chart {
+  width: 100%;
+  position: relative;
+  background: rgba(10, 24, 48, 0.45);
+  border-radius: 6px;
+  padding: 4px 6px 2px;
+  border: 1px solid rgba(85, 160, 240, 0.15);
+}
+.flow-mini-chart svg {
+  width: 100%;
+  height: 38px;
+  display: block;
+}
+.flow-chart-axis {
+  display: flex;
+  justify-content: space-between;
+  font-size: 10.5px;
+  color: #6d90b4;
+  font-family: var(--num);
+  margin-top: 2px;
+}
+.hub-flow-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+  margin-top: 2px;
+}
+.hub-chip {
+  background: rgba(12, 32, 64, 0.65);
+  border: 1px solid rgba(85, 160, 240, 0.2);
+  border-radius: 4px;
+  padding: 3px 5px;
+  font-size: 11px;
+  color: #bcd5ee;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  white-space: nowrap;
+}
+.hub-chip b {
+  font-family: var(--num);
+  color: #f7fbff;
+  margin-left: 2px;
+}
+.h-dot {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  display: inline-block;
+  margin-right: 4px;
+  flex-shrink: 0;
+}
+.h-dot.port { background: #00d8ff; box-shadow: 0 0 4px #00d8ff; }
+.h-dot.sports { background: #38efbd; box-shadow: 0 0 4px #38efbd; }
+.h-dot.beach { background: #f5b842; box-shadow: 0 0 4px #f5b842; }
+.h-dot.east { background: #a78bfa; box-shadow: 0 0 4px #a78bfa; }
+
 /* --------------------------------------------------------------------------
    左侧模块 2: 运营监控
    -------------------------------------------------------------------------- */
 .panel-ops {
-  flex: .95;
+  flex: 1;
 }
 .gmv-dual {
   display: flex;
@@ -372,11 +452,72 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   box-shadow: 0 0 6px rgba(255, 190, 66, 0.5);
 }
 
+/* 7日营收柱状趋势与热点区间 */
+.ops-extra-block {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed rgba(95, 175, 250, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.ops-mini-bars {
+  display: flex;
+  align-items: flex-end;
+  justify-content: space-between;
+  height: 48px;
+  padding: 4px 8px 3px;
+  background: rgba(10, 24, 48, 0.45);
+  border-radius: 6px;
+  border: 1px solid rgba(85, 160, 240, 0.15);
+  gap: 6px;
+}
+.bar-col {
+  flex: 1;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 3px;
+}
+.bar-fill {
+  width: 12px;
+  border-radius: 2px 2px 0 0;
+  background: linear-gradient(180deg, #38efbd, #0284c7);
+  box-shadow: 0 0 6px rgba(56, 239, 189, 0.3);
+  transition: height 0.3s ease;
+}
+.bar-col.active .bar-fill {
+  background: linear-gradient(180deg, #ffbe42, #ea580c);
+  box-shadow: 0 0 8px rgba(255, 190, 66, 0.6);
+}
+.bar-lbl {
+  font-size: 10px;
+  color: #79a0c7;
+  font-family: var(--num);
+  white-space: nowrap;
+}
+.ops-foot-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11.5px;
+  color: #8eb3d8;
+  padding: 2px 4px;
+  background: rgba(10, 24, 48, 0.35);
+  border-radius: 4px;
+}
+.ops-foot-summary b {
+  color: #38efbd;
+  font-family: var(--num);
+}
+
 /* --------------------------------------------------------------------------
    左侧模块 3: 服务监控
    -------------------------------------------------------------------------- */
 .panel-service {
-  flex: 1.15;
+  flex: 1.25;
 }
 .svc-grid {
   display: grid;
@@ -406,6 +547,20 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   margin-top: 4px;
 }
 
+.queue-header-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin: 8px 2px 4px;
+}
+.q-hdr-cell {
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  font-weight: 500;
+  color: #92b4d6;
+  padding: 0 4px;
+}
 .queue-header {
   display: flex;
   justify-content: space-between;
@@ -419,14 +574,43 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   flex-direction: column;
   gap: 6px;
 }
+.queue-grid-2col {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 5px 8px;
+}
 .queue-row {
   display: flex;
   justify-content: space-between;
   align-items: center;
   background: rgba(15, 36, 72, 0.72);
   border: 1px solid rgba(95, 175, 250, 0.22);
-  border-radius: 8px;
-  padding: 8px 12px;
+  border-radius: 6px;
+  padding: 6px 10px;
+  cursor: pointer;
+  transition: all 0.15s ease-out;
+}
+.queue-row:hover {
+  background: rgba(26, 60, 115, 0.88);
+  border-color: rgba(95, 185, 255, 0.65);
+  transform: translateY(-1px);
+}
+.svc-foot-note {
+  margin-top: 6px;
+  font-size: 11.5px;
+  color: #8bb2d6;
+  text-align: center;
+  background: rgba(10, 25, 52, 0.55);
+  border-radius: 4px;
+  padding: 4px 8px;
+  border: 1px solid rgba(90, 160, 230, 0.16);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.svc-foot-note b {
+  color: #38efbd;
+  font-family: var(--num);
 }
 .queue-route {
   display: flex;
@@ -486,7 +670,7 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
    右侧模块 1: 运力总览
    -------------------------------------------------------------------------- */
 .panel-capacity {
-  flex: .78;
+  flex: 0.98;
 }
 .cap-grid {
   display: grid;
@@ -596,11 +780,70 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   text-shadow: 0 0 8px rgba(6, 182, 212, 0.35);
 }
 
+/* 示范路线实时运力分配 */
+.cap-extra-block {
+  margin-top: 8px;
+  padding-top: 6px;
+  border-top: 1px dashed rgba(95, 175, 250, 0.2);
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.route-cap-list {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+.route-cap-item {
+  background: rgba(12, 32, 64, 0.65);
+  border: 1px solid rgba(85, 160, 240, 0.2);
+  border-radius: 5px;
+  padding: 5px 8px;
+}
+.rc-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 12px;
+  margin-bottom: 3px;
+}
+.rc-name {
+  color: #d6e8fb;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.rc-name i {
+  display: inline-block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+}
+.rc-meta {
+  color: #8eb3d8;
+  font-size: 11.5px;
+}
+.rc-meta b {
+  color: #f7fbff;
+}
+.rc-bar {
+  height: 4px;
+  border-radius: 2px;
+  background: rgba(10, 24, 48, 0.7);
+  overflow: hidden;
+}
+.rc-bar i {
+  display: block;
+  height: 100%;
+  border-radius: 2px;
+}
+
 /* --------------------------------------------------------------------------
    右侧模块 2: 车辆监控 (驾驶员异常 + ADAS 统计)
    -------------------------------------------------------------------------- */
 .panel-vehicles {
-  flex: 1.25;
+  flex: 1.12;
 }
 .driver-alert-box {
   display: flex;
@@ -731,11 +974,50 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   font-weight: 500;
 }
 
+/* 主动安全与运行状态条 */
+.veh-extra-block {
+  margin-top: 7px;
+  padding-top: 6px;
+  border-top: 1px dashed rgba(95, 175, 250, 0.2);
+}
+.veh-safety-strip {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 5px;
+}
+.safety-chip {
+  background: rgba(12, 32, 64, 0.65);
+  border: 1px solid rgba(85, 160, 240, 0.2);
+  border-radius: 5px;
+  padding: 4px 4px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.s-lbl {
+  font-size: 11px;
+  color: #82a8cd;
+  white-space: nowrap;
+}
+.s-val {
+  font-size: 13.5px;
+  color: #f7fbff;
+}
+.s-val.c-mint {
+  color: #00d68f;
+  text-shadow: 0 0 6px rgba(0, 214, 143, 0.4);
+}
+.s-val.c-amber {
+  color: #f5b842;
+  text-shadow: 0 0 6px rgba(245, 184, 66, 0.4);
+}
+
 /* --------------------------------------------------------------------------
    右侧模块 3: 事件监控 (处置指标 + 告警处置卡片)
    -------------------------------------------------------------------------- */
 .panel-incidents {
-  flex: 1.25;
+  flex: 1.15;
 }
 .inc-stats-row {
   display: grid;
@@ -913,6 +1195,22 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+}
+.inc-foot-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11.5px;
+  color: #8eb3d8;
+  padding: 4px 8px;
+  background: rgba(10, 24, 48, 0.45);
+  border-radius: 4px;
+  border: 1px solid rgba(85, 160, 240, 0.16);
+  margin-top: 6px;
+}
+.inc-foot-summary b {
+  color: #38efbd;
+  font-family: var(--num);
 }
 
 /* --------------------------------------------------------------------------
@@ -2133,6 +2431,564 @@ footer {
     border-radius: 6px;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Level 3: Multi-display Command Walls / 8320 x 2100 & giant resolutions
+   Tailored for massive command centers, ultra-resolution walls (e.g. 8320 x 2100).
+   Fonts, heights and modules scale up so panels are visually saturated, bold, and aesthetic.
+   -------------------------------------------------------------------------- */
+@media (min-width: 4800px), (min-width: 3200px) and (min-height: 1550px), html.giant-screen {
+  body {
+    font-size: 18px;
+    line-height: 1.45;
+  }
+
+  /* Header scaling */
+  header {
+    height: clamp(100px, 5.5vh, 125px);
+    padding: 0 clamp(40px, 2.5vw, 80px) 8px;
+  }
+  .brand {
+    gap: 18px;
+  }
+  .brandmark {
+    width: 64px;
+    height: 64px;
+  }
+  .brand strong {
+    font-size: 26px;
+    letter-spacing: .18em;
+  }
+  .brand small {
+    font-size: 14px;
+    letter-spacing: .2em;
+    margin-top: 4px;
+  }
+  .mast h1 {
+    font-size: clamp(44px, 2.4vw, 56px);
+    letter-spacing: .16em;
+    margin-bottom: 4px;
+    text-shadow: 0 0 32px #81cafa66;
+  }
+  .mast-sub {
+    font-size: clamp(17px, .95vw, 22px);
+    letter-spacing: .35em;
+  }
+  .clock {
+    gap: 4px;
+  }
+  .clock strong {
+    font-size: 36px;
+  }
+  .clock small {
+    font-size: 15px;
+  }
+  .icbtn {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+  }
+  .icbtn .icon {
+    width: 26px;
+    height: 26px;
+  }
+  .head-right {
+    gap: 26px;
+  }
+
+  /* Command Wall Layout: Left and Right Wings ~900px - 1100px width */
+  main {
+    grid-template-columns: clamp(750px, 12vw, 1100px) minmax(0, 1fr) clamp(750px, 12vw, 1100px);
+    gap: clamp(24px, 1.2vw, 42px);
+    padding: clamp(12px, 1.2vh, 24px) clamp(28px, 1.6vw, 52px) clamp(10px, 1vh, 18px);
+  }
+
+  .rail {
+    gap: clamp(12px, 1.1vh, 18px);
+  }
+
+  .panel {
+    background: rgba(9, 22, 42, 0.95) !important;
+    border: 1px solid rgba(45, 105, 175, 0.65) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 12px 36px rgba(1, 6, 16, 0.75), inset 0 1px 0 rgba(70, 150, 245, 0.2) !important;
+    padding: clamp(14px, 1.1vh, 22px) clamp(16px, 1vw, 24px) !important;
+  }
+
+  .panel-head {
+    margin-bottom: clamp(10px, 0.9vh, 16px);
+  }
+  .panel-title {
+    font-size: 28px;
+    padding-left: 18px;
+  }
+  .panel-title:before {
+    width: 6px;
+    height: 24px;
+  }
+  .tag-badge {
+    font-size: 16px;
+    padding: 4px 16px;
+    border-radius: 14px;
+  }
+
+  /* Sub titles */
+  .sub-section-title {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  .sub-section-title small {
+    font-size: 15px;
+  }
+
+  /* Left Module 1: Island Overview */
+  .overview-dual {
+    gap: 12px;
+  }
+  .metric-card {
+    padding: 12px 16px;
+    border-radius: 8px;
+  }
+  .m-lbl {
+    font-size: 18.5px;
+    margin-bottom: 5px;
+  }
+  .m-val strong {
+    font-size: 54px;
+  }
+  .m-val small {
+    font-size: 20px;
+    margin-left: 6px;
+  }
+  .m-delta {
+    font-size: 17.5px;
+    margin-top: 6px;
+  }
+  .m-delta b {
+    font-size: 21px;
+  }
+  .badge-pill {
+    font-size: 17px;
+    padding: 3px 12px;
+  }
+  .env-grid {
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .env-box {
+    padding: 10px 6px;
+    border-radius: 8px;
+  }
+  .env-ico {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 5px;
+  }
+  .env-ico svg {
+    width: 28px;
+    height: 28px;
+  }
+  .env-val {
+    font-size: 27px;
+  }
+  .env-lbl {
+    font-size: 17px;
+    margin-top: 4px;
+  }
+  .overview-extra-block {
+    margin-top: 14px;
+    padding-top: 10px;
+    gap: 6px;
+  }
+  .flow-mini-chart {
+    padding: 6px 10px 4px;
+    border-radius: 8px;
+  }
+  .flow-mini-chart svg {
+    height: 52px;
+  }
+  .flow-chart-axis {
+    font-size: 14px;
+    margin-top: 4px;
+  }
+  .hub-flow-strip {
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .hub-chip {
+    padding: 6px 10px;
+    font-size: 15.5px;
+    border-radius: 6px;
+  }
+  .h-dot {
+    width: 8px;
+    height: 8px;
+    margin-right: 6px;
+  }
+
+  /* Left Module 2: Operations Monitor */
+  .gmv-dual {
+    gap: 16px;
+    padding-bottom: 10px;
+  }
+  .gmv-val {
+    font-size: 56px;
+    margin: 4px 0;
+  }
+  .arpu-card {
+    padding: 12px 18px;
+    min-width: 120px;
+    border-radius: 8px;
+  }
+  .arpu-val {
+    font-size: 46px;
+  }
+  .arpu-lbl {
+    font-size: 18px;
+  }
+  .order-grid {
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .order-box {
+    padding: 12px 6px 10px;
+    border-radius: 8px;
+  }
+  .order-box strong {
+    font-size: 42px;
+  }
+  .order-box small {
+    font-size: 18px;
+    margin-top: 5px;
+  }
+  .order-progress-strip {
+    height: 6px;
+    margin-top: 12px;
+  }
+  .ops-extra-block {
+    margin-top: 14px;
+    padding-top: 10px;
+    gap: 8px;
+  }
+  .ops-mini-bars {
+    height: 72px;
+    padding: 6px 12px 6px;
+    gap: 10px;
+  }
+  .bar-fill {
+    width: 20px;
+  }
+  .bar-lbl {
+    font-size: 14.5px;
+  }
+  .ops-foot-summary {
+    font-size: 16px;
+    padding: 6px 10px;
+  }
+
+  /* Left Module 3: Service Monitor */
+  .svc-grid {
+    gap: 10px;
+  }
+  .svc-box {
+    padding: 12px 6px;
+    border-radius: 8px;
+  }
+  .svc-num strong {
+    font-size: 42px;
+  }
+  .svc-num small {
+    font-size: 20px;
+    margin-left: 4px;
+  }
+  .svc-lbl {
+    font-size: 18px;
+    margin-top: 4px;
+  }
+  .queue-header-grid {
+    gap: 14px;
+    margin: 12px 4px 8px;
+  }
+  .q-hdr-cell {
+    font-size: 16.5px;
+    padding: 0 6px;
+  }
+  .queue-grid-2col {
+    gap: 8px 14px;
+  }
+  .queue-row {
+    padding: 9px 14px;
+    border-radius: 8px;
+  }
+  .q-stop {
+    font-size: 18px;
+    padding-left: 20px;
+  }
+  .q-stop:before {
+    width: 8px;
+    height: 8px;
+  }
+  .q-pax {
+    font-size: 17.5px;
+  }
+  .q-time {
+    font-size: 22px;
+  }
+  .svc-foot-note {
+    font-size: 16px;
+    padding: 7px 12px;
+    margin-top: 10px;
+  }
+
+  /* Right Module 1: Capacity Overview */
+  .cap-grid {
+    gap: 10px;
+  }
+  .cap-box {
+    padding: 12px 6px;
+    border-radius: 8px;
+  }
+  .cap-box strong {
+    font-size: 42px;
+  }
+  .cap-box small {
+    font-size: 18px;
+    margin-top: 4px;
+  }
+  .cap-dist-bar {
+    height: 6px;
+    margin: 10px 0;
+  }
+  .cap-metrics-dual {
+    gap: 10px;
+  }
+  .cap-chip {
+    padding: 8px 14px;
+    border-radius: 8px;
+  }
+  .cap-chip-lbl {
+    font-size: 18px;
+  }
+  .cap-chip-val {
+    font-size: 24px;
+  }
+  .cap-extra-block {
+    margin-top: 14px;
+    padding-top: 10px;
+    gap: 8px;
+  }
+  .route-cap-list {
+    gap: 8px;
+  }
+  .route-cap-item {
+    padding: 9px 14px;
+    border-radius: 8px;
+  }
+  .rc-info {
+    font-size: 17px;
+    margin-bottom: 5px;
+  }
+  .rc-name i {
+    width: 8px;
+    height: 8px;
+  }
+  .rc-meta {
+    font-size: 16px;
+  }
+  .rc-bar {
+    height: 6px;
+  }
+
+  /* Right Module 2: Vehicles Monitor */
+  .driver-alert-box {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .alert-lbl {
+    font-size: 19px;
+  }
+  .alert-val {
+    font-size: 34px;
+  }
+  .alert-tag {
+    font-size: 15px;
+    padding: 3px 10px;
+  }
+  .alert-unit {
+    font-size: 17px;
+  }
+  .adas-section {
+    gap: 7px;
+  }
+  .adas-header {
+    font-size: 19px;
+    margin-bottom: 4px;
+  }
+  .adas-header .icon {
+    width: 22px;
+    height: 22px;
+  }
+  .adas-grid {
+    gap: 8px;
+  }
+  .adas-col {
+    gap: 5px;
+  }
+  .adas-item {
+    padding: 6.5px 10px;
+    border-radius: 6px;
+  }
+  .adas-dot {
+    width: 8px;
+    height: 8px;
+    margin-right: 8px;
+  }
+  .adas-name {
+    font-size: 17px;
+  }
+  .adas-val {
+    font-size: 20px;
+  }
+  .veh-extra-block {
+    margin-top: 12px;
+    padding-top: 9px;
+  }
+  .veh-safety-strip {
+    gap: 8px;
+  }
+  .safety-chip {
+    padding: 7px 6px;
+    border-radius: 6px;
+  }
+  .s-lbl {
+    font-size: 15px;
+  }
+  .s-val {
+    font-size: 18.5px;
+  }
+
+  /* Right Module 3: Incidents Monitor */
+  .inc-stats-row {
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .inc-stat-box {
+    padding: 12px 6px;
+    border-radius: 8px;
+  }
+  .inc-stat-box strong {
+    font-size: 42px;
+  }
+  .inc-stat-box small {
+    font-size: 18px;
+    margin-top: 4px;
+  }
+  .incident-list-v2 {
+    gap: 8px;
+  }
+  .inc-v2-card {
+    padding: 10px 14px;
+    border-radius: 8px;
+    gap: 6px;
+  }
+  .inc-v2-time {
+    font-size: 17px;
+  }
+  .inc-v2-badge {
+    font-size: 15px;
+    padding: 2px 8px;
+  }
+  .inc-v2-title {
+    font-size: 18px;
+  }
+  .inc-v2-status {
+    font-size: 15px;
+    padding: 2px 10px;
+  }
+  .inc-v2-bottom {
+    font-size: 16px;
+    padding-left: 40px;
+  }
+  .inc-v2-act-lbl {
+    font-size: 14px;
+  }
+  .inc-v2-act-val {
+    font-size: 16px;
+  }
+  .inc-foot-summary {
+    font-size: 16px;
+    padding: 7px 12px;
+    margin-top: 10px;
+  }
+
+  /* Floating Popups */
+  .map-float-panel {
+    width: 600px !important;
+    bottom: 24px !important;
+    left: 24px !important;
+    padding: 22px 24px !important;
+    border-radius: 12px !important;
+  }
+  .map-float-panel.align-right {
+    left: auto !important;
+    right: 24px !important;
+    bottom: 24px !important;
+  }
+  .modal-title {
+    font-size: 23px !important;
+  }
+  .modal-code {
+    font-size: 20px !important;
+  }
+  .modal-sub-card .sc-label {
+    font-size: 16px !important;
+  }
+  .modal-sub-card .sc-val {
+    font-size: 19px !important;
+  }
+  .timeline-item {
+    font-size: 17px !important;
+  }
+  .modal-collapse-btn {
+    font-size: 16px !important;
+    padding: 4px 14px !important;
+  }
+
+  /* Footer Navigation */
+  footer {
+    height: clamp(88px, 5vh, 105px);
+    padding: 0 clamp(40px, 2.5vw, 80px);
+  }
+  .env {
+    font-size: 18px;
+    gap: 12px;
+  }
+  .live-dot {
+    width: 10px;
+    height: 10px;
+  }
+  .foot-id {
+    font-size: 16px;
+  }
+  .cross-small {
+    font-size: 22px;
+  }
+  nav {
+    gap: 16px;
+  }
+  .navbtn {
+    height: 58px;
+    padding: 0 clamp(28px, 2vw, 52px);
+    font-size: 19px;
+    gap: 12px;
+    border-radius: 6px;
+  }
+  .navbtn svg {
+    width: 24px;
+    height: 24px;
+  }
+}
 </style></head>
 <body>
 <div id="app">
@@ -2331,6 +3187,31 @@ function islandOverviewPanel(period = '今日') {
         <small class="env-lbl">航线状态</small>
       </div>
     </div>
+    <div class="overview-extra-block">
+      <div class="sub-section-title"><span>24小时客流时段分布走势</span><small>峰值 14:00 (1,280 人/h) · 实时 860 人/h</small></div>
+      <div class="flow-mini-chart">
+        <svg viewBox="0 0 500 58" preserveAspectRatio="none">
+          <defs>
+            <linearGradient id="flowWaveGrad" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" stop-color="#38efbd" stop-opacity="0.38"/>
+              <stop offset="100%" stop-color="#38efbd" stop-opacity="0.02"/>
+            </linearGradient>
+          </defs>
+          <path d="M0 46 Q 60 48, 120 38 T 240 22 T 350 12 T 500 30 L 500 58 L 0 58 Z" fill="url(#flowWaveGrad)"/>
+          <path d="M0 46 Q 60 48, 120 38 T 240 22 T 350 12 T 500 30" fill="none" stroke="#38efbd" stroke-width="2.6"/>
+          <circle cx="350" cy="12" r="4" fill="#38efbd" filter="drop-shadow(0 0 6px #38efbd)"/>
+        </svg>
+        <div class="flow-chart-axis">
+          <span>02:00</span><span>06:00</span><span>10:00</span><span class="c-mint">14:00 (峰)</span><span>18:00</span><span>22:00</span>
+        </div>
+      </div>
+      <div class="hub-flow-strip">
+        <div class="hub-chip"><span class="h-dot port"></span>西角码头 <b>50.3%</b></div>
+        <div class="hub-chip"><span class="h-dot sports"></span>南湾运动公园 <b>26.6%</b></div>
+        <div class="hub-chip"><span class="h-dot beach"></span>石螺口 <b>14.0%</b></div>
+        <div class="hub-chip"><span class="h-dot east"></span>五彩滩 <b>9.1%</b></div>
+      </div>
+    </div>
   </section>`;
 }
 
@@ -2376,14 +3257,27 @@ function operationsMonitorPanel() {
       <span class="seg serving" style="width: 7.4%;" title="服务中: 26单 (7.4%)"></span>
       <span class="seg pending" style="width: 9.1%;" title="待接单: 32单 (9.1%)"></span>
     </div>
+    <div class="ops-extra-block">
+      <div class="sub-section-title"><span>近7日营运收益走势</span><small>达标率 106.8% · 运营超额</small></div>
+      <div class="ops-mini-bars">
+        <div class="bar-col"><div class="bar-fill" style="height: 64%;"></div><span class="bar-lbl">11-01</span></div>
+        <div class="bar-col"><div class="bar-fill" style="height: 69%;"></div><span class="bar-lbl">11-02</span></div>
+        <div class="bar-col"><div class="bar-fill" style="height: 74%;"></div><span class="bar-lbl">11-03</span></div>
+        <div class="bar-col"><div class="bar-fill" style="height: 80%;"></div><span class="bar-lbl">11-04</span></div>
+        <div class="bar-col"><div class="bar-fill" style="height: 88%;"></div><span class="bar-lbl">11-05</span></div>
+        <div class="bar-col"><div class="bar-fill" style="height: 98%;"></div><span class="bar-lbl">11-06</span></div>
+        <div class="bar-col active"><div class="bar-fill" style="height: 85%;"></div><span class="bar-lbl">今日</span></div>
+      </div>
+      <div class="ops-foot-summary">
+        <span>🔥 热门呼叫区间: <b>西角码头 ⇄ 南湾海鲜市场</b></span>
+        <span>⚡ 派单响应均速: <b>2.4s</b></span>
+      </div>
+    </div>
   </section>`;
 }
 
 /* --------------------------------------------------------------------------
-   左侧模块 3: 服务监控
-   -------------------------------------------------------------------------- */
-/* --------------------------------------------------------------------------
-   左侧模块 3: 服务监控 (排队路线与订单明细)
+   左侧模块 3: 服务监控 (排队路线与订单明细 - 每行展示两条，共 8 条)
    -------------------------------------------------------------------------- */
 const queueOrderDetails = [
   {
@@ -2469,6 +3363,90 @@ const queueOrderDetails = [
       { name: '司机出发时间', time: '08:01' },
       { name: '司机接到乘客时间', time: '08:10' }
     ]
+  },
+  {
+    id: 'WP20261106278',
+    status: '服务中',
+    passengerPhone: '1886****4562',
+    useTime: '今日 08:38',
+    driver: '冯雪 (WZ-267)',
+    driverPhone: '1356****6498',
+    from: '石螺口',
+    to: '南湾运动公园',
+    route: '石螺口 → 南湾运动公园',
+    pax: '6 / 7 人',
+    paxCount: '6 人',
+    price: '¥49.00',
+    wait: '11:49',
+    timeline: [
+      { name: '叫车时间', time: '08:38' },
+      { name: '司机接单时间', time: '08:40' },
+      { name: '司机出发时间', time: '08:44' },
+      { name: '司机接到乘客时间', time: '08:52' }
+    ]
+  },
+  {
+    id: 'WP20261106279',
+    status: '服务中',
+    passengerPhone: '1597****8823',
+    useTime: '今日 10:17',
+    driver: '李磊 (WZ-303)',
+    driverPhone: '1387****1290',
+    from: '南湾运动公园',
+    to: '五彩滩',
+    route: '南湾运动公园 → 五彩滩',
+    pax: '4 / 7 人',
+    paxCount: '4 人',
+    price: '¥38.00',
+    wait: '10:17',
+    timeline: [
+      { name: '叫车时间', time: '10:17' },
+      { name: '司机接单时间', time: '10:19' },
+      { name: '司机出发时间', time: '10:22' },
+      { name: '司机接到乘客时间', time: '10:28' }
+    ]
+  },
+  {
+    id: 'WP20261106280',
+    status: '服务中',
+    passengerPhone: '1397****5519',
+    useTime: '今日 08:42',
+    driver: '王海 (WZ-305)',
+    driverPhone: '1390****7761',
+    from: '西角码头',
+    to: '盛塘天主教堂',
+    route: '西角码头 → 盛塘天主教堂',
+    pax: '3 / 7 人',
+    paxCount: '3 人',
+    price: '¥35.00',
+    wait: '08:42',
+    timeline: [
+      { name: '叫车时间', time: '08:42' },
+      { name: '司机接单时间', time: '08:43' },
+      { name: '司机出发时间', time: '08:46' },
+      { name: '司机接到乘客时间', time: '08:55' }
+    ]
+  },
+  {
+    id: 'WP20261106281',
+    status: '服务中',
+    passengerPhone: '1770****9932',
+    useTime: '今日 07:55',
+    driver: '陈飞 (WZ-309)',
+    driverPhone: '1361****3452',
+    from: '五彩滩',
+    to: '鳄鱼山景区',
+    route: '五彩滩 → 鳄鱼山景区',
+    pax: '2 / 7 人',
+    paxCount: '2 人',
+    price: '¥28.00',
+    wait: '07:55',
+    timeline: [
+      { name: '叫车时间', time: '07:55' },
+      { name: '司机接单时间', time: '07:57' },
+      { name: '司机出发时间', time: '08:01' },
+      { name: '司机接到乘客时间', time: '08:10' }
+    ]
   }
 ];
 
@@ -2503,11 +3481,14 @@ function serviceMonitorPanel() {
         <div class="svc-lbl">取消率</div>
       </div>
     </div>
-    <div class="queue-header">
-      <span>出发地 / 目的地</span>
-      <span>人数 / 等待时长</span>
+    <div class="queue-header-grid">
+      <div class="q-hdr-cell"><span>出发地 / 目的地</span><span>人数 / 等待时长</span></div>
+      <div class="q-hdr-cell"><span>出发地 / 目的地</span><span>人数 / 等待时长</span></div>
     </div>
-    <div class="queue-list">${rows}</div>
+    <div class="queue-grid-2col">${rows}</div>
+    <div class="svc-foot-note">
+      <span>全岛当前排队候车 <b>30 人</b> · 平均调度响应 <b>4.8 分钟</b> · 运力储备充足</span>
+    </div>
   </section>`;
 }
 
@@ -2549,6 +3530,32 @@ function capacityOverviewPanel() {
       <div class="cap-chip">
         <span class="cap-chip-lbl">平均满载率</span>
         <span class="cap-chip-val font-num c-cyan">86%</span>
+      </div>
+    </div>
+    <div class="cap-extra-block">
+      <div class="sub-section-title"><span>示范路线实时运力分配</span><small>全岛 12 辆示范车</small></div>
+      <div class="route-cap-list">
+        <div class="route-cap-item">
+          <div class="rc-info">
+            <span class="rc-name"><i style="background:#5cf1d1"></i>环岛观光线 (L01)</span>
+            <span class="rc-meta font-num"><b>4 辆在线</b> · 满载率 88%</span>
+          </div>
+          <div class="rc-bar"><i style="width:88%; background:#5cf1d1"></i></div>
+        </div>
+        <div class="route-cap-item">
+          <div class="rc-info">
+            <span class="rc-name"><i style="background:#68b7ff"></i>码头接驳线 (L02)</span>
+            <span class="rc-meta font-num"><b>4 辆在线</b> · 满载率 92%</span>
+          </div>
+          <div class="rc-bar"><i style="width:92%; background:#68b7ff"></i></div>
+        </div>
+        <div class="route-cap-item">
+          <div class="rc-info">
+            <span class="rc-name"><i style="background:#f0b765"></i>东岸景区线 (L03)</span>
+            <span class="rc-meta font-num"><b>3 辆在线 / 1 充维</b> · 满载率 76%</span>
+          </div>
+          <div class="rc-bar"><i style="width:76%; background:#f0b765"></i></div>
+        </div>
       </div>
     </div>
   </section>`;
@@ -2602,6 +3609,14 @@ function vehicleMonitorPanel() {
         <div class="adas-col">${adasRight.map(renderItem).join('')}</div>
       </div>
     </div>
+    <div class="veh-extra-block">
+      <div class="veh-safety-strip">
+        <div class="safety-chip"><span class="s-lbl">限速符合率</span><b class="s-val c-mint">99.4%</b></div>
+        <div class="safety-chip"><span class="s-lbl">全岛平均时速</span><b class="s-val font-num">28.6 km/h</b></div>
+        <div class="safety-chip"><span class="s-lbl">主动防撞避险</span><b class="s-val c-amber">2 次化解</b></div>
+        <div class="safety-chip"><span class="s-lbl">设备在线率</span><b class="s-val font-num c-mint">100%</b></div>
+      </div>
+    </div>
   </section>`;
 }
 
@@ -2632,11 +3647,35 @@ const incidentStore = [
     car: 'WZ-102',
     action: '提醒司机注意安全',
     status: '未处理'
+  },
+  {
+    id: 'EV202611060012',
+    time: '14:45',
+    type: 'warn',
+    tag: '预警',
+    title: '南湾运动公园充电桩 03 号桩离线',
+    content: '运动公园快充桩 03 号通信断开，已通知现场运维人员检查配电与网络线缆。',
+    location: '南湾运动公园充电站',
+    car: '—',
+    action: '派单现场运维巡检',
+    status: '已处理'
+  },
+  {
+    id: 'EV202611060009',
+    time: '14:15',
+    type: 'warn',
+    tag: '预警',
+    title: '蓝桥引桥风力达 6 级，提醒减速慢行',
+    content: '受冷空气影响北部湾瞬时阵风达到 6 级，已向沿线运营车辆发送限速与防风驾驶提示。',
+    location: '蓝桥观光路段',
+    car: '全岛车辆',
+    action: '车载广播与调度提醒',
+    status: '已处理'
   }
 ];
 
 function incidentMonitorPanel(handled = new Set()) {
-  const badge = `<span class="tag-badge">今日 6 起 · 最新3条</span>`;
+  const badge = `<span class="tag-badge">今日 6 起 · 最新4条</span>`;
   
   // 实时统计各状态数量
   const handledItems = incidentStore.filter(i => i.status === '已处理');
@@ -2665,11 +3704,11 @@ function incidentMonitorPanel(handled = new Set()) {
     ${panelHeader('事件监控', badge)}
     <div class="inc-stats-row">
       <div class="inc-stat-box err">
-        <strong class="font-num">${errUnhandled}</strong>
+        <strong class="font-num">${Math.max(0, errUnhandled)}</strong>
         <small>异常</small>
       </div>
       <div class="inc-stat-box warn">
-        <strong class="font-num">${warnUnhandled}</strong>
+        <strong class="font-num">${Math.max(0, warnUnhandled)}</strong>
         <small>预警</small>
       </div>
       <div class="inc-stat-box ok">
@@ -2678,6 +3717,10 @@ function incidentMonitorPanel(handled = new Set()) {
       </div>
     </div>
     <div class="incident-list-v2">${cards}</div>
+    <div class="inc-foot-summary">
+      <span>⏱ 平均处置用时: <b>3.8 分钟</b></span>
+      <span>✓ 今日闭环率: <b>95.8%</b></span>
+    </div>
   </section>`;
 }
 
@@ -3698,7 +4741,16 @@ function onAction(a, d = {}){
   }
 }
 function setClock(){const now=new Date(),z='Asia/Shanghai';byId('clock').textContent=now.toLocaleTimeString('en-GB',{timeZone:z,hour12:false});byId('date').textContent=now.toLocaleDateString('sv-SE',{timeZone:z}).replaceAll('-','.')+'  '+now.toLocaleDateString('zh-CN',{timeZone:z,weekday:'short'})}
+function updateScreenScale(){
+  const isGiant = window.innerWidth >= 4800 || (window.innerWidth >= 3000 && window.innerHeight >= 1500);
+  document.documentElement.classList.toggle('giant-screen', isGiant);
+  const scale = Math.min(2.2, Math.max(1, window.innerHeight / 1080));
+  document.documentElement.style.setProperty('--screen-scale', scale.toFixed(3));
+}
+window.addEventListener('resize', updateScreenScale);
+
 function launch(){
+  updateScreenScale();
   document.querySelectorAll('[data-icon]').forEach(el=>el.innerHTML=ico(el.dataset.icon));
   makeMap();try{hasCity=initializeCity()}catch(e){console.warn('建筑图层使用矢量模式',e)}
   updatePanels();updateChrome();renderMapLayers();setClock();setInterval(setClock,1000);

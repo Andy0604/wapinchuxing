@@ -701,3 +701,561 @@
     border-radius: 6px;
   }
 }
+
+/* --------------------------------------------------------------------------
+   Level 3: Multi-display Command Walls / 8320 x 2100 & giant resolutions
+   Tailored for massive command centers, ultra-resolution walls (e.g. 8320 x 2100).
+   Fonts, heights and modules scale up so panels are visually saturated, bold, and aesthetic.
+   -------------------------------------------------------------------------- */
+@media (min-width: 4800px), (min-width: 3200px) and (min-height: 1550px), html.giant-screen {
+  body {
+    font-size: 18px;
+    line-height: 1.45;
+  }
+
+  /* Header scaling */
+  header {
+    height: clamp(100px, 5.5vh, 125px);
+    padding: 0 clamp(40px, 2.5vw, 80px) 8px;
+  }
+  .brand {
+    gap: 18px;
+  }
+  .brandmark {
+    width: 64px;
+    height: 64px;
+  }
+  .brand strong {
+    font-size: 26px;
+    letter-spacing: .18em;
+  }
+  .brand small {
+    font-size: 14px;
+    letter-spacing: .2em;
+    margin-top: 4px;
+  }
+  .mast h1 {
+    font-size: clamp(44px, 2.4vw, 56px);
+    letter-spacing: .16em;
+    margin-bottom: 4px;
+    text-shadow: 0 0 32px #81cafa66;
+  }
+  .mast-sub {
+    font-size: clamp(17px, .95vw, 22px);
+    letter-spacing: .35em;
+  }
+  .clock {
+    gap: 4px;
+  }
+  .clock strong {
+    font-size: 36px;
+  }
+  .clock small {
+    font-size: 15px;
+  }
+  .icbtn {
+    width: 56px;
+    height: 56px;
+    border-radius: 8px;
+  }
+  .icbtn .icon {
+    width: 26px;
+    height: 26px;
+  }
+  .head-right {
+    gap: 26px;
+  }
+
+  /* Command Wall Layout: Left and Right Wings ~900px - 1100px width */
+  main {
+    grid-template-columns: clamp(750px, 12vw, 1100px) minmax(0, 1fr) clamp(750px, 12vw, 1100px);
+    gap: clamp(24px, 1.2vw, 42px);
+    padding: clamp(12px, 1.2vh, 24px) clamp(28px, 1.6vw, 52px) clamp(10px, 1vh, 18px);
+  }
+
+  .rail {
+    gap: clamp(12px, 1.1vh, 18px);
+  }
+
+  .panel {
+    background: rgba(9, 22, 42, 0.95) !important;
+    border: 1px solid rgba(45, 105, 175, 0.65) !important;
+    border-radius: 12px !important;
+    box-shadow: 0 12px 36px rgba(1, 6, 16, 0.75), inset 0 1px 0 rgba(70, 150, 245, 0.2) !important;
+    padding: clamp(14px, 1.1vh, 22px) clamp(16px, 1vw, 24px) !important;
+  }
+
+  .panel-head {
+    margin-bottom: clamp(10px, 0.9vh, 16px);
+  }
+  .panel-title {
+    font-size: 28px;
+    padding-left: 18px;
+  }
+  .panel-title:before {
+    width: 6px;
+    height: 24px;
+  }
+  .tag-badge {
+    font-size: 16px;
+    padding: 4px 16px;
+    border-radius: 14px;
+  }
+
+  /* Sub titles */
+  .sub-section-title {
+    font-size: 18px;
+    margin-bottom: 8px;
+  }
+  .sub-section-title small {
+    font-size: 15px;
+  }
+
+  /* Left Module 1: Island Overview */
+  .overview-dual {
+    gap: 12px;
+  }
+  .metric-card {
+    padding: 12px 16px;
+    border-radius: 8px;
+  }
+  .m-lbl {
+    font-size: 18.5px;
+    margin-bottom: 5px;
+  }
+  .m-val strong {
+    font-size: 54px;
+  }
+  .m-val small {
+    font-size: 20px;
+    margin-left: 6px;
+  }
+  .m-delta {
+    font-size: 17.5px;
+    margin-top: 6px;
+  }
+  .m-delta b {
+    font-size: 21px;
+  }
+  .badge-pill {
+    font-size: 17px;
+    padding: 3px 12px;
+  }
+  .env-grid {
+    gap: 10px;
+    margin-top: 12px;
+  }
+  .env-box {
+    padding: 10px 6px;
+    border-radius: 8px;
+  }
+  .env-ico {
+    width: 32px;
+    height: 32px;
+    margin-bottom: 5px;
+  }
+  .env-ico svg {
+    width: 28px;
+    height: 28px;
+  }
+  .env-val {
+    font-size: 27px;
+  }
+  .env-lbl {
+    font-size: 17px;
+    margin-top: 4px;
+  }
+  .overview-extra-block {
+    margin-top: 14px;
+    padding-top: 10px;
+    gap: 6px;
+  }
+  .flow-mini-chart {
+    padding: 6px 10px 4px;
+    border-radius: 8px;
+  }
+  .flow-mini-chart svg {
+    height: 52px;
+  }
+  .flow-chart-axis {
+    font-size: 14px;
+    margin-top: 4px;
+  }
+  .hub-flow-strip {
+    gap: 8px;
+    margin-top: 6px;
+  }
+  .hub-chip {
+    padding: 6px 10px;
+    font-size: 15.5px;
+    border-radius: 6px;
+  }
+  .h-dot {
+    width: 8px;
+    height: 8px;
+    margin-right: 6px;
+  }
+
+  /* Left Module 2: Operations Monitor */
+  .gmv-dual {
+    gap: 16px;
+    padding-bottom: 10px;
+  }
+  .gmv-val {
+    font-size: 56px;
+    margin: 4px 0;
+  }
+  .arpu-card {
+    padding: 12px 18px;
+    min-width: 120px;
+    border-radius: 8px;
+  }
+  .arpu-val {
+    font-size: 46px;
+  }
+  .arpu-lbl {
+    font-size: 18px;
+  }
+  .order-grid {
+    gap: 10px;
+    margin-top: 8px;
+  }
+  .order-box {
+    padding: 12px 6px 10px;
+    border-radius: 8px;
+  }
+  .order-box strong {
+    font-size: 42px;
+  }
+  .order-box small {
+    font-size: 18px;
+    margin-top: 5px;
+  }
+  .order-progress-strip {
+    height: 6px;
+    margin-top: 12px;
+  }
+  .ops-extra-block {
+    margin-top: 14px;
+    padding-top: 10px;
+    gap: 8px;
+  }
+  .ops-mini-bars {
+    height: 72px;
+    padding: 6px 12px 6px;
+    gap: 10px;
+  }
+  .bar-fill {
+    width: 20px;
+  }
+  .bar-lbl {
+    font-size: 14.5px;
+  }
+  .ops-foot-summary {
+    font-size: 16px;
+    padding: 6px 10px;
+  }
+
+  /* Left Module 3: Service Monitor */
+  .svc-grid {
+    gap: 10px;
+  }
+  .svc-box {
+    padding: 12px 6px;
+    border-radius: 8px;
+  }
+  .svc-num strong {
+    font-size: 42px;
+  }
+  .svc-num small {
+    font-size: 20px;
+    margin-left: 4px;
+  }
+  .svc-lbl {
+    font-size: 18px;
+    margin-top: 4px;
+  }
+  .queue-header-grid {
+    gap: 14px;
+    margin: 12px 4px 8px;
+  }
+  .q-hdr-cell {
+    font-size: 16.5px;
+    padding: 0 6px;
+  }
+  .queue-grid-2col {
+    gap: 8px 14px;
+  }
+  .queue-row {
+    padding: 9px 14px;
+    border-radius: 8px;
+  }
+  .q-stop {
+    font-size: 18px;
+    padding-left: 20px;
+  }
+  .q-stop:before {
+    width: 8px;
+    height: 8px;
+  }
+  .q-pax {
+    font-size: 17.5px;
+  }
+  .q-time {
+    font-size: 22px;
+  }
+  .svc-foot-note {
+    font-size: 16px;
+    padding: 7px 12px;
+    margin-top: 10px;
+  }
+
+  /* Right Module 1: Capacity Overview */
+  .cap-grid {
+    gap: 10px;
+  }
+  .cap-box {
+    padding: 12px 6px;
+    border-radius: 8px;
+  }
+  .cap-box strong {
+    font-size: 42px;
+  }
+  .cap-box small {
+    font-size: 18px;
+    margin-top: 4px;
+  }
+  .cap-dist-bar {
+    height: 6px;
+    margin: 10px 0;
+  }
+  .cap-metrics-dual {
+    gap: 10px;
+  }
+  .cap-chip {
+    padding: 8px 14px;
+    border-radius: 8px;
+  }
+  .cap-chip-lbl {
+    font-size: 18px;
+  }
+  .cap-chip-val {
+    font-size: 24px;
+  }
+  .cap-extra-block {
+    margin-top: 14px;
+    padding-top: 10px;
+    gap: 8px;
+  }
+  .route-cap-list {
+    gap: 8px;
+  }
+  .route-cap-item {
+    padding: 9px 14px;
+    border-radius: 8px;
+  }
+  .rc-info {
+    font-size: 17px;
+    margin-bottom: 5px;
+  }
+  .rc-name i {
+    width: 8px;
+    height: 8px;
+  }
+  .rc-meta {
+    font-size: 16px;
+  }
+  .rc-bar {
+    height: 6px;
+  }
+
+  /* Right Module 2: Vehicles Monitor */
+  .driver-alert-box {
+    padding: 12px 16px;
+    border-radius: 8px;
+    margin-bottom: 10px;
+  }
+  .alert-lbl {
+    font-size: 19px;
+  }
+  .alert-val {
+    font-size: 34px;
+  }
+  .alert-tag {
+    font-size: 15px;
+    padding: 3px 10px;
+  }
+  .alert-unit {
+    font-size: 17px;
+  }
+  .adas-section {
+    gap: 7px;
+  }
+  .adas-header {
+    font-size: 19px;
+    margin-bottom: 4px;
+  }
+  .adas-header .icon {
+    width: 22px;
+    height: 22px;
+  }
+  .adas-grid {
+    gap: 8px;
+  }
+  .adas-col {
+    gap: 5px;
+  }
+  .adas-item {
+    padding: 6.5px 10px;
+    border-radius: 6px;
+  }
+  .adas-dot {
+    width: 8px;
+    height: 8px;
+    margin-right: 8px;
+  }
+  .adas-name {
+    font-size: 17px;
+  }
+  .adas-val {
+    font-size: 20px;
+  }
+  .veh-extra-block {
+    margin-top: 12px;
+    padding-top: 9px;
+  }
+  .veh-safety-strip {
+    gap: 8px;
+  }
+  .safety-chip {
+    padding: 7px 6px;
+    border-radius: 6px;
+  }
+  .s-lbl {
+    font-size: 15px;
+  }
+  .s-val {
+    font-size: 18.5px;
+  }
+
+  /* Right Module 3: Incidents Monitor */
+  .inc-stats-row {
+    gap: 10px;
+    margin-bottom: 10px;
+  }
+  .inc-stat-box {
+    padding: 12px 6px;
+    border-radius: 8px;
+  }
+  .inc-stat-box strong {
+    font-size: 42px;
+  }
+  .inc-stat-box small {
+    font-size: 18px;
+    margin-top: 4px;
+  }
+  .incident-list-v2 {
+    gap: 8px;
+  }
+  .inc-v2-card {
+    padding: 10px 14px;
+    border-radius: 8px;
+    gap: 6px;
+  }
+  .inc-v2-time {
+    font-size: 17px;
+  }
+  .inc-v2-badge {
+    font-size: 15px;
+    padding: 2px 8px;
+  }
+  .inc-v2-title {
+    font-size: 18px;
+  }
+  .inc-v2-status {
+    font-size: 15px;
+    padding: 2px 10px;
+  }
+  .inc-v2-bottom {
+    font-size: 16px;
+    padding-left: 40px;
+  }
+  .inc-v2-act-lbl {
+    font-size: 14px;
+  }
+  .inc-v2-act-val {
+    font-size: 16px;
+  }
+  .inc-foot-summary {
+    font-size: 16px;
+    padding: 7px 12px;
+    margin-top: 10px;
+  }
+
+  /* Floating Popups */
+  .map-float-panel {
+    width: 600px !important;
+    bottom: 24px !important;
+    left: 24px !important;
+    padding: 22px 24px !important;
+    border-radius: 12px !important;
+  }
+  .map-float-panel.align-right {
+    left: auto !important;
+    right: 24px !important;
+    bottom: 24px !important;
+  }
+  .modal-title {
+    font-size: 23px !important;
+  }
+  .modal-code {
+    font-size: 20px !important;
+  }
+  .modal-sub-card .sc-label {
+    font-size: 16px !important;
+  }
+  .modal-sub-card .sc-val {
+    font-size: 19px !important;
+  }
+  .timeline-item {
+    font-size: 17px !important;
+  }
+  .modal-collapse-btn {
+    font-size: 16px !important;
+    padding: 4px 14px !important;
+  }
+
+  /* Footer Navigation */
+  footer {
+    height: clamp(88px, 5vh, 105px);
+    padding: 0 clamp(40px, 2.5vw, 80px);
+  }
+  .env {
+    font-size: 18px;
+    gap: 12px;
+  }
+  .live-dot {
+    width: 10px;
+    height: 10px;
+  }
+  .foot-id {
+    font-size: 16px;
+  }
+  .cross-small {
+    font-size: 22px;
+  }
+  nav {
+    gap: 16px;
+  }
+  .navbtn {
+    height: 58px;
+    padding: 0 clamp(28px, 2vw, 52px);
+    font-size: 19px;
+    gap: 12px;
+    border-radius: 6px;
+  }
+  .navbtn svg {
+    width: 24px;
+    height: 24px;
+  }
+}

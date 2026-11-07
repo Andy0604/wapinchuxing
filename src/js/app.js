@@ -105,7 +105,16 @@ function onAction(a, d = {}){
   }
 }
 function setClock(){const now=new Date(),z='Asia/Shanghai';byId('clock').textContent=now.toLocaleTimeString('en-GB',{timeZone:z,hour12:false});byId('date').textContent=now.toLocaleDateString('sv-SE',{timeZone:z}).replaceAll('-','.')+'  '+now.toLocaleDateString('zh-CN',{timeZone:z,weekday:'short'})}
+function updateScreenScale(){
+  const isGiant = window.innerWidth >= 4800 || (window.innerWidth >= 3000 && window.innerHeight >= 1500);
+  document.documentElement.classList.toggle('giant-screen', isGiant);
+  const scale = Math.min(2.2, Math.max(1, window.innerHeight / 1080));
+  document.documentElement.style.setProperty('--screen-scale', scale.toFixed(3));
+}
+window.addEventListener('resize', updateScreenScale);
+
 function launch(){
+  updateScreenScale();
   document.querySelectorAll('[data-icon]').forEach(el=>el.innerHTML=ico(el.dataset.icon));
   makeMap();try{hasCity=initializeCity()}catch(e){console.warn('建筑图层使用矢量模式',e)}
   updatePanels();updateChrome();renderMapLayers();setClock();setInterval(setClock,1000);

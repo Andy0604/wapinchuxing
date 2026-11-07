@@ -12,3 +12,8 @@ Thumbs.db
 __pycache__/
 *.py[cod]
 *$py.class
+
+# Temporary reference & test files
+游艇智慧监管平台2.0.html
+check_panels.html
+
