@@ -77,12 +77,13 @@ function createFleetSimulation(routeSamples, xy, lines) {
     if(!lines[line] || !Array.isArray(path) || path.length<2)return;
     const forward=lineTrips(path,lines[line].stops,line,false);
     const reverse=line===0?lineTrips(path,lines[line].stops,line,true):forward;
-    for(let slot=0;slot<4;slot++){
+    const slotsCount = line === 0 ? 5 : 4;
+    for(let slot=0;slot<slotsCount;slot++){
       const journeys=slot%2?reverse:forward;
       const cycle=journeys[0].duration+journeys[1].duration;
       // Start the first demonstration trip mid-journey so both parts of its route are visible.
       const initialPhase=line===0&&slot===0?.18:.035;
-      const offset=cycle*((initialPhase+slot*.25+line*.087)%1);
+      const offset=cycle*((initialPhase+slot*(1/slotsCount)+line*.087)%1);
       const vehicle={id:'WZ-'+((line+1)*100+slot+1),line,lineId:lines[line].id,
         lineName:lines[line].name,capacity,type:['观光车','接驳车','公交车'][line]};
       vehicles.push(vehicle);

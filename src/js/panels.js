@@ -736,31 +736,26 @@ function capacityOverviewPanel() {
     ${panelHeader('运力总览', badge)}
     <div class="cap-grid">
       <div class="cap-box total">
-        <strong class="cap-num font-num">31</strong>
+        <strong class="cap-num font-num">22</strong>
         <small>车辆</small>
       </div>
       <div class="cap-box running">
-        <strong class="cap-num font-num">24</strong>
+        <strong class="cap-num font-num">13</strong>
         <small>运营中</small>
       </div>
       <div class="cap-box idle">
-        <strong class="cap-num font-num">3</strong>
+        <strong class="cap-num font-num">9</strong>
         <small>空驶</small>
       </div>
-      <div class="cap-box service">
-        <strong class="cap-num font-num">4</strong>
-        <small>充电维修</small>
-      </div>
     </div>
-    <div class="cap-dist-bar" title="运力分布: 运营 24 / 空驶 3 / 充维 4">
-      <span class="seg-run" style="width: 77.4%;"></span>
-      <span class="seg-idle" style="width: 9.7%;"></span>
-      <span class="seg-serv" style="width: 12.9%;"></span>
+    <div class="cap-dist-bar" title="运力分布: 运营 13 / 空驶 9">
+      <span class="seg-run" style="width: 59.1%;"></span>
+      <span class="seg-idle" style="width: 40.9%;"></span>
     </div>
     <div class="cap-metrics-dual">
       <div class="cap-chip">
-        <span class="cap-chip-lbl">在线率</span>
-        <span class="cap-chip-val font-num c-mint">77.4%</span>
+        <span class="cap-chip-lbl">运营率</span>
+        <span class="cap-chip-val font-num c-mint">59.1%</span>
       </div>
       <div class="cap-chip">
         <span class="cap-chip-lbl">满载率</span>
@@ -829,8 +824,8 @@ let vehCarouselTimer = null;
 
 function getVehicleRosterCards(curDataset, curT, isAll) {
   const allDrivers = curDataset.drivers || [];
-  // 车辆监控只展示在岗在线运营的车辆（24辆在线），离线维保车辆不进入运营监控
-  const drivers = allDrivers.filter(d => d.status !== '离线');
+  // 车辆监控只展示在岗运营的13辆车辆（总车辆22辆，运营中13辆，空驶9辆）
+  const drivers = allDrivers.filter(d => d.status !== '离线').slice(0, 13);
   const orders = curDataset.orders || [];
   const bats = [92, 88, 74, 82, 95, 68, 79, 85, 90, 83, 76, 88, 91, 65, 78, 84, 92, 86, 73, 89, 94, 71, 80, 87, 93, 77, 85, 82, 89, 76, 81, 87];
 
@@ -936,17 +931,18 @@ function setVehCarouselPage(p) {
 function startVehCarousel() {
   if (vehCarouselTimer) clearInterval(vehCarouselTimer);
   vehCarouselTimer = setInterval(() => {
-    currentVehPage = (currentVehPage + 1) % 8;
+    const curDataset = getCurrentDataset();
+    const dyn = getDynamicState();
+    const carPages = getVehicleRosterCards(curDataset, dyn.curT, dyn.isAll);
+    const totalPages = carPages.length || 4;
+    currentVehPage = (currentVehPage + 1) % totalPages;
     const el = document.getElementById('veh-roster-body');
     if (el) el.innerHTML = renderVehRosterInner();
   }, 4500);
 }
 
 function vehicleRosterCarouselPanel() {
-  const isYesterday = (typeof currentDayTab !== 'undefined' && currentDayTab === 'yesterday');
-  const badge = isYesterday
-    ? `<span class="tag-badge">在线 32/32 · 核载7人</span>`
-    : `<span class="tag-badge">在线 24/31 · 核载7人</span>`;
+  const badge = `<span class="tag-badge">运营 13/22 · 核载7人</span>`;
   return `<section class="panel panel-veh-carousel">
     ${panelHeader('车辆监控', badge)}
     <div id="veh-roster-body" class="veh-roster-body-wrap">

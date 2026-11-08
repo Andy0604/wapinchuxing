@@ -47,13 +47,14 @@ function pathKm(points) {
   return distance / 1000;
 }
 
-test('三条线路各有四辆车，车辆编号唯一，核载均为七人', () => {
+test('三条线路共十三辆在岗运营车辆，车辆编号唯一，核载均为七人', () => {
   assert.equal(lines.length, 3);
-  assert.equal(fleet.vehicles.length, 12);
-  assert.equal(new Set(fleet.vehicles.map(v => v.id)).size, 12);
+  assert.equal(fleet.vehicles.length, 13);
+  assert.equal(new Set(fleet.vehicles.map(v => v.id)).size, 13);
+  const counts = [5, 4, 4];
   lines.forEach((line, i) => {
     const group = fleet.vehicles.filter(vehicle => vehicle.line === i);
-    assert.equal(group.length, 4, line.name);
+    assert.equal(group.length, counts[i], line.name);
     for (const vehicle of group) assert.equal(vehicle.capacity, 7, vehicle.id);
   });
 });

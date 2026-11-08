@@ -860,8 +860,8 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 }
 .cap-grid {
   display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 6px;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
   flex: 1.2;
   min-height: 0;
 }
@@ -4113,7 +4113,7 @@ html.giant-screen .incident-empty .ie-sub {
 <main>
  <aside class="rail left-rail" aria-label="交通统计" id="left"></aside>
  <section class="map-area" aria-label="涠洲岛交互地图">
-  <div class="map-top"><div class="map-title"><div class="eyebrow"><i></i>SPATIAL MONITOR</div><h2 id="map-title">全域交通态势</h2><button class="fleet-shortcut" data-action="openFleet" aria-label="查看哇品出行演示车队"><span data-icon="bus"></span>哇品出行 <b>12 辆</b><span class="sep">/</span>在车 <b><span data-fleet-total>—</span> 人</b><span data-icon="chevron"></span></button></div><div class="view-switch" aria-label="地图视角"><button data-action="view3" aria-pressed="true">3D</button><button data-action="view2" aria-pressed="false">2D</button></div></div>
+  <div class="map-top"><div class="map-title"><div class="eyebrow"><i></i>SPATIAL MONITOR</div><h2 id="map-title">全域交通态势</h2><button class="fleet-shortcut" data-action="openFleet" aria-label="查看哇品出行演示车队"><span data-icon="bus"></span>哇品出行 <b>13 辆</b><span class="sep">/</span>在车 <b><span data-fleet-total>—</span> 人</b><span data-icon="chevron"></span></button></div><div class="view-switch" aria-label="地图视角"><button data-action="view3" aria-pressed="true">3D</button><button data-action="view2" aria-pressed="false">2D</button></div></div>
   <div class="viewport" id="viewport" title="拖动平移 · 滚轮缩放 · 按住 Shift 拖动旋转视角">
     <svg id="atlas" viewBox="0 0 900 740" aria-label="涠洲岛交通立体示意图">
       <defs><pattern id="oceanDots" width="32" height="32" patternUnits="userSpaceOnUse"><circle cx="1" cy="1" r="1.15" fill="#2c6ca8" opacity=".25"/></pattern><pattern id="oceanGrid" width="128" height="128" patternUnits="userSpaceOnUse"><path d="M0 128V0h128" fill="none" stroke="#1f4b7a" stroke-opacity=".28" stroke-dasharray="3 5"/><path d="M-4 0h8M0-4v8" stroke="#2f72b2" opacity=".45"/></pattern><radialGradient id="attentionGlow"><stop stop-color="#ffb75d" stop-opacity=".37"/><stop offset=".47" stop-color="#e79b48" stop-opacity=".10"/><stop offset="1" stop-color="#ee9647" stop-opacity="0"/></radialGradient><linearGradient id="alertBeacon" x1="0" y1="1" x2="0" y2="0"><stop stop-color="#ffb760" stop-opacity=".75"/><stop offset="1" stop-color="#f8a652" stop-opacity="0"/></linearGradient><filter id="bloom" x="-100%" y="-100%" width="300%" height="300%"><feGaussianBlur stdDeviation="3.5"/></filter></defs>
@@ -4991,31 +4991,26 @@ function capacityOverviewPanel() {
     ${panelHeader('运力总览', badge)}
     <div class="cap-grid">
       <div class="cap-box total">
-        <strong class="cap-num font-num">31</strong>
+        <strong class="cap-num font-num">22</strong>
         <small>车辆</small>
       </div>
       <div class="cap-box running">
-        <strong class="cap-num font-num">24</strong>
+        <strong class="cap-num font-num">13</strong>
         <small>运营中</small>
       </div>
       <div class="cap-box idle">
-        <strong class="cap-num font-num">3</strong>
+        <strong class="cap-num font-num">9</strong>
         <small>空驶</small>
       </div>
-      <div class="cap-box service">
-        <strong class="cap-num font-num">4</strong>
-        <small>充电维修</small>
-      </div>
     </div>
-    <div class="cap-dist-bar" title="运力分布: 运营 24 / 空驶 3 / 充维 4">
-      <span class="seg-run" style="width: 77.4%;"></span>
-      <span class="seg-idle" style="width: 9.7%;"></span>
-      <span class="seg-serv" style="width: 12.9%;"></span>
+    <div class="cap-dist-bar" title="运力分布: 运营 13 / 空驶 9">
+      <span class="seg-run" style="width: 59.1%;"></span>
+      <span class="seg-idle" style="width: 40.9%;"></span>
     </div>
     <div class="cap-metrics-dual">
       <div class="cap-chip">
-        <span class="cap-chip-lbl">在线率</span>
-        <span class="cap-chip-val font-num c-mint">77.4%</span>
+        <span class="cap-chip-lbl">运营率</span>
+        <span class="cap-chip-val font-num c-mint">59.1%</span>
       </div>
       <div class="cap-chip">
         <span class="cap-chip-lbl">满载率</span>
@@ -5084,8 +5079,8 @@ let vehCarouselTimer = null;
 
 function getVehicleRosterCards(curDataset, curT, isAll) {
   const allDrivers = curDataset.drivers || [];
-  // 车辆监控只展示在岗在线运营的车辆（24辆在线），离线维保车辆不进入运营监控
-  const drivers = allDrivers.filter(d => d.status !== '离线');
+  // 车辆监控只展示在岗运营的13辆车辆（总车辆22辆，运营中13辆，空驶9辆）
+  const drivers = allDrivers.filter(d => d.status !== '离线').slice(0, 13);
   const orders = curDataset.orders || [];
   const bats = [92, 88, 74, 82, 95, 68, 79, 85, 90, 83, 76, 88, 91, 65, 78, 84, 92, 86, 73, 89, 94, 71, 80, 87, 93, 77, 85, 82, 89, 76, 81, 87];
 
@@ -5191,17 +5186,18 @@ function setVehCarouselPage(p) {
 function startVehCarousel() {
   if (vehCarouselTimer) clearInterval(vehCarouselTimer);
   vehCarouselTimer = setInterval(() => {
-    currentVehPage = (currentVehPage + 1) % 8;
+    const curDataset = getCurrentDataset();
+    const dyn = getDynamicState();
+    const carPages = getVehicleRosterCards(curDataset, dyn.curT, dyn.isAll);
+    const totalPages = carPages.length || 4;
+    currentVehPage = (currentVehPage + 1) % totalPages;
     const el = document.getElementById('veh-roster-body');
     if (el) el.innerHTML = renderVehRosterInner();
   }, 4500);
 }
 
 function vehicleRosterCarouselPanel() {
-  const isYesterday = (typeof currentDayTab !== 'undefined' && currentDayTab === 'yesterday');
-  const badge = isYesterday
-    ? `<span class="tag-badge">在线 32/32 · 核载7人</span>`
-    : `<span class="tag-badge">在线 24/31 · 核载7人</span>`;
+  const badge = `<span class="tag-badge">运营 13/22 · 核载7人</span>`;
   return `<section class="panel panel-veh-carousel">
     ${panelHeader('车辆监控', badge)}
     <div id="veh-roster-body" class="veh-roster-body-wrap">
@@ -5941,12 +5937,13 @@ function createFleetSimulation(routeSamples, xy, lines) {
     if(!lines[line] || !Array.isArray(path) || path.length<2)return;
     const forward=lineTrips(path,lines[line].stops,line,false);
     const reverse=line===0?lineTrips(path,lines[line].stops,line,true):forward;
-    for(let slot=0;slot<4;slot++){
+    const slotsCount = line === 0 ? 5 : 4;
+    for(let slot=0;slot<slotsCount;slot++){
       const journeys=slot%2?reverse:forward;
       const cycle=journeys[0].duration+journeys[1].duration;
       // Start the first demonstration trip mid-journey so both parts of its route are visible.
       const initialPhase=line===0&&slot===0?.18:.035;
-      const offset=cycle*((initialPhase+slot*.25+line*.087)%1);
+      const offset=cycle*((initialPhase+slot*(1/slotsCount)+line*.087)%1);
       const vehicle={id:'WZ-'+((line+1)*100+slot+1),line,lineId:lines[line].id,
         lineName:lines[line].name,capacity,type:['观光车','接驳车','公交车'][line]};
       vehicles.push(vehicle);
