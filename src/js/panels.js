@@ -335,19 +335,37 @@ function forecastFlowPanel() {
    -------------------------------------------------------------------------- */
 function islandOverviewPanel(period = '今日') {
   const dyn = getDynamicState();
-  const badge = `<button class="tag-badge" data-action="period">${period}</button>`;
+  const isYesterday = (period === '昨日');
+  const badge = `
+    <div class="trend-tabs">
+      <button class="tag-badge ${!isYesterday ? 'active' : ''}" data-action="setPeriod" data-period="今日">今日</button>
+      <button class="tag-badge ${isYesterday ? 'active' : ''}" data-action="setPeriod" data-period="昨日">昨日</button>
+    </div>
+  `;
+
+  const inboundTitle = isYesterday ? '昨日上岛客流' : '今日上岛客流';
+  const inboundCount = isYesterday ? '5,885' : '6,497';
+  const inboundDelta = isYesterday
+    ? `<div class="m-delta up">较前日 <span class="c-arrow">▲</span> <b>8.2%</b></div>`
+    : `<div class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>10.4%</b></div>`;
+
+  const paxCount = isYesterday ? '1,320' : dyn.totalPax.toLocaleString();
+  const paxDelta = isYesterday
+    ? `<div class="m-delta up">实载率 <span class="c-arrow">▲</span> <b>86.5%</b></div>`
+    : `<div class="m-delta up">实载率 <span class="c-arrow">▲</span> <b>88.6%</b></div>`;
+
   return `<section class="panel panel-overview">
     ${panelHeader('全岛出行总览', badge)}
     <div class="overview-dual">
       <div class="metric-card">
-        <span class="m-lbl">今日上岛客流</span>
-        <div class="m-val"><strong>6,497</strong><small>人次</small></div>
-        <div class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>10.4%</b></div>
+        <span class="m-lbl">${inboundTitle}</span>
+        <div class="m-val"><strong>${inboundCount}</strong><small>人次</small></div>
+        ${inboundDelta}
       </div>
       <div class="metric-card">
         <span class="m-lbl">运送客流</span>
-        <div class="m-val"><strong>${dyn.totalPax.toLocaleString()}</strong><small>人次</small></div>
-        <div class="m-delta up">实载率 <span class="c-arrow">▲</span> <b>88.6%</b></div>
+        <div class="m-val"><strong>${paxCount}</strong><small>人次</small></div>
+        ${paxDelta}
       </div>
     </div>
     <div class="env-grid">
@@ -382,10 +400,8 @@ let orderTrendPeriod = '今日';
 
 function setOrderTrendPeriod(p) {
   orderTrendPeriod = p;
-  const pnl = document.querySelector('.panel-order-trend');
-  if (pnl) {
-    pnl.outerHTML = orderTrendPanel(orderTrendPeriod);
-  } else if (typeof updatePanels === 'function') {
+  if (typeof state !== 'undefined') state.period = p;
+  if (typeof updatePanels === 'function') {
     updatePanels();
   }
 }
@@ -394,25 +410,23 @@ function orderTrendPanel(period = orderTrendPeriod) {
   const dyn = getDynamicState();
   const curT = dyn.curT;
   const isAll = dyn.isAll;
-  const orders = dyn.activeOrders;
+  const isYesterday = (period === '昨日');
 
   const badge = `
     <div class="trend-tabs">
-      <button class="tag-badge ${period === '今日' ? 'active' : ''}" data-action="setOrderTrend" data-trend-period="今日">今日</button>
-      <button class="tag-badge ${period === '昨日' ? 'active' : ''}" data-action="setOrderTrend" data-trend-period="昨日">昨日</button>
+      <button class="tag-badge ${!isYesterday ? 'active' : ''}" data-action="setPeriod" data-period="今日">今日</button>
+      <button class="tag-badge ${isYesterday ? 'active' : ''}" data-action="setPeriod" data-period="昨日">昨日</button>
     </div>
   `;
 
   // 2小时时序统计
   const timeBuckets = ['06:00', '08:00', '10:00', '12:00', '14:00', '16:00', '18:00', '20:00', '22:00'];
+  const targetOrders = isYesterday ? dataset_20261107.orders : dyn.activeOrders;
+
   const bucketCounts = timeBuckets.map((t, idx) => {
-    if (period === '昨日') {
-      const yesterdayMock = [0, 54, 88, 60, 76, 35, 0, 0, 0];
-      return yesterdayMock[idx];
-    }
     const tNext = timeBuckets[idx + 1] || '24:00';
-    if (!isAll && curT < t) return 0;
-    return orders.filter(o => o.orderTime >= t + ':00' && o.orderTime < tNext + ':00').length;
+    if (!isYesterday && !isAll && curT < t) return 0;
+    return targetOrders.filter(o => o.orderTime >= t + ':00' && o.orderTime < tNext + ':00').length;
   });
 
   const maxVal = Math.max(1, ...bucketCounts);
@@ -470,47 +484,75 @@ function orderTrendPanel(period = orderTrendPeriod) {
 /* --------------------------------------------------------------------------
    左侧模块 2B: 运营监控 (司机送达时间匹配累加今日营收 + 客单价实时计算)
    -------------------------------------------------------------------------- */
-function operationsMonitorPanel() {
+function operationsMonitorPanel(period = '今日') {
+  const isYesterday = (period === '昨日');
   const dyn = getDynamicState();
-  const safeTotal = dyn.totalOrders || 1;
-  const donePct = Math.round((dyn.doneOrders / safeTotal) * 100);
-  const cancelPct = Math.round((dyn.cancelOrders / safeTotal) * 100);
-  const servingPct = Math.round((dyn.servingOrders / safeTotal) * 100);
+
+  let totalOrders, doneOrders, cancelOrders, servingOrders, pendingOrders, gmv, avgPrice, revLabel, deltaHtml;
+
+  if (isYesterday) {
+    const orders07 = dataset_20261107.orders;
+    totalOrders = orders07.length;
+    const doneList = orders07.filter(o => o.status === '已完成');
+    doneOrders = doneList.length;
+    cancelOrders = orders07.filter(o => o.status === '已取消').length;
+    servingOrders = orders07.filter(o => o.status === '服务中').length;
+    pendingOrders = totalOrders - doneOrders - cancelOrders - servingOrders;
+    gmv = Math.round(doneList.reduce((s, o) => s + (o.fare || 0), 0));
+    avgPrice = doneOrders > 0 ? Math.round(gmv / doneOrders) : 36;
+    revLabel = '昨日营收 <small>GMV (全天累计)</small>';
+    deltaHtml = '<div class="m-delta up">较前日 <span class="c-arrow">▲</span> <b>7.5%</b></div>';
+  } else {
+    totalOrders = dyn.totalOrders;
+    doneOrders = dyn.doneOrders;
+    cancelOrders = dyn.cancelOrders;
+    servingOrders = dyn.servingOrders;
+    pendingOrders = dyn.pendingOrders;
+    gmv = dyn.gmv;
+    avgPrice = dyn.avgPrice;
+    revLabel = '今日营收 <small>GMV (实时送达入账)</small>';
+    deltaHtml = '<div class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>10%</b></div>';
+  }
+
+  const safeTotal = totalOrders || 1;
+  const donePct = Math.round((doneOrders / safeTotal) * 100);
+  const cancelPct = Math.round((cancelOrders / safeTotal) * 100);
+  const servingPct = Math.round((servingOrders / safeTotal) * 100);
   const pendingPct = Math.max(0, 100 - donePct - cancelPct - servingPct);
 
-  const badge = `<span class="tag-badge">订单总数 ${dyn.totalOrders}</span>`;
+  const badge = `<span class="tag-badge">订单总数 ${totalOrders}</span>`;
   return `<section class="panel panel-ops">
     ${panelHeader('运营监控', badge)}
     <div class="gmv-dual">
       <div class="gmv-left">
-        <span class="m-lbl">今日营收 <small>GMV (实时送达入账)</small></span>
-        <div class="gmv-val font-num">¥${dyn.gmv.toLocaleString()}</div>
-        <div class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>10%</b></div>
+        <span class="m-lbl">${revLabel}</span>
+        <div class="gmv-val font-num">¥${gmv.toLocaleString()}</div>
+        ${deltaHtml}
       </div>
       <div class="arpu-card">
-        <div class="arpu-val font-num">¥${dyn.avgPrice}</div>
+        <div class="arpu-val font-num">¥${avgPrice}</div>
         <div class="arpu-lbl">客单价</div>
       </div>
     </div>
     <div class="order-grid">
       <div class="order-box box-cancel">
-        <strong class="font-num num-cancel">${dyn.cancelOrders}</strong>
+        <strong class="font-num num-cancel">${cancelOrders}</strong>
         <small>已取消</small>
       </div>
       <div class="order-box box-done">
-        <strong class="font-num num-done">${dyn.doneOrders}</strong>
+        <strong class="font-num num-done">${doneOrders}</strong>
         <small>已完成</small>
       </div>
       <div class="order-box box-serving">
-        <strong class="font-num num-serving">${dyn.servingOrders}</strong>
+        <strong class="font-num num-serving">${servingOrders}</strong>
         <small>服务中</small>
       </div>
       <div class="order-box box-pending">
-        <strong class="font-num num-pending">${dyn.pendingOrders}</strong>
+        <strong class="font-num num-pending">${pendingOrders}</strong>
         <small>待接单</small>
       </div>
     </div>
-    <div class="order-progress-strip" title="订单状态比例: 已完成 ${dyn.doneOrders}单 (${donePct}%) / 已取消 ${dyn.cancelOrders}单 (${cancelPct}%) / 服务中 ${dyn.servingOrders}单 (${servingPct}%) / 待接单 ${dyn.pendingOrders}单 (${pendingPct}%)">
+    <div class="order-progress-strip" title="订单状态比例: 已完成 ${doneOrders}单 (${donePct}%) / 已取消 ${cancelOrders}单 (${cancelPct}%) / 服务中 ${servingOrders}单 (${servingPct}%) / 待接单 ${pendingOrders}单 (${pendingPct}%)">
       <span class="seg cancel" style="width: ${cancelPct}%;"></span>
       <span class="seg done" style="width: ${donePct}%;"></span>
       <span class="seg serving" style="width: ${servingPct}%;"></span>
@@ -1117,14 +1159,14 @@ function trafficEventsPanel(handled) {
   return `<section class="panel panel-incidents">${panelHeader('调度事件监控')}<div class="incident-v2-list">${rows}</div></section>`;
 }
 
-function eventModePanels(handled) {
+function eventModePanels(handled, period = '今日') {
   const curDataset = getCurrentDataset();
   const total = curDataset.incidents.length;
   const closed = curDataset.incidents.filter(e => handled.has(e.id) || e.status === '已处理');
   const open = total - closed.length;
   const pct = Math.round(100 * closed.length / (total || 1));
-  const progress = `<section class="panel event-overview">${panelHeader('事件概况', '<span class="tag-badge">今日</span>')}<div class="event-metrics"><div><strong>${open}</strong><small>待处置</small></div><div><strong>${closed.length}</strong><small>已处置</small></div><div><strong>${total}</strong><small>事件总数</small></div></div><div class="closure"><span>处置完成率</span><b>${pct}%</b></div><div class="closure-bar"><i style="width:${pct}%"></i></div></section>`;
-  return [progress + operationsMonitorPanel(), capacityOverviewPanel() + incidentMonitorPanel(handled)];
+  const progress = `<section class="panel event-overview">${panelHeader('事件概况', `<span class="tag-badge">${period}</span>`)}<div class="event-metrics"><div><strong>${open}</strong><small>待处置</small></div><div><strong>${closed.length}</strong><small>已处置</small></div><div><strong>${total}</strong><small>事件总数</small></div></div><div class="closure"><span>处置完成率</span><b>${pct}%</b></div><div class="closure-bar"><i style="width:${pct}%"></i></div></section>`;
+  return [progress + operationsMonitorPanel(period), capacityOverviewPanel() + incidentMonitorPanel(handled)];
 }
 
 /* --------------------------------------------------------------------------
@@ -1138,7 +1180,7 @@ function renderPanels(mode, period = '今日', selectedLine = 0, handled = new S
     leftHtml = routePanels(selectedLine);
     rightHtml = capacityOverviewPanel() + vehicleBehaviorAndAdasPanel();
   } else if (mode === 'events') {
-    const pair = eventModePanels(handled);
+    const pair = eventModePanels(handled, period);
     leftHtml = pair[0];
     rightHtml = pair[1];
   } else {
@@ -1153,8 +1195,8 @@ function renderPanels(mode, period = '今日', selectedLine = 0, handled = new S
         ${islandOverviewPanel(period)}
       </div>
       <div class="panel-row-dual">
-        ${orderTrendPanel(orderTrendPeriod)}
-        ${operationsMonitorPanel()}
+        ${orderTrendPanel(period)}
+        ${operationsMonitorPanel(period)}
       </div>
       ${serviceMonitorPanel()}
     `;

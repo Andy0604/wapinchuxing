@@ -81,7 +81,16 @@ function onAction(a, d = {}){
     case 'setTimeline': setTimelineMode(d.time); break;
     case 'openOrder': openOrderModal(d.orderId || d.queueIdx || 0); break;
     case 'openIncident': openIncidentModal(d.incId); break;
-    case 'setOrderTrend': setOrderTrendPeriod(d.trendPeriod); break;
+    case 'setPeriod':
+    case 'setOrderTrend':
+    case 'period': {
+      const p = d.period || d.trendPeriod || (state.period === '今日' ? '昨日' : '今日');
+      state.period = p;
+      if (typeof orderTrendPeriod !== 'undefined') orderTrendPeriod = p;
+      updatePanels();
+      toast(`已切换至: ${p}数据`);
+      break;
+    }
     case 'setVehPage': setVehCarouselPage(Number(d.page || 0)); break;
     case 'closeModal': closeModal(); break;
     case 'closeOrderModal': closeModal('order'); break;
@@ -93,7 +102,6 @@ function onAction(a, d = {}){
     case 'busFollow':toggleBusFollow();break;
     case 'pauseFleet':playback.paused=!playback.paused;syncFleetReadouts();break;
     case 'speed':playback.rate=({1:10,10:30,30:1})[playback.rate];document.querySelector('[data-action="speed"]').textContent=playback.rate+'×';break;
-    case 'period':state.period=state.period==='今日'?'昨日':'今日';updatePanels();break;
     case 'layers':toggleLayers();break;
     case 'zoomIn':case 'zoomOut':stopTour();target.z=clamp(target.z*(a==='zoomIn'?1.28:1/1.28),.75,5.5);break;
     case 'view3':case 'view2':viewToggle(a==='view3');break;
