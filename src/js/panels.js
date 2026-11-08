@@ -307,11 +307,11 @@ function panelHeader(name, badge = '', icon = '') {
 function forecastFlowPanel() {
   const badge = `<span class="tag-badge">基于船票预售</span>`;
   const days = [
-    { day: '明日 周日', val: '13,500', h: 90, highlight: true },
-    { day: '周一', val: '9,800', h: 58, highlight: false },
-    { day: '周二', val: '7,200', h: 42, highlight: false },
-    { day: '周三', val: '8,500', h: 52, highlight: false },
-    { day: '周四', val: '8,100', h: 48, highlight: false }
+    { day: '明日', val: '4,703', h: 88, highlight: true },
+    { day: '周二', val: '2,307', h: 43, highlight: false },
+    { day: '周三', val: '1,764', h: 33, highlight: false },
+    { day: '周四', val: '2,688', h: 50, highlight: false },
+    { day: '周五', val: '1,276', h: 24, highlight: false }
   ];
 
   const bars = days.map(d => `
@@ -335,14 +335,13 @@ function forecastFlowPanel() {
    -------------------------------------------------------------------------- */
 function islandOverviewPanel(period = '今日') {
   const dyn = getDynamicState();
-  const isTomorrow = dyn.activeDate === '2026-11-08';
   const badge = `<button class="tag-badge" data-action="period">${period}</button>`;
   return `<section class="panel panel-overview">
     ${panelHeader('全岛出行总览', badge)}
     <div class="overview-dual">
       <div class="metric-card">
-        <span class="m-lbl">${isTomorrow ? '明日预计上岛' : '今日上岛客流'}</span>
-        <div class="m-val"><strong>${isTomorrow ? '8,500' : '7,000'}</strong><small>人次</small></div>
+        <span class="m-lbl">今日上岛客流</span>
+        <div class="m-val"><strong>6,497</strong><small>人次</small></div>
         <div class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>10.4%</b></div>
       </div>
       <div class="metric-card">
