@@ -1830,36 +1830,36 @@ html.giant-screen .inc-v2-act-val {
   font-weight: 600 !important;
 }
 html.giant-screen .queue-header-row {
-  font-size: 23px !important;
-  font-weight: 600 !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
 }
 html.giant-screen .q-stop {
-  font-size: 25px !important;
-  font-weight: 600 !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
 }
 html.giant-screen .q-pax {
-  font-size: 25px !important;
+  font-size: 15px !important;
   font-weight: 600 !important;
 }
 html.giant-screen .q-time {
-  font-size: 29px !important;
+  font-size: 16px !important;
   font-weight: 700 !important;
 }
 html.giant-screen .dist-name {
   width: auto !important;
-  min-width: 140px !important;
-  max-width: 220px !important;
-  font-size: 24px !important;
+  min-width: 100px !important;
+  max-width: 160px !important;
+  font-size: 15px !important;
   font-weight: 500 !important;
 }
 html.giant-screen .dist-val {
-  font-size: 28px !important;
+  font-size: 16px !important;
 }
 html.giant-screen .ssh-title {
-  font-size: 26px !important;
+  font-size: 16px !important;
 }
 html.giant-screen .ssh-meta {
-  font-size: 21px !important;
+  font-size: 14px !important;
 }
 
 html.giant-screen .timeline-bar {

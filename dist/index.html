@@ -682,9 +682,9 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 }
 .dist-name {
   width: auto;
-  min-width: 90px;
-  max-width: 160px;
-  font-size: 15px;
+  min-width: 80px;
+  max-width: 130px;
+  font-size: 12.5px;
   color: #bad8f5;
   white-space: nowrap;
   overflow: hidden;
@@ -693,7 +693,7 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 }
 .dist-bar {
   flex: 1;
-  height: 7px;
+  height: 6px;
   background: rgba(10, 25, 52, 0.65);
   border-radius: 3px;
   overflow: hidden;
@@ -707,18 +707,18 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 .dist-val {
   width: 18px;
   text-align: right;
-  font-weight: 700;
-  font-size: 16px;
+  font-weight: 600;
+  font-size: 12.5px;
   color: #f7fbff;
   flex-shrink: 0;
 }
 .queue-header-row {
   display: flex;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: 11.5px;
   font-weight: 500;
-  color: #92b4d6;
-  margin-bottom: 6px;
+  color: #8eb3d6;
+  margin-bottom: 5px;
   padding: 0 4px;
 }
 
@@ -777,11 +777,11 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 }
 .q-stop {
   position: relative;
-  padding-left: 15px;
-  font-size: 16px;
-  font-weight: 600;
+  padding-left: 13px;
+  font-size: 12.5px;
+  font-weight: 500;
   color: #f7fbff;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 }
 .q-stop:before {
   content: '';
@@ -789,34 +789,34 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   left: 1px;
   top: 50%;
   transform: translateY(-50%);
-  width: 6.5px;
-  height: 6.5px;
+  width: 5.5px;
+  height: 5.5px;
   border-radius: 50%;
 }
 .q-stop.from:before {
   background: #00d8ff;
-  box-shadow: 0 0 6px rgba(0, 216, 255, 0.75);
+  box-shadow: 0 0 5px rgba(0, 216, 255, 0.75);
 }
 .q-stop.to:before {
-  border: 1.5px solid #f5b842;
+  border: 1.2px solid #f5b842;
   background: transparent;
-  width: 5.5px;
-  height: 5.5px;
+  width: 4.5px;
+  height: 4.5px;
 }
 .queue-meta {
   text-align: right;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
 }
 .q-pax {
-  font-size: 15px;
-  color: #e6f1fc;
+  font-size: 12px;
+  color: #cde4fa;
   font-family: var(--num);
   font-weight: 600;
 }
 .q-time {
-  font: 700 17px var(--num);
+  font: 700 12.5px var(--num);
   color: #ff5e6a;
   text-shadow: 0 0 8px rgba(255, 94, 106, 0.45);
   letter-spacing: 0.02em;
@@ -1244,7 +1244,7 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 }
 .veh-card-mini {
   display: grid;
-  grid-template-columns: 86px minmax(0, 1fr) auto;
+  grid-template-columns: 112px minmax(0, 1fr) auto;
   align-items: center;
   column-gap: 12px;
   background: rgba(14, 34, 68, 0.65);
@@ -1292,8 +1292,7 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   color: #8eb3d6;
   padding-left: 11px;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: visible;
 }
 .vcm-mid {
   display: flex;
@@ -1368,6 +1367,23 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   padding: 1px 5px;
   border-radius: 3px;
   white-space: nowrap;
+  font-weight: 600;
+}
+.vcm-time-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10.5px;
+  color: #8eb3d6;
+  white-space: nowrap;
+}
+.vcm-time-lbl {
+  font-size: 10px;
+  color: #729ec7;
+}
+.vcm-time-val {
+  font-size: 11px;
+  color: #38efbd;
   font-weight: 600;
 }
 .vcm-bat {
@@ -4105,36 +4121,36 @@ html.giant-screen .inc-v2-act-val {
   font-weight: 600 !important;
 }
 html.giant-screen .queue-header-row {
-  font-size: 23px !important;
-  font-weight: 600 !important;
+  font-size: 15px !important;
+  font-weight: 500 !important;
 }
 html.giant-screen .q-stop {
-  font-size: 25px !important;
-  font-weight: 600 !important;
+  font-size: 16px !important;
+  font-weight: 500 !important;
 }
 html.giant-screen .q-pax {
-  font-size: 25px !important;
+  font-size: 15px !important;
   font-weight: 600 !important;
 }
 html.giant-screen .q-time {
-  font-size: 29px !important;
+  font-size: 16px !important;
   font-weight: 700 !important;
 }
 html.giant-screen .dist-name {
   width: auto !important;
-  min-width: 140px !important;
-  max-width: 220px !important;
-  font-size: 24px !important;
+  min-width: 100px !important;
+  max-width: 160px !important;
+  font-size: 15px !important;
   font-weight: 500 !important;
 }
 html.giant-screen .dist-val {
-  font-size: 28px !important;
+  font-size: 16px !important;
 }
 html.giant-screen .ssh-title {
-  font-size: 26px !important;
+  font-size: 16px !important;
 }
 html.giant-screen .ssh-meta {
-  font-size: 21px !important;
+  font-size: 14px !important;
 }
 
 html.giant-screen .timeline-bar {
@@ -4673,7 +4689,7 @@ function forecastFlowPanel() {
   `).join('');
 
   return `<section class="panel panel-forecast">
-    ${panelHeader('未来客流预测', badge)}
+    ${panelHeader('在岛客流预测', badge)}
     <div class="forecast-bars-grid">${bars}</div>
   </section>`;
 }
@@ -5084,7 +5100,7 @@ function capacityOverviewPanel() {
       </div>
       <div class="cap-chip">
         <span class="cap-chip-lbl">满载率</span>
-        <span class="cap-chip-val font-num c-cyan">86%</span>
+        <span class="cap-chip-val font-num c-cyan">61.5%</span>
       </div>
     </div>
   </section>`;
@@ -5180,7 +5196,9 @@ function getVehicleRosterCards(curDataset, curT, isAll) {
     const fromStop = activeTrip ? activeTrip.from : '西角码头';
     const toStop = activeTrip ? activeTrip.to : '南湾运动公园';
     const paxStr = activeTrip ? `${activeTrip.pax}人` : '4人';
-    const bat = bats[i % bats.length] || 85;
+    const rawPickup = (activeTrip && activeTrip.pickupTime && activeTrip.pickupTime !== '00:00:00')
+      ? activeTrip.pickupTime.slice(0, 5)
+      : '08:30';
 
     list.push({
       id: cid,
@@ -5188,7 +5206,7 @@ function getVehicleRosterCards(curDataset, curT, isAll) {
       from: fromStop,
       to: toStop,
       pax: paxStr,
-      bat: bat,
+      pickupTime: rawPickup,
       status: '在线'
     });
   });
@@ -5209,7 +5227,6 @@ function renderVehRosterInner() {
   const pageCars = carPages[currentVehPage] || carPages[0];
 
   const carRows = pageCars.map(c => {
-    const batClass = c.bat >= 70 ? 'bat-good' : c.bat >= 40 ? 'bat-mid' : 'bat-low';
     return `
       <div class="veh-card-mini" data-bus="${c.id}" role="button" tabindex="0" title="点击定位车辆 ${c.id}">
         <div class="vcm-left">
@@ -5225,9 +5242,9 @@ function renderVehRosterInner() {
         </div>
         <div class="vcm-right">
           <div class="vcm-pax-chip"><span class="font-num">${c.pax.replace(/\/7/, '')}</span></div>
-          <div class="vcm-bat ${batClass}">
-            <span class="bat-icon"></span>
-            <span class="font-num">${c.bat}%</span>
+          <div class="vcm-time-row" title="接到乘客时间: ${c.pickupTime}">
+            <span class="vcm-time-lbl">接客</span>
+            <span class="vcm-time-val font-num">${c.pickupTime}</span>
           </div>
         </div>
       </div>
@@ -5315,7 +5332,14 @@ function incidentMonitorPanel(handled = new Set()) {
 
   const badge = `<span class="tag-badge">今日 ${totalCount} 起 · 待处理 ${unhandledWarn + unhandledErr} 条</span>`;
 
-  const cards = active.map(item => {
+  const sortedActive = [...active].sort((a, b) => {
+    const aHandled = handled.has(a.id) || a.status === '已处理' ? 1 : 0;
+    const bHandled = handled.has(b.id) || b.status === '已处理' ? 1 : 0;
+    if (aHandled !== bHandled) return aHandled - bHandled;
+    return (b.exactTime || b.time || '').localeCompare(a.exactTime || a.time || '');
+  });
+
+  const cards = sortedActive.map(item => {
     const isHandled = handled.has(item.id) || item.status === '已处理';
     return `
       <div class="inc-v2-card ${item.type} ${isHandled ? 'is-handled' : ''}" data-action="openIncident" data-inc-id="${item.id}" role="button" tabindex="0" title="点击查看事件详情">

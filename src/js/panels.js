@@ -348,7 +348,7 @@ function forecastFlowPanel() {
   `).join('');
 
   return `<section class="panel panel-forecast">
-    ${panelHeader('未来客流预测', badge)}
+    ${panelHeader('在岛客流预测', badge)}
     <div class="forecast-bars-grid">${bars}</div>
   </section>`;
 }
@@ -759,7 +759,7 @@ function capacityOverviewPanel() {
       </div>
       <div class="cap-chip">
         <span class="cap-chip-lbl">满载率</span>
-        <span class="cap-chip-val font-num c-cyan">86%</span>
+        <span class="cap-chip-val font-num c-cyan">61.5%</span>
       </div>
     </div>
   </section>`;
@@ -855,7 +855,9 @@ function getVehicleRosterCards(curDataset, curT, isAll) {
     const fromStop = activeTrip ? activeTrip.from : '西角码头';
     const toStop = activeTrip ? activeTrip.to : '南湾运动公园';
     const paxStr = activeTrip ? `${activeTrip.pax}人` : '4人';
-    const bat = bats[i % bats.length] || 85;
+    const rawPickup = (activeTrip && activeTrip.pickupTime && activeTrip.pickupTime !== '00:00:00')
+      ? activeTrip.pickupTime.slice(0, 5)
+      : '08:30';
 
     list.push({
       id: cid,
@@ -863,7 +865,7 @@ function getVehicleRosterCards(curDataset, curT, isAll) {
       from: fromStop,
       to: toStop,
       pax: paxStr,
-      bat: bat,
+      pickupTime: rawPickup,
       status: '在线'
     });
   });
@@ -884,7 +886,6 @@ function renderVehRosterInner() {
   const pageCars = carPages[currentVehPage] || carPages[0];
 
   const carRows = pageCars.map(c => {
-    const batClass = c.bat >= 70 ? 'bat-good' : c.bat >= 40 ? 'bat-mid' : 'bat-low';
     return `
       <div class="veh-card-mini" data-bus="${c.id}" role="button" tabindex="0" title="点击定位车辆 ${c.id}">
         <div class="vcm-left">
@@ -900,9 +901,9 @@ function renderVehRosterInner() {
         </div>
         <div class="vcm-right">
           <div class="vcm-pax-chip"><span class="font-num">${c.pax.replace(/\/7/, '')}</span></div>
-          <div class="vcm-bat ${batClass}">
-            <span class="bat-icon"></span>
-            <span class="font-num">${c.bat}%</span>
+          <div class="vcm-time-row" title="接到乘客时间: ${c.pickupTime}">
+            <span class="vcm-time-lbl">接客</span>
+            <span class="vcm-time-val font-num">${c.pickupTime}</span>
           </div>
         </div>
       </div>
@@ -990,7 +991,14 @@ function incidentMonitorPanel(handled = new Set()) {
 
   const badge = `<span class="tag-badge">今日 ${totalCount} 起 · 待处理 ${unhandledWarn + unhandledErr} 条</span>`;
 
-  const cards = active.map(item => {
+  const sortedActive = [...active].sort((a, b) => {
+    const aHandled = handled.has(a.id) || a.status === '已处理' ? 1 : 0;
+    const bHandled = handled.has(b.id) || b.status === '已处理' ? 1 : 0;
+    if (aHandled !== bHandled) return aHandled - bHandled;
+    return (b.exactTime || b.time || '').localeCompare(a.exactTime || a.time || '');
+  });
+
+  const cards = sortedActive.map(item => {
     const isHandled = handled.has(item.id) || item.status === '已处理';
     return `
       <div class="inc-v2-card ${item.type} ${isHandled ? 'is-handled' : ''}" data-action="openIncident" data-inc-id="${item.id}" role="button" tabindex="0" title="点击查看事件详情">

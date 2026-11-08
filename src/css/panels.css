@@ -667,9 +667,9 @@
 }
 .dist-name {
   width: auto;
-  min-width: 90px;
-  max-width: 160px;
-  font-size: 15px;
+  min-width: 80px;
+  max-width: 130px;
+  font-size: 12.5px;
   color: #bad8f5;
   white-space: nowrap;
   overflow: hidden;
@@ -678,7 +678,7 @@
 }
 .dist-bar {
   flex: 1;
-  height: 7px;
+  height: 6px;
   background: rgba(10, 25, 52, 0.65);
   border-radius: 3px;
   overflow: hidden;
@@ -692,18 +692,18 @@
 .dist-val {
   width: 18px;
   text-align: right;
-  font-weight: 700;
-  font-size: 16px;
+  font-weight: 600;
+  font-size: 12.5px;
   color: #f7fbff;
   flex-shrink: 0;
 }
 .queue-header-row {
   display: flex;
   justify-content: space-between;
-  font-size: 14px;
+  font-size: 11.5px;
   font-weight: 500;
-  color: #92b4d6;
-  margin-bottom: 6px;
+  color: #8eb3d6;
+  margin-bottom: 5px;
   padding: 0 4px;
 }
 
@@ -762,11 +762,11 @@
 }
 .q-stop {
   position: relative;
-  padding-left: 15px;
-  font-size: 16px;
-  font-weight: 600;
+  padding-left: 13px;
+  font-size: 12.5px;
+  font-weight: 500;
   color: #f7fbff;
-  letter-spacing: 0.02em;
+  letter-spacing: 0.01em;
 }
 .q-stop:before {
   content: '';
@@ -774,34 +774,34 @@
   left: 1px;
   top: 50%;
   transform: translateY(-50%);
-  width: 6.5px;
-  height: 6.5px;
+  width: 5.5px;
+  height: 5.5px;
   border-radius: 50%;
 }
 .q-stop.from:before {
   background: #00d8ff;
-  box-shadow: 0 0 6px rgba(0, 216, 255, 0.75);
+  box-shadow: 0 0 5px rgba(0, 216, 255, 0.75);
 }
 .q-stop.to:before {
-  border: 1.5px solid #f5b842;
+  border: 1.2px solid #f5b842;
   background: transparent;
-  width: 5.5px;
-  height: 5.5px;
+  width: 4.5px;
+  height: 4.5px;
 }
 .queue-meta {
   text-align: right;
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 2px;
 }
 .q-pax {
-  font-size: 15px;
-  color: #e6f1fc;
+  font-size: 12px;
+  color: #cde4fa;
   font-family: var(--num);
   font-weight: 600;
 }
 .q-time {
-  font: 700 17px var(--num);
+  font: 700 12.5px var(--num);
   color: #ff5e6a;
   text-shadow: 0 0 8px rgba(255, 94, 106, 0.45);
   letter-spacing: 0.02em;
@@ -1229,7 +1229,7 @@
 }
 .veh-card-mini {
   display: grid;
-  grid-template-columns: 86px minmax(0, 1fr) auto;
+  grid-template-columns: 112px minmax(0, 1fr) auto;
   align-items: center;
   column-gap: 12px;
   background: rgba(14, 34, 68, 0.65);
@@ -1277,8 +1277,7 @@
   color: #8eb3d6;
   padding-left: 11px;
   white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
+  overflow: visible;
 }
 .vcm-mid {
   display: flex;
@@ -1353,6 +1352,23 @@
   padding: 1px 5px;
   border-radius: 3px;
   white-space: nowrap;
+  font-weight: 600;
+}
+.vcm-time-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 10.5px;
+  color: #8eb3d6;
+  white-space: nowrap;
+}
+.vcm-time-lbl {
+  font-size: 10px;
+  color: #729ec7;
+}
+.vcm-time-val {
+  font-size: 11px;
+  color: #38efbd;
   font-weight: 600;
 }
 .vcm-bat {
