@@ -108,11 +108,21 @@ function onAction(a, d = {}){
     case 'busRoute':if(state.bus){const v=runs.find(v=>v.id===state.bus);if(v)setLine(v.line)}break;
   }
 }
-let selectedDateMode = 'auto'; // 'auto' | 'today' | 'tomorrow'
+let selectedDateMode = 'tomorrow';
+let currentTimelineMode = 'live';
+
+// 支持 URL 参数便捷覆盖 (例如 ?date=today 或 ?time=17:00:00)
+try {
+  if (typeof window !== 'undefined' && window.location && window.location.search) {
+    const sp = new URLSearchParams(window.location.search);
+    if (sp.get('date')) selectedDateMode = sp.get('date');
+    if (sp.get('time')) currentTimelineMode = sp.get('time');
+  }
+} catch (e) {}
 
 function getActiveDatasetDate() {
-  if (selectedDateMode === 'today') return '2026-11-07';
-  if (selectedDateMode === 'tomorrow') return '2026-11-08';
+  if (selectedDateMode === 'today' || selectedDateMode === '1107') return '2026-11-07';
+  if (selectedDateMode === 'tomorrow' || selectedDateMode === '1108') return '2026-11-08';
   const now = new Date(), z = 'Asia/Shanghai';
   const curDateStr = now.toLocaleDateString('sv-SE', { timeZone: z });
   return curDateStr >= '2026-11-08' ? '2026-11-08' : '2026-11-07';
@@ -129,7 +139,8 @@ function setDateMode(d) {
   toast(`已切换至: ${label}`);
 }
 
-let currentTimelineMode = 'live';
+window.setDateMode = setDateMode;
+
 let lastIncidentCount = -1;
 let lastCheckedMinute = -1;
 
@@ -143,6 +154,8 @@ function setTimelineMode(t) {
   const label = t === 'live' ? '实时监控' : (t === 'all' ? '全天汇总数据' : t.slice(0, 5) + ' 监控快照');
   toast(`已切换至: ${label}`);
 }
+
+window.setTimelineMode = setTimelineMode;
 
 function getEffectiveTimeStr() {
   if (currentTimelineMode && currentTimelineMode !== 'live' && currentTimelineMode !== 'all') {

@@ -194,24 +194,26 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 .overview-dual {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 6px;
-  flex: 1.05;
+  flex: 1.1;
   min-height: 0;
 }
 .metric-card {
   background: rgba(15, 36, 72, 0.72);
   border: 1px solid rgba(95, 175, 250, 0.22);
   border-radius: 8px;
-  padding: 8px 10px;
+  padding: 6px 8px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
   box-sizing: border-box;
+  overflow: hidden;
 }
 .m-lbl {
   font-size: 13px;
@@ -223,10 +225,10 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   display: flex;
   align-items: baseline;
   gap: 3px;
-  margin: 2px 0;
+  margin: 1px 0;
 }
 .m-val strong {
-  font: 700 27px/1 var(--num);
+  font: 700 23px/1 var(--num);
   color: #f7fbff;
   letter-spacing: .02em;
 }
@@ -270,7 +272,7 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 5px;
-  margin-top: 6px;
+  margin-top: 5px;
   flex: 1;
   min-height: 0;
 }
@@ -278,7 +280,7 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   background: rgba(15, 36, 72, 0.72);
   border: 1px solid rgba(95, 175, 250, 0.22);
   border-radius: 8px;
-  padding: 6px 4px;
+  padding: 4px 2px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -286,14 +288,15 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   text-align: center;
   height: 100%;
   box-sizing: border-box;
+  overflow: hidden;
 }
 .env-ico {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   flex-shrink: 0;
 }
 .env-ico svg {
@@ -1214,13 +1217,13 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 }
 .veh-card-mini {
   display: grid;
-  grid-template-columns: 86px 1fr 64px;
+  grid-template-columns: 74px 1fr 50px;
   align-items: center;
-  column-gap: 8px;
+  column-gap: 6px;
   background: rgba(14, 34, 68, 0.72);
   border: 1px solid rgba(95, 175, 250, 0.22);
   border-radius: 6px;
-  padding: 6px 10px;
+  padding: 5px 8px;
   cursor: pointer;
   transition: all 0.15s ease-out;
   min-height: 0;
@@ -1874,7 +1877,7 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 
 /* 顶部时序模拟控制条 */
 .timeline-bar {
-  display: flex;
+  display: none !important;
   align-items: center;
   gap: 5px;
   background: rgba(9, 25, 45, 0.75);
@@ -4067,7 +4070,7 @@ html.giant-screen .incident-empty .ie-sub {
 <header>
  <div class="brand"><svg class="brandmark" viewBox="0 0 52 52" aria-hidden="true"><path d="m26 2 21 12v24L26 50 5 38V14Z" fill="#092040" stroke="#256dbd"/><g fill="none" stroke="#00d68f" stroke-width="2.3" stroke-linejoin="round"><path d="m11 30 9-15 7 13 6-9 8 13-15 8Z"/><path d="m13 34 13 7 13-7" stroke="#3b9eff"/></g></svg><div><strong>北海 · 涠洲岛</strong><small>WEIZHOU ISLAND</small></div></div>
  <div class="mast"><h1>智慧出行监管平台</h1><div class="mast-sub">哇品出行</div></div>
- <div class="head-right"><div class="timeline-bar" id="timeline-bar" title="时间线与多日模拟数据切换（特定时间点之前不展示尚未发生的数据）"><div class="tb-date-group"><button class="tb-date-btn active" id="btn-date-today" data-action="setDateMode" data-date="today">今日(11.07)</button><button class="tb-date-btn" id="btn-date-tomorrow" data-action="setDateMode" data-date="tomorrow">明日(11.08)</button></div><div class="tb-divider"></div><button class="tb-btn active" data-action="setTimeline" data-time="live">● 实时</button><button class="tb-btn" data-action="setTimeline" data-time="10:00:00">10:00</button><button class="tb-btn" data-action="setTimeline" data-time="11:00:00">11:00</button><button class="tb-btn" data-action="setTimeline" data-time="12:30:00">12:30</button><button class="tb-btn" data-action="setTimeline" data-time="14:00:00">14:00</button><button class="tb-btn" data-action="setTimeline" data-time="all">全天</button></div><div class="clock"><strong id="clock">--:--:--</strong><small id="date"></small></div><button class="icbtn" data-action="fullscreen" title="进入全屏" aria-label="进入全屏" data-icon="expand"></button></div>
+ <div class="head-right"><div class="timeline-bar" id="timeline-bar" style="display: none;" title="时间线与多日模拟数据切换（特定时间点之前不展示尚未发生的数据）"><div class="tb-date-group"><button class="tb-date-btn" id="btn-date-today" data-action="setDateMode" data-date="today">今日(11.07)</button><button class="tb-date-btn active" id="btn-date-tomorrow" data-action="setDateMode" data-date="tomorrow">明日(11.08)</button></div><div class="tb-divider"></div><button class="tb-btn active" data-action="setTimeline" data-time="live">● 实时</button><button class="tb-btn" data-action="setTimeline" data-time="10:00:00">10:00</button><button class="tb-btn" data-action="setTimeline" data-time="11:00:00">11:00</button><button class="tb-btn" data-action="setTimeline" data-time="12:30:00">12:30</button><button class="tb-btn" data-action="setTimeline" data-time="14:00:00">14:00</button><button class="tb-btn" data-action="setTimeline" data-time="all">全天</button></div><div class="clock"><strong id="clock">--:--:--</strong><small id="date"></small></div><button class="icbtn" data-action="fullscreen" title="进入全屏" aria-label="进入全屏" data-icon="expand"></button></div>
  <svg class="head-rule" width="100%" height="12" viewBox="0 0 1600 12" preserveAspectRatio="none" aria-hidden="true"><path d="M0 2H485l12 8h606l12-8h485" fill="none" stroke="#1c4270"/><path d="M390 2h86l12 8h53m518 0h53l12-8h86" fill="none" stroke="#2d70bc"/><path d="M680 10h240" stroke="#3894ff" stroke-width="2"/></svg>
 </header>
 <main>
@@ -4555,10 +4558,7 @@ function islandOverviewPanel(period = '今日') {
       <div class="metric-card">
         <span class="m-lbl">运送客流</span>
         <div class="m-val"><strong>${dyn.totalPax.toLocaleString()}</strong><small>人次</small></div>
-        <div class="m-badges">
-          <span class="badge-pill">${dyn.totalOrders} 单</span>
-          <span class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>10%</b></span>
-        </div>
+        <div class="m-delta up">实载率 <span class="c-arrow">▲</span> <b>88.6%</b></div>
       </div>
     </div>
     <div class="env-grid">
@@ -6215,11 +6215,21 @@ function onAction(a, d = {}){
     case 'busRoute':if(state.bus){const v=runs.find(v=>v.id===state.bus);if(v)setLine(v.line)}break;
   }
 }
-let selectedDateMode = 'auto'; // 'auto' | 'today' | 'tomorrow'
+let selectedDateMode = 'tomorrow';
+let currentTimelineMode = 'live';
+
+// 支持 URL 参数便捷覆盖 (例如 ?date=today 或 ?time=17:00:00)
+try {
+  if (typeof window !== 'undefined' && window.location && window.location.search) {
+    const sp = new URLSearchParams(window.location.search);
+    if (sp.get('date')) selectedDateMode = sp.get('date');
+    if (sp.get('time')) currentTimelineMode = sp.get('time');
+  }
+} catch (e) {}
 
 function getActiveDatasetDate() {
-  if (selectedDateMode === 'today') return '2026-11-07';
-  if (selectedDateMode === 'tomorrow') return '2026-11-08';
+  if (selectedDateMode === 'today' || selectedDateMode === '1107') return '2026-11-07';
+  if (selectedDateMode === 'tomorrow' || selectedDateMode === '1108') return '2026-11-08';
   const now = new Date(), z = 'Asia/Shanghai';
   const curDateStr = now.toLocaleDateString('sv-SE', { timeZone: z });
   return curDateStr >= '2026-11-08' ? '2026-11-08' : '2026-11-07';
@@ -6236,7 +6246,8 @@ function setDateMode(d) {
   toast(`已切换至: ${label}`);
 }
 
-let currentTimelineMode = 'live';
+window.setDateMode = setDateMode;
+
 let lastIncidentCount = -1;
 let lastCheckedMinute = -1;
 
@@ -6250,6 +6261,8 @@ function setTimelineMode(t) {
   const label = t === 'live' ? '实时监控' : (t === 'all' ? '全天汇总数据' : t.slice(0, 5) + ' 监控快照');
   toast(`已切换至: ${label}`);
 }
+
+window.setTimelineMode = setTimelineMode;
 
 function getEffectiveTimeStr() {
   if (currentTimelineMode && currentTimelineMode !== 'live' && currentTimelineMode !== 'all') {

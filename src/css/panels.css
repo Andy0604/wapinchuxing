@@ -179,24 +179,26 @@
   flex: 1;
   display: flex;
   flex-direction: column;
+  overflow: hidden;
 }
 .overview-dual {
   display: grid;
   grid-template-columns: 1fr 1fr;
   gap: 6px;
-  flex: 1.05;
+  flex: 1.1;
   min-height: 0;
 }
 .metric-card {
   background: rgba(15, 36, 72, 0.72);
   border: 1px solid rgba(95, 175, 250, 0.22);
   border-radius: 8px;
-  padding: 8px 10px;
+  padding: 6px 8px;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   height: 100%;
   box-sizing: border-box;
+  overflow: hidden;
 }
 .m-lbl {
   font-size: 13px;
@@ -208,10 +210,10 @@
   display: flex;
   align-items: baseline;
   gap: 3px;
-  margin: 2px 0;
+  margin: 1px 0;
 }
 .m-val strong {
-  font: 700 27px/1 var(--num);
+  font: 700 23px/1 var(--num);
   color: #f7fbff;
   letter-spacing: .02em;
 }
@@ -255,7 +257,7 @@
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 5px;
-  margin-top: 6px;
+  margin-top: 5px;
   flex: 1;
   min-height: 0;
 }
@@ -263,7 +265,7 @@
   background: rgba(15, 36, 72, 0.72);
   border: 1px solid rgba(95, 175, 250, 0.22);
   border-radius: 8px;
-  padding: 6px 4px;
+  padding: 4px 2px;
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -271,14 +273,15 @@
   text-align: center;
   height: 100%;
   box-sizing: border-box;
+  overflow: hidden;
 }
 .env-ico {
-  width: 30px;
-  height: 30px;
+  width: 24px;
+  height: 24px;
   display: flex;
   align-items: center;
   justify-content: center;
-  margin-bottom: 4px;
+  margin-bottom: 2px;
   flex-shrink: 0;
 }
 .env-ico svg {
@@ -1199,13 +1202,13 @@
 }
 .veh-card-mini {
   display: grid;
-  grid-template-columns: 86px 1fr 64px;
+  grid-template-columns: 74px 1fr 50px;
   align-items: center;
-  column-gap: 8px;
+  column-gap: 6px;
   background: rgba(14, 34, 68, 0.72);
   border: 1px solid rgba(95, 175, 250, 0.22);
   border-radius: 6px;
-  padding: 6px 10px;
+  padding: 5px 8px;
   cursor: pointer;
   transition: all 0.15s ease-out;
   min-height: 0;
@@ -1859,7 +1862,7 @@
 
 /* 顶部时序模拟控制条 */
 .timeline-bar {
-  display: flex;
+  display: none !important;
   align-items: center;
   gap: 5px;
   background: rgba(9, 25, 45, 0.75);

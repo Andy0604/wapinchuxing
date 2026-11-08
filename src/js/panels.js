@@ -340,10 +340,7 @@ function islandOverviewPanel(period = '今日') {
       <div class="metric-card">
         <span class="m-lbl">运送客流</span>
         <div class="m-val"><strong>${dyn.totalPax.toLocaleString()}</strong><small>人次</small></div>
-        <div class="m-badges">
-          <span class="badge-pill">${dyn.totalOrders} 单</span>
-          <span class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>10%</b></span>
-        </div>
+        <div class="m-delta up">实载率 <span class="c-arrow">▲</span> <b>88.6%</b></div>
       </div>
     </div>
     <div class="env-grid">
