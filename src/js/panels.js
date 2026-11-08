@@ -236,15 +236,16 @@ function getDynamicState() {
   }
 
   // 7 大区域：南湾运动公园、西角码头、鳄鱼山景区、五彩滩、天主教堂、石螺口景区、其他
+  // 严格保持 Excel 表头顺序，不作重新排序
   const areaItems = [
     { name: '南湾运动公园', count: snap.southBay, color: '#f59e0b' },
     { name: '西角码头', count: snap.westPort, color: '#10b981' },
     { name: '鳄鱼山景区', count: snap.crocPark, color: '#00d8ff' },
     { name: '五彩滩', count: snap.eastBeach, color: '#38bdf8' },
-    { name: '天主教堂', count: snap.church, color: '#38bdf8' },
-    { name: '石螺口景区', count: snap.shiluokou, color: '#38bdf8' },
-    { name: '其他', count: snap.others, color: '#38bdf8' }
-  ].sort((a, b) => b.count - a.count);
+    { name: '天主教堂', count: snap.church, color: '#818cf8' },
+    { name: '石螺口景区', count: snap.shiluokou, color: '#c084fc' },
+    { name: '其他', count: snap.others, color: '#94a3b8' }
+  ];
 
   const maxAreaCount = Math.max(1, ...areaItems.map(a => a.count));
   areaItems.forEach(a => a.pct = Math.round((a.count / maxAreaCount) * 100));
@@ -530,18 +531,20 @@ function serviceMonitorPanel() {
     </div>
   `).join('');
 
-  // 2. 出发地 / 目的地: 根据下单时间到达当前时间放上列表，红字根据司机接单时间计算
+  // 2. 出发地 / 目的地: 根据下单时间到达当前时间放上列表，红字根据司机接单时间计算倒计时
   const recentOrders = dyn.activeOrders.slice(-5).reverse();
   const rows = recentOrders.length ? recentOrders.map((q, idx) => {
-    const isAccepted = dyn.isAll || dyn.curT >= q.acceptTime;
-    let timeText = '';
-    if (!isAccepted) {
-      timeText = '00:45';
+    const initialSec = Math.max(15, q.acceptSec || 60);
+    let currentSec = initialSec;
+    if (!dyn.isAll && dyn.curT < q.acceptTime) {
+      currentSec = Math.max(1, toSeconds(q.acceptTime) - toSeconds(dyn.curT));
     } else {
-      const mm = String(Math.floor(q.acceptSec / 60)).padStart(2, '0');
-      const ss = String(q.acceptSec % 60).padStart(2, '0');
-      timeText = `${mm}:${ss}`;
+      const wallSec = Math.floor(Date.now() / 1000) % initialSec;
+      currentSec = Math.max(1, initialSec - wallSec);
     }
+    const mm = String(Math.floor(currentSec / 60)).padStart(2, '0');
+    const ss = String(currentSec % 60).padStart(2, '0');
+    const timeText = `${mm}:${ss}`;
 
     return `
       <div class="queue-row" data-action="openOrder" data-order-id="${q.id}" role="button" tabindex="0" title="点击查看车辆订单详情">
@@ -551,7 +554,7 @@ function serviceMonitorPanel() {
         </div>
         <div class="queue-meta">
           <span class="q-pax font-num">${q.pax}人</span>
-          <span class="q-time font-num red-countdown" title="接单等待时长">${timeText}</span>
+          <span class="q-time font-num red-countdown" data-sec="${currentSec}" data-initial-sec="${initialSec}" title="接单等待倒计时">${timeText}</span>
         </div>
       </div>
     `;
@@ -587,8 +590,8 @@ function serviceMonitorPanel() {
     <div class="svc-composite-body">
       <div class="svc-dist-col">
         <div class="svc-sub-head">
-          <span class="ssh-title">车辆区域分布 (实时)</span>
-          <span class="ssh-meta">在线 <b>${dyn.snap.total || 32}</b> 辆 · 分时快照</span>
+          <span class="ssh-title">车辆区域分布</span>
+          <span class="ssh-meta">在线 <b>${dyn.snap.total || 32}</b> 辆</span>
         </div>
         <div class="area-dist-list">${distRows}</div>
       </div>
@@ -596,12 +599,30 @@ function serviceMonitorPanel() {
       <div class="svc-queue-col">
         <div class="queue-header-row">
           <span>出发地 / 目的地</span>
-          <span>人数 / 接单等待</span>
+          <span>人数 / 接单倒计时</span>
         </div>
         <div class="queue-list">${rows}</div>
       </div>
     </div>
   </section>`;
+}
+
+/* 每秒调用：接单等待时间倒计时动态走字 (01:08 -> 01:07 -> 01:06 ...) */
+function tickQueueCountdowns() {
+  const els = document.querySelectorAll('.queue-row .q-time.red-countdown');
+  els.forEach(el => {
+    let sec = parseInt(el.dataset.sec, 10);
+    if (isNaN(sec)) return;
+    sec--;
+    if (sec <= 0) {
+      const init = parseInt(el.dataset.initialSec, 10) || 60;
+      sec = init;
+    }
+    el.dataset.sec = sec;
+    const mm = String(Math.floor(sec / 60)).padStart(2, '0');
+    const ss = String(sec % 60).padStart(2, '0');
+    el.textContent = `${mm}:${ss}`;
+  });
 }
 
 /* --------------------------------------------------------------------------

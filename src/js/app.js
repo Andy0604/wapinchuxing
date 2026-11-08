@@ -193,6 +193,11 @@ function setClock(){
     lastCheckedMinute = curMinute;
     if (typeof updatePanels === 'function') updatePanels();
   }
+
+  // 3. 行程接单等待倒计时秒级走字
+  if (typeof tickQueueCountdowns === 'function') {
+    tickQueueCountdowns();
+  }
 }
 function updateScreenScale(){
   const isGiant = window.innerWidth >= 3600 || (window.innerWidth >= 2400 && window.innerWidth / window.innerHeight >= 2.5);

@@ -611,10 +611,12 @@
   font-size: 13px;
   font-weight: 600;
   color: #f0f7ff;
+  white-space: nowrap;
 }
 .ssh-meta {
   font-size: 11px;
   color: #7ca8d0;
+  white-space: nowrap;
 }
 .ssh-meta b {
   color: #00d8ff;
@@ -775,6 +777,27 @@
   letter-spacing: 0.02em;
   display: block;
   margin-top: 1px;
+}
+.q-time.red-countdown {
+  font-variant-numeric: tabular-nums;
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 4px;
+}
+.q-time.red-countdown::before {
+  content: '';
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: #ff5e6a;
+  box-shadow: 0 0 6px #ff5e6a;
+  animation: pulse-countdown 1.5s infinite;
+}
+@keyframes pulse-countdown {
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.3; transform: scale(0.6); }
 }
 
 /* --------------------------------------------------------------------------
