@@ -578,40 +578,41 @@ function operationsMonitorPanel(period = '今日') {
   const badge = `<span class="tag-badge">订单总数 ${totalOrders}</span>`;
   return `<section class="panel panel-ops">
     ${panelHeader('运营监控', badge)}
-    <div class="gmv-dual">
-      <div class="gmv-left">
-        <span class="m-lbl">${revLabel}</span>
-        <div class="gmv-val font-num">¥${gmv.toLocaleString()}</div>
-        ${deltaHtml}
+    <div class="ops-kpi-row">
+      <div class="ops-kpi-box">
+        <span class="kpi-lbl">调度响应率</span>
+        <div class="kpi-val font-num c-mint">${dyn.responseRate || '98.9'}%</div>
+        <small class="kpi-sub">平均响应 ${dyn.avgWait || '1.3'} 分钟</small>
       </div>
-      <div class="arpu-card">
-        <div class="arpu-val font-num">¥${avgPrice}</div>
-        <div class="arpu-lbl">客单价</div>
+      <div class="ops-kpi-box">
+        <span class="kpi-lbl">订单完成率</span>
+        <div class="kpi-val font-num c-cyan">${donePct}%</div>
+        <small class="kpi-sub">${doneOrders} 单安全履约送达</small>
       </div>
     </div>
     <div class="order-grid">
-      <div class="order-box box-cancel">
-        <strong class="font-num num-cancel">${cancelOrders}</strong>
-        <small>已取消</small>
-      </div>
       <div class="order-box box-done">
         <strong class="font-num num-done">${doneOrders}</strong>
-        <small>已完成</small>
+        <small>已完成 (${donePct}%)</small>
       </div>
       <div class="order-box box-serving">
         <strong class="font-num num-serving">${servingOrders}</strong>
-        <small>服务中</small>
+        <small>服务中 (${servingPct}%)</small>
       </div>
       <div class="order-box box-pending">
         <strong class="font-num num-pending">${pendingOrders}</strong>
-        <small>待接单</small>
+        <small>待接单 (${pendingPct}%)</small>
+      </div>
+      <div class="order-box box-cancel">
+        <strong class="font-num num-cancel">${cancelOrders}</strong>
+        <small>已取消 (${cancelPct}%)</small>
       </div>
     </div>
-    <div class="order-progress-strip" title="订单状态比例: 已完成 ${doneOrders}单 (${donePct}%) / 已取消 ${cancelOrders}单 (${cancelPct}%) / 服务中 ${servingOrders}单 (${servingPct}%) / 待接单 ${pendingOrders}单 (${pendingPct}%)">
-      <span class="seg cancel" style="width: ${cancelPct}%;"></span>
+    <div class="order-progress-strip" title="订单状态比例: 已完成 ${doneOrders}单 (${donePct}%) / 服务中 ${servingOrders}单 (${servingPct}%) / 待接单 ${pendingOrders}单 (${pendingPct}%) / 已取消 ${cancelOrders}单 (${cancelPct}%)">
       <span class="seg done" style="width: ${donePct}%;"></span>
       <span class="seg serving" style="width: ${servingPct}%;"></span>
       <span class="seg pending" style="width: ${pendingPct}%;"></span>
+      <span class="seg cancel" style="width: ${cancelPct}%;"></span>
     </div>
   </section>`;
 }
@@ -1278,15 +1279,12 @@ function renderPanels(mode, period = '今日', selectedLine = 0, handled = new S
 
     // 右翼:
     // 1行: 运力总览 (全宽)
-    // 2行: 驾驶监控 (安全驾驶指标 Sheet 6)
-    // 3行: 车辆监控(可轮播列表) (左) + 事件监控 (右)
+    // 2行: 车辆监控 (全宽轮播卡片)
+    // 3行: 事件监控 (全宽事件列表)
     rightHtml = `
       ${capacityOverviewPanel()}
-      ${vehicleBehaviorAndAdasPanel()}
-      <div class="panel-row-dual">
-        ${vehicleRosterCarouselPanel()}
-        ${incidentMonitorPanel(handled)}
-      </div>
+      ${vehicleRosterCarouselPanel()}
+      ${incidentMonitorPanel(handled)}
     `;
   }
 

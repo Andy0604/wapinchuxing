@@ -438,6 +438,36 @@
   margin-top: 2px;
 }
 
+.ops-kpi-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+  margin-bottom: 6px;
+}
+.ops-kpi-box {
+  background: linear-gradient(180deg, rgba(16, 42, 80, 0.72), rgba(10, 28, 56, 0.78));
+  border: 1px solid rgba(95, 175, 250, 0.24);
+  border-radius: 6px;
+  padding: 6px 10px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.ops-kpi-box .kpi-lbl {
+  font-size: 11px;
+  color: #8db5db;
+  font-weight: 500;
+}
+.ops-kpi-box .kpi-val {
+  font: 700 24px/1.1 var(--num);
+  margin-top: 2px;
+}
+.ops-kpi-box .kpi-sub {
+  font-size: 10px;
+  color: #7296b8;
+  margin-top: 2px;
+}
+
 .order-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -809,7 +839,7 @@
    右侧模块 1: 运力总览
    -------------------------------------------------------------------------- */
 .panel-capacity {
-  flex: 0.85;
+  flex: 1;
   display: flex;
   flex-direction: column;
 }
@@ -1187,7 +1217,7 @@
    右侧模块 3A: 车辆监控 (可轮播车辆列表卡片)
    -------------------------------------------------------------------------- */
 .panel-veh-carousel {
-  flex: 1;
+  flex: 1.05;
 }
 .veh-roster-body-wrap {
   display: flex;
@@ -1204,13 +1234,13 @@
 }
 .veh-card-mini {
   display: grid;
-  grid-template-columns: 82px minmax(0, 1fr) 52px;
+  grid-template-columns: 88px minmax(0, 1fr) 56px;
   align-items: center;
-  column-gap: 10px;
+  column-gap: 14px;
   background: rgba(14, 34, 68, 0.72);
   border: 1px solid rgba(95, 175, 250, 0.22);
   border-radius: 6px;
-  padding: 5px 8px;
+  padding: 6px 12px;
   cursor: pointer;
   transition: all 0.15s ease-out;
   min-height: 0;
@@ -1368,7 +1398,9 @@
    右侧模块 3B: 事件监控 (处置指标 + 告警处置卡片)
    -------------------------------------------------------------------------- */
 .panel-incidents {
-  flex: 1.15;
+  flex: 1.35;
+  display: flex;
+  flex-direction: column;
 }
 .inc-stats-row {
   display: grid;
@@ -1433,6 +1465,9 @@
   display: flex;
   flex-direction: column;
   gap: 7px;
+  flex: 1;
+  min-height: 0;
+  overflow-y: auto;
 }
 .inc-v2-card {
   border-radius: 7px;
