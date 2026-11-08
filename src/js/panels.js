@@ -330,11 +330,10 @@ function roadPanel() {
 function forecastFlowPanel() {
   const badge = `<span class="tag-badge">基于船票预售</span>`;
   const days = [
-    { day: '明日', val: '4,703', h: 88, highlight: true },
-    { day: '周二', val: '2,307', h: 43, highlight: false },
-    { day: '周三', val: '1,764', h: 33, highlight: false },
-    { day: '周四', val: '2,688', h: 50, highlight: false },
-    { day: '周五', val: '1,276', h: 24, highlight: false }
+    { day: '明日', val: '4,833', h: 58, highlight: false },
+    { day: '周二', val: '5,404', h: 65, highlight: false },
+    { day: '周三', val: '7,011', h: 85, highlight: false },
+    { day: '周四', val: '8,281', h: 96, highlight: true }
   ];
 
   const bars = days.map(d => `
@@ -368,42 +367,17 @@ function islandOverviewPanel(period = '今日') {
     </div>
   `;
 
-  const inboundTitle = isYesterday ? '昨日在岛客流' : '今日在岛客流';
+  const inboundTitle = isYesterday ? '昨日在岛预测' : '今日在岛预测';
   const inboundCount = isYesterday ? '4,452' : '4,808';
   const inboundDelta = isYesterday
     ? `<div class="m-delta up">较前日 <span class="c-arrow">▲</span> <b>7.8%</b></div>`
     : `<div class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>8.0%</b></div>`;
 
-  // 运送客流：严格对应同时段累计计算
-  const todayOrders = (isAll || curT >= '22:00:00')
-    ? dataset_20261108.orders
-    : dataset_20261108.orders.filter(o => o.orderTime <= curT);
-  const yestOrders = (isAll || curT >= '22:00:00')
-    ? dataset_20261107.orders
-    : dataset_20261107.orders.filter(o => o.orderTime <= curT);
-
-  const todayPax = todayOrders.reduce((sum, o) => sum + (o.pax || 0), 0);
-  const yestPax = yestOrders.reduce((sum, o) => sum + (o.pax || 0), 0);
-
-  let paxCount, paxDelta;
-  if (isYesterday) {
-    paxCount = yestPax.toLocaleString();
-    const prevPax = Math.round(yestPax / 1.075);
-    paxDelta = `<div class="m-delta up" title="昨日同时段: ${yestPax} 人次 / 前日同时段: ${prevPax} 人次">较前日同时段 <span class="c-arrow">▲</span> <b>7.5%</b></div>`;
-  } else {
-    paxCount = todayPax.toLocaleString();
-    if (yestPax > 0) {
-      const diff = todayPax - yestPax;
-      const rawPct = (diff / yestPax) * 100;
-      const isUp = rawPct >= 0;
-      const pctStr = Math.abs(rawPct).toFixed(1);
-      const arrow = isUp ? '▲' : '▼';
-      const cls = isUp ? 'up' : 'down';
-      paxDelta = `<div class="m-delta ${cls}" title="今日累计: ${todayPax} 人次 / 昨日同时段: ${yestPax} 人次">较昨日同时段 <span class="c-arrow">${arrow}</span> <b>${pctStr}%</b></div>`;
-    } else {
-      paxDelta = `<div class="m-delta up">较昨日同时段 <span class="c-arrow">▲</span> <b>0.0%</b></div>`;
-    }
-  }
+  const paxTitle = isYesterday ? '昨日上岛客流' : '上岛客流';
+  const paxCount = isYesterday ? '4,432' : '4,698';
+  const paxDelta = isYesterday
+    ? `<div class="m-delta up" title="昨日同时段: 4,432 人次">较前日同时段 <span class="c-arrow">▲</span> <b>5.8%</b></div>`
+    : `<div class="m-delta up" title="今日累计: 4,698 人次">较昨日同时段 <span class="c-arrow">▲</span> <b>6.0%</b></div>`;
 
   return `<section class="panel panel-overview">
     ${panelHeader('全岛出行总览', badge)}
@@ -414,7 +388,7 @@ function islandOverviewPanel(period = '今日') {
         ${inboundDelta}
       </div>
       <div class="metric-card">
-        <span class="m-lbl">运送客流</span>
+        <span class="m-lbl">${paxTitle}</span>
         <div class="m-val"><strong>${paxCount}</strong><small>人次</small></div>
         ${paxDelta}
       </div>
