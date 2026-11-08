@@ -175,6 +175,14 @@ function getCurrentDataset() {
   return (activeDate === '2026-11-08') ? dataset_20261108 : dataset_20261107;
 }
 
+function toSeconds(timeStr) {
+  if (!timeStr || typeof timeStr !== 'string') return 0;
+  const parts = timeStr.split(':').map(Number);
+  if (parts.length === 3) return parts[0] * 3600 + parts[1] * 60 + (parts[2] || 0);
+  if (parts.length === 2) return parts[0] * 60 + parts[1];
+  return 0;
+}
+
 /* --------------------------------------------------------------------------
    核心动态时序引擎: 按照当前时间实时累加与匹配状态
    -------------------------------------------------------------------------- */
