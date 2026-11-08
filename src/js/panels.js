@@ -892,14 +892,14 @@ function renderVehRosterInner() {
             <span class="vcm-dot"></span>
             <strong class="vcm-id font-num">${c.id}</strong>
           </div>
-          <span class="vcm-driver">${c.driver}</span>
+          <span class="vcm-driver">司机 · ${c.driver}</span>
         </div>
         <div class="vcm-mid">
-          <div class="vcm-stop"><i class="s-dot from"></i><span title="${c.from}">${c.from}</span></div>
-          <div class="vcm-stop"><i class="s-dot to"></i><span title="${c.to}">${c.to}</span></div>
+          <div class="vcm-stop"><i class="s-dot from"></i><span class="vcm-stop-tag">起</span><span class="vcm-stop-name" title="${c.from}">${c.from}</span></div>
+          <div class="vcm-stop"><i class="s-dot to"></i><span class="vcm-stop-tag to">终</span><span class="vcm-stop-name" title="${c.to}">${c.to}</span></div>
         </div>
         <div class="vcm-right">
-          <span class="vcm-pax font-num">${c.pax.replace(/\/7/, '')}</span>
+          <div class="vcm-pax-chip"><span class="font-num">${c.pax.replace(/\/7/, '')}</span></div>
           <div class="vcm-bat ${batClass}">
             <span class="bat-icon"></span>
             <span class="font-num">${c.bat}%</span>
@@ -916,7 +916,7 @@ function renderVehRosterInner() {
   return `
     <div class="veh-roster-list">${carRows}</div>
     <div class="veh-roster-pager">
-      <span class="pager-num font-num">${currentVehPage + 1}/${totalPages}</span>
+      <span class="pager-num font-num">在岗车辆 <b>${currentVehPage * 4 + 1}–${Math.min(13, (currentVehPage + 1) * 4)}</b> / 共 13 辆</span>
       <div class="pager-dots">${dots}</div>
     </div>
   `;
@@ -995,9 +995,11 @@ function incidentMonitorPanel(handled = new Set()) {
     return `
       <div class="inc-v2-card ${item.type} ${isHandled ? 'is-handled' : ''}" data-action="openIncident" data-inc-id="${item.id}" role="button" tabindex="0" title="点击查看事件详情">
         <div class="inc-v2-top">
-          <span class="inc-v2-time font-num">${item.time}</span>
-          <span class="inc-v2-badge ${item.type}">${item.tag || '预警'}</span>
-          <span class="inc-v2-title">${item.title}</span>
+          <div class="inc-v2-meta">
+            <span class="inc-v2-time font-num">${item.time}</span>
+            <span class="inc-v2-badge ${item.type}">${item.tag || '预警'}</span>
+            <span class="inc-v2-title">${item.title}</span>
+          </div>
           <span class="inc-v2-status ${isHandled ? 'ok' : 'pending'}">${isHandled ? '已处理' : '未处理'}</span>
         </div>
         <div class="inc-v2-desc">${item.content}</div>
