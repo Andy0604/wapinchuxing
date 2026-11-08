@@ -4709,11 +4709,11 @@ function islandOverviewPanel(period = '今日') {
     </div>
   `;
 
-  const inboundTitle = isYesterday ? '昨日上岛客流' : '今日上岛客流';
-  const inboundCount = isYesterday ? '5,885' : '6,497';
+  const inboundTitle = isYesterday ? '昨日在岛客流' : '今日在岛客流';
+  const inboundCount = isYesterday ? '4,452' : '4,808';
   const inboundDelta = isYesterday
-    ? `<div class="m-delta up">较前日 <span class="c-arrow">▲</span> <b>8.2%</b></div>`
-    : `<div class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>10.4%</b></div>`;
+    ? `<div class="m-delta up">较前日 <span class="c-arrow">▲</span> <b>7.8%</b></div>`
+    : `<div class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>8.0%</b></div>`;
 
   // 运送客流：严格对应同时段累计计算
   const todayOrders = (isAll || curT >= '22:00:00')
