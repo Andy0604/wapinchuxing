@@ -3,7 +3,7 @@ const sceneNames={overview:'全域交通态势',routes:'线路运行监测',flee
 const layerLabels={places:'监管点位',cars:'车辆与船舶',roads:'交通线路',buildings:'立体建筑'};
 function updateChrome(){
   byId('app').classList.toggle('tracking-fleet',state.mode==='fleet');
-  byId('nav').innerHTML=navItems.map(([id,icon,label])=>'<button class="navbtn '+(state.mode===id?'active':'')+'" aria-pressed="'+(state.mode===id)+'" data-mode="'+id+'">'+ico(icon)+label+'</button>').join('');
+  if (byId('nav')) byId('nav').innerHTML = '';
   byId('map-title').textContent=sceneNames[state.mode];
   document.querySelector('.legend').innerHTML=state.mode==='routes'?'<span><i class="key" style="background:'+lines[state.line].color+'"></i>'+lines[state.line].name+'</span><span>'+lines[state.line].stops.length+' 站</span>':'<span><i class="key mint"></i>畅通</span><span><i class="key amber"></i>缓行</span><span><i class="key blue dashed"></i>航线</span>';
   if(state.mode==='fleet')document.querySelector('.legend').innerHTML='<span><i class="key mint"></i>已行轨迹</span><span><i class="key blue dashed"></i>待行路线</span>';
@@ -246,7 +246,7 @@ function launch(){
     if(!byId('layer-pop').contains(e.target)&&!e.target.closest('[data-action="layers"]'))closeLayers();
     const el=e.target.closest('[data-action],[data-mode],[data-place],[data-event],[data-line],[data-bus],[data-fleet-line]');
     if(!el)return;const d=el.dataset;
-    if(d.action)onAction(d.action,d);else if(d.mode)modeChange(d.mode);else if(d.event)openEvent(d.event);else if(d.place)selectPlace(d.place);else if(d.line!==undefined)setLine(Number(d.line));else if(d.fleetLine!==undefined)pickBus(runs.find(v=>v.line===Number(d.fleetLine)).id);else if(d.bus)pickBus(d.bus);
+    if(d.action)onAction(d.action,d);else if(d.event)openEvent(d.event);else if(d.place)selectPlace(d.place);else if(d.line!==undefined)setLine(Number(d.line));else if(d.fleetLine!==undefined)pickBus(runs.find(v=>v.line===Number(d.fleetLine)).id);else if(d.bus)pickBus(d.bus);
   });
   document.addEventListener('change',e=>{if(e.target.dataset.layer){if(!e.target.checked&&e.target.dataset.layer==='cars'&&state.mode==='fleet')modeChange('overview');state.layers[e.target.dataset.layer]=e.target.checked;dirty=true;renderMapLayers()}});
   document.addEventListener('keydown',e=>{
