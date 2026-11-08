@@ -1204,9 +1204,9 @@
 }
 .veh-card-mini {
   display: grid;
-  grid-template-columns: 74px 1fr 50px;
+  grid-template-columns: 82px minmax(0, 1fr) 52px;
   align-items: center;
-  column-gap: 6px;
+  column-gap: 10px;
   background: rgba(14, 34, 68, 0.72);
   border: 1px solid rgba(95, 175, 250, 0.22);
   border-radius: 6px;

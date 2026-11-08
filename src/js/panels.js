@@ -827,40 +827,39 @@ let currentVehPage = 0;
 let vehCarouselTimer = null;
 
 function getVehicleRosterCards(curDataset, curT, isAll) {
-  const drivers = curDataset.drivers || [];
+  const allDrivers = curDataset.drivers || [];
+  // 车辆监控只展示在岗在线运营的车辆（24辆在线），离线维保车辆不进入运营监控
+  const drivers = allDrivers.filter(d => d.status !== '离线');
   const orders = curDataset.orders || [];
   const bats = [92, 88, 74, 82, 95, 68, 79, 85, 90, 83, 76, 88, 91, 65, 78, 84, 92, 86, 73, 89, 94, 71, 80, 87, 93, 77, 85, 82, 89, 76, 81, 87];
 
   const list = [];
   drivers.forEach((driverObj, i) => {
     const cid = driverObj.car;
-    const isOffline = driverObj.status === '离线';
     const carOrders = orders.filter(o => o.car === cid);
 
     // 寻找司机接到乘客时间到了当前时间的最新行程
     let activeTrip = null;
-    if (!isOffline) {
-      if (isAll) {
-        activeTrip = carOrders[carOrders.length - 1];
-      } else {
-        // 1. 优先找当前正在载客中的行程: pickupTime <= curT 且 curT < deliveredTime
-        activeTrip = carOrders.find(o => o.pickupTime <= curT && curT < o.deliveredTime);
-        // 2. 其次找已接到乘客的最近一单: pickupTime <= curT
-        if (!activeTrip) {
-          const past = carOrders.filter(o => o.pickupTime <= curT);
-          if (past.length) activeTrip = past[past.length - 1];
-        }
-        // 3. 初始排班
-        if (!activeTrip && carOrders.length) {
-          activeTrip = carOrders[0];
-        }
+    if (isAll) {
+      activeTrip = carOrders[carOrders.length - 1];
+    } else {
+      // 1. 优先找当前正在载客中的行程: pickupTime <= curT 且 curT < deliveredTime
+      activeTrip = carOrders.find(o => o.pickupTime <= curT && curT < o.deliveredTime);
+      // 2. 其次找已接到乘客的最近一单: pickupTime <= curT
+      if (!activeTrip) {
+        const past = carOrders.filter(o => o.pickupTime <= curT);
+        if (past.length) activeTrip = past[past.length - 1];
+      }
+      // 3. 初始排班
+      if (!activeTrip && carOrders.length) {
+        activeTrip = carOrders[0];
       }
     }
 
-    const fromStop = isOffline ? '充电站' : (activeTrip ? activeTrip.from : '西角码头');
-    const toStop = isOffline ? '待维保' : (activeTrip ? activeTrip.to : '南湾运动公园');
-    const paxStr = isOffline ? '0人' : (activeTrip ? `${activeTrip.pax}人` : '4人');
-    const bat = isOffline ? 100 : (bats[i] || 85);
+    const fromStop = activeTrip ? activeTrip.from : '西角码头';
+    const toStop = activeTrip ? activeTrip.to : '南湾运动公园';
+    const paxStr = activeTrip ? `${activeTrip.pax}人` : '4人';
+    const bat = bats[i % bats.length] || 85;
 
     list.push({
       id: cid,
@@ -869,7 +868,7 @@ function getVehicleRosterCards(curDataset, curT, isAll) {
       to: toStop,
       pax: paxStr,
       bat: bat,
-      status: driverObj.status || '在线'
+      status: '在线'
     });
   });
 
