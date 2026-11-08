@@ -228,6 +228,9 @@
 .m-delta.up {
   color: #38efbd;
 }
+.m-delta.down {
+  color: #ff5757;
+}
 .m-delta .c-arrow {
   font-size: 10px;
   margin-right: 2px;

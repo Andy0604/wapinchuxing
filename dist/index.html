@@ -243,6 +243,9 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
 .m-delta.up {
   color: #38efbd;
 }
+.m-delta.down {
+  color: #ff5757;
+}
 .m-delta .c-arrow {
   font-size: 10px;
   margin-right: 2px;
@@ -4552,6 +4555,8 @@ function forecastFlowPanel() {
    -------------------------------------------------------------------------- */
 function islandOverviewPanel(period = '今日') {
   const dyn = getDynamicState();
+  const curT = dyn.curT;
+  const isAll = dyn.isAll;
   const isYesterday = (period === '昨日');
   const badge = `
     <div class="trend-tabs">
@@ -4566,10 +4571,36 @@ function islandOverviewPanel(period = '今日') {
     ? `<div class="m-delta up">较前日 <span class="c-arrow">▲</span> <b>8.2%</b></div>`
     : `<div class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>10.4%</b></div>`;
 
-  const paxCount = isYesterday ? '1,320' : dyn.totalPax.toLocaleString();
-  const paxDelta = isYesterday
-    ? `<div class="m-delta up">实载率 <span class="c-arrow">▲</span> <b>86.5%</b></div>`
-    : `<div class="m-delta up">实载率 <span class="c-arrow">▲</span> <b>88.6%</b></div>`;
+  // 运送客流：严格对应同时段累计计算
+  const todayOrders = (isAll || curT >= '22:00:00')
+    ? dataset_20261108.orders
+    : dataset_20261108.orders.filter(o => o.orderTime <= curT);
+  const yestOrders = (isAll || curT >= '22:00:00')
+    ? dataset_20261107.orders
+    : dataset_20261107.orders.filter(o => o.orderTime <= curT);
+
+  const todayPax = todayOrders.reduce((sum, o) => sum + (o.pax || 0), 0);
+  const yestPax = yestOrders.reduce((sum, o) => sum + (o.pax || 0), 0);
+
+  let paxCount, paxDelta;
+  if (isYesterday) {
+    paxCount = yestPax.toLocaleString();
+    const prevPax = Math.round(yestPax / 1.075);
+    paxDelta = `<div class="m-delta up" title="昨日同时段: ${yestPax} 人次 / 前日同时段: ${prevPax} 人次">较前日同时段 <span class="c-arrow">▲</span> <b>7.5%</b></div>`;
+  } else {
+    paxCount = todayPax.toLocaleString();
+    if (yestPax > 0) {
+      const diff = todayPax - yestPax;
+      const rawPct = (diff / yestPax) * 100;
+      const isUp = rawPct >= 0;
+      const pctStr = Math.abs(rawPct).toFixed(1);
+      const arrow = isUp ? '▲' : '▼';
+      const cls = isUp ? 'up' : 'down';
+      paxDelta = `<div class="m-delta ${cls}" title="今日累计: ${todayPax} 人次 / 昨日同时段: ${yestPax} 人次">较昨日同时段 <span class="c-arrow">${arrow}</span> <b>${pctStr}%</b></div>`;
+    } else {
+      paxDelta = `<div class="m-delta up">较昨日同时段 <span class="c-arrow">▲</span> <b>0.0%</b></div>`;
+    }
+  }
 
   return `<section class="panel panel-overview">
     ${panelHeader('全岛出行总览', badge)}
@@ -4704,21 +4735,25 @@ function orderTrendPanel(period = orderTrendPeriod) {
 function operationsMonitorPanel(period = '今日') {
   const isYesterday = (period === '昨日');
   const dyn = getDynamicState();
+  const curT = dyn.curT;
+  const isAll = dyn.isAll;
 
   let totalOrders, doneOrders, cancelOrders, servingOrders, pendingOrders, gmv, avgPrice, revLabel, deltaHtml;
 
   if (isYesterday) {
-    const orders07 = dataset_20261107.orders;
+    const orders07 = (isAll || curT >= '22:00:00')
+      ? dataset_20261107.orders
+      : dataset_20261107.orders.filter(o => o.orderTime <= curT);
     totalOrders = orders07.length;
-    const doneList = orders07.filter(o => o.status === '已完成');
+    const doneList = orders07.filter(o => o.status === '已完成' && (isAll || curT >= o.deliveredTime));
     doneOrders = doneList.length;
     cancelOrders = orders07.filter(o => o.status === '已取消').length;
-    servingOrders = orders07.filter(o => o.status === '服务中').length;
-    pendingOrders = totalOrders - doneOrders - cancelOrders - servingOrders;
+    servingOrders = orders07.filter(o => o.status === '服务中' || (o.status === '已完成' && !isAll && curT >= o.acceptTime && curT < o.deliveredTime)).length;
+    pendingOrders = orders07.filter(o => o.status === '待接单' || (o.status === '已完成' && !isAll && curT < o.acceptTime)).length;
     gmv = Math.round(doneList.reduce((s, o) => s + (o.fare || 0), 0));
     avgPrice = doneOrders > 0 ? Math.round(gmv / doneOrders) : 36;
-    revLabel = '昨日营收 <small>GMV (全天累计)</small>';
-    deltaHtml = '<div class="m-delta up">较前日 <span class="c-arrow">▲</span> <b>7.5%</b></div>';
+    revLabel = isAll ? '昨日营收 <small>GMV (全天累计)</small>' : '昨日营收 <small>GMV (同时段入账)</small>';
+    deltaHtml = '<div class="m-delta up">较前日同时段 <span class="c-arrow">▲</span> <b>7.5%</b></div>';
   } else {
     totalOrders = dyn.totalOrders;
     doneOrders = dyn.doneOrders;
@@ -4728,7 +4763,7 @@ function operationsMonitorPanel(period = '今日') {
     gmv = dyn.gmv;
     avgPrice = dyn.avgPrice;
     revLabel = '今日营收 <small>GMV (实时送达入账)</small>';
-    deltaHtml = '<div class="m-delta up">较昨日 <span class="c-arrow">▲</span> <b>10%</b></div>';
+    deltaHtml = '<div class="m-delta up">较昨日同时段 <span class="c-arrow">▲</span> <b>10%</b></div>';
   }
 
   const safeTotal = totalOrders || 1;
@@ -4892,45 +4927,39 @@ function tickQueueCountdowns() {
    右侧模块 1: 运力总览
    -------------------------------------------------------------------------- */
 function capacityOverviewPanel() {
-  const dyn = getDynamicState();
   const badge = `<span class="tag-badge mint-tag"><i class="live-dot"></i>实时</span>`;
-  const total = dyn.snap.total || 32;
-  const runPct = Math.round((dyn.snap.serving / total) * 100);
-  const idlePct = Math.round((dyn.snap.idle / total) * 100);
-  const servPct = Math.max(0, 100 - runPct - idlePct);
-
   return `<section class="panel panel-capacity">
     ${panelHeader('运力总览', badge)}
     <div class="cap-grid">
       <div class="cap-box total">
-        <strong class="cap-num font-num">${total}</strong>
-        <small>在线总数</small>
+        <strong class="cap-num font-num">31</strong>
+        <small>车辆</small>
       </div>
-      <div class="cap-box run">
-        <strong class="cap-num font-num">${dyn.snap.serving}</strong>
+      <div class="cap-box running">
+        <strong class="cap-num font-num">24</strong>
         <small>运营中</small>
       </div>
       <div class="cap-box idle">
-        <strong class="cap-num font-num">${dyn.snap.idle}</strong>
+        <strong class="cap-num font-num">3</strong>
         <small>空驶</small>
       </div>
       <div class="cap-box service">
-        <strong class="cap-num font-num">${dyn.snap.charging}</strong>
-        <small>充电/维修</small>
+        <strong class="cap-num font-num">4</strong>
+        <small>充电维修</small>
       </div>
     </div>
-    <div class="cap-dist-bar" title="运力分布: 运营 ${dyn.snap.serving} / 空驶 ${dyn.snap.idle} / 充维 ${dyn.snap.charging}">
-      <span class="seg-run" style="width: ${runPct}%;"></span>
-      <span class="seg-idle" style="width: ${idlePct}%;"></span>
-      <span class="seg-serv" style="width: ${servPct}%;"></span>
+    <div class="cap-dist-bar" title="运力分布: 运营 24 / 空驶 3 / 充维 4">
+      <span class="seg-run" style="width: 77.4%;"></span>
+      <span class="seg-idle" style="width: 9.7%;"></span>
+      <span class="seg-serv" style="width: 12.9%;"></span>
     </div>
     <div class="cap-metrics-dual">
       <div class="cap-chip">
-        <span class="cap-chip-lbl">车辆在线率</span>
-        <span class="cap-chip-val font-num c-mint">100%</span>
+        <span class="cap-chip-lbl">在线率</span>
+        <span class="cap-chip-val font-num c-mint">77.4%</span>
       </div>
       <div class="cap-chip">
-        <span class="cap-chip-lbl">平均满载率</span>
+        <span class="cap-chip-lbl">满载率</span>
         <span class="cap-chip-val font-num c-cyan">86%</span>
       </div>
     </div>
