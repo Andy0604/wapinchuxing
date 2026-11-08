@@ -5263,59 +5263,68 @@ function openOrderModal(orderId) {
   const modal = document.getElementById('order-modal');
   if (!modal) return;
 
-  const modalBody = modal.querySelector('.modal-body');
-  if (modalBody) {
-    modalBody.innerHTML = `
-      <div class="modal-sec">
-        <div class="modal-order-head">
-          <div class="moh-id font-num">${o.id}</div>
-          <span class="status-badge ${o.status === '已完成' ? 'status-done' : o.status === '已取消' ? 'status-cancel' : 'status-serving'}">${o.status}</span>
-        </div>
-        <div class="modal-grid-2">
-          <div class="mg-item"><span class="mg-lbl">出发地:</span><strong class="mg-val">${o.fromFull}</strong></div>
-          <div class="mg-item"><span class="mg-lbl">目的地:</span><strong class="mg-val">${o.toFull}</strong></div>
-          <div class="mg-item"><span class="mg-lbl">接单司机:</span><strong class="mg-val">${o.driver} (${o.car})</strong></div>
-          <div class="mg-item"><span class="mg-lbl">乘客人数:</span><strong class="mg-val font-num">${o.pax} 人</strong></div>
-          <div class="mg-item"><span class="mg-lbl">预估里程:</span><strong class="mg-val font-num">${o.km} km</strong></div>
-          <div class="mg-item"><span class="mg-lbl">订单金额:</span><strong class="mg-val font-num c-mint">¥${o.fare}</strong></div>
-        </div>
+  modal.innerHTML = `
+    <div class="modal-head">
+      <h3 class="modal-title">车辆订单详情</h3>
+      <div class="modal-head-actions">
+        <button class="modal-collapse-btn" data-action="closeOrderModal">收起</button>
       </div>
+    </div>
+    <div class="modal-dashed-card">
+      <span class="modal-code font-num">${o.id}</span>
+      <span class="modal-pill ${o.status === '已完成' ? 'handled' : 'serving'}">${o.status}</span>
+    </div>
+    <div class="modal-grid-2">
+      <div class="modal-sub-card full">
+        <span class="sc-label">出发地</span>
+        <span class="sc-val">${o.fromFull || o.from}</span>
+      </div>
+      <div class="modal-sub-card full">
+        <span class="sc-label">目的地</span>
+        <span class="sc-val">${o.toFull || o.to}</span>
+      </div>
+      <div class="modal-sub-card">
+        <span class="sc-label">接单司机</span>
+        <span class="sc-val">${o.driver} (${o.car})</span>
+      </div>
+      <div class="modal-sub-card">
+        <span class="sc-label">乘客人数</span>
+        <span class="sc-val font-num">${o.pax} 人</span>
+      </div>
+      <div class="modal-sub-card">
+        <span class="sc-label">预估里程</span>
+        <span class="sc-val font-num">${o.km} km</span>
+      </div>
+      <div class="modal-sub-card">
+        <span class="sc-label">订单金额</span>
+        <span class="sc-val amber">¥${o.fare}</span>
+      </div>
+    </div>
 
-      <div class="modal-sec">
-        <div class="modal-sec-title">行程时序流</div>
-        <div class="modal-timeline">
-          <div class="mt-node done">
-            <span class="mt-dot"></span>
-            <div class="mt-info">
-              <span class="mt-name">下单时间</span>
-              <span class="mt-time font-num">${o.orderTime}</span>
-            </div>
-          </div>
-          <div class="mt-node ${o.acceptTime ? 'done' : ''}">
-            <span class="mt-dot"></span>
-            <div class="mt-info">
-              <span class="mt-name">司机接单时间</span>
-              <span class="mt-time font-num">${o.acceptTime || '—'} (耗时 ${o.acceptSec}秒)</span>
-            </div>
-          </div>
-          <div class="mt-node ${o.pickupTime ? 'done' : ''}">
-            <span class="mt-dot"></span>
-            <div class="mt-info">
-              <span class="mt-name">司机接到乘客</span>
-              <span class="mt-time font-num">${o.pickupTime || '—'} (接驾 ${o.pickupMin}分)</span>
-            </div>
-          </div>
-          <div class="mt-node ${o.deliveredTime ? 'done' : ''}">
-            <span class="mt-dot"></span>
-            <div class="mt-info">
-              <span class="mt-name">司机送达时间</span>
-              <span class="mt-time font-num">${o.deliveredTime || '—'} (行程 ${o.tripMin}分)</span>
-            </div>
-          </div>
-        </div>
+    <div class="modal-section-title">订单行程时序流</div>
+    <div class="modal-timeline">
+      <div class="timeline-item">
+        <span class="timeline-name">下单时间</span>
+        <span class="timeline-time">${o.orderTime}</span>
       </div>
-    `;
-  }
+      <div class="timeline-item">
+        <span class="timeline-name">司机接单时间</span>
+        <span class="timeline-time">${o.acceptTime || '—'} (耗时 ${o.acceptSec}秒)</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-name">司机接到乘客</span>
+        <span class="timeline-time">${o.pickupTime || '—'} (接驾 ${o.pickupMin}分)</span>
+      </div>
+      <div class="timeline-item">
+        <span class="timeline-name">司机送达时间</span>
+        <span class="timeline-time">${o.deliveredTime || '—'} (行程 ${o.tripMin}分)</span>
+      </div>
+    </div>
+
+    <div class="modal-actions">
+      <button class="modal-btn cancel" data-action="closeOrderModal">关闭</button>
+    </div>
+  `;
 
   modal.hidden = false;
   modal.classList.add('open');
@@ -5329,33 +5338,46 @@ function openIncidentModal(id) {
   const modal = document.getElementById('incident-modal');
   if (!modal) return;
 
-  const modalBody = modal.querySelector('.modal-body');
-  if (modalBody) {
-    modalBody.innerHTML = `
-      <div class="modal-sec">
-        <div class="modal-order-head">
-          <div class="moh-id">${inc.title}</div>
-          <span class="status-badge ${inc.status === '已处理' ? 'status-done' : 'status-cancel'}">${inc.status}</span>
-        </div>
-        <div class="modal-grid-2">
-          <div class="mg-item"><span class="mg-lbl">发生时间:</span><strong class="mg-val font-num">${inc.exactTime}</strong></div>
-          <div class="mg-item"><span class="mg-lbl">预警类型:</span><strong class="mg-val">${inc.tag || '交通预警'}</strong></div>
-          <div class="mg-item"><span class="mg-lbl">影响区域:</span><strong class="mg-val">${inc.location}</strong></div>
-          <div class="mg-item"><span class="mg-lbl">建议处理:</span><strong class="mg-val c-amber">${inc.action}</strong></div>
-        </div>
+  modal.innerHTML = `
+    <div class="modal-head">
+      <h3 class="modal-title">交通事件详情</h3>
+      <div class="modal-head-actions">
+        <button class="modal-collapse-btn" data-action="closeIncidentModal">收起</button>
       </div>
-      <div class="modal-sec">
-        <div class="modal-sec-title">情况说明</div>
-        <p class="modal-p">${inc.content}</p>
+    </div>
+    <div class="modal-dashed-card">
+      <span class="modal-code">${inc.title}</span>
+      <span class="modal-pill ${inc.status === '已处理' ? 'handled' : 'unhandled'}">${inc.status}</span>
+    </div>
+    <div class="modal-grid-2">
+      <div class="modal-sub-card">
+        <span class="sc-label">发生时间</span>
+        <span class="sc-val font-num">${inc.exactTime}</span>
       </div>
-      <div class="modal-footer-actions">
-        <button class="modal-btn secondary" data-action="closeIncidentModal">关闭</button>
-        <button class="modal-btn primary" data-action="resolveIncident" data-inc-id="${inc.id}" ${inc.status === '已处理' ? 'disabled' : ''}>
-          ${inc.status === '已处理' ? '已完成处置' : '执行调度处置'}
-        </button>
+      <div class="modal-sub-card">
+        <span class="sc-label">预警类型</span>
+        <span class="sc-val warn">${inc.tag || '交通预警'}</span>
       </div>
-    `;
-  }
+      <div class="modal-sub-card full">
+        <span class="sc-label">影响区域</span>
+        <span class="sc-val">${inc.location}</span>
+      </div>
+      <div class="modal-sub-card full">
+        <span class="sc-label">建议处理</span>
+        <span class="sc-val amber">${inc.action}</span>
+      </div>
+    </div>
+    <div class="modal-section-title">情况说明</div>
+    <div class="modal-sub-card full">
+      <span class="sc-label" style="line-height:1.6;color:#d5e5f5;font-size:12px">${inc.content}</span>
+    </div>
+    <div class="modal-actions">
+      <button class="modal-btn cancel" data-action="closeIncidentModal">关闭</button>
+      <button class="modal-btn primary" data-action="resolveIncident" data-inc-id="${inc.id}" ${inc.status === '已处理' ? 'disabled' : ''}>
+        ${inc.status === '已处理' ? '已完成处置' : '执行调度处置'}
+      </button>
+    </div>
+  `;
 
   modal.hidden = false;
   modal.classList.add('open');
