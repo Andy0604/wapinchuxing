@@ -19,6 +19,6 @@ const events=[
  {id:'EV-002',name:'南湾海鲜市场拥堵预警',time:'10:58',exactTime:'10:58:00',place:'bay',level:'路况预警',severity:'amber',detail:'南湾海鲜市场，多辆车速偏低，拥堵预警，处理方式：通知司机注意绕行。',action:'通知司机注意绕行',done:true},
  {id:'EV-003',name:'船舶11:50分到港客流上升',time:'11:20',exactTime:'11:20:00',place:'port',level:'客流预警',severity:'amber',detail:'船舶11:50分到港，客流上升，处理方式：通知调度，增派车辆。',action:'通知调度，增派车辆',done:true},
  {id:'EV-004',name:'仙人掌基地施工绕行',time:'12:30',exactTime:'12:30:00',place:'east',level:'施工预警',severity:'amber',detail:'涠洲岛仙人掌基地路段施工，请绕行，处理方式：通知司机注意绕行。',action:'通知司机注意绕行',done:true},
- {id:'EV-005',name:'船舶13:50分到港客流上升',time:'13:20',exactTime:'13:20:00',place:'port',level:'客流预警',severity:'amber',detail:'船舶13:50分到港，客流上升，处理方式：通知调度，增派车辆。',action:'通知调度，增派车辆',done:false},
+ {id:'EV-005',name:'船舶13:50分到港客流上升',time:'13:20',exactTime:'13:20:00',place:'port',level:'客流预警',severity:'amber',detail:'船舶13:50分到港，客流上升，处理方式：通知调度，增派车辆。',action:'通知调度，增派车辆',done:true},
  {id:'EV-006',name:'船舶15:30分到港客流上升',time:'15:00',exactTime:'15:00:00',place:'port',level:'客流预警',severity:'amber',detail:'船舶15:30分到港，客流上升，处理方式：通知调度，增派车辆。',action:'通知调度，增派车辆',done:false}
 ];

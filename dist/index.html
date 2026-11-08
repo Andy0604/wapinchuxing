@@ -1235,6 +1235,18 @@ footer{height:clamp(60px,7.9vh,81px);min-height:58px;border-top:1px solid #1a3d6
   flex: 1;
   min-height: 0;
 }
+.veh-roster-header-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 11.5px;
+  font-weight: 500;
+  color: #8eb3d6;
+  padding: 0 4px 5px;
+}
+.vcm-header-right {
+  text-align: right;
+}
 .veh-roster-list {
   display: grid;
   grid-template-rows: repeat(4, 1fr);
@@ -3753,12 +3765,29 @@ footer {
     justify-self: end !important;
     gap: 6px !important;
   }
-  .vcm-pax {
-    font-size: 26px !important;
-    font-weight: 700 !important;
+  .veh-roster-header-row {
+    font-size: 18px !important;
+    padding: 0 8px 6px !important;
   }
-  .vcm-bat {
-    font-size: 22px !important;
+  .vcm-pax-chip {
+    font-size: 18px !important;
+    padding: 2px 10px !important;
+  }
+  .vcm-time-row {
+    display: inline-flex !important;
+    align-items: center !important;
+    gap: 5px !important;
+    font-size: 16px !important;
+    white-space: nowrap !important;
+  }
+  .vcm-time-lbl {
+    font-size: 14px !important;
+    color: #729ec7 !important;
+  }
+  .vcm-time-val {
+    font-size: 17px !important;
+    color: #38efbd !important;
+    font-weight: 600 !important;
   }
   .bat-icon {
     width: 24px !important;
@@ -4081,12 +4110,30 @@ html.giant-screen .vcm-mid {
   font-size: 15px !important;
   font-weight: 500 !important;
 }
-html.giant-screen .vcm-pax {
-  font-size: 18px !important;
-  font-weight: 700 !important;
+html.giant-screen .veh-roster-header-row {
+  font-size: 15px !important;
+  font-weight: 500 !important;
+  padding: 0 10px 5px !important;
 }
-html.giant-screen .vcm-bat {
-  font-size: 16px !important;
+html.giant-screen .vcm-pax-chip {
+  font-size: 15px !important;
+  padding: 2px 8px !important;
+}
+html.giant-screen .vcm-time-row {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 4px !important;
+  font-size: 14px !important;
+  white-space: nowrap !important;
+}
+html.giant-screen .vcm-time-lbl {
+  font-size: 13px !important;
+  color: #729ec7 !important;
+}
+html.giant-screen .vcm-time-val {
+  font-size: 14.5px !important;
+  color: #38efbd !important;
+  font-weight: 600 !important;
 }
 html.giant-screen .inc-stat-box strong {
   font-size: 32px !important;
@@ -4276,7 +4323,7 @@ const events=[
  {id:'EV-002',name:'南湾海鲜市场拥堵预警',time:'10:58',exactTime:'10:58:00',place:'bay',level:'路况预警',severity:'amber',detail:'南湾海鲜市场，多辆车速偏低，拥堵预警，处理方式：通知司机注意绕行。',action:'通知司机注意绕行',done:true},
  {id:'EV-003',name:'船舶11:50分到港客流上升',time:'11:20',exactTime:'11:20:00',place:'port',level:'客流预警',severity:'amber',detail:'船舶11:50分到港，客流上升，处理方式：通知调度，增派车辆。',action:'通知调度，增派车辆',done:true},
  {id:'EV-004',name:'仙人掌基地施工绕行',time:'12:30',exactTime:'12:30:00',place:'east',level:'施工预警',severity:'amber',detail:'涠洲岛仙人掌基地路段施工，请绕行，处理方式：通知司机注意绕行。',action:'通知司机注意绕行',done:true},
- {id:'EV-005',name:'船舶13:50分到港客流上升',time:'13:20',exactTime:'13:20:00',place:'port',level:'客流预警',severity:'amber',detail:'船舶13:50分到港，客流上升，处理方式：通知调度，增派车辆。',action:'通知调度，增派车辆',done:false},
+ {id:'EV-005',name:'船舶13:50分到港客流上升',time:'13:20',exactTime:'13:20:00',place:'port',level:'客流预警',severity:'amber',detail:'船舶13:50分到港，客流上升，处理方式：通知调度，增派车辆。',action:'通知调度，增派车辆',done:true},
  {id:'EV-006',name:'船舶15:30分到港客流上升',time:'15:00',exactTime:'15:00:00',place:'port',level:'客流预警',severity:'amber',detail:'船舶15:30分到港，客流上升，处理方式：通知调度，增派车辆。',action:'通知调度，增派车辆',done:false}
 ];
 
@@ -4413,7 +4460,7 @@ const warningIncidents = [
     "placeId": "port",
     "car": "—",
     "action": "通知调度，增派车辆",
-    "status": "未处理"
+    "status": "已处理"
   },
   {
     "id": "EV202611080006",
@@ -5261,6 +5308,11 @@ function vehicleRosterCarouselPanel() {
   const badge = `<span class="tag-badge">运营 13/22 · 核载7人</span>`;
   return `<section class="panel panel-veh-carousel">
     ${panelHeader('车辆监控', badge)}
+    <div class="veh-roster-header-row">
+      <span>车辆 / 司机</span>
+      <span>起止站点</span>
+      <span class="vcm-header-right">载客 / 司机接客时间</span>
+    </div>
     <div id="veh-roster-body" class="veh-roster-body-wrap">
       ${renderVehRosterInner()}
     </div>

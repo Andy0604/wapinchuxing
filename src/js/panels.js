@@ -72,7 +72,7 @@ const warningIncidents = [
     "placeId": "port",
     "car": "—",
     "action": "通知调度，增派车辆",
-    "status": "未处理"
+    "status": "已处理"
   },
   {
     "id": "EV202611080006",
@@ -920,6 +920,11 @@ function vehicleRosterCarouselPanel() {
   const badge = `<span class="tag-badge">运营 13/22 · 核载7人</span>`;
   return `<section class="panel panel-veh-carousel">
     ${panelHeader('车辆监控', badge)}
+    <div class="veh-roster-header-row">
+      <span>车辆 / 司机</span>
+      <span>起止站点</span>
+      <span class="vcm-header-right">载客 / 司机接客时间</span>
+    </div>
     <div id="veh-roster-body" class="veh-roster-body-wrap">
       ${renderVehRosterInner()}
     </div>
