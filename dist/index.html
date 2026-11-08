@@ -4517,8 +4517,31 @@ function getLatestIncidentTitle() {
 }
 
 function panelHeader(name, badge = '', icon = '') {
-  const icoHtml = icon ? ico(icon) : '';
-  return `<div class="panel-head"><h3 class="panel-title">${icoHtml}${name}</h3>${badge}</div>`;
+  let icoName = icon;
+  let badgeHtml = badge;
+  if (!icon && badge && typeof icons !== 'undefined' && icons[badge]) {
+    icoName = badge;
+    badgeHtml = '';
+  } else if (icon && typeof icons !== 'undefined' && icons[badge] && typeof icon === 'string' && icon.includes('<')) {
+    icoName = badge;
+    badgeHtml = icon;
+  }
+  const icoHtml = icoName ? ico(icoName) : '';
+  return `<div class="panel-head"><h3 class="panel-title">${icoHtml}${name}</h3>${badgeHtml}</div>`;
+}
+
+function roadPanel() {
+  const roads = [
+    ['port','码头接驳区','畅通',7],
+    ['beach','石螺口路段','畅通',6],
+    ['bay','南湾街','缓行',3]
+  ];
+  const rows = roads.map(([place,name,status,n]) => {
+    const color = status==='缓行'?'amber':'mint';
+    const bar = Array.from({length:8},(_,i)=>i<n?`<i style="background:var(--${color})"></i>`:'<i></i>').join('');
+    return `<button class="road-row" data-place="${place}"><span class="roadname">${name}</span><span class="bar" aria-hidden="true">${bar}</span><b class="${color}-t">${status}</b>${ico('chevron')}</button>`;
+  }).join('');
+  return `<section class="panel health">${panelHeader('道路运行指数','<span class="tag-static"><i class="live-dot"></i> 监测中</span>','signal')}<div class="gauge-box">${typeof gaugeChart === 'function' ? gaugeChart() : ''}</div><div class="road-list">${rows}</div></section>`;
 }
 
 /* --------------------------------------------------------------------------
